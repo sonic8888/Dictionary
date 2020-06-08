@@ -272,7 +272,7 @@ namespace MyDictionary
                     if (item.Name == windowName)
                     {
                         item.Close();
-                
+                        MessageBox.Show("TEST");
                     }
                 }
                 // добавляем Mycardword в базу данных
