@@ -27,8 +27,9 @@ namespace MyDictionary
 
         private void clickNewWord(object sender, RoutedEventArgs e)
         {
-            WindowNewWord wnw = new WindowNewWord();
-            wnw.Show();
+
+            ChoseWords chw = new ChoseWords();
+            chw.Show();
         }
     }
 }
