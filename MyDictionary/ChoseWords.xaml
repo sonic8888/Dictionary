@@ -7,15 +7,17 @@
         xmlns:xmlread="clr-namespace:XMLRead;assembly=XMLRead"
         xmlns:convert="clr-namespace:MyDictionary.Converters"
         mc:Ignorable="d"
-        Title="ChoseWords" Height="650" Width="1000">
+        Title="ChoseWords" Height="650" Width="1000" MinHeight="600" MaxHeight="700" MinWidth="950" MaxWidth="1050">
     <Window.Resources>
         <convert:WidthConverterMultiplication x:Key="WidthconverterMultiplication70" Width="0.7"></convert:WidthConverterMultiplication>
         <convert:WidthConverterMultiplication x:Key="WidthconverterMultiplication30" Width="0.3"></convert:WidthConverterMultiplication>
+        <convert:WidthConverterMultiplication x:Key="WidthconverterMultiplication40" Width="0.4"></convert:WidthConverterMultiplication>
+        <convert:WidthConverterMultiplication x:Key="WidthconverterMultiplication60" Width="0.6"></convert:WidthConverterMultiplication>
         <convert:WidthConverterSummation x:Key="WidthconverterSummation" Width="55"></convert:WidthConverterSummation>
         <convert:WidthConverterSummation x:Key="WidthconverterSummation300" Width="350"></convert:WidthConverterSummation>
         <xmlread:MyCollection x:Key="collection"/>
     </Window.Resources>
-    <Grid x:Name="grid" >
+    <Grid x:Name="gridMain" >
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="auto"/>
@@ -25,38 +27,104 @@
         HorizontalAlignment="Center" VerticalAlignment="Stretch" />
         <Grid x:Name="gridListElement" Background="AliceBlue" Margin="5" Grid.Column="0" >
             <Grid.RowDefinitions>
-                <RowDefinition />
-                <RowDefinition Height="9*"/>
+                <RowDefinition MinHeight="60" MaxHeight="60" />
+                <RowDefinition Height="9*" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Border x:Name="borderTop" Background="LightGray" Grid.Column="0">
+            <Border x:Name="borderTop" Background="#FF8B95AE" Grid.Column="0" Grid.Row="0" VerticalAlignment="Top"   >
                 <StackPanel Orientation="Horizontal">
                     <Image Source="Picture/icons8-поиск-64.png" Stretch="Fill" Width="32" Height="32" Margin="5,0"/>
-                    <TextBox x:Name="findWord" Margin="5,10,15,10" FontSize="28"    
+                    <TextBox x:Name="findWord" Margin="5,10,15,10" FontSize="28" VerticalContentAlignment="Center"
                              Width="{Binding ActualWidth, ElementName=borderTop, Mode=OneWay, 
                         Converter={StaticResource WidthconverterSummation}}" BorderBrush="White" SpellCheck.IsEnabled="True" 
                              Focusable="True" TextAlignment="Left" PreviewTextInput="TextBoxInputText" PreviewKeyDown="PreviewKeyDownFindWord"  />
                 </StackPanel>
             </Border>
-            <ListView x:Name="wordListView" Grid.Row="1"  ItemsSource="{Binding Mode=OneWay, Source={StaticResource collection}}" IsSynchronizedWithCurrentItem="True" FontSize="16"   >
+            <ListView x:Name="wordListView" Grid.Row="1"  ItemsSource="{Binding Mode=OneWay,
+                Source={StaticResource collection}}" IsSynchronizedWithCurrentItem="True" FontSize="16" Margin="0,5,0,0" Background="#FFC1C2C7"  >
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="Слово" Width="{Binding ActualWidth, ElementName=wordListView, Mode=OneWay, Converter={StaticResource WidthconverterMultiplication30}}" >
+                        <GridViewColumn Header="Слово" Width="{Binding ActualWidth,
+                            ElementName=wordListView, Mode=OneWay, Converter={StaticResource WidthconverterMultiplication30}}" >
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock x:Name="textboxword" Text="{Binding Word}" FontSize="18" Background="{x:Null}" Foreground="#FF6679F0"   />
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-                        <GridViewColumn DisplayMemberBinding="{Binding Translite}" Width="{Binding ActualWidth, ElementName=wordListView, Mode=OneWay, Converter={StaticResource WidthconverterMultiplication70}}">Перевод</GridViewColumn>
+                        <GridViewColumn DisplayMemberBinding="{Binding Translite}" Width="{Binding ActualWidth, ElementName=wordListView, Mode=OneWay, 
+                            Converter={StaticResource WidthconverterMultiplication70}}">Перевод</GridViewColumn>
                         <!--<GridViewColumn DisplayMemberBinding="{Binding PartOfSpeach}">Часть речи</GridViewColumn>-->
                     </GridView>
                 </ListView.View>
             </ListView>
 
         </Grid>
-        <Grid x:Name="gridElementProperty" Background="#FF9DDADC" Margin="5" Grid.Column="2"></Grid>
+        <Grid x:Name="gridElement"  Grid.Column="2" Margin="5" >
+            <Grid.RowDefinitions>
+                <RowDefinition MinHeight="60" MaxHeight="60"/>
+                <RowDefinition Height="9*"/>
+            </Grid.RowDefinitions>
+            <ToolBar x:Name="toolBar" Grid.Row="0" Background="{Binding Background, ElementName=borderTop}" Foreground="#FF080808"/>
+            <Grid x:Name="gridElementProperty" Grid.Row="1" Background="#FFB6B6B6"  Margin="0,30,0,0" >
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid x:Name="inerGrid" Grid.Row="0" Margin="20">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="0.3*"/>
+                        <RowDefinition/>
+                        <RowDefinition Height="0.3*"/>
+                        <RowDefinition/>
+                        <RowDefinition Height="0.3*"/>
+                        <RowDefinition Height="2*" />
+                        <RowDefinition Height="0.5*"/>
+                        <RowDefinition />
+                        <RowDefinition Height="4*"/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <StackPanel Orientation="Horizontal" Grid.Row="0">
+                        <TextBlock x:Name="textBlockWord" Text="Слово:" FontSize="24"
+                                   Width="{Binding ActualWidth, Converter={StaticResource WidthconverterMultiplication40}, ElementName=inerGrid,
+                            Mode=OneWay}"
+                                   VerticalAlignment="Bottom" Foreground="#FF6679F0"></TextBlock>
+                        <TextBox x:Name="textBoxWord" Width="{Binding ActualWidth, Converter={StaticResource WidthconverterMultiplication60},
+                            ElementName=inerGrid, Mode=OneWay}" FontSize="24" VerticalAlignment="Bottom" Background="#FFCDCBCB"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Grid.Row="2">
+                        <TextBlock Text="Транскрипция:" FontSize="24" Width="{Binding ActualWidth, ElementName=textBlockWord, Mode=OneWay}"
+                                   VerticalAlignment="Bottom" Foreground="{Binding Foreground, ElementName=textBlockWord}"  />
+                        <TextBox x:Name="textBoxTranscription" Width="{Binding Width, ElementName=textBoxWord}"
+                                 FontSize="{Binding FontSize, ElementName=textBlockWord}" VerticalAlignment="{Binding VerticalAlignment,
+                            ElementName=textBoxWord}" Background="{Binding Background, ElementName=textBoxWord}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Grid.Row="4">
+                        <TextBlock Text="Часть речи:" FontSize="24" Width="{Binding ActualWidth, ElementName=textBlockWord, Mode=OneWay}"
+                                   VerticalAlignment="Bottom" Foreground="{Binding Foreground, ElementName=textBlockWord}"  />
+                        <TextBox x:Name="textBoxPartOfSpeach" Width="{Binding Width, ElementName=textBoxWord}"
+                                 FontSize="{Binding FontSize, ElementName=textBlockWord}" VerticalAlignment="{Binding VerticalAlignment,
+                            ElementName=textBoxWord}" Background="{Binding Background, ElementName=textBoxWord}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Grid.Row="6" >
+                        <TextBlock Text="Перевод:" FontSize="24" Width="{Binding ActualWidth, ElementName=textBlockWord, Mode=OneWay}"
+                                   VerticalAlignment="Top" Foreground="{Binding Foreground, ElementName=textBlockWord}"  />
+                        <TextBox x:Name="textBoxTranslation" Width="{Binding Width, ElementName=textBoxWord}"
+                                 FontSize="{Binding FontSize, ElementName=textBlockWord}" VerticalAlignment="{Binding VerticalAlignment,
+                            ElementName=textBoxWord}" Background="{Binding Background, ElementName=textBoxWord}" Height="80" AcceptsReturn="True" AcceptsTab="True"/>
+                    </StackPanel>
+                    <TextBlock Text="Примеры:" Grid.Row="8" FontSize="24" Width="{Binding ActualWidth, ElementName=textBlockWord, Mode=OneWay}"
+                                   VerticalAlignment="Bottom" Foreground="{Binding Foreground, ElementName=textBlockWord}" HorizontalAlignment="Left" />
+                    <TextBox x:Name="textBoxExample" Grid.Row="9" Width="{Binding ActualWidth, ElementName=inerGrid, Mode=OneWay}"
+                                 FontSize="{Binding FontSize, ElementName=textBlockWord}" VerticalAlignment="{Binding VerticalAlignment,
+                            ElementName=textBoxWord}" Background="{Binding Background, ElementName=textBoxWord}" Height="130" AcceptsReturn="True" AcceptsTab="True"/>
+
+                </Grid>
+            </Grid>
+        </Grid>
     </Grid>
 </Window>
