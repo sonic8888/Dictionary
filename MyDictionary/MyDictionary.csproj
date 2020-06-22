@@ -84,7 +84,7 @@
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="XMLRead">
-      <HintPath>..\..\Library\XMLRead\bin\Debug\XMLRead.dll</HintPath>
+      <HintPath>..\..\MyLibrary\XMLRead\bin\Debug\XMLRead.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -98,6 +98,11 @@
     <Compile Include="CardWordEmpty.xaml.cs">
       <DependentUpon>CardWordEmpty.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ChoseWords.xaml.cs">
+      <DependentUpon>ChoseWords.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Converters\WidthConverterMultiplication.cs" />
+    <Compile Include="Converters\WidthConverterSummation.cs" />
     <Compile Include="WindowNewWord.xaml.cs">
       <DependentUpon>WindowNewWord.xaml</DependentUpon>
     </Compile>
@@ -106,6 +111,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="CardWordEmpty.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ChoseWords.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -261,6 +270,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Customize.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Picture\icons8-поиск-64.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

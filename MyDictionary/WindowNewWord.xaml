@@ -32,7 +32,9 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <Image Source="Picture/search-look-magnify-glass-inspect.png" Width="25" Height="25"/>
-                <TextBox x:Name="findWord" Grid.Column="1" Margin="3,0,3,0" BorderBrush="White" FontSize="22" Foreground="#FF6679F0" SelectionBrush="White" FontFamily="Sitka Text" VerticalAlignment="Center" Cursor="" SpellCheck.IsEnabled="True" Focusable="True" BorderThickness="0" PreviewTextInput="TextBoxInputText" PreviewKeyDown="PreviewKeyDownFindWord"/>
+                <TextBox x:Name="findWord" Grid.Column="1" Margin="3,0,3,0" BorderBrush="White" FontSize="22" Foreground="#FF6679F0" SelectionBrush="White"
+                         FontFamily="Sitka Text" VerticalAlignment="Center" Cursor="" SpellCheck.IsEnabled="True" Focusable="True" BorderThickness="0" 
+                         PreviewTextInput="TextBoxInputText" PreviewKeyDown="PreviewKeyDownFindWord"/>
             </Grid>
         </Border>
         <Menu Grid.Column="1"  Margin="8" Width="39">
