@@ -50,7 +50,7 @@
                             ElementName=wordListView, Mode=OneWay, Converter={StaticResource WidthconverterMultiplication30}}" >
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock x:Name="textboxword" Text="{Binding Word}" FontSize="18" Background="{x:Null}" Foreground="#FF6679F0"   />
+                                    <TextBlock x:Name="textboxword" Text="{Binding Word}" FontSize="18" Background="{x:Null}" Foreground="#FF6679F0"  MouseDown="MouseDownTextBloc"  />
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
@@ -80,10 +80,10 @@
                         <RowDefinition Height="0.3*"/>
                         <RowDefinition/>
                         <RowDefinition Height="0.3*"/>
-                        <RowDefinition Height="2*" />
+                        <RowDefinition Height="6*" />
                         <RowDefinition Height="0.5*"/>
                         <RowDefinition />
-                        <RowDefinition Height="4*"/>
+                        <RowDefinition Height="3*"/>
                         <RowDefinition/>
                         <RowDefinition/>
                         <RowDefinition/>
@@ -92,36 +92,36 @@
                         <TextBlock x:Name="textBlockWord" Text="Слово:" FontSize="24"
                                    Width="{Binding ActualWidth, Converter={StaticResource WidthconverterMultiplication40}, ElementName=inerGrid,
                             Mode=OneWay}"
-                                   VerticalAlignment="Bottom" Foreground="#FF6679F0"></TextBlock>
+                                   VerticalAlignment="Bottom" Foreground="#FF0C1F9C"></TextBlock>
                         <TextBox x:Name="textBoxWord" Width="{Binding ActualWidth, Converter={StaticResource WidthconverterMultiplication60},
-                            ElementName=inerGrid, Mode=OneWay}" FontSize="24" VerticalAlignment="Bottom" Background="#FFCDCBCB"/>
+                            ElementName=inerGrid, Mode=OneWay}" FontSize="24" VerticalAlignment="Bottom" Background="#FFCDCBCB" Text="{Binding Path=Word}"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Grid.Row="2">
                         <TextBlock Text="Транскрипция:" FontSize="24" Width="{Binding ActualWidth, ElementName=textBlockWord, Mode=OneWay}"
                                    VerticalAlignment="Bottom" Foreground="{Binding Foreground, ElementName=textBlockWord}"  />
                         <TextBox x:Name="textBoxTranscription" Width="{Binding Width, ElementName=textBoxWord}"
                                  FontSize="{Binding FontSize, ElementName=textBlockWord}" VerticalAlignment="{Binding VerticalAlignment,
-                            ElementName=textBoxWord}" Background="{Binding Background, ElementName=textBoxWord}"/>
+                            ElementName=textBoxWord}" Background="{Binding Background, ElementName=textBoxWord}" Text="{Binding Path=Transcription}"/>
                     </StackPanel>
-                    <StackPanel Orientation="Horizontal" Grid.Row="4">
-                        <TextBlock Text="Часть речи:" FontSize="24" Width="{Binding ActualWidth, ElementName=textBlockWord, Mode=OneWay}"
-                                   VerticalAlignment="Bottom" Foreground="{Binding Foreground, ElementName=textBlockWord}"  />
-                        <TextBox x:Name="textBoxPartOfSpeach" Width="{Binding Width, ElementName=textBoxWord}"
-                                 FontSize="{Binding FontSize, ElementName=textBlockWord}" VerticalAlignment="{Binding VerticalAlignment,
-                            ElementName=textBoxWord}" Background="{Binding Background, ElementName=textBoxWord}"/>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal" Grid.Row="6" >
-                        <TextBlock Text="Перевод:" FontSize="24" Width="{Binding ActualWidth, ElementName=textBlockWord, Mode=OneWay}"
-                                   VerticalAlignment="Top" Foreground="{Binding Foreground, ElementName=textBlockWord}"  />
-                        <TextBox x:Name="textBoxTranslation" Width="{Binding Width, ElementName=textBoxWord}"
-                                 FontSize="{Binding FontSize, ElementName=textBlockWord}" VerticalAlignment="{Binding VerticalAlignment,
-                            ElementName=textBoxWord}" Background="{Binding Background, ElementName=textBoxWord}" Height="80" AcceptsReturn="True" AcceptsTab="True"/>
-                    </StackPanel>
+
+                    <TextBlock Grid.Row="4" Text="Перевод:" FontSize="24" Width="{Binding ActualWidth, ElementName=textBlockWord, Mode=OneWay}"
+                                   VerticalAlignment="Bottom" Foreground="{Binding Foreground, ElementName=textBlockWord}" HorizontalAlignment="Left" />
+                    <ListView x:Name="LisstViewTranlate" Grid.Row="6"  Grid.ColumnSpan="3" IsSynchronizedWithCurrentItem="True" 
+                              ItemsSource="{Binding Path=TranslateList}" ToolTip="Двойной щелчок для удаления"
+                              Background="{Binding Background, ElementName=textBoxWord}"  >
+                        <ListView.View >
+                            <GridView>
+                                <GridViewColumn x:Name="gridColumnTranslate" Header="перевод"  DisplayMemberBinding="{Binding Translate}"  Width="{Binding Width, ElementName=textBoxWord}"/>
+                                <GridViewColumn Header="часть речи" Width="{Binding ActualWidth, ElementName=textBlockWord, Mode=OneWay}" DisplayMemberBinding="{Binding Partofspeach}" />
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+
+
                     <TextBlock Text="Примеры:" Grid.Row="8" FontSize="24" Width="{Binding ActualWidth, ElementName=textBlockWord, Mode=OneWay}"
                                    VerticalAlignment="Bottom" Foreground="{Binding Foreground, ElementName=textBlockWord}" HorizontalAlignment="Left" />
-                    <TextBox x:Name="textBoxExample" Grid.Row="9" Width="{Binding ActualWidth, ElementName=inerGrid, Mode=OneWay}"
-                                 FontSize="{Binding FontSize, ElementName=textBlockWord}" VerticalAlignment="{Binding VerticalAlignment,
-                            ElementName=textBoxWord}" Background="{Binding Background, ElementName=textBoxWord}" Height="130" AcceptsReturn="True" AcceptsTab="True"/>
+                    <ListBox Grid.Row="9" x:Name="listBoxExample" Background="{Binding Background, ElementName=textBoxWord}" ItemsSource="{Binding Path=ExampleList}" />
+                    <Button x:Name="buttonAddWord" Grid.Row="11" Content="Добавить" HorizontalAlignment="Right" Margin="0,5,0,0" Width="70" Click="ClickButtonAddWord" />
 
                 </Grid>
             </Grid>

@@ -85,9 +85,10 @@ namespace MyDictionary
                 if (list != null)
                 {
                     MyCardWord myCard = new MyCardWord(list);
-                    CardWord cardWord = new CardWord(myCard);
-                    cardWord.Topmost = true;
-                    cardWord.Show();
+                    //CardWord cardWord = new CardWord(myCard);
+                    //cardWord.Topmost = true;
+                    //cardWord.Show();
+                    inerGrid.DataContext = myCard;
 
                 }
                 else
@@ -135,6 +136,11 @@ namespace MyDictionary
             CardWordEmpty cwe = new CardWordEmpty();
             cwe.Topmost = true;
             cwe.Show();
+        }
+
+        private void ClickButtonAddWord(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
