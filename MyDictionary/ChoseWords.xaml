@@ -107,7 +107,7 @@
                     <TextBlock Grid.Row="4" Text="Перевод:" FontSize="24" Width="{Binding ActualWidth, ElementName=textBlockWord, Mode=OneWay}"
                                    VerticalAlignment="Bottom" Foreground="{Binding Foreground, ElementName=textBlockWord}" HorizontalAlignment="Left" />
                     <ListView x:Name="LisstViewTranlate" Grid.Row="6"  Grid.ColumnSpan="3" IsSynchronizedWithCurrentItem="True" 
-                              ItemsSource="{Binding Path=TranslateList}" ToolTip="Двойной щелчок для удаления"
+                              ItemsSource="{Binding Path=TranslateObservable}" ToolTip="Двойной щелчок для удаления"
                               Background="{Binding Background, ElementName=textBoxWord}"  >
                         <ListView.View >
                             <GridView>
@@ -120,7 +120,7 @@
 
                     <TextBlock Text="Примеры:" Grid.Row="8" FontSize="24" Width="{Binding ActualWidth, ElementName=textBlockWord, Mode=OneWay}"
                                    VerticalAlignment="Bottom" Foreground="{Binding Foreground, ElementName=textBlockWord}" HorizontalAlignment="Left" />
-                    <ListBox Grid.Row="9" x:Name="listBoxExample" Background="{Binding Background, ElementName=textBoxWord}" ItemsSource="{Binding Path=ExampleList}" />
+                    <ListBox Grid.Row="9" x:Name="listBoxExample" Background="{Binding Background, ElementName=textBoxWord}" ItemsSource="{Binding Path=ExampleObservable}" />
                     <Button x:Name="buttonAddWord" Grid.Row="11" Content="Добавить" HorizontalAlignment="Right" Margin="0,5,0,0" Width="70" Click="ClickButtonAddWord" />
 
                 </Grid>
