@@ -15,7 +15,7 @@
         <convert:WidthConverterMultiplication x:Key="WidthconverterMultiplication60" Width="0.6"></convert:WidthConverterMultiplication>
         <convert:WidthConverterSummation x:Key="WidthconverterSummation" Width="55"></convert:WidthConverterSummation>
         <convert:WidthConverterSummation x:Key="WidthconverterSummation300" Width="350"></convert:WidthConverterSummation>
-        <xmlread:MyCollection x:Key="collection"/>
+
     </Window.Resources>
     <Grid x:Name="gridMain" >
         <Grid.ColumnDefinitions>
@@ -39,11 +39,11 @@
                     <TextBox x:Name="findWord" Margin="5,10,15,10" FontSize="28" VerticalContentAlignment="Center"
                              Width="{Binding ActualWidth, ElementName=borderTop, Mode=OneWay, 
                         Converter={StaticResource WidthconverterSummation}}" BorderBrush="White" SpellCheck.IsEnabled="True" 
-                             Focusable="True" TextAlignment="Left" PreviewTextInput="TextBoxInputText" PreviewKeyDown="PreviewKeyDownFindWord"  />
+                             Focusable="True" TextAlignment="Left" PreviewTextInput="PreviewTextInputt" KeyUp="KeyUpTextBoxFind"  />
                 </StackPanel>
             </Border>
-            <ListView x:Name="wordListView" Grid.Row="1"  ItemsSource="{Binding Mode=OneWay,
-                Source={StaticResource collection}}" IsSynchronizedWithCurrentItem="True" FontSize="16" Margin="0,5,0,0" Background="#FFC1C2C7"  >
+            <ListView x:Name="wordListView" Grid.Row="1"  
+                IsSynchronizedWithCurrentItem="True" FontSize="16" Margin="0,5,0,0" Background="#FFC1C2C7" SelectionChanged="SelectionChanget"  >
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="Слово" Width="{Binding ActualWidth,
@@ -54,7 +54,7 @@
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-                        <GridViewColumn DisplayMemberBinding="{Binding Translite}" Width="{Binding ActualWidth, ElementName=wordListView, Mode=OneWay, 
+                        <GridViewColumn DisplayMemberBinding="{Binding TranslateLine}" Width="{Binding ActualWidth, ElementName=wordListView, Mode=OneWay, 
                             Converter={StaticResource WidthconverterMultiplication70}}">Перевод</GridViewColumn>
                         <!--<GridViewColumn DisplayMemberBinding="{Binding PartOfSpeach}">Часть речи</GridViewColumn>-->
                     </GridView>
@@ -80,10 +80,10 @@
                         <RowDefinition Height="0.3*"/>
                         <RowDefinition/>
                         <RowDefinition Height="0.3*"/>
-                        <RowDefinition Height="6*" />
+                        <RowDefinition Height="5*" />
                         <RowDefinition Height="0.5*"/>
                         <RowDefinition />
-                        <RowDefinition Height="3*"/>
+                        <RowDefinition Height="4*"/>
                         <RowDefinition/>
                         <RowDefinition/>
                         <RowDefinition/>
@@ -94,33 +94,31 @@
                             Mode=OneWay}"
                                    VerticalAlignment="Bottom" Foreground="#FF0C1F9C"></TextBlock>
                         <TextBox x:Name="textBoxWord" Width="{Binding ActualWidth, Converter={StaticResource WidthconverterMultiplication60},
-                            ElementName=inerGrid, Mode=OneWay}" FontSize="24" VerticalAlignment="Bottom" Background="#FFCDCBCB" Text="{Binding Path=Word}"/>
+                            ElementName=inerGrid, Mode=OneWay}" FontSize="24" VerticalAlignment="Bottom" Background="#FFCDCBCB" Text="{Binding Word}"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Grid.Row="2">
                         <TextBlock Text="Транскрипция:" FontSize="24" Width="{Binding ActualWidth, ElementName=textBlockWord, Mode=OneWay}"
                                    VerticalAlignment="Bottom" Foreground="{Binding Foreground, ElementName=textBlockWord}"  />
                         <TextBox x:Name="textBoxTranscription" Width="{Binding Width, ElementName=textBoxWord}"
                                  FontSize="{Binding FontSize, ElementName=textBlockWord}" VerticalAlignment="{Binding VerticalAlignment,
-                            ElementName=textBoxWord}" Background="{Binding Background, ElementName=textBoxWord}" Text="{Binding Path=Transcription}"/>
+                            ElementName=textBoxWord}" Background="{Binding Background, ElementName=textBoxWord}" Text="{Binding Transcription}"/>
                     </StackPanel>
-
-                    <TextBlock Grid.Row="4" Text="Перевод:" FontSize="24" Width="{Binding ActualWidth, ElementName=textBlockWord, Mode=OneWay}"
+                    <StackPanel Orientation="Horizontal" Grid.Row="4">
+                        <TextBlock  Text="Часть речи:" FontSize="24" Width="{Binding ActualWidth, ElementName=textBlockWord, Mode=OneWay}"
                                    VerticalAlignment="Bottom" Foreground="{Binding Foreground, ElementName=textBlockWord}" HorizontalAlignment="Left" />
-                    <ListView x:Name="LisstViewTranlate" Grid.Row="6"  Grid.ColumnSpan="3" IsSynchronizedWithCurrentItem="True" 
-                              ItemsSource="{Binding Path=TranslateObservable}" ToolTip="Двойной щелчок для удаления"
-                              Background="{Binding Background, ElementName=textBoxWord}"  >
-                        <ListView.View >
-                            <GridView>
-                                <GridViewColumn x:Name="gridColumnTranslate" Header="перевод"  DisplayMemberBinding="{Binding Translate}"  Width="{Binding Width, ElementName=textBoxWord}"/>
-                                <GridViewColumn Header="часть речи" Width="{Binding ActualWidth, ElementName=textBlockWord, Mode=OneWay}" DisplayMemberBinding="{Binding Partofspeach}" />
-                            </GridView>
-                        </ListView.View>
-                    </ListView>
-
+                        <TextBox x:Name="textBoxPartOfSpeach" Width="{Binding Width, ElementName=textBoxWord}"
+                                 FontSize="{Binding FontSize, ElementName=textBlockWord}" VerticalAlignment="{Binding VerticalAlignment,
+                            ElementName=textBoxWord}" Background="{Binding Background, ElementName=textBoxWord}" Text="{Binding PartOfSpeach}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Grid.Row="6">
+                        <TextBlock  Text="Перевод:" FontSize="24" Width="{Binding ActualWidth, ElementName=textBlockWord, Mode=OneWay}"
+                                   VerticalAlignment="Top" Foreground="{Binding Foreground, ElementName=textBlockWord}" HorizontalAlignment="Left" />
+                        <ListBox  x:Name="listBoxETranslate" Background="{Binding Background, ElementName=textBoxWord}" ItemsSource="{Binding Translate}"  Width="{Binding Width, ElementName=textBoxWord}" FontSize="18" />
+                    </StackPanel>
 
                     <TextBlock Text="Примеры:" Grid.Row="8" FontSize="24" Width="{Binding ActualWidth, ElementName=textBlockWord, Mode=OneWay}"
                                    VerticalAlignment="Bottom" Foreground="{Binding Foreground, ElementName=textBlockWord}" HorizontalAlignment="Left" />
-                    <ListBox Grid.Row="9" x:Name="listBoxExample" Background="{Binding Background, ElementName=textBoxWord}" ItemsSource="{Binding Path=ExampleObservable}" />
+                    <ListBox Grid.Row="9" x:Name="listBoxExample" Background="{Binding Background, ElementName=textBoxWord}" ItemsSource="{Binding Path=Example}" FontSize="{Binding FontSize, ElementName=listBoxETranslate}"/>
                     <Button x:Name="buttonAddWord" Grid.Row="11" Content="Добавить" HorizontalAlignment="Right" Margin="0,5,0,0" Width="70" Click="ClickButtonAddWord" />
 
                 </Grid>

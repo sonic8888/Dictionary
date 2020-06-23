@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -23,19 +24,17 @@ namespace MyDictionary
     {
         private int inputTextLenght = 2;//длина текста TextBox после которой начинается обработка событий ввода
         private string pathDirectoryDictionary = @"./ABBYLingvoDic";// путь к папке с словарями ABBYLingvo
-        MyCollection collection;
+        ObservableCollection<WordSample> collection = new ObservableCollection<WordSample>();
         MyXmlReader red;
         public ChoseWords()
         {
             InitializeComponent();
             FIleTools.TotalCreateDirectory();
+            wordListView.ItemsSource = collection;
 
-            Object v = this.TryFindResource("collection");//получаем ссылку на ресурс колекции выборки слов из словарей ABBYLingvo
-            if (v != null)
-            {
-                collection = v as MyCollection;
-            }
+
             InitMyXmlReader();
+
         }
 
 
@@ -50,18 +49,20 @@ namespace MyDictionary
         {
 
 
+            collection.Clear();
             if (findWord.Text.Length >= inputTextLenght)
             {
                 string word = findWord.Text;
 
                 if (red != null)
                 {
-                    List<WordForList> list = red.FindWordForList(word);
-                    collection.Clear();
-                    foreach (WordForList item in list)
+
+                    foreach (WordSample item in red.FindWordsSample(word))
                     {
                         collection.Add(item);
                     }
+
+
                 }
             }
         }
@@ -121,13 +122,29 @@ namespace MyDictionary
         /// <param name="e"></param>
         private void PreviewKeyDownFindWord(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Back)
+            //if (e.Key == Key.Back)
+            //{
+            //    TextCompositionEventArgs w = new EventArgs() as TextCompositionEventArgs;
+
+            //    TextBoxInputText(sender, w);
+
+
+            //}
+            collection.Clear();
+            if (findWord.Text.Length >= inputTextLenght)
             {
-                TextCompositionEventArgs w = new EventArgs() as TextCompositionEventArgs;
+                string word = findWord.Text;
 
-                TextBoxInputText(sender, w);
+                if (red != null)
+                {
+
+                    foreach (WordSample item in red.FindWordsSample(word))
+                    {
+                        collection.Add(item);
+                    }
 
 
+                }
             }
         }
 
@@ -141,6 +158,82 @@ namespace MyDictionary
         private void ClickButtonAddWord(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void KeyDownTextBoxFindWord(object sender, KeyEventArgs e)
+        {
+            //}
+            collection.Clear();
+            if (findWord.Text.Length >= inputTextLenght)
+            {
+                string word = findWord.Text;
+
+                if (red != null)
+                {
+
+                    foreach (WordSample item in red.FindWordsSample(word))
+                    {
+                        collection.Add(item);
+                    }
+
+
+                }
+            }
+
+        }
+
+
+
+        private void PreviewTextInputt(object sender, TextCompositionEventArgs e)
+        {
+            collection.Clear();
+            if (findWord.Text.Length >= inputTextLenght)
+            {
+                string word = findWord.Text;
+
+                if (red != null)
+                {
+
+                    foreach (WordSample item in red.FindWordsSample(word))
+                    {
+                        collection.Add(item);
+                    }
+
+
+                }
+            }
+        }
+
+        private void KeyUpTextBoxFind(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Back)
+            {
+                collection.Clear();
+                if (findWord.Text.Length >= inputTextLenght)
+                {
+                    string word = findWord.Text;
+
+                    if (red != null)
+                    {
+
+                        foreach (WordSample item in red.FindWordsSample(word))
+                        {
+                            collection.Add(item);
+                        }
+
+
+                    }
+                }
+            }
+        }
+
+        private void SelectionChanget(object sender, SelectionChangedEventArgs e)
+        {
+
+            ListBox lb = sender as ListBox;
+            int ind = lb.SelectedIndex;
+            WordSample wordSample = lb.Items[ind] as WordSample;
+            inerGrid.DataContext = wordSample;
         }
     }
 }
