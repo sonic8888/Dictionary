@@ -60,9 +60,6 @@
         </GroupBox>
         <ToolBar Grid.Column="0" Grid.ColumnSpan="5" Height="40" VerticalAlignment="Top" Background="#FFC4DCF7">
             <Menu Width="100" >
-                <!--<Menu.Background>
-                    <ImageBrush ImageSource="Customize.png"/>
-                </Menu.Background>-->
                 <MenuItem x:Name="menuItemFile" Width="110" Height="40" >
                     <MenuItem.Header>
                         <StackPanel Orientation="Horizontal"   >
@@ -72,8 +69,6 @@
                     </MenuItem.Header>
                     <MenuItem x:Name="MenuItemOpen" Header="Открыть" FontSize="14" Width="120" Click="ClickMenuItemOpen"/>
                     <MenuItem x:Name="MenuItemAdd" Header="Добавить" FontSize="14" Width="120" Click="ClickMenuItemAdd"/>
-
-
                 </MenuItem> 
             </Menu>
             <Separator />

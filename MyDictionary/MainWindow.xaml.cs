@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using XMLRead;
 
 namespace MyDictionary
 {
@@ -30,6 +31,7 @@ namespace MyDictionary
 
             ChoseWords chw = new ChoseWords();
             chw.Show();
+
         }
     }
 }

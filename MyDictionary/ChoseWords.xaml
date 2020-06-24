@@ -50,7 +50,7 @@
                             ElementName=wordListView, Mode=OneWay, Converter={StaticResource WidthconverterMultiplication30}}" >
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock x:Name="textboxword" Text="{Binding Word}" FontSize="18" Background="{x:Null}" Foreground="#FF6679F0"  MouseDown="MouseDownTextBloc"  />
+                                    <TextBlock x:Name="textboxword" Text="{Binding Word}" FontSize="18" Background="{x:Null}" Foreground="#FF6679F0"  />
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
@@ -67,7 +67,32 @@
                 <RowDefinition MinHeight="60" MaxHeight="60"/>
                 <RowDefinition Height="9*"/>
             </Grid.RowDefinitions>
-            <ToolBar x:Name="toolBar" Grid.Row="0" Background="{Binding Background, ElementName=borderTop}" Foreground="#FF080808"/>
+            <ToolBar x:Name="toolBar" Grid.Row="0" Background="{Binding Background, ElementName=borderTop}" Foreground="#FF080808">
+                <Menu  Background="{Binding Background, ElementName=borderTop}"  >
+                    <MenuItem x:Name="menuItemFile">
+                        <MenuItem.Header>
+                            <StackPanel Orientation="Horizontal"   >
+                                <Image Source="Picture/icons8-проводник-windows-48.png"  />
+                                <!--<TextBlock Text="Файл" FontSize="18" Margin="15,0,0,0"   />-->
+                            </StackPanel>
+                        </MenuItem.Header>
+                        <MenuItem x:Name="MenuItemOpen" Header="Открыть папку" FontSize="12" Width="180" Click="ClickMenuItemOpen"/>
+                        <MenuItem x:Name="MenuItemAdd" Header="Добавить аудиофайл" FontSize="12" Width="180" Click="ClickMenuItemAdd"/>
+                    </MenuItem>
+                </Menu>
+                <Separator/>
+                <Button x:Name="buttonPlayAydio" Click="ClickButtonPlayAudio">
+                    <Button.Content>
+                        <Image Source="Picture/speaker_3760.png"/>
+                    </Button.Content>
+                </Button>
+                <Separator/>
+                <!--<Button x:Name="buttonCopyFile" Click="ClicButtonCopyFile">
+                    <Button.Content>
+                        <Image Source="Picture/icons8-скопировать-48.png"/>
+                    </Button.Content>
+                </Button>-->
+            </ToolBar>
             <Grid x:Name="gridElementProperty" Grid.Row="1" Background="#FFB6B6B6"  Margin="0,30,0,0" >
                 <Grid.RowDefinitions>
                     <RowDefinition/>
@@ -120,6 +145,8 @@
                                    VerticalAlignment="Bottom" Foreground="{Binding Foreground, ElementName=textBlockWord}" HorizontalAlignment="Left" />
                     <ListBox Grid.Row="9" x:Name="listBoxExample" Background="{Binding Background, ElementName=textBoxWord}" ItemsSource="{Binding Path=Example}" FontSize="{Binding FontSize, ElementName=listBoxETranslate}"/>
                     <Button x:Name="buttonAddWord" Grid.Row="11" Content="Добавить" HorizontalAlignment="Right" Margin="0,5,0,0" Width="70" Click="ClickButtonAddWord" />
+                    <Button x:Name="buttonGreateNewWord" Grid.Row="11" Content="Создать" HorizontalAlignment="Left" Margin="0,5,0,0" Width="70" Click="ClickButtonCreateNewWord" />
+                    <Button x:Name="buttonSave" Grid.Row="11" Content="Сохранить" HorizontalAlignment="Center" Margin="0,5,0,0" Width="70" Click="ClickButtonSave" />
 
                 </Grid>
             </Grid>

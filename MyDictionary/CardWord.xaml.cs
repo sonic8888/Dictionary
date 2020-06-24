@@ -210,7 +210,7 @@ namespace MyDictionary
                 MessageBox.Show("Укажите слово!");
                 return;
             }
-            if (FIleTools.SerachFile(Mycardword.SoundName, FIleTools.NameDirectoryAudio) != null)
+            if (FIleTools.SearchFile(Mycardword.SoundName, FIleTools.NameDirectoryAudio) != null)
             {
                 MessageBox.Show("Файл: " + Mycardword.SoundName + "\n" +
                     " уже скопирован.");
@@ -222,7 +222,7 @@ namespace MyDictionary
                 MessageBox.Show("не указана папка для поиска файлов");
                 return;
             }
-            FileInfo fileInfosound = FIleTools.SerachFile(Mycardword.SoundName, pathDirectSearch);
+            FileInfo fileInfosound = FIleTools.SearchFile(Mycardword.SoundName, pathDirectSearch);
             if (fileInfosound == null)
             {
                 MessageBox.Show("Файл:" + Mycardword.SoundName + "\n" +
@@ -252,13 +252,13 @@ namespace MyDictionary
         private void ClickButtonPlaySound(object sender, RoutedEventArgs e)
         {
 
-            FileInfo fileInfo = FIleTools.SerachFile(Mycardword.SoundName, FIleTools.NameDirectoryAudio);
+            FileInfo fileInfo = FIleTools.SearchFile(Mycardword.SoundName, FIleTools.NameDirectoryAudio);
             if (fileInfo == null)
             {
                 MessageBox.Show("Аудио файл не найден");
                 return;
             }
-            FileInfo sound = FIleTools.SerachFile(Mycardword.SoundName, FIleTools.NameDirectoryAudio);
+            FileInfo sound = FIleTools.SearchFile(Mycardword.SoundName, FIleTools.NameDirectoryAudio);
             if (sound != null)
             {
                 MediaPlayer mediaPlayer = new MediaPlayer();

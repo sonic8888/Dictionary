@@ -26,13 +26,14 @@ namespace MyDictionary
         private string pathDirectoryDictionary = @"./ABBYLingvoDic";// путь к папке с словарями ABBYLingvo
         ObservableCollection<WordSample> collection = new ObservableCollection<WordSample>();
         MyXmlReader red;
+        WordSample _wordsSample;
         public ChoseWords()
         {
             InitializeComponent();
             FIleTools.TotalCreateDirectory();
             wordListView.ItemsSource = collection;
 
-
+            _wordsSample = new WordSample();
             InitMyXmlReader();
 
         }
@@ -70,38 +71,6 @@ namespace MyDictionary
 
 
         /// <summary>
-        /// обработчик TextBlock при шелчке выбора нужного слова
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void MouseDownTextBloc(object sender, MouseButtonEventArgs e)
-        {
-            TextBlock tb = sender as TextBlock;
-            string word = tb.Text.Trim();
-
-
-            if (red != null)
-            {
-                List<Card> list = red.FindWords(word);
-                if (list != null)
-                {
-                    MyCardWord myCard = new MyCardWord(list);
-                    //CardWord cardWord = new CardWord(myCard);
-                    //cardWord.Topmost = true;
-                    //cardWord.Show();
-                    inerGrid.DataContext = myCard;
-
-                }
-                else
-                {
-                    MessageBox.Show("Слово не найдено!");
-                }
-            }
-
-
-        }
-
-        /// <summary>
         /// читает *.xml" файлы
         /// </summary>
         private void InitMyXmlReader()
@@ -122,14 +91,7 @@ namespace MyDictionary
         /// <param name="e"></param>
         private void PreviewKeyDownFindWord(object sender, KeyEventArgs e)
         {
-            //if (e.Key == Key.Back)
-            //{
-            //    TextCompositionEventArgs w = new EventArgs() as TextCompositionEventArgs;
 
-            //    TextBoxInputText(sender, w);
-
-
-            //}
             collection.Clear();
             if (findWord.Text.Length >= inputTextLenght)
             {
@@ -155,10 +117,7 @@ namespace MyDictionary
             cwe.Show();
         }
 
-        private void ClickButtonAddWord(object sender, RoutedEventArgs e)
-        {
-
-        }
+    
 
         private void KeyDownTextBoxFindWord(object sender, KeyEventArgs e)
         {
@@ -234,6 +193,91 @@ namespace MyDictionary
             int ind = lb.SelectedIndex;
             WordSample wordSample = lb.Items[ind] as WordSample;
             inerGrid.DataContext = wordSample;
+            _wordsSample = inerGrid.DataContext as WordSample;
+
+        }
+        /// <summary>
+        /// обработчик вкладки меню "Открыть"
+        /// открывает проводник и сохраняет в текстовый файл путь к внешней папке с аудиофайлами
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ClickMenuItemOpen(object sender, RoutedEventArgs e)
+        {
+            DefaultDialogService dds = new DefaultDialogService();
+            dds.OpenFileDialog();
+            string pathDirectory = dds.GetDirectory(dds.FilePath);
+            FIleTools.WritePath(FIleTools.NameFilePathes, pathDirectory, false);
+        }
+        /// <summary>
+        /// обработчик вкладки меню "Добавить"
+        /// открывает окно проводника
+        /// копирует и переименовывает аудиофайл в папку приложения
+        /// сохраняет новое имя файла в "WordSample"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ClickMenuItemAdd(object sender, RoutedEventArgs e)
+        {
+            DefaultDialogService dds = new DefaultDialogService();
+            dds.OpenFileDialog();
+            string fileName = dds.FilePath;
+            FileInfo filesound = new FileInfo(fileName);
+            FileInfo filecopy = FIleTools.CopyTo(filesound,FIleTools.NameDirectoryAudio);
+            if (filecopy != null)
+            {
+                _wordsSample.SoundName = filecopy.Name;
+              
+            }
+            else
+            {
+                System.Media.SystemSounds.Beep.Play();
+            }
+        }
+
+        private void ClickButtonPlayAudio(object sender, RoutedEventArgs e)
+        {
+            FileInfo file = FIleTools.SearchFile(_wordsSample.SoundName, FIleTools.NameDirectoryAudio);
+            if (file != null)
+            {
+                PlaySound(file);
+                return;
+            }
+            string path = FIleTools.ReadPath(FIleTools.NameFilePathes);
+            FileInfo fileInfo = FIleTools.SearchFile(_wordsSample.SoundName, path);
+            if (fileInfo == null)
+            {
+                System.Media.SystemSounds.Beep.Play();
+                MessageBox.Show("Аудиофайл не найден.\nУкажите файл в ручную.");
+            }
+            else
+            {
+                FileInfo filcopy = FIleTools.CopyTo(fileInfo, FIleTools.NameDirectoryAudio);
+                _wordsSample.SoundName = filcopy.Name;
+                PlaySound(filcopy);
+            }
+        }
+
+       
+        private void PlaySound(FileInfo sound)
+        {
+            MediaPlayer mediaPlayer = new MediaPlayer();
+            mediaPlayer.Open(new Uri(sound.FullName));
+            mediaPlayer.Play();
+        }
+
+        private void ClickButtonCreateNewWord(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ClickButtonSave(object sender, RoutedEventArgs e)
+        {
+
+        }
+        private void ClickButtonAddWord(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

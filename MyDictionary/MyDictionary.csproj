@@ -275,6 +275,16 @@
   <ItemGroup>
     <Resource Include="Picture\icons8-поиск-64.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Picture\icons8-динамик-48.png" />
+    <Resource Include="Picture\icons8-проводник-windows-48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Picture\speaker_3760.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Picture\icons8-скопировать-48.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
