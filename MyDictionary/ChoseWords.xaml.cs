@@ -27,6 +27,10 @@ namespace MyDictionary
         ObservableCollection<WordSample> collection = new ObservableCollection<WordSample>();
         MyXmlReader red;
         WordSample _wordsSample;
+        private char[] splitTranslate;
+        private char[] splitExample;
+        private string messageNotAudio = "Аудиофайл не указан.\nПродожить без него?";
+        private string messageWarning = "Внимание!";
         public ChoseWords()
         {
             InitializeComponent();
@@ -35,7 +39,8 @@ namespace MyDictionary
 
             _wordsSample = new WordSample();
             InitMyXmlReader();
-
+            splitTranslate = new char[] { '\n', '.', ',', '!', ' ', ';', ':', '\r', '\t', '\v', '?', '/' };
+            splitExample = new char[] { '\n', '\r', '\t', '\v' };
         }
 
 
@@ -117,7 +122,7 @@ namespace MyDictionary
             cwe.Show();
         }
 
-    
+
 
         private void KeyDownTextBoxFindWord(object sender, KeyEventArgs e)
         {
@@ -223,11 +228,11 @@ namespace MyDictionary
             dds.OpenFileDialog();
             string fileName = dds.FilePath;
             FileInfo filesound = new FileInfo(fileName);
-            FileInfo filecopy = FIleTools.CopyTo(filesound,FIleTools.NameDirectoryAudio);
+            FileInfo filecopy = FIleTools.CopyTo(filesound, FIleTools.NameDirectoryAudio);
             if (filecopy != null)
             {
                 _wordsSample.SoundName = filecopy.Name;
-              
+
             }
             else
             {
@@ -237,14 +242,47 @@ namespace MyDictionary
 
         private void ClickButtonPlayAudio(object sender, RoutedEventArgs e)
         {
-            FileInfo file = FIleTools.SearchFile(_wordsSample.SoundName, FIleTools.NameDirectoryAudio);
+            FileInfo file;
+            try
+            {
+                file = FIleTools.SearchFile(_wordsSample.SoundName, FIleTools.NameDirectoryAudio);
+
+            }
+            catch (IOException ex)
+            {
+                MessageBox.Show(ex.Message);
+                return;
+            }
             if (file != null)
             {
                 PlaySound(file);
                 return;
             }
-            string path = FIleTools.ReadPath(FIleTools.NameFilePathes);
-            FileInfo fileInfo = FIleTools.SearchFile(_wordsSample.SoundName, path);
+            string path;
+            try
+            {
+                path = FIleTools.ReadPath(FIleTools.NameFilePathes);
+
+            }
+            catch (IOException ex)
+            {
+                MessageBox.Show(ex.Message);
+                return;
+            }
+
+            FileInfo fileInfo;
+            try
+            {
+                fileInfo = FIleTools.SearchFile(_wordsSample.SoundName, path);
+            }
+            catch (IOException ex)
+            {
+
+                MessageBox.Show(ex.Message);
+                return;
+            }
+
+
             if (fileInfo == null)
             {
                 System.Media.SystemSounds.Beep.Play();
@@ -258,7 +296,7 @@ namespace MyDictionary
             }
         }
 
-       
+
         private void PlaySound(FileInfo sound)
         {
             MediaPlayer mediaPlayer = new MediaPlayer();
@@ -268,6 +306,32 @@ namespace MyDictionary
 
         private void ClickButtonCreateNewWord(object sender, RoutedEventArgs e)
         {
+            if (_wordsSample.SoundName == null)
+            {
+                MessageBoxResult messageBoxResult = MessageBox.Show(messageNotAudio, messageWarning, MessageBoxButton.YesNo);
+                if (messageBoxResult == MessageBoxResult.Yes)// ответ Да продолжаем без Аудиофайла
+                {
+
+                }
+                return;
+
+            }
+
+        }
+        private void GreateNewWord()
+        {
+            string word = textBoxWord.Text;
+            if (word == "")
+            {
+                MessageBox.Show("Слово не указано.");
+                return;
+            }
+            ItemCollection trItems = listBoxETranslate.Items;
+            if (trItems.Count < 1)
+            {
+                MessageBox.Show("Перевод не указан.");
+                return;
+            }
 
         }
 
@@ -275,9 +339,50 @@ namespace MyDictionary
         {
 
         }
+        /// <summary>
+        /// Создает диалоговое окно добавления Переводов и 
+        /// Примеров
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ClickButtonAddWord(object sender, RoutedEventArgs e)
         {
+            WindowAddTranslation windowAdd = new WindowAddTranslation();
+            if (windowAdd.ShowDialog() == true)
+            {
+                string translate = windowAdd.textBoxTranslate.Text;
+                string example = windowAdd.textBoxExample.Text;
+                IEnumerable<string> transl = GetEnumerable(translate, splitTranslate);
+                IEnumerable<string> exampl = GetEnumerable(example, splitExample);
 
+                if (transl != null)
+                {
+                    foreach (string item in transl)
+                    {
+                        _wordsSample.Translate.Add(item);
+                    }
+                }
+                if (exampl != null)
+                {
+                    foreach (string item in exampl)
+                    {
+                        _wordsSample.Example.Add(item);
+                    }
+                }
+
+
+            }
+        }
+        /// <summary>
+        /// возвращает последовательность переводов и примеров
+        /// </summary>
+        /// <param name="text"></param>
+        /// <param name="arr"></param>
+        /// <returns></returns>
+        private IEnumerable<string> GetEnumerable(string text, char[] arr)
+        {
+            IEnumerable<string> collect = text.Split(arr).Where(n => n.Length > 1);
+            return collect;
         }
     }
 }

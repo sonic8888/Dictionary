@@ -10,30 +10,23 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
-using XMLRead;
 
 namespace MyDictionary
 {
     /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
+    /// Логика взаимодействия для WindowAddTranslation.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class WindowAddTranslation : Window
     {
-        public MainWindow()
+        public WindowAddTranslation()
         {
             InitializeComponent();
-            FIleTools.CreateDirectory(FIleTools.NameDirectoryAudio);
-            FIleTools.CreateDirectory(FIleTools.NameDirectoryStorage);
         }
 
-        private void clickNewWord(object sender, RoutedEventArgs e)
+        private void ClickButtonSave(object sender, RoutedEventArgs e)
         {
-
-            ChoseWords chw = new ChoseWords();
-            chw.Show();
-
+            this.DialogResult = true;
         }
     }
 }

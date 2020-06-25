@@ -110,7 +110,7 @@
                         <RowDefinition />
                         <RowDefinition Height="4*"/>
                         <RowDefinition/>
-                        <RowDefinition/>
+                        <RowDefinition Height="1.5*"/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
                     <StackPanel Orientation="Horizontal" Grid.Row="0">
@@ -144,9 +144,21 @@
                     <TextBlock Text="Примеры:" Grid.Row="8" FontSize="24" Width="{Binding ActualWidth, ElementName=textBlockWord, Mode=OneWay}"
                                    VerticalAlignment="Bottom" Foreground="{Binding Foreground, ElementName=textBlockWord}" HorizontalAlignment="Left" />
                     <ListBox Grid.Row="9" x:Name="listBoxExample" Background="{Binding Background, ElementName=textBoxWord}" ItemsSource="{Binding Path=Example}" FontSize="{Binding FontSize, ElementName=listBoxETranslate}"/>
-                    <Button x:Name="buttonAddWord" Grid.Row="11" Content="Добавить" HorizontalAlignment="Right" Margin="0,5,0,0" Width="70" Click="ClickButtonAddWord" />
-                    <Button x:Name="buttonGreateNewWord" Grid.Row="11" Content="Создать" HorizontalAlignment="Left" Margin="0,5,0,0" Width="70" Click="ClickButtonCreateNewWord" />
-                    <Button x:Name="buttonSave" Grid.Row="11" Content="Сохранить" HorizontalAlignment="Center" Margin="0,5,0,0" Width="70" Click="ClickButtonSave" />
+                    <Button x:Name="buttonAddWord" Grid.Row="11"   HorizontalAlignment="Right"  Width="90" Click="ClickButtonAddWord" FontSize="10" >
+                        <Button.Content>
+                            <TextBlock Text="Добавить перевод" TextWrapping="Wrap" TextAlignment="Center" FontSize="12"/>
+                        </Button.Content>
+                    </Button>
+                    <Button x:Name="buttonGreateNewWord" Grid.Row="11"  HorizontalAlignment="Left"  Width="90" Click="ClickButtonCreateNewWord" >
+                        <Button.Content>
+                            <TextBlock Text="Создать   новое слово" TextWrapping="Wrap" TextAlignment="Center"/>
+                        </Button.Content>
+                    </Button>
+                    <Button x:Name="buttonSave" Grid.Row="11"  HorizontalAlignment="Center"  Width="90" Click="ClickButtonSave">
+                        <Button.Content>
+                            <TextBlock Text="Сохранить в Базу Данных" TextWrapping="Wrap" TextAlignment="Center"/>
+                        </Button.Content>
+                    </Button>
 
                 </Grid>
             </Grid>

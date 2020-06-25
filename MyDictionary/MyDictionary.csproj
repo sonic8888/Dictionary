@@ -85,7 +85,7 @@
     <Reference Include="PresentationFramework" />
     <Reference Include="XMLRead, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Library\XMLRead\bin\Debug\XMLRead.dll</HintPath>
+      <HintPath>..\..\MyLibrary\XMLRead\bin\Debug\XMLRead.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -104,6 +104,9 @@
     </Compile>
     <Compile Include="Converters\WidthConverterMultiplication.cs" />
     <Compile Include="Converters\WidthConverterSummation.cs" />
+    <Compile Include="WindowAddTranslation.xaml.cs">
+      <DependentUpon>WindowAddTranslation.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WindowNewWord.xaml.cs">
       <DependentUpon>WindowNewWord.xaml</DependentUpon>
     </Compile>
@@ -131,6 +134,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="WindowAddTranslation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="WindowNewWord.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
