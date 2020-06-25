@@ -31,6 +31,8 @@ namespace MyDictionary
         private char[] splitExample;
         private string messageNotAudio = "Аудиофайл не указан.\nПродожить без него?";
         private string messageWarning = "Внимание!";
+        private string pathRedTick = @"Picture\\tick_red.png";
+        private string pathGreenTick = @"Picture\\tick_green.png";
         public ChoseWords()
         {
             InitializeComponent();
@@ -242,57 +244,19 @@ namespace MyDictionary
 
         private void ClickButtonPlayAudio(object sender, RoutedEventArgs e)
         {
-            FileInfo file;
-            try
-            {
-                file = FIleTools.SearchFile(_wordsSample.SoundName, FIleTools.NameDirectoryAudio);
+            FileInfo file = SearchFile(_wordsSample.SoundName, FIleTools.NameDirectoryAudio);
 
-            }
-            catch (IOException ex)
-            {
-                MessageBox.Show(ex.Message);
-                return;
-            }
+
             if (file != null)
             {
                 PlaySound(file);
                 return;
             }
-            string path;
-            try
+       
+            FileInfo fileInfo = CopyAudio();
+            if (fileInfo != null)
             {
-                path = FIleTools.ReadPath(FIleTools.NameFilePathes);
-
-            }
-            catch (IOException ex)
-            {
-                MessageBox.Show(ex.Message);
-                return;
-            }
-
-            FileInfo fileInfo;
-            try
-            {
-                fileInfo = FIleTools.SearchFile(_wordsSample.SoundName, path);
-            }
-            catch (IOException ex)
-            {
-
-                MessageBox.Show(ex.Message);
-                return;
-            }
-
-
-            if (fileInfo == null)
-            {
-                System.Media.SystemSounds.Beep.Play();
-                MessageBox.Show("Аудиофайл не найден.\nУкажите файл в ручную.");
-            }
-            else
-            {
-                FileInfo filcopy = FIleTools.CopyTo(fileInfo, FIleTools.NameDirectoryAudio);
-                _wordsSample.SoundName = filcopy.Name;
-                PlaySound(filcopy);
+                PlaySound(fileInfo);
             }
         }
 
@@ -304,40 +268,54 @@ namespace MyDictionary
             mediaPlayer.Play();
         }
 
-        private void ClickButtonCreateNewWord(object sender, RoutedEventArgs e)
-        {
-            if (_wordsSample.SoundName == null)
-            {
-                MessageBoxResult messageBoxResult = MessageBox.Show(messageNotAudio, messageWarning, MessageBoxButton.YesNo);
-                if (messageBoxResult == MessageBoxResult.Yes)// ответ Да продолжаем без Аудиофайла
-                {
 
-                }
-                return;
-
-            }
-
-        }
-        private void GreateNewWord()
+        /// <summary>
+        /// Заполняем _wordsSample новыми значениями
+        /// </summary>
+        private bool GreateNewWord()
         {
             string word = textBoxWord.Text;
             if (word == "")
             {
                 MessageBox.Show("Слово не указано.");
-                return;
+                return false;
             }
-            ItemCollection trItems = listBoxETranslate.Items;
-            if (trItems.Count < 1)
+            if (listBoxETranslate.Items.Count < 1)
             {
                 MessageBox.Show("Перевод не указан.");
-                return;
+                return false;
             }
+            if (_wordsSample.SoundName == null)
+            {
+                MessageBoxResult messageBoxResult = MessageBox.Show(messageNotAudio, messageWarning, MessageBoxButton.YesNo);
+                if (messageBoxResult == MessageBoxResult.No)
+                {
+                    return false;
+                }
 
+            }
+            FileInfo file = FIleTools.SearchFile(_wordsSample.SoundName, FIleTools.NameDirectoryAudio);
+            if (file == null)
+            {
+                CopyAudio();
+
+            }
+            _wordsSample.Word = word.Trim();
+            _wordsSample.PartOfSpeach = textBoxPartOfSpeach.Text.Trim();
+            _wordsSample.Transcription = textBoxTranscription.Text.Trim();
+
+            return true;
         }
 
         private void ClickButtonSave(object sender, RoutedEventArgs e)
         {
+            if (GreateNewWord())
+            {
+                imageButtonSave.Source = BitmapFrame.Create(CreateUri(pathGreenTick));
+            }
 
+
+            //imageButtonSave.Source = BitmapFrame.Create(new Uri(@"Picture\\tick_green.png", UriKind.Relative));
         }
         /// <summary>
         /// Создает диалоговое окно добавления Переводов и 
@@ -369,7 +347,10 @@ namespace MyDictionary
                         _wordsSample.Example.Add(item);
                     }
                 }
-
+                if (inerGrid.DataContext == null)
+                {
+                    inerGrid.DataContext = _wordsSample;
+                }
 
             }
         }
@@ -383,6 +364,75 @@ namespace MyDictionary
         {
             IEnumerable<string> collect = text.Split(arr).Where(n => n.Length > 1);
             return collect;
+        }
+        private Uri CreateUri(string patn)
+        {
+            Uri uri = null;
+            try
+            {
+                uri = new Uri(patn, UriKind.Relative);
+            }
+            catch (IOException ex)
+            {
+                MessageBox.Show(ex.Message);
+                return null;
+
+            }
+            return uri;
+        }
+        private FileInfo SearchFile(string name, string nameDirectory)
+        {
+            FileInfo file = null;
+            try
+            {
+                file = FIleTools.SearchFile(name, nameDirectory);
+
+            }
+            catch (IOException ex)
+            {
+                MessageBox.Show(ex.Message);
+                return null;
+            }
+            return file;
+        }
+        private string ReadPath()
+        {
+            string path;
+            try
+            {
+                path = FIleTools.ReadPath(FIleTools.NameFilePathes);
+
+            }
+            catch (IOException ex)
+            {
+                MessageBox.Show(ex.Message);
+                return null;
+            }
+            return path;
+        }
+        private FileInfo CopyAudio()
+        {
+            string path = ReadPath();
+            FileInfo filcopy = null;
+            if (path == null)
+            {
+                MessageBox.Show("не удалось прочитать путь к папке с внешними аудиофайлами");
+                return null;
+            }
+            FileInfo fileInfo = SearchFile(_wordsSample.SoundName, path);
+            if (fileInfo == null)
+            {
+                System.Media.SystemSounds.Beep.Play();
+                MessageBox.Show("Аудиофайл не найден.\nУкажите файл в ручную.");
+                return null;
+            }
+            else
+            {
+                filcopy = FIleTools.CopyTo(fileInfo, FIleTools.NameDirectoryAudio);
+                _wordsSample.SoundName = filcopy.Name;
+
+            }
+            return filcopy;
         }
     }
 }

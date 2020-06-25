@@ -83,15 +83,11 @@
                 <Separator/>
                 <Button x:Name="buttonPlayAydio" Click="ClickButtonPlayAudio">
                     <Button.Content>
-                        <Image Source="Picture/speaker_3760.png"/>
+                        <Image Source="pack://siteoforigin:,,,/Picture/speaker_3760.png"/>
                     </Button.Content>
                 </Button>
                 <Separator/>
-                <!--<Button x:Name="buttonCopyFile" Click="ClicButtonCopyFile">
-                    <Button.Content>
-                        <Image Source="Picture/icons8-скопировать-48.png"/>
-                    </Button.Content>
-                </Button>-->
+            
             </ToolBar>
             <Grid x:Name="gridElementProperty" Grid.Row="1" Background="#FFB6B6B6"  Margin="0,30,0,0" >
                 <Grid.RowDefinitions>
@@ -99,11 +95,11 @@
                 </Grid.RowDefinitions>
                 <Grid x:Name="inerGrid" Grid.Row="0" Margin="20">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="1.5*"/>
                         <RowDefinition Height="0.3*"/>
-                        <RowDefinition/>
+                        <RowDefinition Height="1.5*"/>
                         <RowDefinition Height="0.3*"/>
-                        <RowDefinition/>
+                        <RowDefinition Height="1.5*"/>
                         <RowDefinition Height="0.3*"/>
                         <RowDefinition Height="5*" />
                         <RowDefinition Height="0.5*"/>
@@ -119,7 +115,7 @@
                             Mode=OneWay}"
                                    VerticalAlignment="Bottom" Foreground="#FF0C1F9C"></TextBlock>
                         <TextBox x:Name="textBoxWord" Width="{Binding ActualWidth, Converter={StaticResource WidthconverterMultiplication60},
-                            ElementName=inerGrid, Mode=OneWay}" FontSize="24" VerticalAlignment="Bottom" Background="#FFCDCBCB" Text="{Binding Word}"/>
+                            ElementName=inerGrid, Mode=OneWay}" FontSize="24" VerticalAlignment="Center" Background="#FFCDCBCB" Text="{Binding Word}" MaxLines="1" MinLines="1" VerticalContentAlignment="Center"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Grid.Row="2">
                         <TextBlock Text="Транскрипция:" FontSize="24" Width="{Binding ActualWidth, ElementName=textBlockWord, Mode=OneWay}"
@@ -144,19 +140,24 @@
                     <TextBlock Text="Примеры:" Grid.Row="8" FontSize="24" Width="{Binding ActualWidth, ElementName=textBlockWord, Mode=OneWay}"
                                    VerticalAlignment="Bottom" Foreground="{Binding Foreground, ElementName=textBlockWord}" HorizontalAlignment="Left" />
                     <ListBox Grid.Row="9" x:Name="listBoxExample" Background="{Binding Background, ElementName=textBoxWord}" ItemsSource="{Binding Path=Example}" FontSize="{Binding FontSize, ElementName=listBoxETranslate}"/>
-                    <Button x:Name="buttonAddWord" Grid.Row="11"   HorizontalAlignment="Right"  Width="90" Click="ClickButtonAddWord" FontSize="10" >
+                    <Button x:Name="buttonAddWord" Grid.Row="11"   HorizontalAlignment="Right"  Width="120" Click="ClickButtonAddWord" FontSize="10" >
                         <Button.Content>
-                            <TextBlock Text="Добавить перевод" TextWrapping="Wrap" TextAlignment="Center" FontSize="12"/>
+                            <TextBlock Text="Добавить перевод" TextWrapping="Wrap" TextAlignment="Left" FontSize="12"/>
                         </Button.Content>
                     </Button>
-                    <Button x:Name="buttonGreateNewWord" Grid.Row="11"  HorizontalAlignment="Left"  Width="90" Click="ClickButtonCreateNewWord" >
+                    <!--<Button x:Name="buttonGreateNewWord" Grid.Row="11"  HorizontalAlignment="Left"  Width="90" Click="ClickButtonCreateNewWord" >
                         <Button.Content>
                             <TextBlock Text="Создать   новое слово" TextWrapping="Wrap" TextAlignment="Center"/>
                         </Button.Content>
-                    </Button>
-                    <Button x:Name="buttonSave" Grid.Row="11"  HorizontalAlignment="Center"  Width="90" Click="ClickButtonSave">
+                    </Button>-->
+                    <Button x:Name="buttonSave" Grid.Row="11"  HorizontalAlignment="Left"  Width="120" Click="ClickButtonSave">
                         <Button.Content>
-                            <TextBlock Text="Сохранить в Базу Данных" TextWrapping="Wrap" TextAlignment="Center"/>
+                            <!--<Image />
+                            <TextBlock Text="Сохранить в Базу Данных" TextWrapping="Wrap" TextAlignment="Left"/>-->
+                            <StackPanel Orientation="Horizontal">
+                                <Image x:Name="imageButtonSave"  Source="pack://siteoforigin:,,,/Picture/tick_red.png"/>
+                                <TextBlock Text="Сохранить" TextAlignment="Center" VerticalAlignment="Center"/>
+                            </StackPanel>
                         </Button.Content>
                     </Button>
 

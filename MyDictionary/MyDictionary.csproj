@@ -85,7 +85,7 @@
     <Reference Include="PresentationFramework" />
     <Reference Include="XMLRead, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\MyLibrary\XMLRead\bin\Debug\XMLRead.dll</HintPath>
+      <HintPath>..\..\Library\XMLRead\bin\Debug\XMLRead.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -287,10 +287,20 @@
     <Resource Include="Picture\icons8-проводник-windows-48.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Picture\speaker_3760.png" />
+    <None Include="Picture\speaker_3760.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Picture\icons8-скопировать-48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Picture\tick_green.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Picture\tick_red.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
