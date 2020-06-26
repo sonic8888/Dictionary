@@ -252,7 +252,7 @@ namespace MyDictionary
                 PlaySound(file);
                 return;
             }
-       
+
             FileInfo fileInfo = CopyAudio();
             if (fileInfo != null)
             {
@@ -297,8 +297,11 @@ namespace MyDictionary
             FileInfo file = FIleTools.SearchFile(_wordsSample.SoundName, FIleTools.NameDirectoryAudio);
             if (file == null)
             {
-                CopyAudio();
-
+                FileInfo cory = CopyAudio();
+                if (cory == null)
+                {
+                    return false;
+                }
             }
             _wordsSample.Word = word.Trim();
             _wordsSample.PartOfSpeach = textBoxPartOfSpeach.Text.Trim();
