@@ -14,9 +14,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using XMLRead;
+using MyDictionary.Tools;
 
 namespace MyDictionary
 {
+    enum ColorIconButtonsave
+    {
+        Red, Green
+    }
     /// <summary>
     /// Логика взаимодействия для ChoseWords.xaml
     /// </summary>
@@ -30,9 +35,11 @@ namespace MyDictionary
         private char[] splitTranslate;
         private char[] splitExample;
         private string messageNotAudio = "Аудиофайл не указан.\nПродожить без него?";
+        private string messageOfAudio = "Желаете продолжить\nбез Аудиофайла?";
         private string messageWarning = "Внимание!";
         private string pathRedTick = @"Picture\\tick_red.png";
         private string pathGreenTick = @"Picture\\tick_green.png";
+        private ColorIconButtonsave colorIcon = ColorIconButtonsave.Red;
         public ChoseWords()
         {
             InitializeComponent();
@@ -117,12 +124,6 @@ namespace MyDictionary
             }
         }
 
-        private void ClickButtonNewWord(object sender, RoutedEventArgs e)
-        {
-            CardWordEmpty cwe = new CardWordEmpty();
-            cwe.Topmost = true;
-            cwe.Show();
-        }
 
 
 
@@ -201,6 +202,7 @@ namespace MyDictionary
             WordSample wordSample = lb.Items[ind] as WordSample;
             inerGrid.DataContext = wordSample;
             _wordsSample = inerGrid.DataContext as WordSample;
+            ChengeIconButtonSave(pathRedTick, ColorIconButtonsave.Red);
 
         }
         /// <summary>
@@ -292,7 +294,10 @@ namespace MyDictionary
                 {
                     return false;
                 }
-
+                _wordsSample.Word = word.Trim();
+                _wordsSample.PartOfSpeach = textBoxPartOfSpeach.Text.Trim();
+                _wordsSample.Transcription = textBoxTranscription.Text.Trim();
+                return true;
             }
             FileInfo file = FIleTools.SearchFile(_wordsSample.SoundName, FIleTools.NameDirectoryAudio);
             if (file == null)
@@ -300,7 +305,11 @@ namespace MyDictionary
                 FileInfo cory = CopyAudio();
                 if (cory == null)
                 {
-                    return false;
+                    MessageBoxResult messageBoxResult = MessageBox.Show(messageOfAudio, messageWarning, MessageBoxButton.YesNo);
+                    if (messageBoxResult == MessageBoxResult.No)
+                    {
+                        return false;
+                    }
                 }
             }
             _wordsSample.Word = word.Trim();
@@ -314,7 +323,11 @@ namespace MyDictionary
         {
             if (GreateNewWord())
             {
-                imageButtonSave.Source = BitmapFrame.Create(CreateUri(pathGreenTick));
+                ChengeIconButtonSave(pathGreenTick, ColorIconButtonsave.Green);
+                int ind = BdTools.AddNewWords(_wordsSample);
+
+                _wordsSample = new WordSample();
+                inerGrid.DataContext = null;
             }
 
 
@@ -333,6 +346,9 @@ namespace MyDictionary
             {
                 string translate = windowAdd.textBoxTranslate.Text;
                 string example = windowAdd.textBoxExample.Text;
+                string word = textBoxWord.Text;
+                string trancription = textBoxTranscription.Text;
+                string partOfSpeach = textBoxPartOfSpeach.Text;
                 IEnumerable<string> transl = GetEnumerable(translate, splitTranslate);
                 IEnumerable<string> exampl = GetEnumerable(example, splitExample);
 
@@ -352,6 +368,9 @@ namespace MyDictionary
                 }
                 if (inerGrid.DataContext == null)
                 {
+                    _wordsSample.Word = word;
+                    _wordsSample.Transcription = trancription;
+                    _wordsSample.PartOfSpeach = partOfSpeach;
                     inerGrid.DataContext = _wordsSample;
                 }
 
@@ -437,5 +456,21 @@ namespace MyDictionary
             }
             return filcopy;
         }
+        private void ChengeIconButtonSave(string color, ColorIconButtonsave col)
+        {
+            imageButtonSave.Source = BitmapFrame.Create(CreateUri(color));
+            colorIcon = col;
+        }
+
+
+
+        private void textBoxWord_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            if (colorIcon == ColorIconButtonsave.Green)
+            {
+                ChengeIconButtonSave(pathRedTick, ColorIconButtonsave.Red);
+            }
+        }
     }
+
 }
