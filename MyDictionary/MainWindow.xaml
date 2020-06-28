@@ -21,7 +21,8 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Button Click="clickNewWord">HewWord</Button>
+        <Button Click="clickNewWord" Grid.Row="0" Grid.Column="0">HewWord</Button>
+        <Button x:Name="buttonDictionary" Click="buttonDictionary_Click" Grid.Row="0" Grid.Column="2">TotalDictionary</Button>
         
     </Grid>
 </Window>

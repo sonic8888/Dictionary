@@ -35,5 +35,11 @@ namespace MyDictionary
             chw.Show();
 
         }
+
+        private void buttonDictionary_Click(object sender, RoutedEventArgs e)
+        {
+            TotalDictionary td = new TotalDictionary();
+            td.Show();
+        }
     }
 }
