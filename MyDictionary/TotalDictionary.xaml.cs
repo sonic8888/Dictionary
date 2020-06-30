@@ -16,7 +16,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using XMLRead;
- 
+
 
 namespace MyDictionary
 {
@@ -26,22 +26,27 @@ namespace MyDictionary
     public partial class TotalDictionary : Window
     {
         ObservableCollection<MyWord> collection;
-        public TotalDictionary()
+        List<int> collDelete;
+        MainWindow window;
+        public TotalDictionary(ObservableCollection<MyWord> collection,MainWindow win)
         {
             InitializeComponent();
-            try
-            {
-                collection = BdTools.ReadWord();
-                listViewDictionary.ItemsSource = collection;
-            }
-            catch (Exception ex)
-            {
+            //try
+            //{
+            //    collection = BdTools.ReadWord();
+            //    listViewDictionary.ItemsSource = collection;
+            //    collDelete = new List<int>();
+            //}
+            //catch (Exception ex)
+            //{
 
-                MessageBox.Show(ex.Message);
-            }
+            //    MessageBox.Show(ex.Message);
+            //}
 
-
-
+            this.collection = collection;
+            listViewDictionary.ItemsSource = collection;
+            collDelete = new List<int>();
+            window = win;
         }
 
         private void buttonSound_Click(object sender, RoutedEventArgs e)
@@ -67,6 +72,20 @@ namespace MyDictionary
                 mediaPlayer.Play();
             }
 
+        }
+
+        private void checkbox_Checked(object sender, RoutedEventArgs e)
+        {
+            CheckBox cb = sender as CheckBox;
+            int index = (int)cb.Content;
+            collDelete.Add(index);
+        }
+
+        private void checkbox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            CheckBox cb = sender as CheckBox;
+            int index = (int)cb.Content;
+            collDelete.Remove(index);
         }
     }
 }

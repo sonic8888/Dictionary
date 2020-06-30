@@ -40,7 +40,7 @@
                     <GridViewColumn>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <CheckBox Name="checkbox" IsThreeState="True" IsChecked="False" Height="20" Margin="20,0" />
+                                <CheckBox Name="checkbox" IsThreeState="false" IsChecked="False" Height="20" Margin="20,0"  DataContext="{Binding WordId}" Checked="checkbox_Checked" Unchecked="checkbox_Unchecked"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>

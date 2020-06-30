@@ -1,5 +1,8 @@
-﻿using System;
+﻿using MyDictionary.EF;
+using MyDictionary.Tools;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Threading;
 using XMLRead;
 
 namespace MyDictionary
@@ -21,11 +25,14 @@ namespace MyDictionary
     /// </summary>
     public partial class MainWindow : Window
     {
+        ObservableCollection<MyWord> collection;
+        Thread thread;
         public MainWindow()
         {
             InitializeComponent();
             FIleTools.CreateDirectory(FIleTools.NameDirectoryAudio);
             FIleTools.CreateDirectory(FIleTools.NameDirectoryStorage);
+            StartNewThread();
         }
 
         private void clickNewWord(object sender, RoutedEventArgs e)
@@ -38,8 +45,33 @@ namespace MyDictionary
 
         private void buttonDictionary_Click(object sender, RoutedEventArgs e)
         {
-            TotalDictionary td = new TotalDictionary();
+            if (thread.IsAlive == true)
+            {
+                Thread.Sleep(1000);
+            }
+            TotalDictionary td = new TotalDictionary(collection, this);
             td.Show();
         }
+        private void ReadDictionary()
+        {
+
+            try
+            {
+                collection = BdTools.ReadWord();
+
+            }
+            catch (Exception)
+            {
+
+                return;
+            }
+        }
+        public void StartNewThread()
+        {
+            thread = new Thread(new ThreadStart(ReadDictionary));
+            thread.Start();
+        }
+
+
     }
 }
