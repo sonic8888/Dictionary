@@ -38,12 +38,12 @@
                     <Image Source="Picture/icons8-поиск-64.png" Stretch="Fill" Width="32" Height="32" Margin="5,0"/>
                     <TextBox x:Name="findWord" Margin="5,10,15,10" FontSize="28" VerticalContentAlignment="Center"
                              Width="{Binding ActualWidth, ElementName=borderTop, Mode=OneWay, 
-                        Converter={StaticResource WidthconverterSummation}}" BorderBrush="White" SpellCheck.IsEnabled="True" 
+                        Converter={StaticResource WidthconverterSummation}}" BorderBrush="White"  
                              Focusable="True" TextAlignment="Left" PreviewTextInput="PreviewTextInputt" KeyUp="KeyUpTextBoxFind"  />
                 </StackPanel>
             </Border>
             <ListView x:Name="wordListView" Grid.Row="1"  
-                IsSynchronizedWithCurrentItem="True" FontSize="16" Margin="0,5,0,0" Background="#FFC1C2C7" SelectionChanged="SelectionChanget"  >
+                IsSynchronizedWithCurrentItem="True" FontSize="16" Margin="0,5,0,0" Background="#FFC1C2C7" MouseDoubleClick="wordListView_MouseDoubleClick"    >
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="Слово" Width="{Binding ActualWidth,

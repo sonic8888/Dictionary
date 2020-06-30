@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -110,6 +111,28 @@ namespace MyDictionary.Tools
 
                 }
 
+            }
+        }
+        public static ObservableCollection<MyWord> ReadWord()
+        {
+            ObservableCollection<MyWord> myWords = new ObservableCollection<MyWord>();
+            using (var context = new ApplicationContext())
+            {
+                context.Configuration.LazyLoadingEnabled = false;
+                try
+                {
+                    foreach (MyWord c in context.MyWords )
+                    {
+                        context.Entry(c).Collection(x => x.MyTranslates).Load();
+                        myWords.Add(c);
+                    }
+                }
+                catch (Exception)
+                {
+
+                    return null;  
+                }
+                return myWords;
             }
         }
     }

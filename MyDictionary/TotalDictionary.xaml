@@ -28,15 +28,41 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
             <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <ListView x:Name="listViewDictionary" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="6" Grid.RowSpan="8">
+        <ListView x:Name="listViewDictionary" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="11" Grid.RowSpan="8">
             <ListView.View>
                 <GridView>
                     <GridViewColumn>
-                        <CheckBox Name="checkbox" IsThreeState="True" IsChecked="False" Height="20" Margin="10,0" />
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <CheckBox Name="checkbox" IsThreeState="True" IsChecked="False" Height="20" Margin="20,0" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
                     </GridViewColumn>
                     <GridViewColumn>
-                        <Image x:Name="imagePhone" Height="32" Width="32" Source="Picture/icons8-динамик-48.png"/>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <!--<Image x:Name="imagePhone" Height="40" Width="40" Source="Picture/icons8-динамик-48.png" Margin="10,10"/>-->
+                                <Button x:Name="buttonSound" Width="50" Height="50" Click="buttonSound_Click" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" DataContext="{Binding SoundName}">
+                                    <Image x:Name="imagePhone"  Source="Picture/icons8-динамик-48.png"  />
+                                </Button>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <TextBlock x:Name="textBlockWord" Text="{Binding Word}" Width="450" Height="20" FontSize="16" VerticalAlignment="Bottom" Foreground="#FF002EFF"  />
+                                    <TextBlock x:Name="textBlockTranslate" Text="{Binding TranslateStr}" Width="450" Height="20" FontSize="16" VerticalAlignment="Top"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
                     </GridViewColumn>
                 </GridView>
             </ListView.View>

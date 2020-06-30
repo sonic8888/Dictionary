@@ -194,17 +194,17 @@ namespace MyDictionary
             }
         }
 
-        private void SelectionChanget(object sender, SelectionChangedEventArgs e)
-        {
+        //private void SelectionChanget(object sender, SelectionChangedEventArgs e)
+        //{
 
-            ListBox lb = sender as ListBox;
-            int ind = lb.SelectedIndex;
-            WordSample wordSample = lb.Items[ind] as WordSample;
-            inerGrid.DataContext = wordSample;
-            _wordsSample = inerGrid.DataContext as WordSample;
-            ChengeIconButtonSave(pathRedTick, ColorIconButtonsave.Red);
+        //    ListBox lb = sender as ListBox;
+        //    int ind = lb.SelectedIndex;
+        //    WordSample wordSample = lb.Items[ind] as WordSample;
+        //    inerGrid.DataContext = wordSample;
+        //    _wordsSample = inerGrid.DataContext as WordSample;
+        //    ChengeIconButtonSave(pathRedTick, ColorIconButtonsave.Red);
 
-        }
+        //}
         /// <summary>
         /// обработчик вкладки меню "Открыть"
         /// открывает проводник и сохраняет в текстовый файл путь к внешней папке с аудиофайлами
@@ -470,6 +470,16 @@ namespace MyDictionary
             {
                 ChengeIconButtonSave(pathRedTick, ColorIconButtonsave.Red);
             }
+        }
+
+        private void wordListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            ListBox lb = sender as ListBox;
+            int ind = lb.SelectedIndex;
+            WordSample wordSample = lb.Items[ind] as WordSample;
+            inerGrid.DataContext = wordSample;
+            _wordsSample = inerGrid.DataContext as WordSample;
+            ChengeIconButtonSave(pathRedTick, ColorIconButtonsave.Red);
         }
     }
 
