@@ -18,6 +18,7 @@ using System.Windows.Shapes;
 using XMLRead;
 
 
+
 namespace MyDictionary
 {
     /// <summary>
@@ -28,7 +29,7 @@ namespace MyDictionary
         ObservableCollection<MyWord> collection;
         List<int> collDelete;
         MainWindow window;
-        public TotalDictionary(ObservableCollection<MyWord> collection,MainWindow win)
+        public TotalDictionary(ObservableCollection<MyWord> collection, MainWindow win)
         {
             InitializeComponent();
             //try
@@ -86,6 +87,16 @@ namespace MyDictionary
             CheckBox cb = sender as CheckBox;
             int index = (int)cb.Content;
             collDelete.Remove(index);
+        }
+
+        private void buttonDelete_Click(object sender, RoutedEventArgs e)
+        {
+            Button but = sender as Button;
+            int index = (int)but.DataContext;
+
+            MyWord wordDel = BdTools.DeleteWord(index);
+            collection.Remove(wordDel); 
+
         }
     }
 }

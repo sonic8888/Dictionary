@@ -292,7 +292,27 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Picture\PlasticFantastic Icon_Backet.ico" />
+    <Resource Include="Picture\PlasticFantastic Icon_Blue.ico" />
+    <Resource Include="Picture\PlasticFantastic Icon_Phone.ico" />
+    <Resource Include="Picture\PlasticFantastic Icon_Queston.ico" />
+    <Resource Include="Picture\PlasticFantastic Icon_Red.ico" />
+    <Resource Include="Picture\PlasticFantastic Icon_Yellow.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Picture\backet.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Picture\Circle_Green.png" />
+    <Resource Include="Picture\Circle_Grey.png" />
+    <Resource Include="Picture\Circle_Red.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Picture\Cub_Gold.png" />
+    <Resource Include="Picture\Cub_green.png" />
+    <Resource Include="Picture\Cub_grey.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
