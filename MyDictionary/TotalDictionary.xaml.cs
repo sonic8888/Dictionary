@@ -6,6 +6,7 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -29,24 +30,20 @@ namespace MyDictionary
         ObservableCollection<MyWord> collection;
         List<int> collDelete;
         MainWindow window;
-        public TotalDictionary(ObservableCollection<MyWord> collection, MainWindow win)
+        Thread thread;
+        string messageQuestion = "Вы хотите удалить выделеные слова?";
+        string messageWarning = "Внимание!";
+        public TotalDictionary(ObservableCollection<MyWord> col, MainWindow win)
         {
             InitializeComponent();
-            //try
-            //{
-            //    collection = BdTools.ReadWord();
-            //    listViewDictionary.ItemsSource = collection;
-            //    collDelete = new List<int>();
-            //}
-            //catch (Exception ex)
-            //{
 
-            //    MessageBox.Show(ex.Message);
-            //}
-
-            this.collection = collection;
+            collection = col;
             listViewDictionary.ItemsSource = collection;
             collDelete = new List<int>();
+
+
+
+
             window = win;
         }
 
@@ -78,14 +75,14 @@ namespace MyDictionary
         private void checkbox_Checked(object sender, RoutedEventArgs e)
         {
             CheckBox cb = sender as CheckBox;
-            int index = (int)cb.Content;
+            int index = (int)cb.DataContext;
             collDelete.Add(index);
         }
 
         private void checkbox_Unchecked(object sender, RoutedEventArgs e)
         {
             CheckBox cb = sender as CheckBox;
-            int index = (int)cb.Content;
+            int index = (int)cb.DataContext;
             collDelete.Remove(index);
         }
 
@@ -95,7 +92,55 @@ namespace MyDictionary
             int index = (int)but.DataContext;
 
             MyWord wordDel = BdTools.DeleteWord(index);
-            collection.Remove(wordDel); 
+            collection.Remove(wordDel);
+
+        }
+
+        private void buttonReffresh_Click(object sender, RoutedEventArgs e)
+        {
+            StartNewThread();
+            while (thread.IsAlive)
+            {
+                Thread.Sleep(50);
+            }
+            listViewDictionary.ItemsSource = collection;
+        }
+        private void ReadDictionary()
+        {
+
+            try
+            {
+                collection = BdTools.ReadWord();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return;
+            }
+        }
+        public void StartNewThread()
+        {
+            thread = new Thread(new ThreadStart(ReadDictionary));
+            thread.Start();
+        }
+
+        private void buttonDelete_Click_1(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult result = MessageBox.Show(messageQuestion, messageWarning, MessageBoxButton.YesNo);
+            if (result == MessageBoxResult.Yes)
+            {
+                foreach (int index in collDelete)
+                {
+                    DeleteWord(index);
+                }
+            }
+        }
+        private void DeleteWord(int wordId)
+        {
+            BdTools.DeleteWord(wordId);
+            MyWord myWord = collection.Where(n => n.WordId == wordId).First();
+            collection.Remove(myWord);
 
         }
     }
