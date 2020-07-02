@@ -78,7 +78,7 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn>
+                    <!--<GridViewColumn>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <Button x:Name="buttonDelete" Width="50" Height="50" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" DataContext="{Binding WordId}" Click="buttonDelete_Click">
@@ -88,10 +88,24 @@
                                 </Button>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
+                    </GridViewColumn>-->
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button Grid.Column="0" Grid.Row="0" Content="feretet" Click="Button_Click"/>
+        <ToolBar Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="13">
+            <Menu x:Name="menu" >Menu</Menu>
+            <Separator Width="2"/>
+            <Button x:Name="buttonReffresh" Width="50" Click="buttonReffresh_Click"  Foreground="{x:Null}">
+                <Button.Content>
+                    <Image Source="Picture/refresh_arrow_1546.png" />
+                </Button.Content>
+            </Button>
+            <Separator Width="2"/>
+            <Button x:Name="buttonDelete" Width="50" Click="buttonDelete_Click_1">
+                <Button.Content>
+                    <Image Source="Picture/backet.png"/>
+                </Button.Content>
+            </Button>
+        </ToolBar>
     </Grid>
 </Window>

@@ -24,7 +24,7 @@ namespace MyDictionary.EF
         public string Transcription { get; set; }
         public ICollection<MyTranslate> MyTranslates { get; set; }
         public ICollection<MyExample> MyExamples { get; set; }
-        private string translateStr;
+        private string translateStr = "";
 
         public string TranslateStr
         {

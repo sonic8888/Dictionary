@@ -45,9 +45,10 @@ namespace MyDictionary
 
         private void buttonDictionary_Click(object sender, RoutedEventArgs e)
         {
-            if (thread.IsAlive == true)
+         
+            while (thread.IsAlive)
             {
-                Thread.Sleep(1000);
+                Thread.Sleep(50);
             }
             TotalDictionary td = new TotalDictionary(collection, this);
             td.Show();
