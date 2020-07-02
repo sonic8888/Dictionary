@@ -95,8 +95,15 @@ namespace MyDictionary
             int index = (int)but.DataContext;
 
             MyWord wordDel = BdTools.DeleteWord(index);
-            collection.Remove(wordDel); 
+            int ind = collection.IndexOf(wordDel);
+            collection.RemoveAt(ind);
 
+
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            collection.RemoveAt(2);
         }
     }
 }

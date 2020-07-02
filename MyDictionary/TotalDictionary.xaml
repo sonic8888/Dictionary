@@ -92,5 +92,6 @@
                 </GridView>
             </ListView.View>
         </ListView>
+        <Button Grid.Column="0" Grid.Row="0" Content="feretet" Click="Button_Click"/>
     </Grid>
 </Window>
