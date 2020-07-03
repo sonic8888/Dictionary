@@ -69,7 +69,7 @@ namespace MyDictionary.Tools
 
             }
         }
-    
+
 
         public static int AddNewWords(WordSample wordSample)
         {
@@ -121,7 +121,7 @@ namespace MyDictionary.Tools
                 context.Configuration.LazyLoadingEnabled = false;
                 try
                 {
-                    foreach (MyWord c in context.MyWords )
+                    foreach (MyWord c in context.MyWords)
                     {
                         context.Entry(c).Collection(x => x.MyTranslates).Load();
                         myWords.Add(c);
@@ -130,9 +130,28 @@ namespace MyDictionary.Tools
                 catch (Exception)
                 {
 
-                    return null;  
+                    return null;
                 }
                 return myWords;
+            }
+        }
+        public static int AddNewMyDataWords(int id)
+        {
+            using (var context = new ApplicationContext())
+            {
+                try
+                {
+                    var md = new MyDataWord() { WordId = id, DataTimeInsert = DateTime.Now, DataTimeLastCall = DateTime.Now };
+                    context.MyDataWords.Add(md);
+                    context.SaveChanges();
+                    return md.Id;
+                }
+                catch (Exception)
+                {
+
+                    return 0;
+                }
+
             }
         }
     }

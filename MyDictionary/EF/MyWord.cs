@@ -25,7 +25,7 @@ namespace MyDictionary.EF
         public ICollection<MyTranslate> MyTranslates { get; set; }
         public ICollection<MyExample> MyExamples { get; set; }
         private string translateStr = "";
-
+        [NotMapped]
         public string TranslateStr
         {
             get

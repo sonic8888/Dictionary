@@ -16,5 +16,6 @@ namespace MyDictionary.EF
         public virtual DbSet<MyWord> MyWords { get; set; }
         public virtual DbSet<MyTranslate> MyTranslates { get; set; }
         public virtual   DbSet<MyExample> MyExamples { get; set; }
+        public virtual   DbSet<MyDataWord> MyDataWords { get; set; }
     }
 }
