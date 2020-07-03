@@ -154,5 +154,23 @@ namespace MyDictionary.Tools
 
             }
         }
+        public static int AddNewMyState(int id)
+        {
+            using (var context = new ApplicationContext())
+            {
+                try
+                {
+                    var md = new MyState() { State = (int)StateWord.Start, WordId = id };
+                    context.MyStates.Add(md);
+                    context.SaveChanges();
+                    return md.Id;
+                }
+                catch (Exception)
+                {
+
+                    return 0;
+                }
+            }
+        }
     }
 }
