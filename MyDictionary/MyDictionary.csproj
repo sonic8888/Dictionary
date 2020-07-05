@@ -95,10 +95,10 @@
     <Compile Include="ChoseWords.xaml.cs">
       <DependentUpon>ChoseWords.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\StateConverter.cs" />
     <Compile Include="Converters\WidthConverterMultiplication.cs" />
     <Compile Include="Converters\WidthConverterSummation.cs" />
     <Compile Include="EF\ApplicationContext.cs" />
-    <Compile Include="EF\MyDataWord.cs" />
     <Compile Include="EF\MyExample.cs" />
     <Compile Include="EF\MyTranslate.cs" />
     <Compile Include="EF\MyWord.cs" />
