@@ -33,6 +33,7 @@ namespace MyDictionary
         Thread thread;
         string messageQuestion = "Вы хотите удалить выделеные слова?";
         string messageWarning = "Внимание!";
+        string colorForegraund = "#FFCFCDCD";//серый цвет 
         public TotalDictionary(ObservableCollection<MyWord> col, MainWindow win)
         {
             InitializeComponent();
@@ -142,6 +143,26 @@ namespace MyDictionary
             MyWord myWord = collection.Where(n => n.WordId == wordId).First();
             collection.Remove(myWord);
 
+        }
+        /// <summary>
+        /// при получение фокуса textboxFindWord убираем посказку
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void textboxFindWord_GotFocus(object sender, RoutedEventArgs e)
+        {
+            textboxFindWord.Text = "";
+            textboxFindWord.Foreground = new SolidColorBrush(Colors.Black);
+        }
+        /// <summary>
+        /// при потере фокуса textboxFindWord возврашаем подсказку
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void textboxFindWord_LostFocus(object sender, RoutedEventArgs e)
+        {
+            textboxFindWord.Text = "найти слово";
+            textboxFindWord.Foreground = new BrushConverter().ConvertFrom("#FFCFCDCD") as SolidColorBrush;
         }
     }
 }
