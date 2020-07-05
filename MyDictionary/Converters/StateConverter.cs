@@ -5,10 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
+using System.Windows.Media.Imaging;
 
 namespace MyDictionary.Converters
 {
-    [ValueConversion(typeof(int), typeof(string))]
+    [ValueConversion(typeof(int), typeof(BitmapImage))]
     public class StateConverter : IValueConverter
     {
         string pathGrey = @"Picture/Cub_grey.png";
@@ -34,7 +35,11 @@ namespace MyDictionary.Converters
                     path = pathGrey;
                     break;
             }
-            return state;
+            BitmapImage bi = new BitmapImage();
+            bi.BeginInit();
+            bi.UriSource = new Uri(path, UriKind.Relative);
+            bi.EndInit();
+            return bi;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

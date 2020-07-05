@@ -4,8 +4,12 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MyDictionary"
+        xmlns:convert="clr-namespace:MyDictionary.Converters"
         mc:Ignorable="d"
         Title="TotalDictionary" Height="800" Width="900">
+    <Window.Resources>
+        <convert:StateConverter x:Key="stateconverter"></convert:StateConverter>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -72,7 +76,7 @@
                             <DataTemplate>
                                 <Button x:Name="buttonState" Width="50" Height="50" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}">
                                     <Button.Content>
-                                        <Image x:Name="imageButtonState" Source="Picture/Cub_grey.png"/>
+                                        <Image x:Name="imageButtonState" Source="{Binding State,Converter={StaticResource stateconverter}}"/>
                                     </Button.Content>
                                 </Button>
                             </DataTemplate>
