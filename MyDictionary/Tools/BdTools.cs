@@ -11,14 +11,13 @@ namespace MyDictionary.Tools
 {
     public static class BdTools
     {
-        private static int state = 1;
         public static int AddNewWord(string word, string soundname = "", string partofspeach = "", string transcription = "")
         {
             using (var context = new ApplicationContext())
             {
                 try
                 {
-                    var words = new MyWord() { Word = word, SoundName = soundname, PartOfSpeach = partofspeach, Transcription = transcription, State = state, DataTimeInsert = DateTime.Now, DataTimeLastCall = DateTime.Now };
+                    var words = new MyWord() { Word = word, SoundName = soundname, PartOfSpeach = partofspeach, Transcription = transcription };
                     context.MyWords.Add(words);
                     context.SaveChanges();
                     return words.WordId;
@@ -136,6 +135,24 @@ namespace MyDictionary.Tools
                 return myWords;
             }
         }
+        public static int AddNewMyDataWords(int id)
+        {
+            using (var context = new ApplicationContext())
+            {
+                try
+                {
+                    var md = new MyDataWord() { WordId = id, DataTimeInsert = DateTime.Now, DataTimeLastCall = DateTime.Now };
+                    context.MyDataWords.Add(md);
+                    context.SaveChanges();
+                    return md.Id;
+                }
+                catch (Exception)
+                {
 
+                    return 0;
+                }
+
+            }
+        }
     }
 }

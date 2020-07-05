@@ -100,7 +100,6 @@
     <Compile Include="EF\ApplicationContext.cs" />
     <Compile Include="EF\MyDataWord.cs" />
     <Compile Include="EF\MyExample.cs" />
-    <Compile Include="EF\MyState.cs" />
     <Compile Include="EF\MyTranslate.cs" />
     <Compile Include="EF\MyWord.cs" />
     <Compile Include="Tools\BdTools.cs" />

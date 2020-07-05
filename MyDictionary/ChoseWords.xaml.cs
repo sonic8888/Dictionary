@@ -325,8 +325,8 @@ namespace MyDictionary
             {
                 ChengeIconButtonSave(pathGreenTick, ColorIconButtonsave.Green);
                 int ind = BdTools.AddNewWords(_wordsSample);
-  
                 _wordsSample = new WordSample();
+                BdTools.AddNewMyDataWords(ind);
                 inerGrid.DataContext = null;
             }
 
