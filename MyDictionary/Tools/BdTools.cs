@@ -145,6 +145,26 @@ namespace MyDictionary.Tools
                 try
                 {
                     mw = context.MyWords.Find(id);
+                    context.SaveChanges();
+                }
+                catch (Exception)
+                {
+
+                    return null;
+                }
+            }
+            return mw;
+        }
+        public static MyWord UpdateStateMyWord(int id, int state)
+        {
+            MyWord mw = null;
+            using (var context = new ApplicationContext())
+            {
+                try
+                {
+                    mw = context.MyWords.Find(id);
+                    mw.State = state;
+                    context.SaveChanges();
                 }
                 catch (Exception)
                 {

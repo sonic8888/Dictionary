@@ -108,7 +108,7 @@ namespace MyDictionary
             {
                 Thread.Sleep(50);
             }
-            //listViewDictionary.ItemsSource = collection;
+            listViewDictionary.ItemsSource = collection;
         }
         private void ReadDictionary()
         {
@@ -173,12 +173,7 @@ namespace MyDictionary
         {
             Button but = sender as Button;
             int id = (int)but.DataContext;
-            //Image im = but.Content as Image;
-            //BitmapImage bi = new BitmapImage();
-            //bi.BeginInit();
-            //bi.UriSource = new Uri(@"Picture/Cub_green.png", UriKind.Relative);
-            //bi.EndInit();
-            //im.Source = bi;
+        
             MyWord mw = collection.Where(n => n.WordId == id).First();
 
 
@@ -189,12 +184,9 @@ namespace MyDictionary
                 Image im = but.Content as Image;
                 im.Source = InitBitMap();
                 mw.State = StateWord;
-                // сохраняем в бд
+                BdTools.UpdateStateMyWord(id, StateWord);
             }
-            else
-            {
-
-            }
+     
         }
 
         private void buttonStateGrey_Click(object sender, RoutedEventArgs e)
