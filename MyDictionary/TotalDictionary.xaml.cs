@@ -103,7 +103,7 @@ namespace MyDictionary
             {
                 Thread.Sleep(50);
             }
-            listViewDictionary.ItemsSource = collection;
+            //listViewDictionary.ItemsSource = collection;
         }
         private void ReadDictionary()
         {
