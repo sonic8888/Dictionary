@@ -42,8 +42,8 @@ namespace MyDictionary
             listViewDictionary.ItemsSource = collection;
             collDelete = new List<int>();
 
-
-
+           
+           
 
             window = win;
         }
@@ -163,6 +163,31 @@ namespace MyDictionary
         {
             textboxFindWord.Text = "найти слово";
             textboxFindWord.Foreground = new BrushConverter().ConvertFrom("#FFCFCDCD") as SolidColorBrush;
+        }
+
+        private void buttonState_Click(object sender, RoutedEventArgs e)
+        {
+            Button but = sender as Button;
+        
+
+
+            int id = (int)but.DataContext;
+            int state = 0;
+            WindowStateChose wsc = new WindowStateChose(id) { Collection = collection };
+            wsc.InitRadioButton();
+            if (wsc.ShowDialog() == true)
+            {
+                // сохраняем в бд
+            }
+            else
+            {
+
+            }
+        }
+
+        private void buttonStateGrey_Click(object sender, RoutedEventArgs e)
+        {
+            int id = 6;
         }
     }
 }

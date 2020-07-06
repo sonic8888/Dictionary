@@ -137,5 +137,23 @@ namespace MyDictionary.Tools
             }
         }
 
+        public static MyWord FindMyWord(int id)
+        {
+            MyWord mw = null;
+            using (var context = new ApplicationContext())
+            {
+                try
+                {
+                    mw = context.MyWords.Find(id);
+                }
+                catch (Exception)
+                {
+
+                    return null;
+                }
+            }
+            return mw;
+        }
+
     }
 }
