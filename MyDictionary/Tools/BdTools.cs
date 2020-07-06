@@ -11,13 +11,14 @@ namespace MyDictionary.Tools
 {
     public static class BdTools
     {
+        private static int state = 1;
         public static int AddNewWord(string word, string soundname = "", string partofspeach = "", string transcription = "")
         {
             using (var context = new ApplicationContext())
             {
                 try
                 {
-                    var words = new MyWord() { Word = word, SoundName = soundname, PartOfSpeach = partofspeach, Transcription = transcription };
+                    var words = new MyWord() { Word = word, SoundName = soundname, PartOfSpeach = partofspeach, Transcription = transcription, State = state, DataTimeInsert = DateTime.Now, DataTimeLastCall = DateTime.Now };
                     context.MyWords.Add(words);
                     context.SaveChanges();
                     return words.WordId;
@@ -69,7 +70,7 @@ namespace MyDictionary.Tools
 
             }
         }
-    
+
 
         public static int AddNewWords(WordSample wordSample)
         {
@@ -121,7 +122,7 @@ namespace MyDictionary.Tools
                 context.Configuration.LazyLoadingEnabled = false;
                 try
                 {
-                    foreach (MyWord c in context.MyWords )
+                    foreach (MyWord c in context.MyWords)
                     {
                         context.Entry(c).Collection(x => x.MyTranslates).Load();
                         myWords.Add(c);
@@ -130,10 +131,29 @@ namespace MyDictionary.Tools
                 catch (Exception)
                 {
 
-                    return null;  
+                    return null;
                 }
                 return myWords;
             }
         }
+
+        public static MyWord FindMyWord(int id)
+        {
+            MyWord mw = null;
+            using (var context = new ApplicationContext())
+            {
+                try
+                {
+                    mw = context.MyWords.Find(id);
+                }
+                catch (Exception)
+                {
+
+                    return null;
+                }
+            }
+            return mw;
+        }
+
     }
 }

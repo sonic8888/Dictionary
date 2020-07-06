@@ -4,8 +4,12 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MyDictionary"
+        xmlns:convert="clr-namespace:MyDictionary.Converters"
         mc:Ignorable="d"
-        Title="TotalDictionary" Height="800" Width="900">
+        Title="TotalDictionary" Height="800" Width="900" ResizeMode="NoResize">
+    <!--<Window.Resources>
+        <convert:StateConverter x:Key="stateconverter"></convert:StateConverter>
+    </Window.Resources>-->
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -40,10 +44,10 @@
         <ListView x:Name="listViewDictionary" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="11" Grid.RowSpan="10">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn>
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <CheckBox Name="checkbox" IsThreeState="false" IsChecked="False" Height="20" Margin="20,0"  DataContext="{Binding WordId}" Checked="checkbox_Checked" Unchecked="checkbox_Unchecked"/>
+                    <GridViewColumn x:Name="gridViewColumn">
+                        <GridViewColumn.CellTemplate >
+                            <DataTemplate x:Name="myData">
+                                <CheckBox x:Name="checkboxMy" IsThreeState="false" IsChecked="False" Height="20" Margin="20,0"  DataContext="{Binding WordId}" Checked="checkbox_Checked" Unchecked="checkbox_Unchecked"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
@@ -67,18 +71,26 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn>
+                    <GridViewColumn >
                         <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <Button x:Name="buttonState" Width="50" Height="50" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}">
-                                    <Button.Content>
-                                        <Image x:Name="imageButtonState" Source="Picture/Cub_grey.png"/>
+                            <DataTemplate >
+                                <Button x:Name="buttonState" Width="50" Height="50" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="buttonState_Click"   DataContext="{Binding WordId}"    >
+                                    <Button.Content >
+                                        <Image x:Name="imageButtonState"  Source="Picture/Cub_grey.png"    />
                                     </Button.Content>
                                 </Button>
+                                <DataTemplate.Triggers>
+                                    <DataTrigger Binding="{Binding State}" Value="2">
+                                        <Setter TargetName="imageButtonState" Property="Source" Value="Picture/Cub_green.png"/>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding State}" Value="3">
+                                        <Setter TargetName="imageButtonState" Property="Source" Value="Picture/Cub_Gold.png"/>
+                                    </DataTrigger>
+                                </DataTemplate.Triggers>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-            
+             
                 </GridView>
             </ListView.View>
         </ListView>
@@ -97,5 +109,20 @@
                 </Button.Content>
             </Button>
         </ToolBar>
+        <StackPanel Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="11" Orientation="Horizontal">
+            <TextBox x:Name="textboxFindWord" Width="300" Margin="0,5" VerticalContentAlignment="Center" FontSize="22" Foreground="#FFCFCDCD" Text="найти слово" GotFocus="textboxFindWord_GotFocus" LostFocus="textboxFindWord_LostFocus"/>
+            <ComboBox Name="comboboxListElement" Text="Все слова" FontSize="18" Width="170" Margin="1,0"  VerticalAlignment="Center" Height="{Binding ActualHeight, ElementName=textboxFindWord, Mode=OneWay}" VerticalContentAlignment="Center">
+                <ComboBoxItem IsSelected="True">
+                    <TextBlock Text="Все слова"/>
+                </ComboBoxItem>
+                <TextBlock Text="Существительное"/>
+                <TextBlock Text="Прилагательное"/>
+                <TextBlock Text="Глагол"/>
+                <TextBlock Text="Фразы"/>
+            </ComboBox>
+            <Button x:Name="buttonStateGrey" Content="Новый" Width="90" Margin="1,5" FontSize="16" Background="#FFBFBABA" Click="buttonStateGrey_Click"/>
+            <Button x:Name="buttonStateGreen" Content="Изучаю" Width="90" Margin="1,5" FontSize="16" Background="#FF42EA59"/>
+            <Button x:Name="buttonStateGold" Content="Знаю" Width="90" Margin="1,5" FontSize="16" Background="#FFE1F702"/>
+        </StackPanel>
     </Grid>
 </Window>

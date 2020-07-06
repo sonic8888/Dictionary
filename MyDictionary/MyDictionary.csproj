@@ -95,6 +95,7 @@
     <Compile Include="ChoseWords.xaml.cs">
       <DependentUpon>ChoseWords.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\StateConverter.cs" />
     <Compile Include="Converters\WidthConverterMultiplication.cs" />
     <Compile Include="Converters\WidthConverterSummation.cs" />
     <Compile Include="EF\ApplicationContext.cs" />
@@ -107,6 +108,9 @@
     </Compile>
     <Compile Include="WindowAddTranslation.xaml.cs">
       <DependentUpon>WindowAddTranslation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WindowStateChose.xaml.cs">
+      <DependentUpon>WindowStateChose.xaml</DependentUpon>
     </Compile>
     <Page Include="ChoseWords.xaml">
       <SubType>Designer</SubType>
@@ -129,6 +133,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="WindowAddTranslation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WindowStateChose.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
