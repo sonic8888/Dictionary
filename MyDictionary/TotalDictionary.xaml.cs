@@ -34,6 +34,9 @@ namespace MyDictionary
         string messageQuestion = "Вы хотите удалить выделеные слова?";
         string messageWarning = "Внимание!";
         string colorForegraund = "#FFCFCDCD";//серый цвет 
+        string pathGrey = @"Picture/Cub_grey.png";
+        string pathGreen = @"Picture/Cub_green.png";
+        string pathGold = @"Picture/Cub_Gold.png";
         public TotalDictionary(ObservableCollection<MyWord> col, MainWindow win)
         {
             InitializeComponent();
@@ -42,11 +45,12 @@ namespace MyDictionary
             listViewDictionary.ItemsSource = collection;
             collDelete = new List<int>();
 
-           
-           
+
+
 
             window = win;
         }
+        public int StateWord { get; set; }
 
         private void buttonSound_Click(object sender, RoutedEventArgs e)
         {
@@ -168,15 +172,23 @@ namespace MyDictionary
         private void buttonState_Click(object sender, RoutedEventArgs e)
         {
             Button but = sender as Button;
-        
-
-
             int id = (int)but.DataContext;
-            int state = 0;
-            WindowStateChose wsc = new WindowStateChose(id) { Collection = collection };
-            wsc.InitRadioButton();
+            //Image im = but.Content as Image;
+            //BitmapImage bi = new BitmapImage();
+            //bi.BeginInit();
+            //bi.UriSource = new Uri(@"Picture/Cub_green.png", UriKind.Relative);
+            //bi.EndInit();
+            //im.Source = bi;
+            MyWord mw = collection.Where(n => n.WordId == id).First();
+
+
+            WindowStateChose wsc = new WindowStateChose(this, mw.State);
+
             if (wsc.ShowDialog() == true)
             {
+                Image im = but.Content as Image;
+                im.Source = InitBitMap();
+                mw.State = StateWord;
                 // сохраняем в бд
             }
             else
@@ -188,6 +200,24 @@ namespace MyDictionary
         private void buttonStateGrey_Click(object sender, RoutedEventArgs e)
         {
             int id = 6;
+        }
+        private BitmapImage InitBitMap()
+        {
+            string path = "";
+            switch (StateWord)
+            {
+                case 1: path = pathGrey; break;
+                case 2: path = pathGreen; break;
+                case 3: path = pathGold; break;
+                default:
+                    break;
+            }
+            BitmapImage bi = new BitmapImage();
+            bi.BeginInit();
+            bi.UriSource = new Uri(path, UriKind.Relative);
+            bi.EndInit();
+
+            return bi;
         }
     }
 }

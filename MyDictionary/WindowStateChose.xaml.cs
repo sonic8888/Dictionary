@@ -21,69 +21,52 @@ namespace MyDictionary
     /// </summary>
     public partial class WindowStateChose : Window
     {
-        ObservableCollection<MyWord> collection;
-        int index;
+        TotalDictionary totalDictionary;
         int state;
-        MyWord myWord;
-        int colInd;
-        public WindowStateChose(int wordId)
+        public WindowStateChose(TotalDictionary win,int state)
         {
             InitializeComponent();
-            
-            index = wordId;
-            state = 1;
-        }
-
-        public ObservableCollection<MyWord> Collection { get => collection; set => collection = value; }
-
-        private void buttonSave_Click(object sender, RoutedEventArgs e)
-        {
-            this.DialogResult = true;
-        }
-        public void InitRadioButton()
-        {
-            int state = 0; 
-
-            for (int i = 0; i < collection.Count; i++)
-            {
-                if (collection[i].WordId==index)
-                {
-                    colInd = i;
-                    state = collection[i].State;
-                }
-            }
+            this.state = state;
+            totalDictionary = win;
             switch (state)
             {
                 case 1:
                     radioBattonGrey.IsChecked = true;
                     break;
-                case 2:radioBattonGreen.IsChecked = true;
+                case 2:
+                    radioBattonGreen.IsChecked = true;
                     break;
-                case 3:radioBattonGold.IsChecked = true;
+                case 3:
+                    radioBattonGold.IsChecked = true;
                     break;
                 default:
                     break;
             }
         }
 
+
+
+        private void buttonSave_Click(object sender, RoutedEventArgs e)
+        {
+            this.DialogResult = true;
+        }
+  
+
         private void radioBattonGrey_Checked(object sender, RoutedEventArgs e)
         {
-            state = 1;
+            totalDictionary.StateWord = 1;
         }
 
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            collection[colInd].State = state;
-        }
+    
 
         private void radioBattonGreen_Checked(object sender, RoutedEventArgs e)
         {
-            state = 2;
+            totalDictionary.StateWord = 2;
         }
 
         private void radioBattonGold_Checked(object sender, RoutedEventArgs e)
         {
-            state = 3;
+            totalDictionary.StateWord = 3;
         }
     }
 }
