@@ -192,7 +192,8 @@ namespace MyDictionary
 
         private void buttonStateGrey_Click(object sender, RoutedEventArgs e)
         {
-            //int id = 6;
+            IEnumerable<MyWord> en = collection.Where(n => n.State == 1);
+            listViewDictionary.ItemsSource = new ObservableCollection<MyWord>(en);
         }
         private BitmapImage InitBitMap()
         {
@@ -234,6 +235,7 @@ namespace MyDictionary
         {
             if (IsOrder)
             {
+                ObservableCollection<MyWord> collection = listViewDictionary.ItemsSource as ObservableCollection<MyWord>;
                 IEnumerable<MyWord> en = collection.OrderByDescending(n => n.DataTimeInsert);
 
                 listViewDictionary.ItemsSource = new ObservableCollection<MyWord>(en);
@@ -241,6 +243,7 @@ namespace MyDictionary
             }
             else
             {
+                ObservableCollection<MyWord> collection = listViewDictionary.ItemsSource as ObservableCollection<MyWord>;
                 IEnumerable<MyWord> en = collection.OrderBy(n => n.DataTimeInsert);
 
                 listViewDictionary.ItemsSource = new ObservableCollection<MyWord>(en);
@@ -254,14 +257,16 @@ namespace MyDictionary
             {
                 ComboBox comboBox = (ComboBox)sender;
                 TextBlock tb = (TextBlock)comboBox.SelectedItem;
-                SelectCollection(tb.Text);
+                string text = tb.Text;
+                text = new string(text.ToArray(), 0, 3);
+                SelectCollection(text);
 
             }
 
         }
         private void SelectCollection(string part)
         {
-            if (part == "все слова")
+            if (part == "все")
             {
                 listViewDictionary.ItemsSource = collection;
                 return;
@@ -269,6 +274,18 @@ namespace MyDictionary
             IEnumerable<MyWord> en = collection.Where(n => n.PartOfSpeach.StartsWith(part));
             listViewDictionary.ItemsSource = new ObservableCollection<MyWord>(en);
 
+        }
+
+        private void buttonStateGreen_Click(object sender, RoutedEventArgs e)
+        {
+            IEnumerable<MyWord> en = collection.Where(n => n.State == 2);
+            listViewDictionary.ItemsSource = new ObservableCollection<MyWord>(en);
+        }
+
+        private void buttonStateGold_Click(object sender, RoutedEventArgs e)
+        {
+            IEnumerable<MyWord> en = collection.Where(n => n.State == 3);
+            listViewDictionary.ItemsSource = new ObservableCollection<MyWord>(en);
         }
     }
 }

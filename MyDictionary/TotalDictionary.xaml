@@ -6,12 +6,12 @@
         xmlns:local="clr-namespace:MyDictionary"
         xmlns:convert="clr-namespace:MyDictionary.Converters"
         mc:Ignorable="d"
-        Title="TotalDictionary" Height="800" Width="900" ResizeMode="NoResize">
+        Title="TotalDictionary" Height="800" Width="900" ResizeMode="NoResize" Background="White">
     <Window.Resources>
         <convert:StateConverter x:Key="stateconverter"></convert:StateConverter>
         <convert:DataConverter x:Key="dataconverter"></convert:DataConverter>
     </Window.Resources>
-    <Grid>
+    <Grid Background="#FFE0E0E0">
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition/>
@@ -42,7 +42,7 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <ListView x:Name="listViewDictionary" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="11" Grid.RowSpan="10">
+        <ListView x:Name="listViewDictionary" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="11" Grid.RowSpan="10" Background="#FFF3F3F3">
             <ListView.View>
                 <GridView>
                     <GridViewColumn x:Name="gridViewColumn">
@@ -125,7 +125,7 @@
         </ToolBar>
         <StackPanel Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="11" Orientation="Horizontal">
             <TextBox x:Name="textboxFindWord" Width="345" Margin="0,5" VerticalContentAlignment="Center" FontSize="22" Foreground="#FFCFCDCD" Text="найти слово" GotFocus="textboxFindWord_GotFocus" LostFocus="textboxFindWord_LostFocus" PreviewTextInput="textboxFindWord_PreviewTextInput" KeyUp="textboxFindWord_KeyUp"/>
-            <ComboBox Name="comboboxListElement" Text="Все слова" FontSize="18" Width="135
+            <ComboBox Name="comboboxListElement" Text="Все слова" FontSize="18" Width="133
                       " Margin="1,0"  VerticalAlignment="Center" Height="{Binding ActualHeight, ElementName=textboxFindWord, Mode=OneWay}" VerticalContentAlignment="Center" SelectionChanged="comboboxListElement_SelectionChanged"  >
                 <TextBlock Text="все слова"/>
                 <TextBlock Text="сущ"/>
@@ -134,8 +134,8 @@
                 <TextBlock Text="фразы"/>
             </ComboBox>
             <Button x:Name="buttonStateGrey" Content="Новый" Width="65" Margin="1,5" FontSize="16" Background="#FFBFBABA" Click="buttonStateGrey_Click"/>
-            <Button x:Name="buttonStateGreen" Content="Изучаю" Width="65" Margin="1,5" FontSize="16" Background="#FF42EA59"/>
-            <Button x:Name="buttonStateGold" Content="Знаю" Width="65" Margin="1,5" FontSize="16" Background="#FFE1F702"/>
+            <Button x:Name="buttonStateGreen" Content="Изучаю" Width="65" Margin="1,5" FontSize="16" Background="#FF42EA59" Click="buttonStateGreen_Click"/>
+            <Button x:Name="buttonStateGold" Content="Знаю" Width="65" Margin="1,5" FontSize="16" Background="#FFE1F702" Click="buttonStateGold_Click"/>
             <Button x:Name="buttonDateOrderBy" Content="Дата↓↑" Width="65" Margin="1,5" FontSize="16" Click="buttonDateOrderBy_Click"/>
         </StackPanel>
     </Grid>
