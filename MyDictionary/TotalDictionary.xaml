@@ -110,7 +110,7 @@
             </Button>
         </ToolBar>
         <StackPanel Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="11" Orientation="Horizontal">
-            <TextBox x:Name="textboxFindWord" Width="300" Margin="0,5" VerticalContentAlignment="Center" FontSize="22" Foreground="#FFCFCDCD" Text="найти слово" GotFocus="textboxFindWord_GotFocus" LostFocus="textboxFindWord_LostFocus"/>
+            <TextBox x:Name="textboxFindWord" Width="300" Margin="0,5" VerticalContentAlignment="Center" FontSize="22" Foreground="#FFCFCDCD" Text="найти слово" GotFocus="textboxFindWord_GotFocus" LostFocus="textboxFindWord_LostFocus" PreviewTextInput="textboxFindWord_PreviewTextInput" KeyUp="textboxFindWord_KeyUp"/>
             <ComboBox Name="comboboxListElement" Text="Все слова" FontSize="18" Width="170" Margin="1,0"  VerticalAlignment="Center" Height="{Binding ActualHeight, ElementName=textboxFindWord, Mode=OneWay}" VerticalContentAlignment="Center">
                 <ComboBoxItem IsSelected="True">
                     <TextBlock Text="Все слова"/>

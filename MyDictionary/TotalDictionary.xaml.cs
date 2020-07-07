@@ -173,7 +173,7 @@ namespace MyDictionary
         {
             Button but = sender as Button;
             int id = (int)but.DataContext;
-        
+
             MyWord mw = collection.Where(n => n.WordId == id).First();
 
 
@@ -186,7 +186,7 @@ namespace MyDictionary
                 mw.State = StateWord;
                 BdTools.UpdateStateMyWord(id, StateWord);
             }
-     
+
         }
 
         private void buttonStateGrey_Click(object sender, RoutedEventArgs e)
@@ -210,6 +210,23 @@ namespace MyDictionary
             bi.EndInit();
 
             return bi;
+        }
+
+        private void textboxFindWord_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            string text = textboxFindWord.Text;
+            IEnumerable<MyWord> en = collection.Where(n => n.Word.StartsWith(text));
+            listViewDictionary.ItemsSource = new ObservableCollection<MyWord>(en);
+        }
+
+        private void textboxFindWord_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Back)
+            {
+                string text = textboxFindWord.Text;
+                IEnumerable<MyWord> en = collection.Where(n => n.Word.StartsWith(text));
+                listViewDictionary.ItemsSource = new ObservableCollection<MyWord>(en);
+            }
         }
     }
 }
