@@ -47,7 +47,7 @@
                     <GridViewColumn x:Name="gridViewColumn">
                         <GridViewColumn.CellTemplate >
                             <DataTemplate x:Name="myData">
-                                <CheckBox x:Name="checkboxMy" IsThreeState="false" IsChecked="False" Height="20" Margin="20,0"  DataContext="{Binding WordId}" Checked="checkbox_Checked" Unchecked="checkbox_Unchecked"/>
+                                <CheckBox x:Name="checkboxMy" IsThreeState="false" IsChecked="False" Height="20"   DataContext="{Binding WordId}" Checked="checkbox_Checked" Unchecked="checkbox_Unchecked"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
@@ -65,8 +65,8 @@
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel>
-                                    <TextBlock x:Name="textBlockWord" Text="{Binding Word}" Width="450" Height="20" FontSize="16" VerticalAlignment="Bottom" Foreground="#FF002EFF"  />
-                                    <TextBlock x:Name="textBlockTranslate" Text="{Binding TranslateStr}" Width="450" Height="20" FontSize="16" VerticalAlignment="Top"/>
+                                    <TextBlock x:Name="textBlockWord" Text="{Binding Word}" Width="370" Height="20" FontSize="16" VerticalAlignment="Bottom" Foreground="#FF002EFF"  />
+                                    <TextBlock x:Name="textBlockTranslate" Text="{Binding TranslateStr}" Width="370" Height="20" FontSize="16" VerticalAlignment="Top"/>
                                 </StackPanel>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
@@ -90,7 +90,6 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-             
                 </GridView>
             </ListView.View>
         </ListView>
@@ -110,7 +109,7 @@
             </Button>
         </ToolBar>
         <StackPanel Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="11" Orientation="Horizontal">
-            <TextBox x:Name="textboxFindWord" Width="300" Margin="0,5" VerticalContentAlignment="Center" FontSize="22" Foreground="#FFCFCDCD" Text="найти слово" GotFocus="textboxFindWord_GotFocus" LostFocus="textboxFindWord_LostFocus" PreviewTextInput="textboxFindWord_PreviewTextInput" KeyUp="textboxFindWord_KeyUp"/>
+            <TextBox x:Name="textboxFindWord" Width="250" Margin="0,5" VerticalContentAlignment="Center" FontSize="22" Foreground="#FFCFCDCD" Text="найти слово" GotFocus="textboxFindWord_GotFocus" LostFocus="textboxFindWord_LostFocus" PreviewTextInput="textboxFindWord_PreviewTextInput" KeyUp="textboxFindWord_KeyUp"/>
             <ComboBox Name="comboboxListElement" Text="Все слова" FontSize="18" Width="170" Margin="1,0"  VerticalAlignment="Center" Height="{Binding ActualHeight, ElementName=textboxFindWord, Mode=OneWay}" VerticalContentAlignment="Center">
                 <ComboBoxItem IsSelected="True">
                     <TextBlock Text="Все слова"/>
@@ -120,9 +119,10 @@
                 <TextBlock Text="Глагол"/>
                 <TextBlock Text="Фразы"/>
             </ComboBox>
-            <Button x:Name="buttonStateGrey" Content="Новый" Width="90" Margin="1,5" FontSize="16" Background="#FFBFBABA" Click="buttonStateGrey_Click"/>
-            <Button x:Name="buttonStateGreen" Content="Изучаю" Width="90" Margin="1,5" FontSize="16" Background="#FF42EA59"/>
-            <Button x:Name="buttonStateGold" Content="Знаю" Width="90" Margin="1,5" FontSize="16" Background="#FFE1F702"/>
+            <Button x:Name="buttonStateGrey" Content="Новый" Width="80" Margin="1,5" FontSize="16" Background="#FFBFBABA" Click="buttonStateGrey_Click"/>
+            <Button x:Name="buttonStateGreen" Content="Изучаю" Width="80" Margin="1,5" FontSize="16" Background="#FF42EA59"/>
+            <Button x:Name="buttonStateGold" Content="Знаю" Width="80" Margin="1,5" FontSize="16" Background="#FFE1F702"/>
+            <Button x:Name="buttonDateOrderBy" Content="Дата↓↑" Width="80" Margin="1,5" FontSize="16"/>
         </StackPanel>
     </Grid>
 </Window>
