@@ -247,5 +247,28 @@ namespace MyDictionary
                 IsOrder = true;
             }
         }
+
+        private void comboboxListElement_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (sender != null)
+            {
+                ComboBox comboBox = (ComboBox)sender;
+                TextBlock tb = (TextBlock)comboBox.SelectedItem;
+                SelectCollection(tb.Text);
+
+            }
+
+        }
+        private void SelectCollection(string part)
+        {
+            if (part == "все слова")
+            {
+                listViewDictionary.ItemsSource = collection;
+                return;
+            }
+            IEnumerable<MyWord> en = collection.Where(n => n.PartOfSpeach.StartsWith(part));
+            listViewDictionary.ItemsSource = new ObservableCollection<MyWord>(en);
+
+        }
     }
 }

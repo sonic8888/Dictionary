@@ -126,14 +126,12 @@
         <StackPanel Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="11" Orientation="Horizontal">
             <TextBox x:Name="textboxFindWord" Width="345" Margin="0,5" VerticalContentAlignment="Center" FontSize="22" Foreground="#FFCFCDCD" Text="найти слово" GotFocus="textboxFindWord_GotFocus" LostFocus="textboxFindWord_LostFocus" PreviewTextInput="textboxFindWord_PreviewTextInput" KeyUp="textboxFindWord_KeyUp"/>
             <ComboBox Name="comboboxListElement" Text="Все слова" FontSize="18" Width="135
-                      " Margin="1,0"  VerticalAlignment="Center" Height="{Binding ActualHeight, ElementName=textboxFindWord, Mode=OneWay}" VerticalContentAlignment="Center">
-                <ComboBoxItem IsSelected="True">
-                    <TextBlock Text="Все слова"/>
-                </ComboBoxItem>
-                <TextBlock Text="Существительное"/>
-                <TextBlock Text="Прилагательное"/>
-                <TextBlock Text="Глагол"/>
-                <TextBlock Text="Фразы"/>
+                      " Margin="1,0"  VerticalAlignment="Center" Height="{Binding ActualHeight, ElementName=textboxFindWord, Mode=OneWay}" VerticalContentAlignment="Center" SelectionChanged="comboboxListElement_SelectionChanged"  >
+                <TextBlock Text="все слова"/>
+                <TextBlock Text="сущ"/>
+                <TextBlock Text="прил"/>
+                <TextBlock Text="глаг"/>
+                <TextBlock Text="фразы"/>
             </ComboBox>
             <Button x:Name="buttonStateGrey" Content="Новый" Width="65" Margin="1,5" FontSize="16" Background="#FFBFBABA" Click="buttonStateGrey_Click"/>
             <Button x:Name="buttonStateGreen" Content="Изучаю" Width="65" Margin="1,5" FontSize="16" Background="#FF42EA59"/>
