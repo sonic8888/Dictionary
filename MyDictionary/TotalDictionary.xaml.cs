@@ -33,10 +33,11 @@ namespace MyDictionary
         Thread thread;
         string messageQuestion = "Вы хотите удалить выделеные слова?";
         string messageWarning = "Внимание!";
-        string colorForegraund = "#FFCFCDCD";//серый цвет 
+        //string colorForegraund = "#FFCFCDCD";//серый цвет 
         string pathGrey = @"Picture/Cub_grey.png";
         string pathGreen = @"Picture/Cub_green.png";
         string pathGold = @"Picture/Cub_Gold.png";
+        private bool IsOrder = true;
         public TotalDictionary(ObservableCollection<MyWord> col, MainWindow win)
         {
             InitializeComponent();
@@ -191,7 +192,7 @@ namespace MyDictionary
 
         private void buttonStateGrey_Click(object sender, RoutedEventArgs e)
         {
-            int id = 6;
+            //int id = 6;
         }
         private BitmapImage InitBitMap()
         {
@@ -226,6 +227,24 @@ namespace MyDictionary
                 string text = textboxFindWord.Text;
                 IEnumerable<MyWord> en = collection.Where(n => n.Word.StartsWith(text));
                 listViewDictionary.ItemsSource = new ObservableCollection<MyWord>(en);
+            }
+        }
+
+        private void buttonDateOrderBy_Click(object sender, RoutedEventArgs e)
+        {
+            if (IsOrder)
+            {
+                IEnumerable<MyWord> en = collection.OrderByDescending(n => n.DataTimeInsert);
+
+                listViewDictionary.ItemsSource = new ObservableCollection<MyWord>(en);
+                IsOrder = false;
+            }
+            else
+            {
+                IEnumerable<MyWord> en = collection.OrderBy(n => n.DataTimeInsert);
+
+                listViewDictionary.ItemsSource = new ObservableCollection<MyWord>(en);
+                IsOrder = true;
             }
         }
     }

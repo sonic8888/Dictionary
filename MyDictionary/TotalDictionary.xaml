@@ -9,6 +9,7 @@
         Title="TotalDictionary" Height="800" Width="900" ResizeMode="NoResize">
     <Window.Resources>
         <convert:StateConverter x:Key="stateconverter"></convert:StateConverter>
+        <convert:DataConverter x:Key="dataconverter"></convert:DataConverter>
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -54,8 +55,8 @@
                     <GridViewColumn>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <!--<Image x:Name="imagePhone" Height="40" Width="40" Source="Picture/icons8-динамик-48.png" Margin="10,10"/>-->
-                                <Button x:Name="buttonSound" Width="50" Height="50" Click="buttonSound_Click" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" DataContext="{Binding SoundName}">
+                                <!--<Image x:Name="imagePhone" Height="45" Width="40" Source="Picture/icons8-динамик-48.png" Margin="10,10"/>-->
+                                <Button x:Name="buttonSound" Width="45" Height="40" Click="buttonSound_Click" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" DataContext="{Binding SoundName}">
                                     <Image x:Name="imagePhone"  Source="Picture/icons8-динамик-48.png"  />
                                 </Button>
                             </DataTemplate>
@@ -65,16 +66,23 @@
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel>
-                                    <TextBlock x:Name="textBlockWord" Text="{Binding Word}" Width="370" Height="20" FontSize="16" VerticalAlignment="Bottom" Foreground="#FF002EFF"  />
-                                    <TextBlock x:Name="textBlockTranslate" Text="{Binding TranslateStr}" Width="370" Height="20" FontSize="16" VerticalAlignment="Top"/>
+                                    <TextBlock x:Name="textBlockWord" Text="{Binding Word}" Width="350" Height="20" MinWidth="250" MaxWidth="450" FontSize="16" VerticalAlignment="Bottom" Foreground="#FF002EFF"  />
+                                    <TextBlock x:Name="textBlockTranslate" Text="{Binding TranslateStr}" Width="350" MinWidth="250" MaxWidth="450" Height="20" FontSize="16" VerticalAlignment="Top"/>
                                 </StackPanel>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock x:Name="textblockPartOfSpeach" Text="{Binding PartOfSpeach}" Width="75" FontSize="22" VerticalAlignment="Bottom" Foreground="#FF0A022C" FontStyle="Italic" Height="auto" LineHeight="Auto" Margin="0,10,0,0"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
                     <GridViewColumn >
                         <GridViewColumn.CellTemplate>
                             <DataTemplate >
-                                <Button x:Name="buttonState" Width="50" Height="50" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="buttonState_Click"    DataContext="{Binding WordId}"  >
+                                <Button x:Name="buttonState" Width="50" Height="50" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="buttonState_Click"    DataContext="{Binding WordId}" Margin="0,0,0,0" >
                                     <Button.Content >
                                         <Image x:Name="imageButtonState"  Source="Picture/Cub_grey.png"    />
                                     </Button.Content>
@@ -87,6 +95,13 @@
                                         <Setter TargetName="imageButtonState" Property="Source" Value="Picture/Cub_Gold.png"/>
                                     </DataTrigger>
                                 </DataTemplate.Triggers>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock x:Name="textblockData" Text="{Binding DataInsert, Converter={StaticResource dataconverter}}" Width="100" FontSize="16" VerticalAlignment="Bottom" Foreground="#FF0A022C" FontStyle="Italic" Margin="10,0,0,0"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
@@ -109,8 +124,9 @@
             </Button>
         </ToolBar>
         <StackPanel Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="11" Orientation="Horizontal">
-            <TextBox x:Name="textboxFindWord" Width="250" Margin="0,5" VerticalContentAlignment="Center" FontSize="22" Foreground="#FFCFCDCD" Text="найти слово" GotFocus="textboxFindWord_GotFocus" LostFocus="textboxFindWord_LostFocus" PreviewTextInput="textboxFindWord_PreviewTextInput" KeyUp="textboxFindWord_KeyUp"/>
-            <ComboBox Name="comboboxListElement" Text="Все слова" FontSize="18" Width="170" Margin="1,0"  VerticalAlignment="Center" Height="{Binding ActualHeight, ElementName=textboxFindWord, Mode=OneWay}" VerticalContentAlignment="Center">
+            <TextBox x:Name="textboxFindWord" Width="345" Margin="0,5" VerticalContentAlignment="Center" FontSize="22" Foreground="#FFCFCDCD" Text="найти слово" GotFocus="textboxFindWord_GotFocus" LostFocus="textboxFindWord_LostFocus" PreviewTextInput="textboxFindWord_PreviewTextInput" KeyUp="textboxFindWord_KeyUp"/>
+            <ComboBox Name="comboboxListElement" Text="Все слова" FontSize="18" Width="135
+                      " Margin="1,0"  VerticalAlignment="Center" Height="{Binding ActualHeight, ElementName=textboxFindWord, Mode=OneWay}" VerticalContentAlignment="Center">
                 <ComboBoxItem IsSelected="True">
                     <TextBlock Text="Все слова"/>
                 </ComboBoxItem>
@@ -119,10 +135,10 @@
                 <TextBlock Text="Глагол"/>
                 <TextBlock Text="Фразы"/>
             </ComboBox>
-            <Button x:Name="buttonStateGrey" Content="Новый" Width="80" Margin="1,5" FontSize="16" Background="#FFBFBABA" Click="buttonStateGrey_Click"/>
-            <Button x:Name="buttonStateGreen" Content="Изучаю" Width="80" Margin="1,5" FontSize="16" Background="#FF42EA59"/>
-            <Button x:Name="buttonStateGold" Content="Знаю" Width="80" Margin="1,5" FontSize="16" Background="#FFE1F702"/>
-            <Button x:Name="buttonDateOrderBy" Content="Дата↓↑" Width="80" Margin="1,5" FontSize="16"/>
+            <Button x:Name="buttonStateGrey" Content="Новый" Width="65" Margin="1,5" FontSize="16" Background="#FFBFBABA" Click="buttonStateGrey_Click"/>
+            <Button x:Name="buttonStateGreen" Content="Изучаю" Width="65" Margin="1,5" FontSize="16" Background="#FF42EA59"/>
+            <Button x:Name="buttonStateGold" Content="Знаю" Width="65" Margin="1,5" FontSize="16" Background="#FFE1F702"/>
+            <Button x:Name="buttonDateOrderBy" Content="Дата↓↑" Width="65" Margin="1,5" FontSize="16" Click="buttonDateOrderBy_Click"/>
         </StackPanel>
     </Grid>
 </Window>

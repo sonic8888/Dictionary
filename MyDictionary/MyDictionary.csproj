@@ -96,6 +96,7 @@
     <Compile Include="ChoseWords.xaml.cs">
       <DependentUpon>ChoseWords.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\DataConverter.cs" />
     <Compile Include="Converters\StateConverter.cs" />
     <Compile Include="Converters\WidthConverterMultiplication.cs" />
     <Compile Include="Converters\WidthConverterSummation.cs" />
