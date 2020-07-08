@@ -12,13 +12,13 @@ namespace MyDictionary.Tools
     public static class BdTools
     {
         private static int state = 1;
-        public static int AddNewWord(string word, string soundname = "", string partofspeach = "", string transcription = "")
+        public static int AddNewWord(string word, DateTime insert, DateTime lastCall, string soundname = "", string partofspeach = "", string transcription = "",  int state=1 )
         {
             using (var context = new ApplicationContext())
             {
                 try
                 {
-                    var words = new MyWord() { Word = word, SoundName = soundname, PartOfSpeach = partofspeach, Transcription = transcription, State = state, DataTimeInsert = DateTime.Now, DataTimeLastCall = DateTime.Now };
+                    var words = new MyWord() { Word = word, SoundName = soundname, PartOfSpeach = partofspeach, Transcription = transcription, State = state, DataTimeInsert = insert, DataTimeLastCall = lastCall };
                     context.MyWords.Add(words);
                     context.SaveChanges();
                     return words.WordId;
@@ -74,7 +74,7 @@ namespace MyDictionary.Tools
 
         public static int AddNewWords(WordSample wordSample)
         {
-            int index = AddNewWord(wordSample.Word, wordSample.SoundName, wordSample.PartOfSpeach, wordSample.Transcription);
+            int index = AddNewWord(wordSample.Word, wordSample.DateTimeInsert, wordSample.DateTimeLastCall, wordSample.SoundName, wordSample.PartOfSpeach, wordSample.Transcription);
             if (index > 0)
             {
                 foreach (string trans in wordSample.Translate)

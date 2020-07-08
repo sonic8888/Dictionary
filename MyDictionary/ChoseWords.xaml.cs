@@ -40,6 +40,7 @@ namespace MyDictionary
         private string pathRedTick = @"Picture\\tick_red.png";
         private string pathGreenTick = @"Picture\\tick_green.png";
         private ColorIconButtonsave colorIcon = ColorIconButtonsave.Red;
+        int newState = 1;
         public ChoseWords()
         {
             InitializeComponent();
@@ -171,7 +172,7 @@ namespace MyDictionary
             }
         }
 
-            private void KeyUpTextBoxFind(object sender, KeyEventArgs e)
+        private void KeyUpTextBoxFind(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Back)
             {
@@ -194,7 +195,7 @@ namespace MyDictionary
             }
         }
 
-  
+
         /// <summary>
         /// обработчик вкладки меню "Открыть"
         /// открывает проводник и сохраняет в текстовый файл путь к внешней папке с аудиофайлами
@@ -305,7 +306,9 @@ namespace MyDictionary
             _wordsSample.Word = word.Trim();
             _wordsSample.PartOfSpeach = textBoxPartOfSpeach.Text.Trim();
             _wordsSample.Transcription = textBoxTranscription.Text.Trim();
-
+            _wordsSample.DateTimeInsert = DateTime.Now;
+            _wordsSample.DateTimeLastCall = DateTime.Now;
+            _wordsSample.State = newState;
             return true;
         }
 
@@ -316,7 +319,7 @@ namespace MyDictionary
                 ChengeIconButtonSave(pathGreenTick, ColorIconButtonsave.Green);
                 int ind = BdTools.AddNewWords(_wordsSample);
                 _wordsSample = new WordSample();
-         
+
                 inerGrid.DataContext = null;
             }
 

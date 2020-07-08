@@ -73,7 +73,6 @@
                         <MenuItem.Header>
                             <StackPanel Orientation="Horizontal"   >
                                 <Image Source="Picture/icons8-проводник-windows-48.png"  />
-                                <!--<TextBlock Text="Файл" FontSize="18" Margin="15,0,0,0"   />-->
                             </StackPanel>
                         </MenuItem.Header>
                         <MenuItem x:Name="MenuItemOpen" Header="Открыть папку" FontSize="12" Width="180" Click="ClickMenuItemOpen"/>

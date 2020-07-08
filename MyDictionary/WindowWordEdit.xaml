@@ -33,6 +33,8 @@
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
+            <RowDefinition/>
+         
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -49,6 +51,25 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
+        <ToolBar Grid.Row="0" Grid.ColumnSpan="13">
+            <Menu>
+                <MenuItem>
+                    <MenuItem.Header>
+                        <StackPanel Orientation="Horizontal"   >
+                            <Image Source="Picture/icons8-проводник-windows-48.png"  />
+                        </StackPanel>
+                    </MenuItem.Header>
+                    <MenuItem x:Name="MenuItemOpen" Header="Скопировать аудиофайл" FontSize="12" Width="180" Click="ClickMenuItemOpen"/>
+                </MenuItem>
+            </Menu>
+            <Separator/>
+            <Button x:Name="buttonPlayAydio" Click="ClickButtonPlayAudio">
+                <Button.Content>
+                    <Image Source="pack://siteoforigin:,,,/Picture/speaker_3760.png"/>
+                </Button.Content>
+            </Button>
+            <Separator/>
+        </ToolBar>
         <TextBlock Text="Слово:" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="4"/>
         <TextBox x:Name="textboxWord" Grid.Row="1" Grid.Column="6" Grid.ColumnSpan="6" Text="{Binding Word}"/>
         <TextBlock Text="Транскрипция:" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="4"/>
@@ -57,11 +78,13 @@
         <TextBox x:Name="textboxPartOfSpeach" Grid.Row="3" Grid.Column="6" Grid.ColumnSpan="6" Text="{Binding PartOfSpeach}"/>
         <TextBlock Text="Статус:" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="4"/>
         <TextBox x:Name="textboxStatus" Grid.Row="4" Grid.Column="6" Grid.ColumnSpan="6" Text="{Binding State, Converter={StaticResource statestringconvert}}"/>
-        <TextBlock Text="Перевод:" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="4"/>
-        <TextBox x:Name="textboxTranslate" Grid.Row="5" Grid.RowSpan="2" Grid.Column="6" Grid.ColumnSpan="6" FontSize="14" AcceptsReturn="True"/>
-        <TextBlock Text="Примеры:" Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="4"/>
-        <TextBox x:Name="textboxExample" Grid.Row="8" Grid.RowSpan="2" Grid.Column="1" Grid.ColumnSpan="11"/>
-        <Button x:Name="buttonSave" Content="Сохранить" Grid.Row="11"  Grid.Column="1" Grid.ColumnSpan="3" IsDefault="True" Click="buttonSave_Click"/>
-        <Button x:Name="buttonCansel" Content="Отмена" Grid.Row="11"  Grid.Column="9" Grid.ColumnSpan="3" IsCancel="True"/>
+        <TextBlock Text="Аудио:" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="4"/>
+        <TextBox x:Name="textboxAudio" Grid.Row="5" Grid.Column="6" Grid.ColumnSpan="6" Text="{Binding SoundName}" FontSize="14"/>
+        <TextBlock Text="Перевод:" Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="4"/>
+        <TextBox x:Name="textboxTranslate" Grid.Row="6" Grid.RowSpan="2" Grid.Column="6" Grid.ColumnSpan="6" FontSize="14" AcceptsReturn="True"/>
+        <TextBlock Text="Примеры:" Grid.Row="8" Grid.Column="1" Grid.ColumnSpan="4"/>
+        <TextBox x:Name="textboxExample" Grid.Row="9" Grid.RowSpan="2" Grid.Column="1" Grid.ColumnSpan="11"/>
+        <Button x:Name="buttonSave" Content="Сохранить" Grid.Row="12"  Grid.Column="1" Grid.ColumnSpan="3" IsDefault="True" Click="buttonSave_Click"/>
+        <Button x:Name="buttonCansel" Content="Отмена" Grid.Row="12"  Grid.Column="9" Grid.ColumnSpan="3" IsCancel="True"/>
     </Grid>
 </Window>
