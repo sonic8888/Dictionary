@@ -98,6 +98,7 @@
     </Compile>
     <Compile Include="Converters\DataConverter.cs" />
     <Compile Include="Converters\StateConverter.cs" />
+    <Compile Include="Converters\StateInStringConverter.cs" />
     <Compile Include="Converters\WidthConverterMultiplication.cs" />
     <Compile Include="Converters\WidthConverterSummation.cs" />
     <Compile Include="EF\ApplicationContext.cs" />
@@ -113,6 +114,9 @@
     </Compile>
     <Compile Include="WindowStateChose.xaml.cs">
       <DependentUpon>WindowStateChose.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WindowWordEdit.xaml.cs">
+      <DependentUpon>WindowWordEdit.xaml</DependentUpon>
     </Compile>
     <Page Include="ChoseWords.xaml">
       <SubType>Designer</SubType>
@@ -139,6 +143,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="WindowStateChose.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WindowWordEdit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

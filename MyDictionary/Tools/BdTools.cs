@@ -142,9 +142,12 @@ namespace MyDictionary.Tools
             MyWord mw = null;
             using (var context = new ApplicationContext())
             {
+                context.Configuration.LazyLoadingEnabled = false;
                 try
                 {
                     mw = context.MyWords.Find(id);
+                    context.Entry(mw).Collection(x => x.MyTranslates).Load();
+                    context.Entry(mw).Collection(x => x.MyExamples).Load();
                     context.SaveChanges();
                 }
                 catch (Exception)

@@ -65,8 +65,8 @@
                     <GridViewColumn>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <StackPanel>
-                                    <TextBlock x:Name="textBlockWord" Text="{Binding Word}" Width="350" Height="20" MinWidth="250" MaxWidth="450" FontSize="16" VerticalAlignment="Bottom" Foreground="#FF002EFF"  />
+                                <StackPanel  >
+                                    <TextBlock x:Name="textBlockWord" Text="{Binding Word}" Width="350" Height="20" MinWidth="250" MaxWidth="450" FontSize="16" VerticalAlignment="Bottom" Foreground="#FF002EFF"   />
                                     <TextBlock x:Name="textBlockTranslate" Text="{Binding TranslateStr}" Width="350" MinWidth="250" MaxWidth="450" Height="20" FontSize="16" VerticalAlignment="Top"/>
                                 </StackPanel>
                             </DataTemplate>
@@ -82,7 +82,7 @@
                     <GridViewColumn >
                         <GridViewColumn.CellTemplate>
                             <DataTemplate >
-                                <Button x:Name="buttonState" Width="50" Height="50" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="buttonState_Click"    DataContext="{Binding WordId}" Margin="0,0,0,0" >
+                                <Button x:Name="buttonState" Width="50" Height="50" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="buttonState_Click"    DataContext="{Binding WordId}" Margin="0,0,0,0" PreviewMouseRightButtonDown="buttonState_PreviewMouseRightButtonDown" >
                                     <Button.Content >
                                         <Image x:Name="imageButtonState"  Source="Picture/Cub_grey.png"    />
                                     </Button.Content>

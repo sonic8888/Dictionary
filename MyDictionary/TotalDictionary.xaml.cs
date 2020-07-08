@@ -287,5 +287,20 @@ namespace MyDictionary
             IEnumerable<MyWord> en = collection.Where(n => n.State == 3);
             listViewDictionary.ItemsSource = new ObservableCollection<MyWord>(en);
         }
+
+      
+
+        private void buttonState_PreviewMouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            Button bt = sender as Button;
+            int wordid = (int)bt.DataContext;
+            MyWord mw = BdTools.FindMyWord(wordid);
+            WindowWordEdit wwe = new WindowWordEdit(mw);
+            if (wwe.ShowDialog()==true)
+            {
+
+            }
+           
+        }
     }
 }
