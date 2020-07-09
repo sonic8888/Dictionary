@@ -11,14 +11,16 @@
         <Style TargetType="TextBlock">
             <Setter Property="Margin" Value="0,5,0,0"/>
             <Setter Property="FontSize" Value="22"/>
+            <Setter Property="Foreground" Value="#FF0024BD"/>
         </Style>
         <Style TargetType="TextBox">
             <Setter Property="Margin" Value="0,5,0,0"/>
             <Setter Property="FontSize" Value="22"/>
+            <Setter Property="Background" Value="#FFE4E4E5"/>
         </Style>
         <convert:StateInStringConverter x:Key="statestringconvert"></convert:StateInStringConverter>
     </Window.Resources>
-    <Grid>
+    <Grid Background="#FFC7C7C7">
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition/>
@@ -70,8 +72,8 @@
             </Button>
             <Separator/>
         </ToolBar>
-        <TextBlock Text="Слово:" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="4"/>
-        <TextBox x:Name="textboxWord" Grid.Row="1" Grid.Column="6" Grid.ColumnSpan="6" Text="{Binding Word}"/>
+        <TextBlock Text="Слово:" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="4" />
+        <TextBox x:Name="textboxWord" Grid.Row="1" Grid.Column="6" Grid.ColumnSpan="6" Text="{Binding Word}" />
         <TextBlock Text="Транскрипция:" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="4"/>
         <TextBox x:Name="textboxTranscription" Grid.Row="2" Grid.Column="6" Grid.ColumnSpan="6" Text="{Binding Transcription}"/>
         <TextBlock Text="Часть речи:" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="4"/>

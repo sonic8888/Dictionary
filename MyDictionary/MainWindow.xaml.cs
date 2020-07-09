@@ -73,6 +73,10 @@ namespace MyDictionary
             thread.Start();
         }
 
-
+        private void buttonBreyShtorm_Click(object sender, RoutedEventArgs e)
+        {
+            WindowBreyShtorm wbs = new WindowBreyShtorm();
+            wbs.Show();
+        }
     }
 }
