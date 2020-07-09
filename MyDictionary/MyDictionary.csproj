@@ -344,6 +344,12 @@
   <ItemGroup>
     <Resource Include="Picture\refresh_arrow_1546.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Picture\english.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Picture\english2.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
