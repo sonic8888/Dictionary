@@ -33,12 +33,15 @@ namespace MyDictionary
             FIleTools.CreateDirectory(FIleTools.NameDirectoryAudio);
             FIleTools.CreateDirectory(FIleTools.NameDirectoryStorage);
             StartNewThread();
+           
+         
         }
 
         private void clickNewWord(object sender, RoutedEventArgs e)
         {
 
             ChoseWords chw = new ChoseWords();
+            
             chw.Show();
 
         }
@@ -77,6 +80,7 @@ namespace MyDictionary
         {
             WindowBreyShtorm wbs = new WindowBreyShtorm();
             wbs.Show();
+            ObservableCollection<MyWord> observableCollections = BdTools.ReadWord();
         }
     }
 }

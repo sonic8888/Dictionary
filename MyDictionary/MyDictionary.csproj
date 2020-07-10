@@ -101,6 +101,7 @@
     <Compile Include="Converters\StateInStringConverter.cs" />
     <Compile Include="Converters\WidthConverterMultiplication.cs" />
     <Compile Include="Converters\WidthConverterSummation.cs" />
+    <Compile Include="DataVariable.cs" />
     <Compile Include="EF\ApplicationContext.cs" />
     <Compile Include="EF\MyExample.cs" />
     <Compile Include="EF\MyTranslate.cs" />

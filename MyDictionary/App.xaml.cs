@@ -13,7 +13,23 @@ namespace MyDictionary
     /// </summary>
     public partial class App : Application
     {
- 
+        public DataVariable dataVariable;
+        private void Application_Startup(object sender, StartupEventArgs e)
+        {
+            dataVariable = new DataVariable();
+        }
+
+        private void Application_Exit(object sender, ExitEventArgs e)
+        {
+            dataVariable.WriteFile();
+        }
+        private int myVar;
+
+        public int MyProperty
+        {
+            get { return myVar; }
+            set { myVar = value; }
+        }
 
     }
 }

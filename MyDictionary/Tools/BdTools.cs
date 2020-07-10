@@ -11,7 +11,7 @@ namespace MyDictionary.Tools
 {
     public static class BdTools
     {
-        private static int state = 1;
+       
         public static int AddNewWord(string word, DateTime insert, DateTime lastCall, string soundname = "", string partofspeach = "", string transcription = "",  int state=1 )
         {
             using (var context = new ApplicationContext())
@@ -125,6 +125,30 @@ namespace MyDictionary.Tools
                     foreach (MyWord c in context.MyWords)
                     {
                         context.Entry(c).Collection(x => x.MyTranslates).Load();
+                        context.Entry(c).Collection(x => x.MyExamples).Load();
+                        myWords.Add(c);
+                    }
+                }
+                catch (Exception)
+                {
+
+                    return null;
+                }
+                return myWords;
+            }
+        }
+        public static ObservableCollection<MyWord> ReadWord(int take)
+        {
+            ObservableCollection<MyWord> myWords = new ObservableCollection<MyWord>();
+            using (var context = new ApplicationContext())
+            {
+                context.Configuration.LazyLoadingEnabled = false;
+                try
+                {
+                    foreach (MyWord c in context.MyWords.Take(take))
+                    {
+                        context.Entry(c).Collection(x => x.MyTranslates).Load();
+                        context.Entry(c).Collection(x => x.MyExamples).Load();
                         myWords.Add(c);
                     }
                 }
