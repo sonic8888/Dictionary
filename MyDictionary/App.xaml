@@ -4,6 +4,19 @@
              xmlns:local="clr-namespace:MyDictionary"
              StartupUri="MainWindow.xaml" Startup="Application_Startup" Exit="Application_Exit">
     <Application.Resources>
-         
+        <Style x:Key="buttonRond" TargetType="Button" >
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="10"
+                                Background="{TemplateBinding Background}">
+
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Application.Resources>
 </Application>

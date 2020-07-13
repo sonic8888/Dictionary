@@ -207,10 +207,13 @@ namespace MyDictionary.Tools
             ObservableCollection<MyWord> myWords = new ObservableCollection<MyWord>();
             using (var context = new ApplicationContext())
             {
+                context.Configuration.LazyLoadingEnabled = false;
                 try
                 {
                     foreach (var item in context.MyWords.Where(n=>n.State==(int)state))
                     {
+                        context.Entry(item).Collection(x => x.MyTranslates).Load();
+                        context.Entry(item).Collection(x => x.MyExamples).Load();
                         myWords.Add(item);
                     }
                  

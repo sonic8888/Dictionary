@@ -85,7 +85,7 @@
     <Reference Include="PresentationFramework" />
     <Reference Include="XMLRead, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\MyLibrary\XMLRead\bin\Debug\XMLRead.dll</HintPath>
+      <HintPath>..\..\Library\XMLRead\bin\Debug\XMLRead.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -115,6 +115,9 @@
     </Compile>
     <Compile Include="WindowBreyShtorm.xaml.cs">
       <DependentUpon>WindowBreyShtorm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WindowBreyShtorm_2.xaml.cs">
+      <DependentUpon>WindowBreyShtorm_2.xaml</DependentUpon>
     </Compile>
     <Compile Include="WindowStateChose.xaml.cs">
       <DependentUpon>WindowStateChose.xaml</DependentUpon>
@@ -147,6 +150,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="WindowBreyShtorm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WindowBreyShtorm_2.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

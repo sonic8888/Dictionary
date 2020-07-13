@@ -104,5 +104,11 @@ namespace MyDictionary
                 }
             }
         }
+
+        private void buttonBreyShtorm2_Click(object sender, RoutedEventArgs e)
+        {
+            WindowBreyShtorm_2 w2 = new WindowBreyShtorm_2();
+            w2.Show();
+        }
     }
 }
