@@ -13,6 +13,11 @@
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -20,9 +25,26 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
             <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Button Click="clickNewWord" Grid.Row="0" Grid.Column="0">HewWord</Button>
-        <Button x:Name="buttonDictionary" Click="buttonDictionary_Click" Grid.Row="0" Grid.Column="2">TotalDictionary</Button>
-        <Button x:Name="buttonBreyShtorm" Grid.Row="0" Grid.Column="4" Content="BreyShtorm" Click="buttonBreyShtorm_Click"/>
+        <ToolBar Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="8">
+            <Menu>
+                <MenuItem>
+                    <MenuItem.Header>
+                        <Image Source="Picture/settingsMain.png" />
+                    </MenuItem.Header>
+                    <MenuItem Header="Тренировка">
+                        <MenuItem Header="Кол-во слов:">
+                            <TextBox x:Name="textboxCountWord" Width="20" PreviewKeyDown="textboxCountWord_PreviewKeyDown"/>
+                        </MenuItem>
+                    </MenuItem>
+                </MenuItem>
+            </Menu>
+        </ToolBar>
+        <Button Click="clickNewWord" Grid.Row="2" Grid.Column="0">HewWord</Button>
+        <Button x:Name="buttonDictionary" Click="buttonDictionary_Click" Grid.Row="2" Grid.Column="2">TotalDictionary</Button>
+        <Button x:Name="buttonBreyShtorm" Grid.Row="2" Grid.Column="4" Content="BreyShtorm" Click="buttonBreyShtorm_Click"/>
     </Grid>
 </Window>

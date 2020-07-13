@@ -20,6 +20,10 @@ using XMLRead;
 
 namespace MyDictionary
 {
+    public enum State
+    {
+        New = 1, Learn = 2, Know = 3
+    }
     /// <summary>
     /// Логика взаимодействия для MainWindow.xaml
     /// </summary>
@@ -27,28 +31,33 @@ namespace MyDictionary
     {
         ObservableCollection<MyWord> collection;
         Thread thread;
+        private int countWord;
+
+
+
         public MainWindow()
         {
             InitializeComponent();
             FIleTools.CreateDirectory(FIleTools.NameDirectoryAudio);
             FIleTools.CreateDirectory(FIleTools.NameDirectoryStorage);
             StartNewThread();
-           
-         
+
+            countWord = App.dataVariable.CountWordLearning;
+            textboxCountWord.Text = countWord.ToString();
         }
 
         private void clickNewWord(object sender, RoutedEventArgs e)
         {
 
             ChoseWords chw = new ChoseWords();
-            
+
             chw.Show();
 
         }
 
         private void buttonDictionary_Click(object sender, RoutedEventArgs e)
         {
-         
+
             while (thread.IsAlive)
             {
                 Thread.Sleep(50);
@@ -78,9 +87,22 @@ namespace MyDictionary
 
         private void buttonBreyShtorm_Click(object sender, RoutedEventArgs e)
         {
-            WindowBreyShtorm wbs = new WindowBreyShtorm();
+            ObservableCollection<MyWord> coll= BdTools.SelecWhereState(State.New);
+            WindowBreyShtorm wbs = new WindowBreyShtorm(coll);
             wbs.Show();
-            ObservableCollection<MyWord> observableCollections = BdTools.ReadWord();
+        }
+
+        private void textboxCountWord_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                string str = textboxCountWord.Text;
+                int value;
+                if (int.TryParse(str, out value))
+                {
+                    App.dataVariable.CountWordLearning = value;
+                }
+            }
         }
     }
 }

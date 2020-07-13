@@ -1,5 +1,7 @@
-﻿using System;
+﻿using MyDictionary.EF;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,9 +21,16 @@ namespace MyDictionary
     /// </summary>
     public partial class WindowBreyShtorm : Window
     {
-        public WindowBreyShtorm()
+        ObservableCollection<MyWord> words;
+        public WindowBreyShtorm(ObservableCollection<MyWord> coll)
         {
+            words = coll;
             InitializeComponent();
+            InitDbContext(words[0]);
+        }
+        private void InitDbContext(MyWord w)
+        {
+            this.DataContext = w;
         }
     }
 }

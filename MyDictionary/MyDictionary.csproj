@@ -351,6 +351,9 @@
   <ItemGroup>
     <Resource Include="Picture\english2.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Picture\settingsMain.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

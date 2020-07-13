@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using MyDictionary.EF;
 using XMLRead;
 
@@ -11,8 +12,8 @@ namespace MyDictionary.Tools
 {
     public static class BdTools
     {
-       
-        public static int AddNewWord(string word, DateTime insert, DateTime lastCall, string soundname = "", string partofspeach = "", string transcription = "",  int state=1 )
+
+        public static int AddNewWord(string word, DateTime insert, DateTime lastCall, string soundname = "", string partofspeach = "", string transcription = "", int state = 1)
         {
             using (var context = new ApplicationContext())
             {
@@ -200,6 +201,27 @@ namespace MyDictionary.Tools
                 }
             }
             return mw;
+        }
+        public static ObservableCollection<MyWord> SelecWhereState(State state)
+        {
+            ObservableCollection<MyWord> myWords = new ObservableCollection<MyWord>();
+            using (var context = new ApplicationContext())
+            {
+                try
+                {
+                    foreach (var item in context.MyWords.Where(n=>n.State==(int)state))
+                    {
+                        myWords.Add(item);
+                    }
+                 
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                    return null;
+                }
+            }
+            return myWords;
         }
 
     }

@@ -13,7 +13,7 @@ namespace MyDictionary
     /// </summary>
     public partial class App : Application
     {
-        public DataVariable dataVariable;
+        public static DataVariable dataVariable;
         private void Application_Startup(object sender, StartupEventArgs e)
         {
             dataVariable = new DataVariable();
