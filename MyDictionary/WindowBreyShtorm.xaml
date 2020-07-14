@@ -45,7 +45,7 @@
             <Button x:Name="buttonSound" Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Margin="0,0,0,10" Background="{x:Null}" Foreground="{x:Null}" BorderThickness="0" DataContext="{Binding SoundName}" Click="buttonSound_Click">
                 <Image Source="Picture/icons8-динамик-48.png" Width=" 50" Height="50"/>
             </Button>
-            <Button x:Name="buttonKnow" Grid.Row="12" Grid.Column="1" Grid.ColumnSpan="2" Content="Знаю" FontSize="16"/>
+            <Button x:Name="buttonKnow" Grid.Row="12" Grid.Column="1" Grid.ColumnSpan="2" Content="Знаю" FontSize="16" Click="buttonKnow_Click"/>
             <Button x:Name="buttonNotKnow" Grid.Row="12" Grid.Column="8" Grid.ColumnSpan="2" Content="Тренировать" Background="#FF6C5FEC" FontSize="16" Foreground="White" Click="buttonNotKnow_Click"/>
         </Grid>
     </Grid>

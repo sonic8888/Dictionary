@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace MyDictionary.EF
 {
     [Table("Words")]
-    public class MyWord
+    public class MyWord:IComparable, IEquatable<MyWord>
     {
         private string translateStr = "";
         private int state;
@@ -18,6 +18,7 @@ namespace MyDictionary.EF
         private string dataLastCall;
         private DateTime dataTimeInsert;
         private DateTime dateTimeLastCall;
+        private int countAnswer;
         [Key]
         public int WordId { get; set; }
         [StringLength(50)]
@@ -98,5 +99,30 @@ namespace MyDictionary.EF
 
         }
 
+        [NotMapped]
+        public int CountAnswer
+        {
+            get { return countAnswer; }
+            set { countAnswer = value; }
+        }
+      
+        public int CompareTo(object obj)
+        {
+            MyWord mw = obj as MyWord;
+            if (mw==null)
+            {
+                throw new Exception("сравнение не возможно");
+            }
+            return this.WordId.CompareTo(mw.WordId);
+        }
+
+        public bool Equals(MyWord other)
+        {
+            if (other is null)
+                return false;
+            return this.WordId.Equals(other.WordId);
+        }
+        public override bool Equals(object obj) => Equals(obj as MyWord);
+        public override int GetHashCode() => this.WordId;
     }
 }

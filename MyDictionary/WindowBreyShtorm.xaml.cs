@@ -1,4 +1,5 @@
 ﻿using MyDictionary.EF;
+using MyDictionary.Tools;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -24,12 +25,14 @@ namespace MyDictionary
     public partial class WindowBreyShtorm : Window
     {
         ObservableCollection<MyWord> words;
+        ObservableCollection<MyWord> wordsTrenings;
         int count = 0;
         public WindowBreyShtorm(ObservableCollection<MyWord> coll)
         {
             words = coll;
             InitializeComponent();
             InitDbContext(words[count]);
+            wordsTrenings = new ObservableCollection<MyWord>();
         }
         private void InitDbContext(MyWord w)
         {
@@ -55,6 +58,7 @@ namespace MyDictionary
 
         private void buttonNotKnow_Click(object sender, RoutedEventArgs e)
         {
+            wordsTrenings.Add(words[count]);
             if (++count < words.Count && count < App.dataVariable.CountWordLearning)
             {
                 InitDbContext(words[count]);
@@ -62,8 +66,17 @@ namespace MyDictionary
             }
             else
             {
+                ObservableCollection<MyWord> trening = BdTools.ReadWord(App.dataVariable.CountSelectWord) ;
+                IEnumerable<MyWord> enumerable = trening.Except(wordsTrenings);
+            
+
 
             }
+        }
+
+        private void buttonKnow_Click(object sender, RoutedEventArgs e)
+        {
+            BdTools.UpdateStateMyWord(words[count++], State.Know);
         }
     }
 }

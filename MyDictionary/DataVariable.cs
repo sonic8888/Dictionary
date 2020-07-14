@@ -13,12 +13,14 @@ namespace MyDictionary
     {
         private List<string> defoltValueList;
         private int countWordLearning;
+        private int countSelectWord;
         public DataVariable()
         {
             if (!File.Exists(FIleTools.NameFileDataVariable))
             {
                 defoltValueList = new List<string>();
                 defoltValueList.Add("5");// defoltValue countWordLearning
+                defoltValueList.Add("50");// defoltValue countSelectWord
                 StreamWriter streamWriter;
                 using (streamWriter= File.CreateText(FIleTools.NameFileDataVariable))
                 {
@@ -43,6 +45,8 @@ namespace MyDictionary
                         listValue.Add(input);
                     }
                     countWordLearning = int.Parse(listValue[0]);//читаем countWordLearning
+                    countSelectWord = int.Parse(listValue[1]);//читаем countSelectWord
+
                 }
 
             }
@@ -52,7 +56,9 @@ namespace MyDictionary
                 MessageBox.Show(ex.ToString());
             }
         }
-
+        /// <summary>
+        /// кол-во тренируемых слов
+        /// </summary>
         public int CountWordLearning
         {
             get { return countWordLearning; }
@@ -66,6 +72,7 @@ namespace MyDictionary
                 using (StreamWriter sw=new StreamWriter(FIleTools.NameFileDataVariable))
                 {
                     sw.WriteLine(countWordLearning);
+                    sw.WriteLine(countSelectWord);
                 }
             }
             catch (IOException ex)
@@ -74,5 +81,12 @@ namespace MyDictionary
                 MessageBox.Show(ex.ToString());
             }
         }
+
+        public int CountSelectWord
+        {
+            get { return countSelectWord; }
+            set { countSelectWord = value; }
+        }
+
     }
 }

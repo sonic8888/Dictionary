@@ -31,7 +31,7 @@ namespace MyDictionary
     {
         ObservableCollection<MyWord> collection;
         Thread thread;
-        private int countWord;
+   
 
 
 
@@ -41,9 +41,8 @@ namespace MyDictionary
             FIleTools.CreateDirectory(FIleTools.NameDirectoryAudio);
             FIleTools.CreateDirectory(FIleTools.NameDirectoryStorage);
             StartNewThread();
-
-            countWord = App.dataVariable.CountWordLearning;
-            textboxCountWord.Text = countWord.ToString();
+            textboxCountWord.Text = App.dataVariable.CountWordLearning.ToString();
+            textboxCounSelekt.Text = App.dataVariable.CountSelectWord.ToString();
         }
 
         private void clickNewWord(object sender, RoutedEventArgs e)
@@ -109,6 +108,20 @@ namespace MyDictionary
         {
             WindowBreyShtorm_2 w2 = new WindowBreyShtorm_2();
             w2.Show();
+
+        }
+
+        private void textboxCounSelekt_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                string str = textboxCounSelekt.Text;
+                int value;
+                if (int.TryParse(str, out value))
+                {
+                    App.dataVariable.CountSelectWord = value;
+                }
+            }
         }
     }
 }

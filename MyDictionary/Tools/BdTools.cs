@@ -202,6 +202,10 @@ namespace MyDictionary.Tools
             }
             return mw;
         }
+        public static MyWord UpdateStateMyWord(MyWord mw, State state)
+        {
+            return UpdateStateMyWord(mw.WordId, (int)state);
+        }
         public static ObservableCollection<MyWord> SelecWhereState(State state)
         {
             ObservableCollection<MyWord> myWords = new ObservableCollection<MyWord>();
@@ -210,13 +214,13 @@ namespace MyDictionary.Tools
                 context.Configuration.LazyLoadingEnabled = false;
                 try
                 {
-                    foreach (var item in context.MyWords.Where(n=>n.State==(int)state))
+                    foreach (var item in context.MyWords.Where(n => n.State == (int)state))
                     {
                         context.Entry(item).Collection(x => x.MyTranslates).Load();
                         context.Entry(item).Collection(x => x.MyExamples).Load();
                         myWords.Add(item);
                     }
-                 
+
                 }
                 catch (Exception ex)
                 {

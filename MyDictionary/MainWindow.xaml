@@ -39,6 +39,9 @@
                         <MenuItem Header="Кол-во слов:">
                             <TextBox x:Name="textboxCountWord" Width="20" PreviewKeyDown="textboxCountWord_PreviewKeyDown"/>
                         </MenuItem>
+                        <MenuItem Header="Кол-во выборки:">
+                            <TextBox x:Name="textboxCounSelekt" Width="20" PreviewKeyDown="textboxCounSelekt_PreviewKeyDown" />
+                        </MenuItem>
                     </MenuItem>
                 </MenuItem>
             </Menu>
