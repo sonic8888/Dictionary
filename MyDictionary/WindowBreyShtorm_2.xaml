@@ -49,11 +49,11 @@
                 <Image Source="Picture/icons8-динамик-48.png" Width=" 50" Height="50"/>
             </Button>
             <TextBlock x:Name="textblockWord" Grid.Row="1" Grid.Column="0"  Text="buttonthree" VerticalAlignment="Center"  TextAlignment="Left" FontSize="30" Foreground="#FF0A1900" Margin="20,0"/>
-            <Button x:Name="buttonOne" Grid.Row="0" Grid.Column="1" Margin="10,10,10,0" Content="buttonfour"   />
-            <Button x:Name="buttontwo" Grid.Row="1" Grid.Column="1" Margin="10,10,10,0"/>
-            <Button x:Name="buttonthree" Grid.Row="2" Grid.Column="1" Margin="10,10,10,0"/>
-            <Button x:Name="buttonfour" Grid.Row="3" Grid.Column="1" Margin="10,10,10,0"/>
-            <Button x:Name="buttonfive" Grid.Row="4" Grid.Column="1" Margin="10,10,10,0"/>
+            <Button x:Name="buttonOne" Grid.Row="0" Grid.Column="1" Margin="10,10,10,0" Content="buttonfour" Click="buttonOne_Click"   />
+            <Button x:Name="buttontwo" Grid.Row="1" Grid.Column="1" Margin="10,10,10,0" Click="buttontwo_Click"/>
+            <Button x:Name="buttonthree" Grid.Row="2" Grid.Column="1" Margin="10,10,10,0" Click="buttonthree_Click"/>
+            <Button x:Name="buttonfour" Grid.Row="3" Grid.Column="1" Margin="10,10,10,0" Click="buttonfour_Click"/>
+            <Button x:Name="buttonfive" Grid.Row="4" Grid.Column="1" Margin="10,10,10,0" Click="buttonfive_Click"/>
             <Button x:Name="buttonsix" Grid.Row="5" Grid.Column="1" Margin="10,10,10,0"/>
             <Border x:Name="border" Grid.Row="7" Grid.RowSpan="2" Grid.Column="0" Grid.ColumnSpan="2" Background="#FFC2C4E8" BorderBrush="AliceBlue" BorderThickness="1">
                 <TextBlock x:Name="textBlockAnswer"   Text="Правильный ответ!" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="24"/>

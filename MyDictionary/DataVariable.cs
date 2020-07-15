@@ -44,8 +44,17 @@ namespace MyDictionary
                     {
                         listValue.Add(input);
                     }
-                    countWordLearning = int.Parse(listValue[0]);//читаем countWordLearning
+                    try
+                    {
                     countSelectWord = int.Parse(listValue[1]);//читаем countSelectWord
+                    countWordLearning = int.Parse(listValue[0]);//читаем countWordLearning
+
+                    }
+                    catch (ArgumentException aex)
+                    {
+
+                        MessageBox.Show(aex.Message);
+                    }
 
                 }
 

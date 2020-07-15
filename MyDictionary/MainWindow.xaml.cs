@@ -31,7 +31,7 @@ namespace MyDictionary
     {
         ObservableCollection<MyWord> collection;
         Thread thread;
-   
+
 
 
 
@@ -86,7 +86,7 @@ namespace MyDictionary
 
         private void buttonBreyShtorm_Click(object sender, RoutedEventArgs e)
         {
-            ObservableCollection<MyWord> coll= BdTools.SelecWhereState(State.New);
+            ObservableCollection<MyWord> coll = BdTools.SelecWhereState(State.New);
             WindowBreyShtorm wbs = new WindowBreyShtorm(coll);
             wbs.Show();
         }
@@ -106,7 +106,12 @@ namespace MyDictionary
 
         private void buttonBreyShtorm2_Click(object sender, RoutedEventArgs e)
         {
-            WindowBreyShtorm_2 w2 = new WindowBreyShtorm_2();
+            ObservableCollection<MyWord> collec_5 = BdTools.ReadWord(5);
+            ObservableCollection<MyWord> collectionTotal
+                = BdTools.ReadWord();
+            //IEnumerable<MyWord> enumer_5 = collec_5.AsEnumerable();
+            IEnumerable<MyWord> enumerable = collectionTotal.Except(collec_5);
+            WindowBreyShtorm_2 w2 = new WindowBreyShtorm_2(collec_5.ToList(), enumerable.ToList());
             w2.Show();
 
         }
