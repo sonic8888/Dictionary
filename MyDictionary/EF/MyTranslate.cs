@@ -9,7 +9,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace MyDictionary.EF
 {
     [Table("Translates")]
-    public class MyTranslate
+    public class MyTranslate:IEquatable<MyTranslate>
     {
         [Key]
         public int TranslateId { get; set; }
@@ -19,5 +19,20 @@ namespace MyDictionary.EF
         public string Translate { get; set; }
 
         public MyWord MyWord { get; set; }
+
+        public bool Equals(MyTranslate other)
+        {
+          
+            return this.Translate.Equals(other.Translate);
+        }
+        public override bool Equals(object obj) => Equals(obj as MyTranslate);
+
+
+        public override int GetHashCode()
+        {
+            int translatehascod = Translate.GetHashCode();
+            int wordidhascode = WordId.GetHashCode();
+            return wordidhascode ^ translatehascod;
+        }
     }
 }

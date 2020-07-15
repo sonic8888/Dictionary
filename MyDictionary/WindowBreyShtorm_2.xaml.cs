@@ -1,6 +1,7 @@
 ﻿using MyDictionary.EF;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +13,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using XMLRead;
 
 namespace MyDictionary
 {
@@ -26,11 +28,18 @@ namespace MyDictionary
         int countButton = 5;
         int count = 0;
         string str = "Не знаю ):";
+        string esAnswer = "Правильный ответ!";
+        string noAnswer = "Не верный ответ!";
         Random random;
         int currentRandowValue;
-        Brush backgroundDefault;
+        Brush backgroundButtonDefault;
+        Brush backgroundBorderDefault;
         Brush backgroundRed;
         Brush backgroundGreen;
+        Brush buttonForegroundBlue;
+        Brush buttonForegroundDefault;
+        bool isEnabledButton;
+        double fontsize;
         public WindowBreyShtorm_2(List<MyWord> trenings, List<MyWord> resurse)
         {
             this.trenings = trenings;
@@ -42,18 +51,29 @@ namespace MyDictionary
             arrButtons.Add(buttonthree);
             arrButtons.Add(buttonfour);
             arrButtons.Add(buttonfive);
-         
+            isEnabledButton = true;
             random = new Random();
             InitValue();
             InitResurse();
-            backgroundDefault = buttonsix.Background;
+            backgroundButtonDefault = buttonsix.Background;
+            backgroundBorderDefault = border.Background;
             backgroundRed = new SolidColorBrush(Color.FromRgb(243, 182, 219));
-            backgroundGreen = new SolidColorBrush(Color.FromRgb(101, 219, 148));
+            backgroundGreen = new SolidColorBrush(Color.FromRgb(179, 255, 215));
+            buttonForegroundBlue = new SolidColorBrush(Colors.Blue);
+            fontsize = buttonsix.FontSize;
+            buttonForegroundDefault = buttonsix.Foreground;
         }
 
         private void buttonSound_Click(object sender, RoutedEventArgs e)
         {
-
+            FileInfo fi = FIleTools.SearchFile(trenings[count].SoundName, FIleTools.NameDirectoryAudio);
+            PlaySound(fi);
+        }
+        private void PlaySound(FileInfo sound)
+        {
+            MediaPlayer mediaPlayer = new MediaPlayer();
+            mediaPlayer.Open(new Uri(sound.FullName));
+            mediaPlayer.Play();
         }
         private void InitValue()
         {
@@ -62,6 +82,8 @@ namespace MyDictionary
             arrButtons[currentRandowValue].DataContext = trenings[count];
             arrButtons[currentRandowValue].Content = trenings[count].TranslateStr;
             buttonsix.Content = str;
+            FileInfo fi = FIleTools.SearchFile(trenings[count].SoundName, FIleTools.NameDirectoryAudio);
+            PlaySound(fi);
         }
         private void InitResurse()
         {
@@ -73,7 +95,7 @@ namespace MyDictionary
             int j = 0;
             foreach (int item in list.Distinct().Take(countButton))
             {
-                if (j== currentRandowValue)
+                if (j == currentRandowValue)
                 {
                     j++;
                     continue;
@@ -86,9 +108,13 @@ namespace MyDictionary
 
         private void buttonOne_Click(object sender, RoutedEventArgs e)
         {
+            if (!isEnabledButton)
+            {
+                return;
+            }
             Button bt = sender as Button;
             MyWord mw = bt.DataContext as MyWord;
-            if (trenings[count].WordId==mw.WordId)
+            if (trenings[count].WordId == mw.WordId)
             {
                 MethodYes(bt);
             }
@@ -96,10 +122,15 @@ namespace MyDictionary
             {
                 MethodNo(bt);
             }
+            isEnabledButton = false;
         }
 
         private void buttontwo_Click(object sender, RoutedEventArgs e)
         {
+            if (!isEnabledButton)
+            {
+                return;
+            }
             Button bt = sender as Button;
             MyWord mw = bt.DataContext as MyWord;
             if (trenings[count].WordId == mw.WordId)
@@ -110,10 +141,15 @@ namespace MyDictionary
             {
                 MethodNo(bt);
             }
+            isEnabledButton = false;
         }
 
         private void buttonthree_Click(object sender, RoutedEventArgs e)
         {
+            if (!isEnabledButton)
+            {
+                return;
+            }
             Button bt = sender as Button;
             MyWord mw = bt.DataContext as MyWord;
             if (trenings[count].WordId == mw.WordId)
@@ -124,10 +160,15 @@ namespace MyDictionary
             {
                 MethodNo(bt);
             }
+            isEnabledButton = false;
         }
 
         private void buttonfour_Click(object sender, RoutedEventArgs e)
         {
+            if (!isEnabledButton)
+            {
+                return;
+            }
             Button bt = sender as Button;
             MyWord mw = bt.DataContext as MyWord;
             if (trenings[count].WordId == mw.WordId)
@@ -138,10 +179,15 @@ namespace MyDictionary
             {
                 MethodNo(bt);
             }
+            isEnabledButton = false;
         }
 
         private void buttonfive_Click(object sender, RoutedEventArgs e)
         {
+            if (!isEnabledButton)
+            {
+                return;
+            }
             Button bt = sender as Button;
             MyWord mw = bt.DataContext as MyWord;
             if (trenings[count].WordId == mw.WordId)
@@ -152,16 +198,29 @@ namespace MyDictionary
             {
                 MethodNo(bt);
             }
+            isEnabledButton = false;
         }
 
         private void buttonsix_Click(object sender, RoutedEventArgs e)
         {
+            Button bt = sender as Button;
+            if ((string)bt.Content==str)
+            {
+                arrButtons[currentRandowValue].Background = backgroundGreen;
+                buttonsix.Foreground = buttonForegroundBlue;
+                buttonsix.Content = "Далее";
+                buttonsix.FontSize = 24;
+        
+                return;
+            }
+            Next();
+            InitDefault();
 
         }
 
         private void Next()
         {
-            if (++count< trenings.Count)
+            if (++count < trenings.Count)
             {
                 InitValue();
                 InitResurse();
@@ -171,13 +230,47 @@ namespace MyDictionary
 
             }
         }
-        private void MethodYes( Button bt)
+        private void MethodYes(Button bt)
         {
+
+            if (trenings[count].MyExamples.Count > 0)
+            {
+                MyExample ex = trenings[count].MyExamples.First();
+
+                textblockExample.Text = ex.Example;
+                textblockContext.Text = "Контекст:";
+
+            }
             bt.Background = backgroundGreen;
+            border.Background = backgroundGreen;
+            textBlockAnswer.Text = esAnswer;
+            buttonsix.Content = "Далее";
+            buttonsix.FontSize = 24;
+            buttonsix.Foreground = buttonForegroundBlue;
         }
         private void MethodNo(Button bt)
         {
             bt.Background = backgroundRed;
+            arrButtons[currentRandowValue].Background = backgroundGreen;
+            border.Background = backgroundRed;
+            textBlockAnswer.Text = noAnswer;
+            buttonsix.Foreground = buttonForegroundBlue;
+            buttonsix.Content = "Далее";
+            buttonsix.FontSize = 24;
+        }
+        private void InitDefault()
+        {
+            foreach (Button button in arrButtons)
+            {
+                button.Background = backgroundButtonDefault;
+            }
+            buttonsix.FontSize = fontsize;
+            buttonsix.Foreground = buttonForegroundDefault;
+            buttonsix.Content = str;
+            border.Background = backgroundBorderDefault;
+            textblockContext.Text = null;
+            textBlockAnswer.Text = null;
+            textblockExample.Text = null;
         }
     }
 }

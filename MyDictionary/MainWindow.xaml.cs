@@ -106,7 +106,7 @@ namespace MyDictionary
 
         private void buttonBreyShtorm2_Click(object sender, RoutedEventArgs e)
         {
-            ObservableCollection<MyWord> collec_5 = BdTools.ReadWord(5);
+            ObservableCollection<MyWord> collec_5 = BdTools.ReadWord(8);
             ObservableCollection<MyWord> collectionTotal
                 = BdTools.ReadWord();
             //IEnumerable<MyWord> enumer_5 = collec_5.AsEnumerable();

@@ -54,12 +54,12 @@
             <Button x:Name="buttonthree" Grid.Row="2" Grid.Column="1" Margin="10,10,10,0" Click="buttonthree_Click"/>
             <Button x:Name="buttonfour" Grid.Row="3" Grid.Column="1" Margin="10,10,10,0" Click="buttonfour_Click"/>
             <Button x:Name="buttonfive" Grid.Row="4" Grid.Column="1" Margin="10,10,10,0" Click="buttonfive_Click"/>
-            <Button x:Name="buttonsix" Grid.Row="5" Grid.Column="1" Margin="10,10,10,0"/>
+            <Button x:Name="buttonsix" Grid.Row="5" Grid.Column="1" Margin="10,10,10,0" Click="buttonsix_Click"/>
             <Border x:Name="border" Grid.Row="7" Grid.RowSpan="2" Grid.Column="0" Grid.ColumnSpan="2" Background="#FFC2C4E8" BorderBrush="AliceBlue" BorderThickness="1">
-                <TextBlock x:Name="textBlockAnswer"   Text="Правильный ответ!" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="24"/>
+                <TextBlock x:Name="textBlockAnswer"    VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="24"/>
             </Border>
-            <TextBlock x:Name="textblockContext" Grid.Row="4" Grid.Column="0" Text="Контекст:" TextAlignment="Justify" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="20,0"/>
-            <TextBlock x:Name="textblockExample" Grid.Row="5" Grid.RowSpan="1" Grid.Column="0"  Grid.ColumnSpan="1" Text="Контекст:" TextAlignment="Justify" HorizontalAlignment="Left" VerticalAlignment="Center"  TextWrapping="Wrap" Foreground="#FF046A12"  Margin="20,0"/>
+            <TextBlock x:Name="textblockContext" Grid.Row="4" Grid.Column="0"  TextAlignment="Justify" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="20,0" FontSize="16"/>
+            <TextBlock x:Name="textblockExample" Grid.Row="5" Grid.RowSpan="1" Grid.Column="0"  Grid.ColumnSpan="1"   TextAlignment="Justify" HorizontalAlignment="Left" VerticalAlignment="Center"  TextWrapping="Wrap" Foreground="#FF046A12"  Margin="20,0" FontSize="16"/>
         </Grid>
         
          
