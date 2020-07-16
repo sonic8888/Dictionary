@@ -30,6 +30,8 @@ namespace MyDictionary
         string str = "Не знаю ):";
         string esAnswer = "Правильный ответ!";
         string noAnswer = "Не верный ответ!";
+        char arrow = '\u279e';
+        string strFront ;
         Random random;
         int currentRandowValue;
         Brush backgroundButtonDefault;
@@ -62,6 +64,7 @@ namespace MyDictionary
             buttonForegroundBlue = new SolidColorBrush(Colors.Blue);
             fontsize = buttonsix.FontSize;
             buttonForegroundDefault = buttonsix.Foreground;
+            strFront = "Далее ➞";
         }
 
         private void buttonSound_Click(object sender, RoutedEventArgs e)
@@ -208,13 +211,14 @@ namespace MyDictionary
             {
                 arrButtons[currentRandowValue].Background = backgroundGreen;
                 buttonsix.Foreground = buttonForegroundBlue;
-                buttonsix.Content = "Далее";
+                buttonsix.Content = strFront;
                 buttonsix.FontSize = 24;
         
                 return;
             }
             Next();
             InitDefault();
+            isEnabledButton = true;
 
         }
 
@@ -244,9 +248,10 @@ namespace MyDictionary
             bt.Background = backgroundGreen;
             border.Background = backgroundGreen;
             textBlockAnswer.Text = esAnswer;
-            buttonsix.Content = "Далее";
+            buttonsix.Content = strFront;
             buttonsix.FontSize = 24;
             buttonsix.Foreground = buttonForegroundBlue;
+            trenings[count].TrueAnswer++;
         }
         private void MethodNo(Button bt)
         {
@@ -255,7 +260,7 @@ namespace MyDictionary
             border.Background = backgroundRed;
             textBlockAnswer.Text = noAnswer;
             buttonsix.Foreground = buttonForegroundBlue;
-            buttonsix.Content = "Далее";
+            buttonsix.Content = strFront;
             buttonsix.FontSize = 24;
         }
         private void InitDefault()

@@ -18,7 +18,8 @@ namespace MyDictionary.EF
         private string dataLastCall;
         private DateTime dataTimeInsert;
         private DateTime dateTimeLastCall;
-        private int countAnswer;
+        private int trueAnswer;
+       
         [Key]
         public int WordId { get; set; }
         [StringLength(50)]
@@ -103,12 +104,7 @@ namespace MyDictionary.EF
 
         }
 
-        [NotMapped]
-        public int CountAnswer
-        {
-            get { return countAnswer; }
-            set { countAnswer = value; }
-        }
+  
 
         public int CompareTo(object obj)
         {
@@ -128,5 +124,12 @@ namespace MyDictionary.EF
         }
         public override bool Equals(object obj) => Equals(obj as MyWord);
         public override int GetHashCode() => this.WordId;
+        [NotMapped]
+        public int TrueAnswer
+        {
+            get { return trueAnswer; }
+            set { trueAnswer = value; }
+        }
+
     }
 }
