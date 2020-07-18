@@ -122,7 +122,9 @@ namespace MyDictionary.EF
                 return false;
             return this.WordId.Equals(other.WordId);
         }
+
         public override bool Equals(object obj) => Equals(obj as MyWord);
+
         public override int GetHashCode() => this.WordId;
         [NotMapped]
         public int TrueAnswer

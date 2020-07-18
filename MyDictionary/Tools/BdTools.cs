@@ -24,9 +24,9 @@ namespace MyDictionary.Tools
                     context.SaveChanges();
                     return words.WordId;
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
-
+                    MessageBox.Show(e.Message);
                     return 0;
                 }
 
@@ -44,9 +44,9 @@ namespace MyDictionary.Tools
                     context.SaveChanges();
                     return tr.TranslateId;
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
-
+                    MessageBox.Show(e.Message);
                     return 0;
                 }
 
@@ -63,9 +63,9 @@ namespace MyDictionary.Tools
                     context.SaveChanges();
                     return tr.ExampleId;
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
-
+                    MessageBox.Show(e.Message);
                     return 0;
                 }
 
@@ -106,8 +106,9 @@ namespace MyDictionary.Tools
                     }
                     return mw;
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
+                    MessageBox.Show(e.Message);
                     return null;
 
 
@@ -130,9 +131,9 @@ namespace MyDictionary.Tools
                         myWords.Add(c);
                     }
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
-
+                    MessageBox.Show(e.Message);
                     return null;
                 }
                 return myWords;
@@ -153,9 +154,9 @@ namespace MyDictionary.Tools
                         myWords.Add(c);
                     }
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
-
+                    MessageBox.Show(e.Message);
                     return null;
                 }
                 return myWords;
@@ -175,9 +176,9 @@ namespace MyDictionary.Tools
                     context.Entry(mw).Collection(x => x.MyExamples).Load();
                     context.SaveChanges();
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
-
+                    MessageBox.Show(e.Message);
                     return null;
                 }
             }
@@ -194,9 +195,9 @@ namespace MyDictionary.Tools
                     mw.State = state;
                     context.SaveChanges();
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
-
+                    MessageBox.Show(e.Message);
                     return null;
                 }
             }
