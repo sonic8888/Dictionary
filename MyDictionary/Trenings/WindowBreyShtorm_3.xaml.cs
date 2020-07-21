@@ -20,7 +20,7 @@ namespace MyDictionary.Trenings
     public partial class WindowBreyShtorm_3 : Window
     {
         string translate = "завтра";
-        string word = "tomorrow";
+        string word = "tomor";
         List<Button> listButtonsTop = new List<Button>();
         List<Button> listButtonsBottom = new List<Button>();
         double widthButton = 50;

@@ -53,9 +53,9 @@
             </Grid.ColumnDefinitions>
             <TextBlock x:Name="textBlockWord" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="9" VerticalAlignment="Top" HorizontalAlignment="Center" Text="wertyufgertud" FontSize="24" />
             <WrapPanel Name="wrapPanelTop" Orientation="Horizontal" Grid.Row="2" Grid.Column="1" Grid.RowSpan="2" 
-                      Grid.ColumnSpan="9"/>
+                      Grid.ColumnSpan="9" HorizontalAlignment="Center"/>
             <WrapPanel Name="wrapPanelBottom" Orientation="Horizontal" Grid.Row="5"  Grid.Column="1" Grid.RowSpan="2"
-                       Grid.ColumnSpan="9"/>
+                       Grid.ColumnSpan="9" HorizontalAlignment="Center"/>
             <Button x:Name="button" Content="нажми меня" Grid.Row="10" Grid.Column="10" Click="button_Click"/>
         </Grid>
 
