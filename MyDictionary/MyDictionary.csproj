@@ -109,13 +109,16 @@
     <Compile Include="TotalDictionary.xaml.cs">
       <DependentUpon>TotalDictionary.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Trenings\WindowBreyShtorm_3.xaml.cs">
+      <DependentUpon>WindowBreyShtorm_3.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WindowAddTranslation.xaml.cs">
       <DependentUpon>WindowAddTranslation.xaml</DependentUpon>
     </Compile>
-    <Compile Include="WindowBreyShtorm.xaml.cs">
+    <Compile Include="Trenings\WindowBreyShtorm.xaml.cs">
       <DependentUpon>WindowBreyShtorm.xaml</DependentUpon>
     </Compile>
-    <Compile Include="WindowBreyShtorm_2.xaml.cs">
+    <Compile Include="Trenings\WindowBreyShtorm_2.xaml.cs">
       <DependentUpon>WindowBreyShtorm_2.xaml</DependentUpon>
     </Compile>
     <Compile Include="WindowStateChose.xaml.cs">
@@ -144,15 +147,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Trenings\WindowBreyShtorm_3.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="WindowAddTranslation.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="WindowBreyShtorm.xaml">
+    <Page Include="Trenings\WindowBreyShtorm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="WindowBreyShtorm_2.xaml">
+    <Page Include="Trenings\WindowBreyShtorm_2.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

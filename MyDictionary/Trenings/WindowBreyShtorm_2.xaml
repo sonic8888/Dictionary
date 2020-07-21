@@ -46,7 +46,7 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <Button x:Name="buttonSound" Grid.Row="0" Grid.Column="0"  Margin="0,0,245,0" Background="{x:Null}" Foreground="{x:Null}" BorderThickness="0" DataContext="{Binding SoundName}" Click="buttonSound_Click">
-                <Image Source="Picture/icons8-динамик-48.png" Width=" 50" Height="50"/>
+                <Image Source="/MyDictionary;component/Picture/icons8-динамик-48.png" Width=" 50" Height="50"/>
             </Button>
             <TextBlock x:Name="textblockWord" Grid.Row="1" Grid.Column="0"  Text="buttonthree" VerticalAlignment="Center"  TextAlignment="Left" FontSize="30" Foreground="#FF0A1900" Margin="20,0"/>
             <Button x:Name="buttonOne" Grid.Row="0" Grid.Column="1" Margin="10,10,10,0" Content="buttonfour" Click="buttonOne_Click"   />

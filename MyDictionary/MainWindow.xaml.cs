@@ -17,6 +17,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Threading;
 using XMLRead;
+using MyDictionary.Trenings;
 
 namespace MyDictionary
 {
@@ -127,6 +128,12 @@ namespace MyDictionary
                     App.dataVariable.CountSelectWord = value;
                 }
             }
+        }
+
+        private void buttonBreyShtorm3_Click(object sender, RoutedEventArgs e)
+        {
+            WindowBreyShtorm_3 wb3 = new WindowBreyShtorm_3();
+            wb3.Show();
         }
     }
 }

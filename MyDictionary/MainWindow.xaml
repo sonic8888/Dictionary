@@ -49,6 +49,7 @@
         <Button Click="clickNewWord" Grid.Row="2" Grid.Column="0">HewWord</Button>
         <Button x:Name="buttonDictionary" Click="buttonDictionary_Click" Grid.Row="2" Grid.Column="2">TotalDictionary</Button>
         <Button x:Name="buttonBreyShtorm" Grid.Row="2" Grid.Column="4" Content="BreyShtorm" Click="buttonBreyShtorm_Click"/>
-        <Button x:Name="buttonBreyShtorm2" Grid.Row="2" Grid.Column="6" Content="BreyShtorm" Click="buttonBreyShtorm2_Click"/>
+        <Button x:Name="buttonBreyShtorm2" Grid.Row="2" Grid.Column="6" Content="BreyShtorm2" Click="buttonBreyShtorm2_Click"/>
+        <Button x:Name="buttonBreyShtorm3" Grid.Row="4" Grid.Column="6" Content="BreyShtorm3" Click="buttonBreyShtorm3_Click"/>
     </Grid>
 </Window>
