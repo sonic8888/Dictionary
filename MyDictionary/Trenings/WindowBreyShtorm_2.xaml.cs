@@ -54,7 +54,7 @@ namespace MyDictionary
             arrButtons.Add(buttonfour);
             arrButtons.Add(buttonfive);
             isEnabledButton = true;
-            random = new Random();
+            random = App.random; ;
             InitValue();
             InitResurse();
             backgroundButtonDefault = buttonsix.Background;

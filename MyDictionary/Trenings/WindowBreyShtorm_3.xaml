@@ -8,20 +8,36 @@
         Title="WindowBreyShtorm_3" Height="600" Width="800" Background="#FFE8DCDC" Loaded="Window_Loaded">
     <Window.Resources>
         <ControlTemplate x:Key="templateButtonTop" TargetType="{x:Type Button}">
-            <Border x:Name="borderButtonTop" BorderBrush="#FFB8BAE2" BorderThickness="1" Background="#FFB8BAE2" CornerRadius="5" TextBlock.Foreground="#FFB8BAE2" TextBlock.FontSize="20">
+            <Border x:Name="borderButtonTop" BorderBrush="#FFB8BAE2" BorderThickness="2" Background="#FFB8BAE2" CornerRadius="5" TextBlock.Foreground="#FFB8BAE2" TextBlock.FontSize="20">
                 <ContentPresenter RecognizesAccessKey="True" Margin="{TemplateBinding Padding}"></ContentPresenter>
             </Border>
         </ControlTemplate>
         <ControlTemplate x:Key="templateButtonBottom" TargetType="{x:Type Button}">
-            <Border x:Name="borderButtonBottom" BorderBrush="#FF1D9D0F" BorderThickness="1" Background="#FF1D9D0F" CornerRadius="5" TextBlock.Foreground="White" TextBlock.FontSize="24">
+            <Border x:Name="borderButtonBottom" BorderBrush="#FF0F2DEA" BorderThickness="2" Background="#FF0F2DEA" CornerRadius="5" TextBlock.Foreground="White" TextBlock.FontSize="24">
                 <ContentPresenter RecognizesAccessKey="True"  Margin="{TemplateBinding Padding}" ></ContentPresenter>
             </Border>
             <ControlTemplate.Triggers>
                 <Trigger Property="IsMouseOver" Value="true">
-                    <Setter TargetName="borderButtonBottom" Property="Background" Value="DarkGreen"/>
+                    <Setter TargetName="borderButtonBottom" Property="Background" Value="#FF1212F7"/>
+                    <Setter TargetName="borderButtonBottom" Property="BorderBrush" Value="#FF1212F7"/>
                     <Setter TargetName="borderButtonBottom" Property="Cursor" Value="Hand"/>
                 </Trigger>
+                <EventTrigger RoutedEvent="Button.Click">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation  Storyboard.TargetName="borderButtonBottom" 
+                                             Storyboard.TargetProperty="Background.Color"
+                                             To="Red" Duration="0:0:0.1" AutoReverse ="True"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+
             </ControlTemplate.Triggers>
+        </ControlTemplate>
+        <ControlTemplate x:Key="buttonTemplateGreen"  TargetType="{x:Type Button}">
+            <Border x:Name="borderButtonGreen" BorderBrush="#FF00C11A" BorderThickness="2" Background="#FF00C11A" CornerRadius="5" TextBlock.Foreground="White" TextBlock.FontSize="20">
+                <ContentPresenter RecognizesAccessKey="True" Margin="{TemplateBinding Padding}"></ContentPresenter>
+            </Border>
         </ControlTemplate>
     </Window.Resources>
     <Grid Background="#FFD3CCF1">
@@ -56,7 +72,7 @@
                       Grid.ColumnSpan="9" HorizontalAlignment="Center"/>
             <WrapPanel Name="wrapPanelBottom" Orientation="Horizontal" Grid.Row="5"  Grid.Column="1" Grid.RowSpan="2"
                        Grid.ColumnSpan="9" HorizontalAlignment="Center"/>
-            <Button x:Name="button" Content="нажми меня" Grid.Row="10" Grid.Column="10" Click="button_Click"/>
+            <Label Name="labelcolor" Grid.Row="9" Grid.Column="10" Content="label" Background="Blue"/>
         </Grid>
 
     </Grid>

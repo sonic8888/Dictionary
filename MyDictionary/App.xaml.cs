@@ -16,6 +16,7 @@ namespace MyDictionary
     public partial class App : Application
     {
         public static DataVariable dataVariable;
+        public static Random random;
         private void Application_Startup(object sender, StartupEventArgs e)
         {
             if (!Directory.Exists(FIleTools.NameDirectoryStorage))
@@ -27,6 +28,7 @@ namespace MyDictionary
                 Directory.CreateDirectory(FIleTools.NameDirectoryAudio);
             }
             dataVariable = new DataVariable();
+            random = new Random();
         }
 
         private void Application_Exit(object sender, ExitEventArgs e)
