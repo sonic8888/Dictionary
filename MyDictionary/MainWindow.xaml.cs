@@ -87,8 +87,14 @@ namespace MyDictionary
 
         private void buttonBreyShtorm_Click(object sender, RoutedEventArgs e)
         {
-            ObservableCollection<MyWord> coll = BdTools.SelecWhereState(State.New);
-            WindowBreyShtorm wbs = new WindowBreyShtorm(coll);
+
+            ObservableCollection<MyWord> collLearn = BdTools.SelecWhereState(State.Learn);
+            ObservableCollection<MyWord> collNew = BdTools.SelecWhereState(State.New);
+            foreach (MyWord m in collNew)
+            {
+                collLearn.Add(m);
+            }
+            WindowBreyShtorm wbs = new WindowBreyShtorm(collLearn);
             wbs.Show();
         }
 

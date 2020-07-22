@@ -66,17 +66,31 @@ namespace MyDictionary
             }
             else
             {
-                ObservableCollection<MyWord> trening = BdTools.ReadWord(App.dataVariable.CountSelectWord) ;
-                IEnumerable<MyWord> enumerable = trening.Except(wordsTrenings);
-            
-
-
+                ObservableCollection<MyWord> total_50 = BdTools.ReadWord(App.dataVariable.CountSelectWord);
+                IEnumerable<MyWord> resurse = total_50.Except(wordsTrenings);
+                WindowBreyShtorm_2 wb2 = new WindowBreyShtorm_2(wordsTrenings.ToList(), resurse.ToList());
+                wb2.Show();
+                this.Close();
             }
         }
 
         private void buttonKnow_Click(object sender, RoutedEventArgs e)
         {
-            BdTools.UpdateStateMyWord(words[count++], State.Know);
+            if (++count < words.Count)
+            {
+                BdTools.UpdateStateMyWord(words[count], State.Know);
+
+                InitDbContext(words[count]);
+
+            }
+            else
+            {
+                MessageBox.Show("Нет новых слов");
+                this.Close();
+            }
+
+
+
         }
     }
 }

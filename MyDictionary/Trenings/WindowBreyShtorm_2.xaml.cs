@@ -1,4 +1,5 @@
 ﻿using MyDictionary.EF;
+using MyDictionary.Trenings;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -30,7 +31,6 @@ namespace MyDictionary
         string str = "Не знаю ):";
         string esAnswer = "Правильный ответ!";
         string noAnswer = "Не верный ответ!";
-        char arrow = '\u279e';
         string strFront ;
         Random random;
         int currentRandowValue;
@@ -231,7 +231,7 @@ namespace MyDictionary
             }
             else
             {
-
+                GreateWindowBreyShtorm3();
             }
         }
         private void MethodYes(Button bt)
@@ -276,6 +276,12 @@ namespace MyDictionary
             textblockContext.Text = null;
             textBlockAnswer.Text = null;
             textblockExample.Text = null;
+        }
+        private void GreateWindowBreyShtorm3()
+        {
+            WindowBreyShtorm_3 bs3 = new WindowBreyShtorm_3(trenings);
+            bs3.Show();
+            this.Close();
         }
     }
 }
