@@ -1,6 +1,7 @@
 ﻿using MyDictionary.EF;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using XMLRead;
 
 namespace MyDictionary.Trenings
 {
@@ -44,6 +46,8 @@ namespace MyDictionary.Trenings
         private int countAnswerTrue = 0;
         Random random;
         MyWord curentMyWord;
+        Brush backgroundButtonNextDefault;
+        Brush backgroundButtonNextColor;
         public WindowBreyShtorm_3(List<MyWord> words)
         {
             myWords = words;
@@ -51,6 +55,8 @@ namespace MyDictionary.Trenings
             random = App.random;
             strFront = "Далее ➞";
             strDef = "Не знаю ):";
+            backgroundButtonNextDefault = buttonNext.Background;
+            backgroundButtonNextColor = Brushes.LightCyan;
             Init();
         }
         private void Init()
@@ -62,6 +68,7 @@ namespace MyDictionary.Trenings
             AddButtons(str);
             textBlockWord.Text = translate;
             buttonNext.Content = strDef;
+            buttonNext.Background = backgroundButtonNextDefault;
         }
         private void AddButtons(string word)
         {
@@ -133,7 +140,21 @@ namespace MyDictionary.Trenings
             }
             else
             {
+                //успешное завершние слова
+                if (myWords[currentWord].MyExamples.Count > 0)
+                {
+                    textblockexample.Text = myWords[currentWord].MyExamples.First().Example.Replace("--", " – ");
+
+                }
+                FileInfo fi = FIleTools.SearchFile(myWords[currentWord].SoundName, FIleTools.NameDirectoryAudio);
+                if (fi != null)
+                {
+                    PlaySound(fi);
+
+                }
                 buttonNext.Content = strFront;
+                buttonNext.Background = backgroundButtonNextColor;
+                imageWord.Visibility = Visibility.Visible;
             }
 
         }
@@ -156,14 +177,18 @@ namespace MyDictionary.Trenings
         }
         private string Mix(string word)
         {
-            List<char> lists = word.ToList();
-            string mix = "";
-            for (int i = lists.Count - 1; i >= 0; i--)
+            string mix;
+            do
             {
-                char ch = lists[random.Next(i)];
-                mix += ch;
-                lists.Remove(ch);
-            }
+                mix = null;
+                List<char> lists = word.ToList();
+                for (int i = lists.Count - 1; i >= 0; i--)
+                {
+                    char ch = lists[random.Next(i)];
+                    mix += ch;
+                    lists.Remove(ch);
+                }
+            } while (mix == word);
             return mix;
         }
         private void PaintGreen(Button bt)
@@ -173,13 +198,15 @@ namespace MyDictionary.Trenings
 
         private void Finish()
         {
-            if (countAnswerTrue== wordTrue.Length)
+            if (countAnswerTrue == wordTrue.Length)
             {
                 myWords[currentWord].TrueAnswer++;
             }
             currentLitter = 0;
             RemoveButtons();
             currentWord++;
+            imageWord.Visibility = Visibility.Hidden;
+            textblockexample.Text = "";
             Init();
         }
 
@@ -195,6 +222,12 @@ namespace MyDictionary.Trenings
                 MessageBox.Show("Новое окно");
                 /// следующее окно
             }
+        }
+        private void PlaySound(FileInfo sound)
+        {
+            MediaPlayer mediaPlayer = new MediaPlayer();
+            mediaPlayer.Open(new Uri(sound.FullName));
+            mediaPlayer.Play();
         }
     }
 }
