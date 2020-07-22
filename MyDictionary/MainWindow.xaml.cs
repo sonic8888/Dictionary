@@ -94,6 +94,7 @@ namespace MyDictionary
             {
                 collLearn.Add(m);
             }
+            //ObservableCollection<MyWord> collLearn = BdTools.ReadWord(3);
             WindowBreyShtorm wbs = new WindowBreyShtorm(collLearn);
             wbs.Show();
         }

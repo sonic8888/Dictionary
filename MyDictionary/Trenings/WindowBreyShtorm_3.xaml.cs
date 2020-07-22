@@ -41,6 +41,7 @@ namespace MyDictionary.Trenings
         private int currentWord = 0;
         private string strFront;
         private string strDef;
+        private int countAnswerTrue = 0;
         Random random;
         MyWord curentMyWord;
         public WindowBreyShtorm_3(List<MyWord> words)
@@ -123,6 +124,7 @@ namespace MyDictionary.Trenings
         {
             PaintGreen(buttontarget);
             buttonSender.Visibility = Visibility.Hidden;
+            countAnswerTrue++;
             if (currentLitter < wordTrue.Length - 1)
             {
                 currentLitter++;
@@ -171,6 +173,10 @@ namespace MyDictionary.Trenings
 
         private void Finish()
         {
+            if (countAnswerTrue== wordTrue.Length)
+            {
+                myWords[currentWord].TrueAnswer++;
+            }
             currentLitter = 0;
             RemoveButtons();
             currentWord++;

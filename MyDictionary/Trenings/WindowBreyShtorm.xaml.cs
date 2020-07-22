@@ -85,8 +85,20 @@ namespace MyDictionary
             }
             else
             {
-                MessageBox.Show("Нет новых слов");
-                this.Close();
+                if (wordsTrenings.Count != 0)
+                {
+                    ObservableCollection<MyWord> total_50 = BdTools.ReadWord(App.dataVariable.CountSelectWord);
+                    IEnumerable<MyWord> resurse = total_50.Except(wordsTrenings);
+                    WindowBreyShtorm_2 wb2 = new WindowBreyShtorm_2(wordsTrenings.ToList(), resurse.ToList());
+                    wb2.Show();
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("Нет новых слов");
+                    this.Close();
+
+                }
             }
 
 
