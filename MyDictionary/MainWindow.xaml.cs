@@ -132,7 +132,9 @@ namespace MyDictionary
 
         private void buttonBreyShtorm3_Click(object sender, RoutedEventArgs e)
         {
-            WindowBreyShtorm_3 wb3 = new WindowBreyShtorm_3();
+            ObservableCollection<MyWord> collec_5 = BdTools.ReadWord(3);
+            
+             WindowBreyShtorm_3 wb3 = new WindowBreyShtorm_3(collec_5.ToList());
             wb3.Show();
         }
     }

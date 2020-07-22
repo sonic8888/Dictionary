@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MyDictionary.EF;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,6 +21,7 @@ namespace MyDictionary.Trenings
     /// </summary>
     public partial class WindowBreyShtorm_3 : Window
     {
+        List<MyWord> myWords;
         string translate = "завтра";
         string wordTrue = "tomorrow";
         List<Button> listButtonsTop = new List<Button>();
@@ -36,18 +38,29 @@ namespace MyDictionary.Trenings
         double pappingButtonRight = 5;
         double pappingButtonBottom = 5;
         private int currentLitter = 0;
+        private int currentWord = 0;
+        private string strFront;
+        private string strDef;
         Random random;
-        public WindowBreyShtorm_3()
+        MyWord curentMyWord;
+        public WindowBreyShtorm_3(List<MyWord> words)
         {
+            myWords = words;
             InitializeComponent();
-            wordTrue = wordTrue.ToUpper();
-            translate = translate.ToUpper();
             random = App.random;
-            textBlockWord.Text = translate;
+            strFront = "Далее ➞";
+            strDef = "Не знаю ):";
+            Init();
+        }
+        private void Init()
+        {
+            curentMyWord = myWords[currentWord];
+            wordTrue = curentMyWord.Word.ToUpper();
+            translate = curentMyWord.MyTranslates.First().Translate;
             string str = Mix(wordTrue);
             AddButtons(str);
-
-
+            textBlockWord.Text = translate;
+            buttonNext.Content = strDef;
         }
         private void AddButtons(string word)
         {
@@ -69,6 +82,13 @@ namespace MyDictionary.Trenings
                 wrapPanelBottom.Children.Add(bt);
             }
 
+        }
+        private void RemoveButtons()
+        {
+            listButtonsTop.Clear();
+            listButtonsBottom.Clear();
+            wrapPanelTop.Children.Clear();
+            wrapPanelBottom.Children.Clear();
         }
 
         private Button CreateButton(string nameControleTemplate)
@@ -92,15 +112,33 @@ namespace MyDictionary.Trenings
             char contentTarget = (char)buttontarget.Content;
             if (contentSender == contentTarget)
             {
-                PaintGreen(buttontarget);
-                buttonSender.Visibility = Visibility.Hidden;
+                LitterTrue(buttontarget, buttonSender);
             }
             else
             {
-                ControlTemplate template = buttonSender.Template;
-                Border border = (Border)template.FindName("borderButtonBottom", buttonSender);
-                Animation(border);
+                LitterFalse(buttonSender);
             }
+        }
+        private void LitterTrue(Button buttontarget, Button buttonSender)
+        {
+            PaintGreen(buttontarget);
+            buttonSender.Visibility = Visibility.Hidden;
+            if (currentLitter < wordTrue.Length - 1)
+            {
+                currentLitter++;
+
+                ColorBorderBrush();
+            }
+            else
+            {
+                buttonNext.Content = strFront;
+            }
+
+        }
+        private void LitterFalse(Button buttonSender)
+        {
+
+
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -130,19 +168,27 @@ namespace MyDictionary.Trenings
         {
             bt.Template = (ControlTemplate)this.FindResource("buttonTemplateGreen");
         }
-        private void Animation(Border lab)
-        {
-            ColorAnimation ca = new ColorAnimation();
-            SolidColorBrush background = (SolidColorBrush)lab.Background;
-            ca.From = background.Color;
-            ca.To = Colors.Red;
-            ca.Duration = TimeSpan.FromSeconds(1);
-            Storyboard.SetTargetName(lab, "borderButtonBottom");
-            Storyboard.SetTargetProperty(ca, new PropertyPath(SolidColorBrush.ColorProperty));
-            Storyboard storyboard = new Storyboard();
-            
 
+        private void Finish()
+        {
+            currentLitter = 0;
+            RemoveButtons();
+            currentWord++;
+            Init();
         }
 
+        private void buttonNext_Click(object sender, RoutedEventArgs e)
+        {
+            if (currentWord < myWords.Count - 1)
+            {
+                Finish();
+
+            }
+            else
+            {
+                MessageBox.Show("Новое окно");
+                /// следующее окно
+            }
+        }
     }
 }
