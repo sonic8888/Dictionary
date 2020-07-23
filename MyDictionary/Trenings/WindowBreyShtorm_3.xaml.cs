@@ -1,4 +1,5 @@
 ﻿using MyDictionary.EF;
+using MyDictionary.Tools;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -143,7 +144,7 @@ namespace MyDictionary.Trenings
                 //успешное завершние слова
                 if (myWords[currentWord].MyExamples.Count > 0)
                 {
-                    textblockexample.Text = myWords[currentWord].MyExamples.First().Example.Replace("--", " – ");
+                    textblockexample.Text = MyTools.ExampleSpace(myWords[currentWord].MyExamples.First().Example);
 
                 }
                 FileInfo fi = FIleTools.SearchFile(myWords[currentWord].SoundName, FIleTools.NameDirectoryAudio);
@@ -221,6 +222,9 @@ namespace MyDictionary.Trenings
             {
                 MessageBox.Show("Новое окно");
                 /// следующее окно
+                WindowBreyShtorm_4 wb4 = new WindowBreyShtorm_4(myWords);
+                wb4.Show();
+                this.Close();
             }
         }
         private void PlaySound(FileInfo sound)

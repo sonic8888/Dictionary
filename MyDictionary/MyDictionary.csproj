@@ -98,6 +98,7 @@
     <Compile Include="Converters\DataConverter.cs" />
     <Compile Include="Converters\StateConverter.cs" />
     <Compile Include="Converters\StateInStringConverter.cs" />
+    <Compile Include="Converters\TranscriptionConverter.cs" />
     <Compile Include="Converters\WidthConverterMultiplication.cs" />
     <Compile Include="Converters\WidthConverterSummation.cs" />
     <Compile Include="DataVariable.cs" />
@@ -106,6 +107,7 @@
     <Compile Include="EF\MyTranslate.cs" />
     <Compile Include="EF\MyWord.cs" />
     <Compile Include="Tools\BdTools.cs" />
+    <Compile Include="Tools\MyTools.cs" />
     <Compile Include="TotalDictionary.xaml.cs">
       <DependentUpon>TotalDictionary.xaml</DependentUpon>
     </Compile>
