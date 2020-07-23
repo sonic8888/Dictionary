@@ -112,6 +112,9 @@
     <Compile Include="Trenings\WindowBreyShtorm_3.xaml.cs">
       <DependentUpon>WindowBreyShtorm_3.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Trenings\WindowBreyShtorm_4.xaml.cs">
+      <DependentUpon>WindowBreyShtorm_4.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WindowAddTranslation.xaml.cs">
       <DependentUpon>WindowAddTranslation.xaml</DependentUpon>
     </Compile>
@@ -148,6 +151,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Trenings\WindowBreyShtorm_3.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Trenings\WindowBreyShtorm_4.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

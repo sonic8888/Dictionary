@@ -140,9 +140,16 @@ namespace MyDictionary
         private void buttonBreyShtorm3_Click(object sender, RoutedEventArgs e)
         {
             ObservableCollection<MyWord> collec_5 = BdTools.ReadWord(7);
-            
-             WindowBreyShtorm_3 wb3 = new WindowBreyShtorm_3(collec_5.ToList());
+
+            WindowBreyShtorm_3 wb3 = new WindowBreyShtorm_3(collec_5.ToList());
             wb3.Show();
+        }
+
+        private void buttonBreyShtorm4_Click(object sender, RoutedEventArgs e)
+        {
+            ObservableCollection<MyWord> collec_5 = BdTools.ReadWord(5);
+            WindowBreyShtorm_4 wb4 = new WindowBreyShtorm_4(collec_5.ToList());
+            wb4.Show();
         }
     }
 }
