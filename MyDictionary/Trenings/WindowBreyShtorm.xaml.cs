@@ -68,8 +68,9 @@ namespace MyDictionary
             {
                 ObservableCollection<MyWord> total_50 = BdTools.ReadWord(App.dataVariable.CountSelectWord);
                 IEnumerable<MyWord> resurse = total_50.Except(wordsTrenings);
-                WindowBreyShtorm_2 wb2 = new WindowBreyShtorm_2(wordsTrenings.ToList(), resurse.ToList());
-                wb2.Show();
+                //WindowBreyShtorm_2 wb2 = new WindowBreyShtorm_2(wordsTrenings.ToList(), resurse.ToList());
+                //wb2.Show();
+                WindowsManager.GreateWindowBreyShtorm_2(wordsTrenings.ToList(), resurse.ToList());
                 this.Close();
             }
         }

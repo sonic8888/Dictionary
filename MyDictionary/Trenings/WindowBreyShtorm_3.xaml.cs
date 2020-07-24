@@ -220,10 +220,11 @@ namespace MyDictionary.Trenings
             }
             else
             {
-                MessageBox.Show("Новое окно");
+                //MessageBox.Show("Новое окно");
                 /// следующее окно
-                WindowBreyShtorm_4 wb4 = new WindowBreyShtorm_4(myWords);
-                wb4.Show();
+                //WindowBreyShtorm_4 wb4 = new WindowBreyShtorm_4(myWords);
+                //wb4.Show();
+                WindowsManager.CreateWindowBreyShtorm_4(myWords);
                 this.Close();
             }
         }

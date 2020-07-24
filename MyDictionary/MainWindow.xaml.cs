@@ -58,12 +58,17 @@ namespace MyDictionary
         private void buttonDictionary_Click(object sender, RoutedEventArgs e)
         {
 
-            while (thread.IsAlive)
+            //while (thread.IsAlive)
+            //{
+            //    Thread.Sleep(50);
+            //}
+            //TotalDictionary td = new TotalDictionary(collection);
+            //td.Show();
+            while (App.thread.IsAlive)
             {
                 Thread.Sleep(50);
             }
-            TotalDictionary td = new TotalDictionary(collection, this);
-            td.Show();
+            WindowsManager.CreateTotalDictionary();
         }
         private void ReadDictionary()
         {
@@ -88,15 +93,16 @@ namespace MyDictionary
         private void buttonBreyShtorm_Click(object sender, RoutedEventArgs e)
         {
 
-            ObservableCollection<MyWord> collLearn = BdTools.SelecWhereState(State.Learn);
-            ObservableCollection<MyWord> collNew = BdTools.SelecWhereState(State.New);
-            foreach (MyWord m in collNew)
-            {
-                collLearn.Add(m);
-            }
-            //ObservableCollection<MyWord> collLearn = BdTools.ReadWord(3);
-            WindowBreyShtorm wbs = new WindowBreyShtorm(collLearn);
-            wbs.Show();
+            //ObservableCollection<MyWord> collLearn = BdTools.SelecWhereState(State.Learn);
+            //ObservableCollection<MyWord> collNew = BdTools.SelecWhereState(State.New);
+            //foreach (MyWord m in collNew)
+            //{
+            //    collLearn.Add(m);
+            //}
+            ////ObservableCollection<MyWord> collLearn = BdTools.ReadWord(3);
+            //WindowBreyShtorm wbs = new WindowBreyShtorm(collLearn);
+            //wbs.Show();
+            WindowsManager.CreateWindowBreyShtorm();
         }
 
         private void textboxCountWord_PreviewKeyDown(object sender, KeyEventArgs e)
@@ -119,8 +125,9 @@ namespace MyDictionary
                 = BdTools.ReadWord();
             //IEnumerable<MyWord> enumer_5 = collec_5.AsEnumerable();
             IEnumerable<MyWord> enumerable = collectionTotal.Except(collec_5);
-            WindowBreyShtorm_2 w2 = new WindowBreyShtorm_2(collec_5.ToList(), enumerable.ToList());
-            w2.Show();
+            //WindowBreyShtorm_2 w2 = new WindowBreyShtorm_2(collec_5.ToList(), enumerable.ToList());
+            //w2.Show();
+            WindowsManager.GreateWindowBreyShtorm_2(collec_5.ToList(), enumerable.ToList());
 
         }
 
@@ -141,15 +148,17 @@ namespace MyDictionary
         {
             ObservableCollection<MyWord> collec_5 = BdTools.ReadWord(7);
 
-            WindowBreyShtorm_3 wb3 = new WindowBreyShtorm_3(collec_5.ToList());
-            wb3.Show();
+            //WindowBreyShtorm_3 wb3 = new WindowBreyShtorm_3(collec_5.ToList());
+            //wb3.Show();
+            WindowsManager.CreateWindowBreyShtorm_3(collec_5.ToList());
         }
 
         private void buttonBreyShtorm4_Click(object sender, RoutedEventArgs e)
         {
             ObservableCollection<MyWord> collec_5 = BdTools.ReadWord(5);
-            WindowBreyShtorm_4 wb4 = new WindowBreyShtorm_4(collec_5.ToList());
-            wb4.Show();
+            //WindowBreyShtorm_4 wb4 = new WindowBreyShtorm_4(collec_5.ToList());
+            //wb4.Show();
+            WindowsManager.CreateWindowBreyShtorm_4(collec_5.ToList());
         }
     }
 }

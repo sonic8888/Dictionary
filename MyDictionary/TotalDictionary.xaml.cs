@@ -29,7 +29,7 @@ namespace MyDictionary
     {
         ObservableCollection<MyWord> collection;
         List<int> collDelete;
-        MainWindow window;
+        //MainWindow window;
         Thread thread;
         string messageQuestion = "Вы хотите удалить выделеные слова?";
         string messageWarning = "Внимание!";
@@ -38,7 +38,7 @@ namespace MyDictionary
         string pathGreen = @"Picture/Cub_green.png";
         string pathGold = @"Picture/Cub_Gold.png";
         private bool IsOrder = true;
-        public TotalDictionary(ObservableCollection<MyWord> col, MainWindow win)
+        public TotalDictionary(ObservableCollection<MyWord> col)
         {
             InitializeComponent();
 
@@ -49,7 +49,7 @@ namespace MyDictionary
 
 
 
-            window = win;
+            //window = win;
         }
         public int StateWord { get; set; }
 
@@ -104,12 +104,12 @@ namespace MyDictionary
 
         private void buttonReffresh_Click(object sender, RoutedEventArgs e)
         {
-            StartNewThread();
+            Thread thread = App.StartNewThread();
             while (thread.IsAlive)
             {
                 Thread.Sleep(50);
             }
-            listViewDictionary.ItemsSource = collection;
+            listViewDictionary.ItemsSource = App.collection;
         }
         private void ReadDictionary()
         {
@@ -288,7 +288,7 @@ namespace MyDictionary
             listViewDictionary.ItemsSource = new ObservableCollection<MyWord>(en);
         }
 
-      
+
 
         private void buttonState_PreviewMouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
@@ -296,11 +296,11 @@ namespace MyDictionary
             int wordid = (int)bt.DataContext;
             MyWord mw = BdTools.FindMyWord(wordid);
             WindowWordEdit wwe = new WindowWordEdit(mw);
-            if (wwe.ShowDialog()==true)
+            if (wwe.ShowDialog() == true)
             {
 
             }
-           
+
         }
     }
 }

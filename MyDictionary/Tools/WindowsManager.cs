@@ -1,0 +1,59 @@
+﻿using MyDictionary.EF;
+using MyDictionary.Trenings;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace MyDictionary.Tools
+{
+    public static class WindowsManager
+    {
+        public static ChoseWords CreateChoseWords()
+        {
+            ChoseWords chw = new ChoseWords();
+            chw.Show();
+            return chw;
+        }
+        public static TotalDictionary CreateTotalDictionary()
+        {
+            TotalDictionary td = new TotalDictionary(App.collection);
+            td.Show();
+            return td;
+        }
+        public static WindowBreyShtorm CreateWindowBreyShtorm()
+        {
+            ObservableCollection<MyWord> collLearn = BdTools.SelecWhereState(State.Learn);
+            ObservableCollection<MyWord> collNew = BdTools.SelecWhereState(State.New);
+            foreach (MyWord m in collNew)
+            {
+                collLearn.Add(m);
+            }
+
+            WindowBreyShtorm wbs = new WindowBreyShtorm(collLearn);
+            wbs.Show();
+            return wbs;
+        }
+        public static WindowBreyShtorm_2 GreateWindowBreyShtorm_2(List<MyWord> trenings, List<MyWord> resurse)
+        {
+            WindowBreyShtorm_2 wb2 = new WindowBreyShtorm_2(trenings, resurse);
+            wb2.Show();
+            return wb2;
+        }
+        public static WindowBreyShtorm_3 CreateWindowBreyShtorm_3(List<MyWord> words)
+        {
+            WindowBreyShtorm_3 wb3 = new WindowBreyShtorm_3(words);
+            wb3.Show();
+            return wb3;
+        }
+        public static WindowBreyShtorm_4 CreateWindowBreyShtorm_4(List<MyWord> words)
+        {
+            WindowBreyShtorm_4 wb4 = new WindowBreyShtorm_4(words);
+            wb4.Show();
+            return wb4;
+        }
+     
+}
+}

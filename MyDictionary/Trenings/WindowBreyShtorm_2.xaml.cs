@@ -1,4 +1,5 @@
 ﻿using MyDictionary.EF;
+using MyDictionary.Tools;
 using MyDictionary.Trenings;
 using System;
 using System.Collections.Generic;
@@ -279,8 +280,9 @@ namespace MyDictionary
         }
         private void GreateWindowBreyShtorm3()
         {
-            WindowBreyShtorm_3 bs3 = new WindowBreyShtorm_3(trenings);
-            bs3.Show();
+            //WindowBreyShtorm_3 bs3 = new WindowBreyShtorm_3(trenings);
+            //bs3.Show();
+            WindowsManager.CreateWindowBreyShtorm_3(trenings);
             this.Close();
         }
     }

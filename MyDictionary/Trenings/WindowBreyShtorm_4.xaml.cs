@@ -154,6 +154,7 @@ namespace MyDictionary.Trenings
             else
             {
                 //завершение и подведение итога
+                FinishAndChageState();
             }
         }
 
@@ -163,6 +164,17 @@ namespace MyDictionary.Trenings
             {
                 NextWord();
             }
+        }
+        private void FinishAndChageState()
+        {
+            //string str = "";
+            //foreach (MyWord item in myWords)
+            //{
+            //    str += item.Word+" true =";
+            //    str += item.TrueAnswer + "\n";
+            //}
+            //MessageBox.Show(str);
+            this.Close();
         }
     }
 }
