@@ -160,5 +160,16 @@ namespace MyDictionary
             //wb4.Show();
             WindowsManager.CreateWindowBreyShtorm_4(collec_5.ToList());
         }
+
+        private void buttonBreyShtormResult_Click(object sender, RoutedEventArgs e)
+        {
+            ObservableCollection<MyWord> collec_5 = BdTools.ReadWord(5);
+            foreach (MyWord item in collec_5)
+            {
+                item.TrueAnswer = App.random.Next(4);
+            }
+            WindowBreyShtormResult wbr = new WindowBreyShtormResult(collec_5.ToList());
+            wbr.Show();
+        }
     }
 }

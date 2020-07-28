@@ -15,6 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using XMLRead;
 using MyDictionary.Tools;
+using System.Threading;
 
 namespace MyDictionary.Trenings
 {
@@ -28,6 +29,7 @@ namespace MyDictionary.Trenings
         string message = "Введите слово";
         string contentNext = "Далее ➞";
         string contentControl = "Проверить";
+        Thread thread;
         public WindowBreyShtorm_4(List<MyWord> words)
         {
             myWords = words;
@@ -160,21 +162,48 @@ namespace MyDictionary.Trenings
 
         private void Window_PreviewKeyDown(object sender, KeyEventArgs e)
         {
-            if ((string)buttonNext.Content== contentNext)
+            if ((string)buttonNext.Content == contentNext)
             {
                 NextWord();
             }
         }
         private void FinishAndChageState()
         {
-            //string str = "";
-            //foreach (MyWord item in myWords)
-            //{
-            //    str += item.Word+" true =";
-            //    str += item.TrueAnswer + "\n";
-            //}
-            //MessageBox.Show(str);
+            WindowBreyShtormResult wbr = new WindowBreyShtormResult(myWords);
+            if (wbr.ShowDialog() == true)
+            {
+                StartNewThread();
+            }
+            else
+            {
+                foreach (MyWord item in myWords)
+                {
+                    item.TrueAnswer = 0;
+                }
+                WindowsManager.CreateWindowBreyShtorm(myWords);
+            }
+
             this.Close();
         }
+        private void UpdateState()
+        {
+            foreach (MyWord item in myWords)
+            {
+                State st = State.Learn;
+                if (3 - item.TrueAnswer == 0)
+                {
+                    st = State.Know;
+                }
+                BdTools.UpdateStateMyWord(item.WordId, (int)st);
+            }
+        }
+        public  Thread StartNewThread()
+        {
+            thread = new Thread(new ThreadStart(UpdateState));
+            thread.Start();
+            return thread;
+        }
     }
+
+    
 }

@@ -95,9 +95,11 @@
     <Compile Include="ChoseWords.xaml.cs">
       <DependentUpon>ChoseWords.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\AnswerConverter.cs" />
     <Compile Include="Converters\DataConverter.cs" />
     <Compile Include="Converters\StateConverter.cs" />
     <Compile Include="Converters\StateInStringConverter.cs" />
+    <Compile Include="Converters\StatusConverter.cs" />
     <Compile Include="Converters\TranscriptionConverter.cs" />
     <Compile Include="Converters\WidthConverterMultiplication.cs" />
     <Compile Include="Converters\WidthConverterSummation.cs" />
@@ -111,6 +113,9 @@
     <Compile Include="Tools\WindowsManager.cs" />
     <Compile Include="TotalDictionary.xaml.cs">
       <DependentUpon>TotalDictionary.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Trenings\WindowBreyShtormResult.xaml.cs">
+      <DependentUpon>WindowBreyShtormResult.xaml</DependentUpon>
     </Compile>
     <Compile Include="Trenings\WindowBreyShtorm_3.xaml.cs">
       <DependentUpon>WindowBreyShtorm_3.xaml</DependentUpon>
@@ -150,6 +155,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="TotalDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Trenings\WindowBreyShtormResult.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

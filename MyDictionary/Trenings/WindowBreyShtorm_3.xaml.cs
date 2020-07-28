@@ -208,6 +208,7 @@ namespace MyDictionary.Trenings
             currentWord++;
             imageWord.Visibility = Visibility.Hidden;
             textblockexample.Text = "";
+            countAnswerTrue = 0;
             Init();
         }
 

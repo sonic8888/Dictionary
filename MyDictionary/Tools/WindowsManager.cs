@@ -36,6 +36,13 @@ namespace MyDictionary.Tools
             wbs.Show();
             return wbs;
         }
+        public static WindowBreyShtorm CreateWindowBreyShtorm(List<MyWord> list)
+        {
+
+            WindowBreyShtorm wbs = new WindowBreyShtorm(new ObservableCollection<MyWord>(list));
+            wbs.Show();
+            return wbs;
+        }
         public static WindowBreyShtorm_2 GreateWindowBreyShtorm_2(List<MyWord> trenings, List<MyWord> resurse)
         {
             WindowBreyShtorm_2 wb2 = new WindowBreyShtorm_2(trenings, resurse);
@@ -55,5 +62,6 @@ namespace MyDictionary.Tools
             return wb4;
         }
      
+      
 }
 }

@@ -52,5 +52,6 @@
         <Button x:Name="buttonBreyShtorm2" Grid.Row="2" Grid.Column="6" Content="BreyShtorm2" Click="buttonBreyShtorm2_Click"/>
         <Button x:Name="buttonBreyShtorm3" Grid.Row="4" Grid.Column="6" Content="BreyShtorm3" Click="buttonBreyShtorm3_Click"/>
         <Button x:Name="buttonBreyShtorm4" Grid.Row="6" Grid.Column="6" Content="BreyShtorm4" Click="buttonBreyShtorm4_Click" />
+        <Button x:Name="buttonBreyShtormResult" Grid.Row="8" Grid.Column="6" Content="BreyShtormResult" Click="buttonBreyShtormResult_Click"  />
     </Grid>
 </Window>
