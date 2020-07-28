@@ -175,7 +175,7 @@ namespace MyDictionary
         private void buttonTest_Click(object sender, RoutedEventArgs e)
         {
             List<int> sourse = BdTools.GetWordId();
-            List<int> random = BdTools.GetRandom(sourse, 5);
+            List<int> random = BdTools.GetRandom(sourse, 29);
 
         }
     }

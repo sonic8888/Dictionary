@@ -255,6 +255,11 @@ namespace MyDictionary.Tools
         }
         public static List<int> GetRandom(List<int> sourse, int count)
         {
+            if (sourse.Count < count)
+            {
+                MessageBox.Show("Кол-во выбраных элементов больше длины колекции");
+                return null;
+            }
             List<int> listRandom = new List<int>();
             for (int i = 0; i < count; i++)
             {
