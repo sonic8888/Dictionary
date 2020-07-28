@@ -61,6 +61,12 @@ namespace MyDictionary.Tools
             wb4.Show();
             return wb4;
         }
+        public static WindowBreyShtormResult CreatewindowBreyShtormResult(List<MyWord> words)
+        {
+            WindowBreyShtormResult wbr = new WindowBreyShtormResult(words);
+            wbr.Show();
+            return wbr;
+        }
      
       
 }

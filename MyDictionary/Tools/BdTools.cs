@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
 using MyDictionary.EF;
 using XMLRead;
 
@@ -230,6 +231,42 @@ namespace MyDictionary.Tools
                 }
             }
             return myWords;
+        }
+        public static List<int> GetWordId()
+        {
+            using (var context = new ApplicationContext())
+            {
+                List<int> wordid;
+                try
+                {
+                    wordid = new List<int>();
+                    foreach (MyWord mw in context.MyWords)
+                    {
+                        wordid.Add(mw.WordId);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                    return null;
+                }
+                return wordid;
+            }
+        }
+        public static List<int> GetRandom(List<int> sourse, int count)
+        {
+            List<int> listRandom = new List<int>();
+            for (int i = 0; i < count; i++)
+            {
+                int index = App.random.Next(sourse.Count);
+                int id = sourse[index];
+                listRandom.Add(id);
+                if (!sourse.Remove(id))
+                {
+                    break;
+                }
+            }
+            return listRandom;
         }
 
     }

@@ -171,5 +171,12 @@ namespace MyDictionary
             WindowBreyShtormResult wbr = new WindowBreyShtormResult(collec_5.ToList());
             wbr.Show();
         }
+
+        private void buttonTest_Click(object sender, RoutedEventArgs e)
+        {
+            List<int> sourse = BdTools.GetWordId();
+            List<int> random = BdTools.GetRandom(sourse, 5);
+
+        }
     }
 }

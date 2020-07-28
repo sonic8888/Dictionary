@@ -133,5 +133,9 @@ namespace MyDictionary.EF
             set { trueAnswer = value; }
         }
 
+        public static explicit operator int(MyWord v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
