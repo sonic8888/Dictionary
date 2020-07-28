@@ -170,18 +170,19 @@ namespace MyDictionary.Trenings
         private void FinishAndChageState()
         {
             WindowBreyShtormResult wbr = new WindowBreyShtormResult(myWords);
-            if (wbr.ShowDialog() == true)
-            {
-                StartNewThread();
-            }
-            else
-            {
-                foreach (MyWord item in myWords)
-                {
-                    item.TrueAnswer = 0;
-                }
-                WindowsManager.CreateWindowBreyShtorm(myWords);
-            }
+            wbr.Show();
+            //if (wbr.ShowDialog() == true)
+            //{
+            //    StartNewThread();
+            //}
+            //else
+            //{
+            //    foreach (MyWord item in myWords)
+            //    {
+            //        item.TrueAnswer = 0;
+            //    }
+            //    WindowsManager.CreateWindowBreyShtorm(myWords);
+            //}
 
             this.Close();
         }

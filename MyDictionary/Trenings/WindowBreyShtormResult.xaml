@@ -48,7 +48,7 @@
                 </ListView.View>
             </ListView>
             <Button x:Name="buttonSave" Content="Сохранить" IsDefault="True" Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="2" Click="buttonSave_Click"/>
-            <Button x:Name="buttonBace" Content="Заново" IsCancel="True" Grid.Row="9" Grid.Column="7" Grid.ColumnSpan="2"/>
+            <Button x:Name="buttonBace" Content="Заново" IsCancel="True" Grid.Row="9" Grid.Column="7" Grid.ColumnSpan="2" Click="buttonBace_Click"/>
         </Grid>
     </Grid>
 </Window>
