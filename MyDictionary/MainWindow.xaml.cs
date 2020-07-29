@@ -18,6 +18,7 @@ using System.Windows.Shapes;
 using System.Threading;
 using XMLRead;
 using MyDictionary.Trenings;
+using MyDictionary.Repetition;
 
 namespace MyDictionary
 {
@@ -174,9 +175,9 @@ namespace MyDictionary
 
         private void buttonTest_Click(object sender, RoutedEventArgs e)
         {
-            List<int> sourse = BdTools.GetWordId();
-            List<int> random = BdTools.GetRandom(sourse, 29);
-
+            WindowRepetition wr = new WindowRepetition();
+            wr.Show();
+           
         }
     }
 }

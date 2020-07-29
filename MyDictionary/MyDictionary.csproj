@@ -108,6 +108,9 @@
     <Compile Include="EF\MyExample.cs" />
     <Compile Include="EF\MyTranslate.cs" />
     <Compile Include="EF\MyWord.cs" />
+    <Compile Include="Repetition\WindowRepetition.xaml.cs">
+      <DependentUpon>WindowRepetition.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Tools\BdTools.cs" />
     <Compile Include="Tools\MyTools.cs" />
     <Compile Include="Tools\WindowsManager.cs" />
@@ -154,6 +157,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Repetition\WindowRepetition.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="TotalDictionary.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -385,6 +392,10 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Picture\settingsMain.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Picture\GalkaLow.png" />
+    <Resource Include="Picture\krestikLow.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
