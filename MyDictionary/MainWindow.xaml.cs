@@ -175,8 +175,10 @@ namespace MyDictionary
 
         private void buttonTest_Click(object sender, RoutedEventArgs e)
         {
-            WindowRepetition wr = new WindowRepetition();
-            wr.Show();
+            //WindowRepetition wr = new WindowRepetition();
+            //wr.Show();
+            ObservableCollection<MyWord> obs = BdTools.ReadWord(10);
+            List<MyWord> lists = MyTools.GetRandomListMyWord(obs.ToList(), obs.Count);
            
         }
     }

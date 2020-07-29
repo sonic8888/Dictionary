@@ -1,9 +1,12 @@
-﻿using System;
+﻿using MyDictionary.EF;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Media.Imaging;
 
 namespace MyDictionary.Tools
 {
@@ -17,7 +20,7 @@ namespace MyDictionary.Tools
         {
             return example.Replace("--", " – ");
         }
-        public static List<int> GetRandom(List<int> sourse, int count)
+        public static List<int> GetRandomInt(List<int> sourse, int count)
         {
             if (sourse.Count < count)
             {
@@ -36,6 +39,55 @@ namespace MyDictionary.Tools
                 }
             }
             return listRandom;
+        }
+        public static List<string> GetRandomString(List<string> sourse, int count)
+        {
+            if (sourse.Count < count)
+            {
+                MessageBox.Show("Кол-во выбраных элементов больше длины колекции");
+                return null;
+            }
+            List<string> listRandom = new List<string>();
+            for (int i = 0; i < count; i++)
+            {
+                int index = App.random.Next(sourse.Count);
+                string str = sourse[index];
+                listRandom.Add(str);
+                if (!sourse.Remove(str))
+                {
+                    break;
+                }
+
+            }
+            return listRandom;
+        }
+        public static List<MyWord> GetRandomListMyWord(List<MyWord> sourse, int count)
+        {
+            if (sourse.Count < count)
+            {
+                MessageBox.Show("Кол-во выбраных элементов больше длины колекции");
+                return null;
+            }
+            List<MyWord> listRandom = new List<MyWord>();
+            for (int i = 0; i < count; i++)
+            {
+                int index = App.random.Next(sourse.Count);
+                MyWord mw = sourse[index];
+                listRandom.Add(mw);
+                if (!sourse.Remove(mw))
+                {
+                    break;
+                }
+            }
+            return listRandom;
+        }
+        public static BitmapImage CreateBitmapImage(string path)
+        {
+            BitmapImage bi = new BitmapImage();
+            bi.BeginInit();
+            bi.UriSource = new Uri(path, UriKind.Relative);
+            bi.EndInit();
+            return bi;
         }
     }
 }

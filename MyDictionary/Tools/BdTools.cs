@@ -253,6 +253,103 @@ namespace MyDictionary.Tools
                 return wordid;
             }
         }
+        /// <summary>
+        /// выбирает слова которые не входя в список
+        /// </summary>
+        /// <param name="list"></param>
+        /// <returns></returns>
+        public static List<MyWord> GetListMyWord(List<MyWord> list)
+        {
+            List<MyWord> myWords;
+            
+            IEnumerable<int> enumerable = list.Select(n => n.WordId);
+          
+            using (var context = new ApplicationContext())
+            {
+                try
+                {
+                    myWords = new List<MyWord>();
+                    foreach (MyWord mw in context.MyWords)
+                    {
+                        if (!enumerable.Contains(mw.WordId))
+                        {
+                            myWords.Add(mw);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                    return null;
+                }
+                return myWords;
+            }
+
+        }
+        /// <summary>
+        /// выбирает слова которые не входя в список длинной lenght
+        /// </summary>
+        /// <param name="list"></param>
+        /// <returns></returns>
+        public static List<MyWord> GetListMyWord(List<MyWord> list,int lenght)
+        {
+            List<MyWord> myWords;
+
+            IEnumerable<int> enumerable = list.Select(n => n.WordId);
+
+            using (var context = new ApplicationContext())
+            {
+                try
+                {
+                    myWords = new List<MyWord>();
+                    foreach (MyWord mw in context.MyWords)
+                    {
+                        if (!enumerable.Contains(mw.WordId))
+                        {
+                           
+                            myWords.Add(mw);
+                        }
+                        if (myWords.Count>=lenght)
+                        {
+                            return myWords;
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                    return null;
+                }
+                return myWords;
+            }
+
+        }
+        public static List<string> GetListTranslate(List<MyWord> list)
+        {
+            List<string> translate;
+            IEnumerable<int> enumerable = list.Select(n => n.WordId);
+            using (var context = new ApplicationContext())
+            {
+                try
+                {
+                    translate = new List<string>();
+                    foreach (MyTranslate mt in context.MyTranslates)
+                    {
+                        if (!enumerable.Contains(mt.WordId))
+                        {
+                            translate.Add(mt.Translate);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                    return null;
+                }
+                return translate;
+            }
+
+        }
     
 
     }
