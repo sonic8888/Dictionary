@@ -24,8 +24,11 @@ namespace MyDictionary.Repetition
     public partial class WindowRepetition : Window
     {
         bool isLock = true;
-        string pathCheck = @"/MyDictionary;component/Picture/GalkaLow.png";
-        string pathCross = @"/MyDictionary;component/Picture/krestikLow.png";
+        //bool IsAnswer = true;
+        //string pathCheck = @"/MyDictionary;component/Picture/GalkaLow.png";
+        //string pathCross = @"/MyDictionary;component/Picture/krestikLow.png";
+
+        //private int countdown;
         int countMilisek;//скорость прогрессбара-время для ответа
         List<MyWord> myWords;
         Random random;
@@ -36,14 +39,17 @@ namespace MyDictionary.Repetition
 
         ProgressBar pr;
         DispatcherTimer dispatcherTimer;
+        DispatcherTimer dispatcherTimerNext;
         public WindowRepetition(List<MyWord> words)
         {
             myWords = words;
             currentMyWord = myWords[currentIndex];
-            InitializeComponent();
-            pr = progressbar;
-            CreateDispetherTime();
             countMilisek = App.dataVariable.CountMilisek;
+            CreateDispetherTime();
+            CreateDispetherTimeNext();
+            InitializeComponent();
+
+            pr = progressbar;
             random = App.random;
             arrButtons = new Button[2];
             arrButtons[0] = buttonleft;
@@ -52,6 +58,7 @@ namespace MyDictionary.Repetition
         }
         private void InitElements()
         {
+            
             textblockword.Text = currentMyWord.Word;
             MyWord[] arrMw = new MyWord[] { currentMyWord, GetRandoMyWord() };
             List<int> random = MyTools.GetRandomInt(new List<int>() { 0, 1 }, 2);
@@ -62,6 +69,7 @@ namespace MyDictionary.Repetition
                 TextBlock textblock = (TextBlock)arrButtons[i].Content;
                 textblock.Text = GetTranslate(mw);
             }
+            textblocktop.Text = (myWords.Count - currentIndex).ToString();
         }
 
         private void CreateDispetherTime()
@@ -71,6 +79,13 @@ namespace MyDictionary.Repetition
             dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 0, countMilisek);
             dispatcherTimer.Start();
         }
+        private void CreateDispetherTimeNext()
+        {
+            dispatcherTimerNext = new DispatcherTimer();
+            dispatcherTimerNext.Tick += new EventHandler(NextStep);
+            dispatcherTimerNext.Interval = new TimeSpan(0, 0, 1);
+            
+        }   
         private string GetTranslate(MyWord mw)
         {
             int count = mw.MyTranslates.Count;
@@ -106,17 +121,29 @@ namespace MyDictionary.Repetition
             }
             else
             {
-                EndTime();
+                EndTime(false);
             }
         }
-        private void EndTime()
+        private void EndTime(bool answer)
         {
             dispatcherTimer.Stop();
-            progressbar.Value = 100;
+            //progressbar.Value = 100;
             textblocktop.Visibility = Visibility.Hidden;
-            elipsecount.Visibility = Visibility.Hidden;
-            imageTop.Visibility = Visibility.Visible;
-            imageTop.Source = MyTools.CreateBitmapImage(pathCross);
+            //elipsecount.Visibility = Visibility.Hidden;
+            //imageTop.Visibility = Visibility.Visible;
+            //imageTop.Source = MyTools.CreateBitmapImage(pathCross);
+            if (answer)
+            {
+                lineyes1.Visibility = Visibility.Visible;
+                lineyes2.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                lineNo1.Visibility = Visibility.Visible;
+                lineNo2.Visibility = Visibility.Visible;
+
+            }
+            dispatcherTimerNext.Start();
         }
         private MyWord GetRandoMyWord()
         {
@@ -156,7 +183,37 @@ namespace MyDictionary.Repetition
                 AnswerFalse();
             }
         }
-        private void AnswerTrue() { }
-        private void AnswerFalse() { }
+        private void AnswerTrue()
+        {
+            EndTime(true);
+        }
+        private void AnswerFalse()
+        {
+            EndTime(false);
+        }
+
+        //public int CountDown
+        //{
+        //    get { return countdown; }
+        //    set { countdown = value; }
+        //}
+        private void HiddenLines()
+        {
+            lineyes1.Visibility = Visibility.Hidden;
+            lineyes2.Visibility = Visibility.Hidden;
+            lineNo1.Visibility = Visibility.Hidden;
+            lineNo2.Visibility = Visibility.Hidden;
+        }
+        private void NextStep(object sender, EventArgs e)
+        {
+            NextCurrentMyWord();
+            HiddenLines();
+            textblocktop.Visibility = Visibility.Visible;
+            InitElements();
+            progressbar.Value = 100;
+            dispatcherTimerNext.Stop();
+            dispatcherTimer.Start();
+        }
+
     }
 }

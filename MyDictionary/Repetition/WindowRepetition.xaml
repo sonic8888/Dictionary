@@ -6,6 +6,9 @@
         xmlns:local="clr-namespace:MyDictionary.Repetition"
         mc:Ignorable="d"
         Title="WindowRepetition"  Height="600" Width="800">
+    <Window.Resources>
+        
+    </Window.Resources>
     <Grid Background="#FFD3CCF1">
         <Grid x:Name="innergrid" Background="#FFDBDCF0" Margin="60,50">
             <Grid.RowDefinitions>
@@ -38,13 +41,16 @@
                     <ColumnDefinition Width="5"/>
                 </Grid.ColumnDefinitions>
                 <Ellipse x:Name="elipsecount" Grid.Row="1" Grid.Column="1" Width="88" Height="88" Fill="#FF009502"  />
-                <TextBlock x:Name="textblocktop" Grid.Row="1" Grid.Column="1" TextAlignment="Center" VerticalAlignment="Center" FontSize="40" Text="12" Foreground="White"  />
+                <TextBlock x:Name="textblocktop" Grid.Row="1" Grid.Column="1" TextAlignment="Center" VerticalAlignment="Center" FontSize="40"   Foreground="White"/>
         
                 <!--<Ellipse x:Name="elipseYes" Grid.Row="1" Grid.Column="1" Width="70" Height="70" Fill="#FF0FD334"/>
                 <Line X1="60" Y1="35" X2="80" Y2="70" StrokeThickness="4" Grid.Row="1" Grid.Column="1" Stroke="Red"
                       Fill="#FFDC1F1F"/>-->
-                <Image x:Name="imageTop" Grid.Row="1" Grid.Column="1"   Visibility="Hidden" Source="/MyDictionary;component/Picture/GalkaLow.png"/>
-
+                <Image x:Name="imageTop" Grid.Row="1" Grid.Column="1"   Visibility="Hidden" Source="/MyDictionary;component/Picture/GalkaLow.png"  />
+                <Line x:Name="lineyes1"  Grid.Row="1" Grid.Column="1" X1="65" Y1="25" X2="80" Y2="75" Stroke="White" StrokeThickness="7" StrokeEndLineCap="Round"  StrokeStartLineCap="Round" Visibility="Hidden"/>
+                <Line x:Name="lineyes2"  Grid.Row="1" Grid.Column="1" X1="80" Y1="75" X2="95" Y2="30" Stroke="White" StrokeThickness="7" StrokeEndLineCap="Round"  StrokeStartLineCap="Round" Visibility="Hidden"/>
+                <Line x:Name="lineNo1"  Grid.Row="1" Grid.Column="1" X1="65" Y1="25" X2="95" Y2="75" Stroke="Red" StrokeThickness="7" StrokeEndLineCap="Round" StrokeStartLineCap="Round" Visibility="Hidden"/>
+                <Line x:Name="lineNo2"  Grid.Row="1" Grid.Column="1" X1="65" Y1="75" X2="95" Y2="25" Stroke="Red" StrokeThickness="7" StrokeEndLineCap="Round" StrokeStartLineCap="Round" Visibility="Hidden"/>
             </Grid>
             <TextBlock x:Name="textblockword" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="7" FontSize="50" Text="example" TextAlignment="Center"/>
             <Button x:Name="buttonleft" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" FontSize="30" Click="buttonleft_Click">
@@ -59,7 +65,7 @@
                     <TextBlock x:Name="buttoncontentright" Text="Right" TextWrapping="Wrap"/>
                 </Button.Content>
             </Button>
-            <Button x:Name="buttontest" Content="test" Grid.Row="4" Grid.Column="8" Click="buttontest_Click"/>
+            <!--<Button x:Name="buttontest" Content="test" Grid.Row="4" Grid.Column="8" Click="buttontest_Click"/>-->
         </Grid>
         
     </Grid>
