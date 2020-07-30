@@ -42,6 +42,12 @@
                         <MenuItem Header="Кол-во выборки:">
                             <TextBox x:Name="textboxCounSelekt" Width="20" PreviewKeyDown="textboxCounSelekt_PreviewKeyDown" />
                         </MenuItem>
+                        <MenuItem Header="Кол-во слов повторения:">
+                            <TextBox x:Name="textboxCountRepetition" Width="20" PreviewKeyDown="textboxCountRepetition_PreviewKeyDown"   />
+                        </MenuItem>
+                        <MenuItem Header="Кол-во мл.сек времени для ответа:">
+                            <TextBox x:Name="textboxCountMlSekRepetition" Width="20" PreviewKeyDown="textboxCountMlSekRepetition_PreviewKeyDown"  />
+                        </MenuItem>
                     </MenuItem>
                 </MenuItem>
             </Menu>

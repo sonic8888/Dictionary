@@ -1,4 +1,5 @@
 ﻿using MyDictionary.EF;
+using MyDictionary.Repetition;
 using MyDictionary.Trenings;
 using System;
 using System.Collections.Generic;
@@ -66,6 +67,12 @@ namespace MyDictionary.Tools
             WindowBreyShtormResult wbr = new WindowBreyShtormResult(words);
             wbr.Show();
             return wbr;
+        }
+        public static WindowRepetition CreateWindowRepetition(List<MyWord> list)
+        {
+            WindowRepetition wr = new WindowRepetition(list);
+            wr.Show();
+            return wr;
         }
      
       

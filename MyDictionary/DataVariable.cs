@@ -6,14 +6,17 @@ using System.Threading.Tasks;
 using System.IO;
 using XMLRead;
 using System.Windows;
+using System.Reflection;
 
 namespace MyDictionary
 {
     public class DataVariable
     {
         private List<string> defoltValueList;
+        private int countWordRepetition;
         private int countWordLearning;
         private int countSelectWord;
+        private int countMilisek;
         public DataVariable()
         {
             if (!File.Exists(FIleTools.NameFileDataVariable))
@@ -21,8 +24,10 @@ namespace MyDictionary
                 defoltValueList = new List<string>();
                 defoltValueList.Add("5");// defoltValue countWordLearning
                 defoltValueList.Add("50");// defoltValue countSelectWord
+                defoltValueList.Add("20");// defoltValue countWordRepetition
+                defoltValueList.Add("10");// defoltValue countMilisek
                 StreamWriter streamWriter;
-                using (streamWriter= File.CreateText(FIleTools.NameFileDataVariable))
+                using (streamWriter = File.CreateText(FIleTools.NameFileDataVariable))
                 {
                     foreach (string item in defoltValueList)
                     {
@@ -30,6 +35,11 @@ namespace MyDictionary
                     }
                 }
             }
+            else
+            {
+
+            }
+
             InitVariable();
         }
         private void InitVariable()
@@ -40,20 +50,23 @@ namespace MyDictionary
                 {
                     string input = null;
                     List<string> listValue = new List<string>();
-                    while ((input=sr.ReadLine())!=null)
+                    while ((input = sr.ReadLine()) != null)
                     {
                         listValue.Add(input);
                     }
                     try
                     {
-                    countSelectWord = int.Parse(listValue[1]);//читаем countSelectWord
-                    countWordLearning = int.Parse(listValue[0]);//читаем countWordLearning
+
+                        countMilisek = int.Parse(listValue[3]);//читаем countMilisek
+                        countWordRepetition = int.Parse(listValue[2]);//читаем countWordRepetition
+                        countSelectWord = int.Parse(listValue[1]);//читаем countSelectWord
+                        countWordLearning = int.Parse(listValue[0]);//читаем countWordLearning
 
                     }
                     catch (ArgumentException aex)
                     {
 
-                        MessageBox.Show(aex.Message);
+                        MessageBox.Show(aex.Message + " " + MethodBase.GetCurrentMethod().DeclaringType.FullName);
                     }
 
                 }
@@ -62,7 +75,7 @@ namespace MyDictionary
             catch (IOException ex)
             {
 
-                MessageBox.Show(ex.ToString());
+                MessageBox.Show(ex.ToString() + " " + MethodBase.GetCurrentMethod().DeclaringType.FullName);
             }
         }
         /// <summary>
@@ -78,24 +91,48 @@ namespace MyDictionary
         {
             try
             {
-                using (StreamWriter sw=new StreamWriter(FIleTools.NameFileDataVariable))
+                using (StreamWriter sw = new StreamWriter(FIleTools.NameFileDataVariable))
                 {
                     sw.WriteLine(countWordLearning);
                     sw.WriteLine(countSelectWord);
+                    sw.WriteLine(countWordRepetition);
+                    sw.WriteLine(countMilisek);
                 }
             }
             catch (IOException ex)
             {
 
-                MessageBox.Show(ex.ToString());
+                MessageBox.Show(ex.ToString() + " " + MethodBase.GetCurrentMethod().DeclaringType.FullName);
             }
         }
-
+        /// <summary>
+        /// кол-во слов выборки
+        /// </summary>
         public int CountSelectWord
         {
             get { return countSelectWord; }
             set { countSelectWord = value; }
         }
+
+        /// <summary>
+        /// кол-во слов для повторения
+        /// </summary>
+        public int CountWordRepetition
+        {
+            get { return countWordRepetition; }
+            set { countWordRepetition = value; }
+        }
+
+        /// <summary>
+        /// определяет время для ответа при повторении слов
+        /// </summary>
+        public int CountMilisek
+        {
+            get { return countMilisek; }
+            set { countMilisek = value; }
+        }
+
+
 
     }
 }

@@ -45,6 +45,8 @@ namespace MyDictionary
             StartNewThread();
             textboxCountWord.Text = App.dataVariable.CountWordLearning.ToString();
             textboxCounSelekt.Text = App.dataVariable.CountSelectWord.ToString();
+            textboxCountRepetition.Text = App.dataVariable.CountWordRepetition.ToString();
+            textboxCountMlSekRepetition.Text = App.dataVariable.CountMilisek.ToString();
         }
 
         private void clickNewWord(object sender, RoutedEventArgs e)
@@ -59,12 +61,7 @@ namespace MyDictionary
         private void buttonDictionary_Click(object sender, RoutedEventArgs e)
         {
 
-            //while (thread.IsAlive)
-            //{
-            //    Thread.Sleep(50);
-            //}
-            //TotalDictionary td = new TotalDictionary(collection);
-            //td.Show();
+         
             while (App.thread.IsAlive)
             {
                 Thread.Sleep(50);
@@ -94,15 +91,7 @@ namespace MyDictionary
         private void buttonBreyShtorm_Click(object sender, RoutedEventArgs e)
         {
 
-            //ObservableCollection<MyWord> collLearn = BdTools.SelecWhereState(State.Learn);
-            //ObservableCollection<MyWord> collNew = BdTools.SelecWhereState(State.New);
-            //foreach (MyWord m in collNew)
-            //{
-            //    collLearn.Add(m);
-            //}
-            ////ObservableCollection<MyWord> collLearn = BdTools.ReadWord(3);
-            //WindowBreyShtorm wbs = new WindowBreyShtorm(collLearn);
-            //wbs.Show();
+        
             WindowsManager.CreateWindowBreyShtorm();
         }
 
@@ -124,10 +113,7 @@ namespace MyDictionary
             ObservableCollection<MyWord> collec_5 = BdTools.ReadWord(8);
             ObservableCollection<MyWord> collectionTotal
                 = BdTools.ReadWord();
-            //IEnumerable<MyWord> enumer_5 = collec_5.AsEnumerable();
             IEnumerable<MyWord> enumerable = collectionTotal.Except(collec_5);
-            //WindowBreyShtorm_2 w2 = new WindowBreyShtorm_2(collec_5.ToList(), enumerable.ToList());
-            //w2.Show();
             WindowsManager.GreateWindowBreyShtorm_2(collec_5.ToList(), enumerable.ToList());
 
         }
@@ -148,17 +134,12 @@ namespace MyDictionary
         private void buttonBreyShtorm3_Click(object sender, RoutedEventArgs e)
         {
             ObservableCollection<MyWord> collec_5 = BdTools.ReadWord(7);
-
-            //WindowBreyShtorm_3 wb3 = new WindowBreyShtorm_3(collec_5.ToList());
-            //wb3.Show();
             WindowsManager.CreateWindowBreyShtorm_3(collec_5.ToList());
         }
 
         private void buttonBreyShtorm4_Click(object sender, RoutedEventArgs e)
         {
             ObservableCollection<MyWord> collec_5 = BdTools.ReadWord(5);
-            //WindowBreyShtorm_4 wb4 = new WindowBreyShtorm_4(collec_5.ToList());
-            //wb4.Show();
             WindowsManager.CreateWindowBreyShtorm_4(collec_5.ToList());
         }
 
@@ -175,11 +156,36 @@ namespace MyDictionary
 
         private void buttonTest_Click(object sender, RoutedEventArgs e)
         {
-            //WindowRepetition wr = new WindowRepetition();
-            //wr.Show();
-            ObservableCollection<MyWord> obs = BdTools.ReadWord(10);
-            List<MyWord> lists = MyTools.GetRandomListMyWord(obs.ToList(), obs.Count);
-           
+            //ObservableCollection<MyWord> obs = BdTools.ReadWord(10);
+            //List<MyWord> lists = MyTools.GetRandomListMyWord(obs.ToList(), 150);
+            List<MyWord> lists = BdTools.GetRandomListMyWord(App.dataVariable.CountWordRepetition);
+            WindowsManager.CreateWindowRepetition(lists);
+        }
+
+        private void textboxCountRepetition_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                string str = textboxCountRepetition.Text;
+                int value;
+                if (int.TryParse(str, out value))
+                {
+                    App.dataVariable.CountWordRepetition = value;
+                }
+            }
+        }
+
+        private void textboxCountMlSekRepetition_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                string str = textboxCountMlSekRepetition.Text;
+                int value;
+                if (int.TryParse(str, out value))
+                {
+                    App.dataVariable.CountMilisek = value;
+                }
+            }
         }
     }
 }

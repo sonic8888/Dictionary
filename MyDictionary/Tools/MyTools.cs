@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -24,7 +25,7 @@ namespace MyDictionary.Tools
         {
             if (sourse.Count < count)
             {
-                MessageBox.Show("Кол-во выбраных элементов больше длины колекции");
+                MessageBox.Show(MethodBase.GetCurrentMethod().DeclaringType.FullName);
                 return null;
             }
             List<int> listRandom = new List<int>();
@@ -44,7 +45,7 @@ namespace MyDictionary.Tools
         {
             if (sourse.Count < count)
             {
-                MessageBox.Show("Кол-во выбраных элементов больше длины колекции");
+                MessageBox.Show(MethodBase.GetCurrentMethod().DeclaringType.FullName);
                 return null;
             }
             List<string> listRandom = new List<string>();
@@ -65,7 +66,7 @@ namespace MyDictionary.Tools
         {
             if (sourse.Count < count)
             {
-                MessageBox.Show("Кол-во выбраных элементов больше длины колекции");
+                MessageBox.Show(MethodBase.GetCurrentMethod().DeclaringType.FullName);
                 return null;
             }
             List<MyWord> listRandom = new List<MyWord>();

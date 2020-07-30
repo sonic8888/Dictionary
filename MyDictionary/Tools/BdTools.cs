@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -27,7 +28,7 @@ namespace MyDictionary.Tools
                 }
                 catch (Exception e)
                 {
-                    MessageBox.Show(e.Message);
+                    MessageBox.Show(e.Message + MethodBase.GetCurrentMethod().DeclaringType.FullName);
                     return 0;
                 }
 
@@ -47,7 +48,7 @@ namespace MyDictionary.Tools
                 }
                 catch (Exception e)
                 {
-                    MessageBox.Show(e.Message);
+                    MessageBox.Show(e.Message + " " + MethodBase.GetCurrentMethod().DeclaringType.FullName);
                     return 0;
                 }
 
@@ -66,7 +67,7 @@ namespace MyDictionary.Tools
                 }
                 catch (Exception e)
                 {
-                    MessageBox.Show(e.Message);
+                    MessageBox.Show(e.Message + " " + MethodBase.GetCurrentMethod().DeclaringType.FullName);
                     return 0;
                 }
 
@@ -109,7 +110,7 @@ namespace MyDictionary.Tools
                 }
                 catch (Exception e)
                 {
-                    MessageBox.Show(e.Message);
+                    MessageBox.Show(e.Message + " " + MethodBase.GetCurrentMethod().DeclaringType.FullName);
                     return null;
 
 
@@ -134,7 +135,7 @@ namespace MyDictionary.Tools
                 }
                 catch (Exception e)
                 {
-                    MessageBox.Show(e.Message);
+                    MessageBox.Show(e.Message + " " + MethodBase.GetCurrentMethod().DeclaringType.FullName);
                     return null;
                 }
                 return myWords;
@@ -157,7 +158,7 @@ namespace MyDictionary.Tools
                 }
                 catch (Exception e)
                 {
-                    MessageBox.Show(e.Message);
+                    MessageBox.Show(e.Message + " " + MethodBase.GetCurrentMethod().DeclaringType.FullName);
                     return null;
                 }
                 return myWords;
@@ -179,7 +180,7 @@ namespace MyDictionary.Tools
                 }
                 catch (Exception e)
                 {
-                    MessageBox.Show(e.Message);
+                    MessageBox.Show(e.Message + " " + MethodBase.GetCurrentMethod().DeclaringType.FullName);
                     return null;
                 }
             }
@@ -198,7 +199,7 @@ namespace MyDictionary.Tools
                 }
                 catch (Exception e)
                 {
-                    MessageBox.Show(e.Message);
+                    MessageBox.Show(e.Message + " " + MethodBase.GetCurrentMethod().DeclaringType.FullName);
                     return null;
                 }
             }
@@ -226,7 +227,7 @@ namespace MyDictionary.Tools
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message);
+                    MessageBox.Show(ex.Message + " " + MethodBase.GetCurrentMethod().DeclaringType.FullName);
                     return null;
                 }
             }
@@ -247,7 +248,7 @@ namespace MyDictionary.Tools
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message);
+                    MessageBox.Show(ex.Message + " " + MethodBase.GetCurrentMethod().DeclaringType.FullName);
                     return null;
                 }
                 return wordid;
@@ -261,9 +262,9 @@ namespace MyDictionary.Tools
         public static List<MyWord> GetListMyWord(List<MyWord> list)
         {
             List<MyWord> myWords;
-            
+
             IEnumerable<int> enumerable = list.Select(n => n.WordId);
-          
+
             using (var context = new ApplicationContext())
             {
                 try
@@ -279,7 +280,7 @@ namespace MyDictionary.Tools
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message);
+                    MessageBox.Show(ex.Message + " " + MethodBase.GetCurrentMethod().DeclaringType.FullName);
                     return null;
                 }
                 return myWords;
@@ -291,7 +292,7 @@ namespace MyDictionary.Tools
         /// </summary>
         /// <param name="list"></param>
         /// <returns></returns>
-        public static List<MyWord> GetListMyWord(List<MyWord> list,int lenght)
+        public static List<MyWord> GetListMyWord(List<MyWord> list, int lenght)
         {
             List<MyWord> myWords;
 
@@ -306,10 +307,10 @@ namespace MyDictionary.Tools
                     {
                         if (!enumerable.Contains(mw.WordId))
                         {
-                           
+
                             myWords.Add(mw);
                         }
-                        if (myWords.Count>=lenght)
+                        if (myWords.Count >= lenght)
                         {
                             return myWords;
                         }
@@ -317,7 +318,7 @@ namespace MyDictionary.Tools
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message);
+                    MessageBox.Show(ex.Message + " " + MethodBase.GetCurrentMethod().DeclaringType.FullName);
                     return null;
                 }
                 return myWords;
@@ -340,17 +341,51 @@ namespace MyDictionary.Tools
                             translate.Add(mt.Translate);
                         }
                     }
+                  
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message);
+                    MessageBox.Show(ex.Message + " " + MethodBase.GetCurrentMethod().DeclaringType.FullName);
                     return null;
                 }
                 return translate;
             }
 
         }
-    
+        public static List<MyWord> GetRandomListMyWord(int count)
+        {
+            List<int> listId = GetWordId();
+            if (listId.Count<=count)
+            {
+                MessageBox.Show("Кол-во выбираемых слов превышает кол-во слов в БД " + MethodBase.GetCurrentMethod().DeclaringType.FullName);
+                return null;
+            }
+            List<int> listRandomId = MyTools.GetRandomInt(listId, count);
+            List<MyWord> listRandom = new List<MyWord>();
+            using (var context = new ApplicationContext())
+            {
+                context.Configuration.LazyLoadingEnabled = false;
+                try
+                {
+                    for (int i = 0; i < listRandomId.Count; i++)
+                    {
+                        MyWord myWord = context.MyWords.Find(listRandomId[i]);
+                        context.Entry(myWord).Collection(x => x.MyTranslates).Load();
+                        context.Entry(myWord).Collection(x => x.MyExamples).Load();
+                        listRandom.Add(myWord);
+                    }
+                }
+                catch (Exception ex)
+                {
+
+                    MessageBox.Show(ex.Message + " " + MethodBase.GetCurrentMethod().DeclaringType.FullName);
+                    return null;
+                }
+
+            }
+            return listRandom;
+        }
+
 
     }
 }
