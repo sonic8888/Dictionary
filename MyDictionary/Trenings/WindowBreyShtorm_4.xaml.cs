@@ -55,15 +55,11 @@ namespace MyDictionary.Trenings
         {
             if (e.Key == Key.Enter)
             {
-                if (currentword < myWords.Count - 1)
-                {
+                
+               
 
                     ControlAnswer();
-                }
-                else
-                {
-                    FinishAndChageState();
-                }
+             
             }
         }
         private void AnswerYes()
