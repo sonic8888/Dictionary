@@ -48,6 +48,9 @@
                         <MenuItem Header="Кол-во мл.сек времени для ответа:">
                             <TextBox x:Name="textboxCountMlSekRepetition" Width="20" PreviewKeyDown="textboxCountMlSekRepetition_PreviewKeyDown"  />
                         </MenuItem>
+                        <MenuItem Header="Время задержки смены слов:">
+                            <TextBox x:Name="textboxCountMlSekDelayRepetition" Width="30" PreviewKeyDown="textboxCountMlSekDelayRepetition_PreviewKeyDown"    />
+                        </MenuItem>
                     </MenuItem>
                 </MenuItem>
             </Menu>

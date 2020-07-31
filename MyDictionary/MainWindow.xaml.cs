@@ -47,6 +47,7 @@ namespace MyDictionary
             textboxCounSelekt.Text = App.dataVariable.CountSelectWord.ToString();
             textboxCountRepetition.Text = App.dataVariable.CountWordRepetition.ToString();
             textboxCountMlSekRepetition.Text = App.dataVariable.CountMilisek.ToString();
+            textboxCountMlSekDelayRepetition.Text = App.dataVariable.CountMilisekDelay.ToString();
         }
 
         private void clickNewWord(object sender, RoutedEventArgs e)
@@ -184,6 +185,19 @@ namespace MyDictionary
                 if (int.TryParse(str, out value))
                 {
                     App.dataVariable.CountMilisek = value;
+                }
+            }
+        }
+
+        private void textboxCountMlSekDelayRepetition_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                string str = textboxCountMlSekDelayRepetition.Text;
+                int value;
+                if (int.TryParse(str, out value))
+                {
+                    App.dataVariable.CountMilisekDelay = value;
                 }
             }
         }

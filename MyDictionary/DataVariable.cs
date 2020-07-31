@@ -13,10 +13,11 @@ namespace MyDictionary
     public class DataVariable
     {
         private List<string> defoltValueList;
-        private int countWordRepetition;
-        private int countWordLearning;
-        private int countSelectWord;
-        private int countMilisek;
+        private int countWordRepetition;// кол-во слов для упражнения повторения (Repetitio)
+        private int countWordLearning;//кол-во слов для тренировки (Trenings)
+        private int countSelectWord;//вспомогательная вывыбока для создания ресурса слов(Trenings)
+        private int countMilisek;//время задержки таймера прогрессбара в WindowRepetition
+        private int countMilisekDelay;//время задержки для смены слов в WindowRepetition
         public DataVariable()
         {
             if (!File.Exists(FIleTools.NameFileDataVariable))
@@ -26,6 +27,7 @@ namespace MyDictionary
                 defoltValueList.Add("50");// defoltValue countSelectWord
                 defoltValueList.Add("20");// defoltValue countWordRepetition
                 defoltValueList.Add("10");// defoltValue countMilisek
+                defoltValueList.Add("1000");// defoltValue countMilisekDelay
                 StreamWriter streamWriter;
                 using (streamWriter = File.CreateText(FIleTools.NameFileDataVariable))
                 {
@@ -57,6 +59,7 @@ namespace MyDictionary
                     try
                     {
 
+                        countMilisekDelay = int.Parse(listValue[4]);//читаем countMilisekDelay
                         countMilisek = int.Parse(listValue[3]);//читаем countMilisek
                         countWordRepetition = int.Parse(listValue[2]);//читаем countWordRepetition
                         countSelectWord = int.Parse(listValue[1]);//читаем countSelectWord
@@ -97,6 +100,7 @@ namespace MyDictionary
                     sw.WriteLine(countSelectWord);
                     sw.WriteLine(countWordRepetition);
                     sw.WriteLine(countMilisek);
+                    sw.WriteLine(countMilisekDelay);
                 }
             }
             catch (IOException ex)
@@ -131,6 +135,13 @@ namespace MyDictionary
             get { return countMilisek; }
             set { countMilisek = value; }
         }
+
+        public int CountMilisekDelay
+        {
+            get { return countMilisekDelay; }
+            set { countMilisekDelay = value; }
+        }
+
 
 
 

@@ -2,7 +2,9 @@
 using MyDictionary.Tools;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -15,6 +17,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using XMLRead;
 
 namespace MyDictionary.Repetition
 {
@@ -24,18 +27,25 @@ namespace MyDictionary.Repetition
     public partial class WindowRepetition : Window
     {
         bool isLock = true;
+        bool isPlay = true;
         //bool IsAnswer = true;
         //string pathCheck = @"/MyDictionary;component/Picture/GalkaLow.png";
         //string pathCross = @"/MyDictionary;component/Picture/krestikLow.png";
 
         //private int countdown;
         int countMilisek;//скорость прогрессбара-время для ответа
+        int countMilisekDelay;//время задержки смены слов
         List<MyWord> myWords;
         Random random;
         int currentIndex = 0;
         MyWord currentMyWord;
         Button[] arrButtons;
-
+        ControlTemplate templateDefault;
+        ControlTemplate templateGreen;
+        ControlTemplate templateRed;
+        //SolidColorBrush colorDefault;
+        //SolidColorBrush colorGreen;
+        //SolidColorBrush colorRed;
 
         ProgressBar pr;
         DispatcherTimer dispatcherTimer;
@@ -45,6 +55,7 @@ namespace MyDictionary.Repetition
             myWords = words;
             currentMyWord = myWords[currentIndex];
             countMilisek = App.dataVariable.CountMilisek;
+            countMilisekDelay = App.dataVariable.CountMilisekDelay;
             CreateDispetherTime();
             CreateDispetherTimeNext();
             InitializeComponent();
@@ -55,10 +66,17 @@ namespace MyDictionary.Repetition
             arrButtons[0] = buttonleft;
             arrButtons[1] = buttonright;
             InitElements();
+            templateDefault = buttonleft.Template;
+            templateGreen = (ControlTemplate)TryFindResource("buttonTemplateGreen");
+            templateRed = (ControlTemplate)TryFindResource("buttonTemplateRed");
+
+            //colorDefault = new SolidColorBrush(Color.FromRgb(221, 221, 221));
+            //colorGreen = new SolidColorBrush(Color.FromRgb(158, 235, 142));
+            //colorRed = new SolidColorBrush(Color.FromRgb(235, 152, 142));
         }
         private void InitElements()
         {
-            
+
             textblockword.Text = currentMyWord.Word;
             MyWord[] arrMw = new MyWord[] { currentMyWord, GetRandoMyWord() };
             List<int> random = MyTools.GetRandomInt(new List<int>() { 0, 1 }, 2);
@@ -70,6 +88,11 @@ namespace MyDictionary.Repetition
                 textblock.Text = GetTranslate(mw);
             }
             textblocktop.Text = (myWords.Count - currentIndex).ToString();
+            if (isPlay)
+            {
+                FileInfo fi = FIleTools.SearchFile(currentMyWord.SoundName, FIleTools.NameDirectoryAudio);
+                PlaySound(fi);
+            }
         }
 
         private void CreateDispetherTime()
@@ -83,9 +106,9 @@ namespace MyDictionary.Repetition
         {
             dispatcherTimerNext = new DispatcherTimer();
             dispatcherTimerNext.Tick += new EventHandler(NextStep);
-            dispatcherTimerNext.Interval = new TimeSpan(0, 0, 1);
-            
-        }   
+            dispatcherTimerNext.Interval = new TimeSpan(0, 0, 0, 0, countMilisekDelay);
+
+        }
         private string GetTranslate(MyWord mw)
         {
             int count = mw.MyTranslates.Count;
@@ -127,6 +150,8 @@ namespace MyDictionary.Repetition
         private void EndTime(bool answer)
         {
             dispatcherTimer.Stop();
+            isLock = false;
+            if (currentIndex >= (myWords.Count - 1)) return;
             //progressbar.Value = 100;
             textblocktop.Visibility = Visibility.Hidden;
             //elipsecount.Visibility = Visibility.Hidden;
@@ -153,42 +178,66 @@ namespace MyDictionary.Repetition
         }
         private void NextCurrentMyWord()
         {
-            currentMyWord = myWords[++currentIndex];
+            if (currentIndex < (myWords.Count - 1))
+            {
+                currentMyWord = myWords[++currentIndex];
+            }
+            else
+            {
+                dispatcherTimerNext.Stop();
+            }
         }
 
         private void buttonleft_Click(object sender, RoutedEventArgs e)
         {
-            Button but = (Button)sender;
-            MyWord mw = (MyWord)but.DataContext;
-            if (mw.WordId == currentMyWord.WordId)
+            if (isLock)
             {
-                AnswerTrue();
-            }
-            else
-            {
-                AnswerFalse();
+                Button but = (Button)sender;
+                MyWord mw = (MyWord)but.DataContext;
+                if (mw.WordId == currentMyWord.WordId)
+                {
+                    //but.Background = colorGreen;
+                    //but.Template = templateGreen;
+                    AnswerTrue(but);
+                }
+                else
+                {
+                    //but.Background = colorRed;
+                    //but.Template = templateRed;
+                    AnswerFalse(but);
+                }
             }
         }
 
         private void buttonright_Click(object sender, RoutedEventArgs e)
         {
-            Button but = (Button)sender;
-            MyWord mw = (MyWord)but.DataContext;
-            if (mw.WordId == currentMyWord.WordId)
+            if (isLock)
             {
-                AnswerTrue();
-            }
-            else
-            {
-                AnswerFalse();
+                Button but = (Button)sender;
+                MyWord mw = (MyWord)but.DataContext;
+                if (mw.WordId == currentMyWord.WordId)
+                {
+                    //but.Background = colorGreen
+                    //but.Template = templateGreen;
+                    AnswerTrue(but);
+                }
+                else
+                {
+                    //but.Background = colorRed;
+                    //but.Template = templateRed;
+                    AnswerFalse(but);
+                }
             }
         }
-        private void AnswerTrue()
+        private void AnswerTrue(Button but)
         {
+            but.Template = templateGreen;
             EndTime(true);
         }
-        private void AnswerFalse()
+        private void AnswerFalse(Button but)
         {
+            //SystemSounds.Beep.Play();
+            but.Template = templateRed;
             EndTime(false);
         }
 
@@ -213,7 +262,25 @@ namespace MyDictionary.Repetition
             progressbar.Value = 100;
             dispatcherTimerNext.Stop();
             dispatcherTimer.Start();
+            isLock = true;
+            arrButtons[0].Template = templateDefault;
+            arrButtons[1].Template = templateDefault;
+        }
+        private void PlaySound(FileInfo sound)
+        {
+            MediaPlayer mediaPlayer = new MediaPlayer();
+            mediaPlayer.Open(new Uri(sound.FullName));
+            mediaPlayer.Play();
         }
 
+        private void checkbox_Checked(object sender, RoutedEventArgs e)
+        {
+            isPlay = true;
+        }
+
+        private void checkbox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            isPlay = false;
+        }
     }
 }
