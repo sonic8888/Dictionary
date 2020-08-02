@@ -20,29 +20,61 @@ namespace MyDictionary
         private int countMilisekDelay;//время задержки для смены слов в WindowRepetition
         public DataVariable()
         {
+            defoltValueList = new List<string>();
+            defoltValueList.Add("5");// defoltValue countWordLearning
+            defoltValueList.Add("50");// defoltValue countSelectWord
+            defoltValueList.Add("20");// defoltValue countWordRepetition
+            defoltValueList.Add("10");// defoltValue countMilisek
+            defoltValueList.Add("1000");// defoltValue countMilisekDelay
             if (!File.Exists(FIleTools.NameFileDataVariable))
             {
-                defoltValueList = new List<string>();
-                defoltValueList.Add("5");// defoltValue countWordLearning
-                defoltValueList.Add("50");// defoltValue countSelectWord
-                defoltValueList.Add("20");// defoltValue countWordRepetition
-                defoltValueList.Add("10");// defoltValue countMilisek
-                defoltValueList.Add("1000");// defoltValue countMilisekDelay
-                StreamWriter streamWriter;
-                using (streamWriter = File.CreateText(FIleTools.NameFileDataVariable))
-                {
-                    foreach (string item in defoltValueList)
-                    {
-                        streamWriter.WriteLine(item);
-                    }
-                }
+                WriteDefoltValue();
             }
             else
             {
+                try
+                {
+                    List<string> listValue;
+                    using (StreamReader sr = File.OpenText(FIleTools.NameFileDataVariable))
+                    {
+                        string input = null;
+                        listValue = new List<string>();
+                        while ((input = sr.ReadLine()) != null)
+                        {
+                            int v = 0;
+                            if (int.TryParse(input, out v))
+                            {
+                                listValue.Add(input);
 
+                            }
+                        }
+
+
+                    }
+                    if (listValue.Count != defoltValueList.Count)
+                    {
+                        WriteDefoltValue();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message + " " + MethodBase.GetCurrentMethod().DeclaringType.FullName);
+
+                }
             }
 
             InitVariable();
+        }
+        private void WriteDefoltValue()
+        {
+            StreamWriter streamWriter;
+            using (streamWriter = File.CreateText(FIleTools.NameFileDataVariable))
+            {
+                foreach (string item in defoltValueList)
+                {
+                    streamWriter.WriteLine(item);
+                }
+            }
         }
         private void InitVariable()
         {
@@ -66,10 +98,10 @@ namespace MyDictionary
                         countWordLearning = int.Parse(listValue[0]);//читаем countWordLearning
 
                     }
-                    catch (ArgumentException aex)
+                    catch (Exception ex)
                     {
 
-                        MessageBox.Show(aex.Message + " " + MethodBase.GetCurrentMethod().DeclaringType.FullName);
+                        MessageBox.Show(ex.Message + " " + MethodBase.GetCurrentMethod().DeclaringType.FullName);
                     }
 
                 }
