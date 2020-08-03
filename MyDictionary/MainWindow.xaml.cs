@@ -159,7 +159,7 @@ namespace MyDictionary
         {
             //ObservableCollection<MyWord> obs = BdTools.ReadWord(10);
             //List<MyWord> lists = MyTools.GetRandomListMyWord(obs.ToList(), 150);
-            List<MyWord> lists = BdTools.GetRandomListMyWord(App.dataVariable.CountWordRepetition);
+            List<MyWord> lists = BdTools.GetRandomListMyWord(6);
             WindowsManager.CreateWindowRepetition(lists);
         }
 

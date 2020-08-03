@@ -18,8 +18,8 @@
             </Border>
         </ControlTemplate>
     </Window.Resources>
-    <Grid Background="#FFD3CCF1">
-        <Grid x:Name="innergrid" Background="#FFDBDCF0" Margin="60,50">
+    <Grid Background="#FFA492F1">
+        <Grid x:Name="innergrid" Background="#FFC4C6F9" Margin="60,50">
             <Grid.RowDefinitions>
                 <RowDefinition Height="40"/>
                 <RowDefinition/>
@@ -62,14 +62,14 @@
                 <Line x:Name="lineNo2"  Grid.Row="1" Grid.Column="1" X1="65" Y1="75" X2="95" Y2="25" Stroke="Red" StrokeThickness="7" StrokeEndLineCap="Round" StrokeStartLineCap="Round" Visibility="Hidden" SnapsToDevicePixels="True"/>
             </Grid>
             <TextBlock x:Name="textblockword" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="7" FontSize="50" Text="example" TextAlignment="Center"  />
-            <Button x:Name="buttonleft" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" FontSize="30" Click="buttonleft_Click"  >
+            <Button x:Name="buttonleft" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" FontSize="30" Click="buttonleft_Click" Background="#FFC3C3C3"  >
                 <Button.Content>
                     <TextBlock x:Name="buttoncontentleft" Text="Left" TextWrapping="Wrap"/>
                 </Button.Content>
             </Button>
             <ProgressBar x:Name="progressbar" Orientation="Vertical" Grid.Row="3" Grid.Column="4" Minimum="0"
                          Maximum="100" Value="100"/>
-            <Button x:Name="buttonright" Grid.Row="3" Grid.Column="5" Grid.ColumnSpan="3" FontSize="30" Click="buttonright_Click"   >
+            <Button x:Name="buttonright" Grid.Row="3" Grid.Column="5" Grid.ColumnSpan="3" FontSize="30" Click="buttonright_Click" Background="#FFC3C3C3"  >
                 <Button.Content>
                     <TextBlock x:Name="buttoncontentright" Text="Right" TextWrapping="Wrap"/>
                 </Button.Content>
@@ -78,6 +78,15 @@
             <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="7" Grid.ColumnSpan="2" Margin="0,0,0,70">
                 <CheckBox x:Name="checkbox" IsChecked="True" Content="Звук" Height="20" FontSize="12" VerticalAlignment="Top" Checked="checkbox_Checked" Unchecked="checkbox_Unchecked"  />
             </StackPanel>
+
+            <TextBlock x:Name="textblockTrue" Grid.Row="2" Grid.Column="1" Text="15" Width="50" FontSize="36" TextAlignment="Center" VerticalAlignment="Center" Visibility="Hidden"/>
+            <Canvas Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="5" >
+                <Rectangle x:Name="recRed"   Height="55"  Width="340" Fill="Red" Stroke="Black" Visibility="Hidden"/>
+                <Rectangle x:Name="recGreen"   Height="55"  Width="1" Fill="Green" Stroke="Black" Visibility="Hidden" />
+            </Canvas>
+            <TextBlock x:Name="textblockFalse" Grid.Row="2" Grid.Column="7" Text="3" Width="50" FontSize="36" TextAlignment="Center" VerticalAlignment="Center" Visibility="Hidden"/>
+            <Button x:Name="buttonBack" Content="Заново"  Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Margin="15,30" FontSize="20" Background="#FFC3C3C3"  Visibility="Hidden" Click="buttonBack_Click"/>
+            <Button x:Name="buttonEnd" Content="Завершить" Grid.Row="4" Grid.Column="7" Grid.ColumnSpan="2" Margin="15,30" FontSize="20" Background="#FFC3C3C3"  Visibility="Hidden" Click="buttonEnd_Click"/>
         </Grid>
 
     </Grid>

@@ -14,6 +14,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Windows.Threading;
@@ -35,6 +36,10 @@ namespace MyDictionary.Repetition
         //private int countdown;
         int countMilisek;//скорость прогрессбара-время для ответа
         int countMilisekDelay;//время задержки смены слов
+        int countTrue = 0;//кол-во верных ответов
+        int countFalse = 0;
+        int _countTrue = 0;
+        int countMilisekFinishAnimation = 2000;
         List<MyWord> myWords;
         Random random;
         int currentIndex = 0;
@@ -69,6 +74,7 @@ namespace MyDictionary.Repetition
             templateDefault = buttonleft.Template;
             templateGreen = (ControlTemplate)TryFindResource("buttonTemplateGreen");
             templateRed = (ControlTemplate)TryFindResource("buttonTemplateRed");
+
 
             //colorDefault = new SolidColorBrush(Color.FromRgb(221, 221, 221));
             //colorGreen = new SolidColorBrush(Color.FromRgb(158, 235, 142));
@@ -151,7 +157,12 @@ namespace MyDictionary.Repetition
         {
             dispatcherTimer.Stop();
             isLock = false;
-            if (currentIndex >= (myWords.Count - 1)) return;
+            if (currentIndex >= (myWords.Count - 1))
+            {
+                //MessageBox.Show("Finish");
+                Summarizing();
+                return;
+            }
             //progressbar.Value = 100;
             textblocktop.Visibility = Visibility.Hidden;
             //elipsecount.Visibility = Visibility.Hidden;
@@ -185,6 +196,7 @@ namespace MyDictionary.Repetition
             else
             {
                 dispatcherTimerNext.Stop();
+
             }
         }
 
@@ -232,6 +244,7 @@ namespace MyDictionary.Repetition
         private void AnswerTrue(Button but)
         {
             but.Template = templateGreen;
+            countTrue++;
             EndTime(true);
         }
         private void AnswerFalse(Button but)
@@ -281,6 +294,73 @@ namespace MyDictionary.Repetition
         private void checkbox_Unchecked(object sender, RoutedEventArgs e)
         {
             isPlay = false;
+        }
+        private void Summarizing()
+        {
+            textblocktop.Text = myWords.Count.ToString();
+            textblocktop.Foreground = new SolidColorBrush(Colors.Black);
+            HiddenContent();
+            VisibleAnimation();
+            FinishAnimation();
+        }
+        private void HiddenContent()
+        {
+            HiddenLines();
+            elipsecount.Visibility = Visibility.Hidden;
+            textblockword.Visibility = Visibility.Hidden;
+            buttonleft.Visibility = Visibility.Hidden;
+            buttonright.Visibility = Visibility.Hidden;
+            progressbar.Visibility = Visibility.Hidden;
+            checkbox.Visibility = Visibility.Hidden;
+        }
+        private void VisibleAnimation()
+        {
+            textblockTrue.Visibility = Visibility.Visible;
+            textblockFalse.Visibility = Visibility.Visible;
+            recRed.Visibility = Visibility.Visible;
+            recGreen.Visibility = Visibility.Visible;
+            buttonBack.Visibility = Visibility.Visible;
+            buttonEnd.Visibility = Visibility.Visible;
+        }
+
+        private void buttonBack_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void buttonEnd_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+        private void FinishAnimation()
+        {
+            DoubleAnimation danime = new DoubleAnimation();
+            countFalse = myWords.Count;
+            DispatcherTimer timer= CreateDispetcherTrue();
+            timer.Start();
+            danime.From = 1;
+            danime.To = countTrue * recRed.Width / myWords.Count;
+            danime.Duration = TimeSpan.FromMilliseconds(countMilisekFinishAnimation);
+            recGreen.BeginAnimation(Rectangle.WidthProperty, danime);
+            //dispatcherTimer.Start();
+        }
+        private DispatcherTimer CreateDispetcherTrue()
+        {
+            DispatcherTimer timer = new DispatcherTimer();
+            timer.Tick += new EventHandler(InitTextBlock);
+            timer.Interval = new TimeSpan(0, 0, 0, 0, countMilisekFinishAnimation / countTrue);
+            return timer;
+        }
+        private void InitTextBlock(object sender, EventArgs e)
+        {
+            DispatcherTimer timer = sender as DispatcherTimer;
+            textblockFalse.Text = countFalse.ToString();
+            textblockTrue.Text = _countTrue.ToString();
+            countFalse--;
+            if (++_countTrue > countTrue)
+            {
+                timer.Stop();
+            }
         }
     }
 }
