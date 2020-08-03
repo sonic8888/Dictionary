@@ -79,14 +79,15 @@
                 <CheckBox x:Name="checkbox" IsChecked="True" Content="Звук" Height="20" FontSize="12" VerticalAlignment="Top" Checked="checkbox_Checked" Unchecked="checkbox_Unchecked"  />
             </StackPanel>
 
-            <TextBlock x:Name="textblockTrue" Grid.Row="2" Grid.Column="1" Text="15" Width="50" FontSize="36" TextAlignment="Center" VerticalAlignment="Center" Visibility="Hidden"/>
+            <TextBlock x:Name="textblockTrue" Grid.Row="2" Grid.Column="1" Text="15" Width="50" FontSize="26" TextAlignment="Center" VerticalAlignment="Top" Visibility="Hidden" Foreground="#FF115F00" Margin="0,10"/>
             <Canvas Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="5" >
                 <Rectangle x:Name="recRed"   Height="55"  Width="340" Fill="Red" Stroke="Black" Visibility="Hidden"/>
                 <Rectangle x:Name="recGreen"   Height="55"  Width="1" Fill="Green" Stroke="Black" Visibility="Hidden" />
             </Canvas>
-            <TextBlock x:Name="textblockFalse" Grid.Row="2" Grid.Column="7" Text="3" Width="50" FontSize="36" TextAlignment="Center" VerticalAlignment="Center" Visibility="Hidden"/>
+            <TextBlock x:Name="textblockFalse" Grid.Row="2" Grid.Column="7" Text="3" Width="50" FontSize="26" TextAlignment="Center" VerticalAlignment="Top" Visibility="Hidden" Foreground="#FFDE0000"  Margin="0,10"/>
             <Button x:Name="buttonBack" Content="Заново"  Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Margin="15,30" FontSize="20" Background="#FFC3C3C3"  Visibility="Hidden" Click="buttonBack_Click"/>
             <Button x:Name="buttonEnd" Content="Завершить" Grid.Row="4" Grid.Column="7" Grid.ColumnSpan="2" Margin="15,30" FontSize="20" Background="#FFC3C3C3"  Visibility="Hidden" Click="buttonEnd_Click"/>
+            <Label Name="labelTotal" Grid.Row="0" Grid.Column="3" Grid.ColumnSpan="3" Content="Всего:" HorizontalContentAlignment="Center" VerticalContentAlignment="Bottom" FontSize="28" Visibility="Hidden"/>
         </Grid>
 
     </Grid>

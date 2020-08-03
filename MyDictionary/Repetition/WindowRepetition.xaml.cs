@@ -321,6 +321,7 @@ namespace MyDictionary.Repetition
             recGreen.Visibility = Visibility.Visible;
             buttonBack.Visibility = Visibility.Visible;
             buttonEnd.Visibility = Visibility.Visible;
+            labelTotal.Visibility = Visibility;
         }
 
         private void buttonBack_Click(object sender, RoutedEventArgs e)
@@ -336,8 +337,8 @@ namespace MyDictionary.Repetition
         {
             DoubleAnimation danime = new DoubleAnimation();
             countFalse = myWords.Count;
-            DispatcherTimer timer= CreateDispetcherTrue();
-            timer.Start();
+            DispatcherTimer timer = CreateDispetcherTrue();
+            timer?.Start();
             danime.From = 1;
             danime.To = countTrue * recRed.Width / myWords.Count;
             danime.Duration = TimeSpan.FromMilliseconds(countMilisekFinishAnimation);
@@ -348,8 +349,18 @@ namespace MyDictionary.Repetition
         {
             DispatcherTimer timer = new DispatcherTimer();
             timer.Tick += new EventHandler(InitTextBlock);
-            timer.Interval = new TimeSpan(0, 0, 0, 0, countMilisekFinishAnimation / countTrue);
+            int delay = 0;
+            if (countTrue != 0)
+            {
+                delay = countMilisekFinishAnimation / countTrue;
+            }
+            else
+            {
+                delay = 1;
+            }
+            timer.Interval = new TimeSpan(0, 0, 0, 0, delay);
             return timer;
+
         }
         private void InitTextBlock(object sender, EventArgs e)
         {
