@@ -58,23 +58,23 @@ namespace MyDictionary.Repetition
         DispatcherTimer dispatcherTimerNext;
         public WindowRepetition(List<MyWord> words)
         {
-            myWords = words;
-            currentMyWord = myWords[currentIndex];
-            countMilisek = App.dataVariable.CountMilisek;
-            countMilisekDelay = App.dataVariable.CountMilisekDelay;
-            CreateDispetherTime();
-            CreateDispetherTimeNext();
+            //myWords = words;
+            //currentMyWord = myWords[currentIndex];
+            //countMilisek = App.dataVariable.CountMilisek;
+            //countMilisekDelay = App.dataVariable.CountMilisekDelay;
+            //CreateDispetherTime();
+            //CreateDispetherTimeNext();
             InitializeComponent();
 
-            pr = progressbar;
-            random = App.random;
-            arrButtons = new Button[2];
-            arrButtons[0] = buttonleft;
-            arrButtons[1] = buttonright;
-            InitElements();
-            templateDefault = buttonleft.Template;
-            templateGreen = (ControlTemplate)TryFindResource("buttonTemplateGreen");
-            templateRed = (ControlTemplate)TryFindResource("buttonTemplateRed");
+            //pr = progressbar;
+            //random = App.random;
+            //arrButtons = new Button[2];
+            //arrButtons[0] = buttonleft;
+            //arrButtons[1] = buttonright;
+            //InitElements();
+            //templateDefault = buttonleft.Template;
+            //templateGreen = (ControlTemplate)TryFindResource("buttonTemplateGreen");
+            //templateRed = (ControlTemplate)TryFindResource("buttonTemplateRed");
 
 
             //colorDefault = new SolidColorBrush(Color.FromRgb(221, 221, 221));
@@ -131,14 +131,14 @@ namespace MyDictionary.Repetition
             {
                 textblocktop.Visibility = Visibility.Hidden;
                 elipsecount.Visibility = Visibility.Hidden;
-                imageTop.Visibility = Visibility.Visible;
+                //imageTop.Visibility = Visibility.Visible;
                 isLock = false;
             }
             else
             {
                 textblocktop.Visibility = Visibility.Visible;
                 elipsecount.Visibility = Visibility.Visible;
-                imageTop.Visibility = Visibility.Hidden;
+                //imageTop.Visibility = Visibility.Hidden;
                 isLock = true;
             }
         }
@@ -171,13 +171,13 @@ namespace MyDictionary.Repetition
             //imageTop.Source = MyTools.CreateBitmapImage(pathCross);
             if (answer)
             {
-                lineyes1.Visibility = Visibility.Visible;
-                lineyes2.Visibility = Visibility.Visible;
+                //lineyes1.Visibility = Visibility.Visible;
+                //lineyes2.Visibility = Visibility.Visible;
             }
             else
             {
-                lineNo1.Visibility = Visibility.Visible;
-                lineNo2.Visibility = Visibility.Visible;
+                //lineNo1.Visibility = Visibility.Visible;
+                //lineNo2.Visibility = Visibility.Visible;
 
             }
             dispatcherTimerNext.Start();
@@ -264,10 +264,10 @@ namespace MyDictionary.Repetition
         //}
         private void HiddenLines()
         {
-            lineyes1.Visibility = Visibility.Hidden;
-            lineyes2.Visibility = Visibility.Hidden;
-            lineNo1.Visibility = Visibility.Hidden;
-            lineNo2.Visibility = Visibility.Hidden;
+            //lineyes1.Visibility = Visibility.Hidden;
+            //lineyes2.Visibility = Visibility.Hidden;
+            //lineNo1.Visibility = Visibility.Hidden;
+            //lineNo2.Visibility = Visibility.Hidden;
         }
         private void NextStep(object sender, EventArgs e)
         {
@@ -292,11 +292,17 @@ namespace MyDictionary.Repetition
         private void checkbox_Checked(object sender, RoutedEventArgs e)
         {
             isPlay = true;
+            
         }
 
         private void checkbox_Unchecked(object sender, RoutedEventArgs e)
         {
             isPlay = false;
+            //lineRed.BeginAnimation(LineGeometry.EndPointProperty, null);
+            //lineRed.EndPoint = new Point(70, 40);
+
+
+
         }
         private void Summarizing()
         {
@@ -375,6 +381,28 @@ namespace MyDictionary.Repetition
             {
                 timer.Stop();
             }
+        }
+
+        private void buttontest_Click_1(object sender, RoutedEventArgs e)
+        {
+            pathX.Visibility = Visibility.Visible;
+            PointAnimation myPointAnimation = new PointAnimation();
+            myPointAnimation.Duration = TimeSpan.FromMilliseconds(100);
+            //myPointAnimation.RepeatBehavior = RepeatBehavior.Forever;
+            myPointAnimation.From = lineRed.EndPoint;
+            myPointAnimation.To = new Point(100, 70);
+            myPointAnimation.Completed += CreateAnimation;
+            lineRed.BeginAnimation(LineGeometry.EndPointProperty, myPointAnimation);
+        }
+        private void CreateAnimation(object sender, EventArgs e)
+        {
+
+            PointAnimation myPointAnimation = new PointAnimation();
+            myPointAnimation.Duration = TimeSpan.FromMilliseconds(100);
+            myPointAnimation.From = lineRed2.EndPoint;
+            myPointAnimation.To = new Point(70, 70);
+            lineRed2.BeginAnimation(LineGeometry.EndPointProperty, myPointAnimation);
+
         }
     }
 }
