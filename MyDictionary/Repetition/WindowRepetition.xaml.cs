@@ -28,6 +28,7 @@ namespace MyDictionary.Repetition
     public partial class WindowRepetition : Window
     {
         bool isLock = true;
+     
         bool isPlay = true;
         //bool IsAnswer = true;
         //string pathCheck = @"/MyDictionary;component/Picture/GalkaLow.png";
@@ -206,6 +207,7 @@ namespace MyDictionary.Repetition
             {
                 Button but = (Button)sender;
                 MyWord mw = (MyWord)but.DataContext;
+                dispatcherTimer.Stop();
                 if (mw.WordId == currentMyWord.WordId)
                 {
                     //but.Background = colorGreen;
@@ -227,6 +229,7 @@ namespace MyDictionary.Repetition
             {
                 Button but = (Button)sender;
                 MyWord mw = (MyWord)but.DataContext;
+                dispatcherTimer.Stop();
                 if (mw.WordId == currentMyWord.WordId)
                 {
                     //but.Background = colorGreen
@@ -352,7 +355,7 @@ namespace MyDictionary.Repetition
             int delay = 0;
             if (countTrue != 0)
             {
-                delay = countMilisekFinishAnimation / countTrue;
+                delay = countMilisekFinishAnimation / (countTrue+2);
             }
             else
             {

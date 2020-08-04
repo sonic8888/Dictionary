@@ -55,11 +55,11 @@
                 <!--<Ellipse x:Name="elipseYes" Grid.Row="1" Grid.Column="1" Width="70" Height="70" Fill="#FF0FD334"/>
                 <Line X1="60" Y1="35" X2="80" Y2="70" StrokeThickness="4" Grid.Row="1" Grid.Column="1" Stroke="Red"
                       Fill="#FFDC1F1F"/>-->
-                <Image x:Name="imageTop" Grid.Row="1" Grid.Column="1"   Visibility="Hidden" Source="/MyDictionary;component/Picture/GalkaLow.png"  />
-                <Line x:Name="lineyes1"  Grid.Row="1" Grid.Column="1" X1="65" Y1="25" X2="80" Y2="75" Stroke="White" StrokeThickness="7" StrokeEndLineCap="Round"  StrokeStartLineCap="Round" Visibility="Hidden" SnapsToDevicePixels="True"/>
-                <Line x:Name="lineyes2"  Grid.Row="1" Grid.Column="1" X1="80" Y1="75" X2="95" Y2="25" Stroke="White" StrokeThickness="7" StrokeEndLineCap="Round"  StrokeStartLineCap="Round" Visibility="Hidden" SnapsToDevicePixels="True"/>
-                <Line x:Name="lineNo1"  Grid.Row="1" Grid.Column="1" X1="65" Y1="25" X2="95" Y2="75" Stroke="Red" StrokeThickness="7" StrokeEndLineCap="Round" StrokeStartLineCap="Round" Visibility="Hidden" SnapsToDevicePixels="True"/>
-                <Line x:Name="lineNo2"  Grid.Row="1" Grid.Column="1" X1="65" Y1="75" X2="95" Y2="25" Stroke="Red" StrokeThickness="7" StrokeEndLineCap="Round" StrokeStartLineCap="Round" Visibility="Hidden" SnapsToDevicePixels="True"/>
+                <!--<Image x:Name="imageTop" Grid.Row="1" Grid.Column="1"   Visibility="Hidden" Source="/MyDictionary;component/Picture/GalkaLow.png"  />-->
+                <Line x:Name="lineyes1"  Grid.Row="1" Grid.Column="1" X1="65" Y1="35" X2="80" Y2="70" Stroke="White" StrokeThickness="7" StrokeEndLineCap="Round"  StrokeStartLineCap="Round" Visibility="Visible" SnapsToDevicePixels="True"/>
+                <Line x:Name="lineyes2"  Grid.Row="1" Grid.Column="1" X1="80" Y1="70" X2="95" Y2="35" Stroke="White" StrokeThickness="7" StrokeEndLineCap="Round"  StrokeStartLineCap="Round" Visibility="Visible" SnapsToDevicePixels="True"/>
+                <Line x:Name="lineNo1"  Grid.Row="1" Grid.Column="1" X1="65" Y1="35" X2="95" Y2="70" Stroke="Red" StrokeThickness="7" StrokeEndLineCap="Round" StrokeStartLineCap="Round" Visibility="Visible" SnapsToDevicePixels="True"/>
+                <Line x:Name="lineNo2"  Grid.Row="1" Grid.Column="1" X1="65" Y1="70" X2="95" Y2="35" Stroke="Red" StrokeThickness="7" StrokeEndLineCap="Round" StrokeStartLineCap="Round" Visibility="Visible" SnapsToDevicePixels="True"/>
             </Grid>
             <TextBlock x:Name="textblockword" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="7" FontSize="50" Text="example" TextAlignment="Center"  />
             <Button x:Name="buttonleft" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" FontSize="30" Click="buttonleft_Click" Background="#FFC3C3C3"  >
