@@ -28,7 +28,7 @@ namespace MyDictionary.Repetition
     public partial class WindowRepetition : Window
     {
         bool isLock = true;
-     
+
         bool isPlay = true;
         //bool IsAnswer = true;
         //string pathCheck = @"/MyDictionary;component/Picture/GalkaLow.png";
@@ -292,14 +292,13 @@ namespace MyDictionary.Repetition
         private void checkbox_Checked(object sender, RoutedEventArgs e)
         {
             isPlay = true;
-            
+
         }
 
         private void checkbox_Unchecked(object sender, RoutedEventArgs e)
         {
             isPlay = false;
-            //lineRed.BeginAnimation(LineGeometry.EndPointProperty, null);
-            //lineRed.EndPoint = new Point(70, 40);
+            BackAnimationX();
 
 
 
@@ -361,7 +360,7 @@ namespace MyDictionary.Repetition
             int delay = 0;
             if (countTrue != 0)
             {
-                delay = countMilisekFinishAnimation / (countTrue+2);
+                delay = countMilisekFinishAnimation / (countTrue + 2);
             }
             else
             {
@@ -402,6 +401,14 @@ namespace MyDictionary.Repetition
             myPointAnimation.From = lineRed2.EndPoint;
             myPointAnimation.To = new Point(70, 70);
             lineRed2.BeginAnimation(LineGeometry.EndPointProperty, myPointAnimation);
+
+        }
+        private void BackAnimationX()
+        {
+            lineRed.BeginAnimation(LineGeometry.EndPointProperty, null);
+            lineRed.EndPoint = new Point(70, 40);
+            lineRed2.BeginAnimation(LineGeometry.EndPointProperty, null);
+            lineRed2.EndPoint = new Point(100, 40);
 
         }
     }
