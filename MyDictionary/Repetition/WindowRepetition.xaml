@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MyDictionary.Repetition"
         mc:Ignorable="d"
-        Title="WindowRepetition"  Height="600" Width="800">
+        Title="WindowRepetition"  Height="600" Width="800" Closing="Window_Closing">
     <Window.Resources>
         <ControlTemplate x:Key="buttonTemplateGreen"  TargetType="{x:Type Button}">
             <Border x:Name="borderButtonGreen" BorderBrush="#FF54C564" BorderThickness="2" Background="#FF54C564"   TextBlock.Foreground="Black" TextBlock.FontSize="30">
@@ -40,7 +40,7 @@
             </Grid.ColumnDefinitions>
             <Canvas x:Name="canvasTop" Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="3">
                 <Ellipse x:Name="elipsecount"   Width="88" Height="88" Fill="#FF009502"  Canvas.Left="42.4" Canvas.Top="10"/>
-                <Path x:Name="pathX"  Stroke="Red" StrokeThickness="6" StrokeEndLineCap="Round" StrokeStartLineCap="Round" Visibility="Visible">
+                <Path x:Name="pathX"  Stroke="Red" StrokeThickness="6" StrokeEndLineCap="Round" StrokeStartLineCap="Round" Visibility="Hidden">
                     <Path.Data>
                         <GeometryGroup  >
                             <LineGeometry StartPoint="70,40" EndPoint="70,40" x:Name="lineRed" />
@@ -48,33 +48,16 @@
                         </GeometryGroup>
                     </Path.Data>
                 </Path>
+                <Path x:Name="pathV"  Stroke="White" StrokeThickness="6" StrokeEndLineCap="Round" StrokeStartLineCap="Round" Visibility="Hidden">
+                    <Path.Data>
+                        <GeometryGroup  >
+                            <LineGeometry StartPoint="70,40" EndPoint="70,40" x:Name="lineWhite" />
+                            <LineGeometry StartPoint="85,70" EndPoint="85,70" x:Name="lineWhite2"  />
+                        </GeometryGroup>
+                    </Path.Data>
+                </Path>
             </Canvas>
-            <TextBlock x:Name="textblocktop" Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="3" TextAlignment="Center" VerticalAlignment="Center" FontSize="40"   Foreground="White" Visibility="Hidden" Text="20"/>
-            <!--<Grid x:Name="gridtop" Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="3">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="5"/>
-                    <RowDefinition/>
-                    <RowDefinition Height="5"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="5"/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition Width="5"/>
-                </Grid.ColumnDefinitions>
-                <Ellipse x:Name="elipsecount" Grid.Row="1" Grid.Column="1" Width="88" Height="88" Fill="#FF009502"  />
-                <TextBlock x:Name="textblocktop" Grid.Row="1" Grid.Column="1" TextAlignment="Center" VerticalAlignment="Center" FontSize="40"   Foreground="White"/>
-
-                -->
-            <!--<Ellipse x:Name="elipseYes" Grid.Row="1" Grid.Column="1" Width="70" Height="70" Fill="#FF0FD334"/>
-                <Line X1="60" Y1="35" X2="80" Y2="70" StrokeThickness="4" Grid.Row="1" Grid.Column="1" Stroke="Red"
-                      Fill="#FFDC1F1F"/>-->
-            <!--<Image x:Name="imageTop" Grid.Row="1" Grid.Column="1"   Visibility="Hidden" Source="/MyDictionary;component/Picture/GalkaLow.png"  />-->
-            <!--
-                <Line x:Name="lineyes1"  Grid.Row="1" Grid.Column="1" X1="65" Y1="35" X2="80" Y2="70" Stroke="White" StrokeThickness="7" StrokeEndLineCap="Round"  StrokeStartLineCap="Round" Visibility="Visible" SnapsToDevicePixels="True"/>
-                <Line x:Name="lineyes2"  Grid.Row="1" Grid.Column="1" X1="80" Y1="70" X2="95" Y2="35" Stroke="White" StrokeThickness="7" StrokeEndLineCap="Round"  StrokeStartLineCap="Round" Visibility="Visible" SnapsToDevicePixels="True"/>
-                <Line x:Name="lineNo1"  Grid.Row="1" Grid.Column="1" X1="65" Y1="35" X2="95" Y2="70" Stroke="Red" StrokeThickness="7" StrokeEndLineCap="Round" StrokeStartLineCap="Round" Visibility="Visible" SnapsToDevicePixels="True"/>
-                <Line x:Name="lineNo2"  Grid.Row="1" Grid.Column="1" X1="65" Y1="70" X2="95" Y2="35" Stroke="Red" StrokeThickness="7" StrokeEndLineCap="Round" StrokeStartLineCap="Round" Visibility="Visible" SnapsToDevicePixels="True"/>
-            </Grid>-->
+            <TextBlock x:Name="textblocktop" Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="3" TextAlignment="Center" VerticalAlignment="Center" FontSize="40"   Foreground="White" Visibility="Visible" Text="20"/>
             <TextBlock x:Name="textblockword" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="7" FontSize="50" Text="example" TextAlignment="Center"  />
             <Button x:Name="buttonleft" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" FontSize="30" Click="buttonleft_Click" Background="#FFC3C3C3"  >
                 <Button.Content>
@@ -88,7 +71,7 @@
                     <TextBlock x:Name="buttoncontentright" Text="Right" TextWrapping="Wrap"/>
                 </Button.Content>
             </Button>
-            <Button x:Name="buttontest" Content="test" Grid.Row="4" Grid.Column="8" Click="buttontest_Click_1" Background="#FFEB988E"  />
+            <!--<Button x:Name="buttontest" Content="test" Grid.Row="4" Grid.Column="8" Click="buttontest_Click_1" Background="#FFEB988E"  />-->
             <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="7" Grid.ColumnSpan="2" Margin="0,0,0,70">
                 <CheckBox x:Name="checkbox" IsChecked="True" Content="Звук" Height="20" FontSize="12" VerticalAlignment="Top" Checked="checkbox_Checked" Unchecked="checkbox_Unchecked"  />
             </StackPanel>

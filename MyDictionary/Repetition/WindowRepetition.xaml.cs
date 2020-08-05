@@ -40,7 +40,9 @@ namespace MyDictionary.Repetition
         int countTrue = 0;//кол-во верных ответов
         int countFalse = 0;
         int _countTrue = 0;
+        int countMilisekAnimationPath = 100;
         int countMilisekFinishAnimation = 2000;
+        int countMilisekDelayFinishAnimation = 2000;
         List<MyWord> myWords;
         Random random;
         int currentIndex = 0;
@@ -58,23 +60,23 @@ namespace MyDictionary.Repetition
         DispatcherTimer dispatcherTimerNext;
         public WindowRepetition(List<MyWord> words)
         {
-            //myWords = words;
-            //currentMyWord = myWords[currentIndex];
-            //countMilisek = App.dataVariable.CountMilisek;
-            //countMilisekDelay = App.dataVariable.CountMilisekDelay;
-            //CreateDispetherTime();
-            //CreateDispetherTimeNext();
+            myWords = words;
+            currentMyWord = myWords[currentIndex];
+            countMilisek = App.dataVariable.CountMilisek;
+            countMilisekDelay = App.dataVariable.CountMilisekDelay;
+            CreateDispetherTime();
+            CreateDispetherTimeNext();
             InitializeComponent();
 
-            //pr = progressbar;
-            //random = App.random;
-            //arrButtons = new Button[2];
-            //arrButtons[0] = buttonleft;
-            //arrButtons[1] = buttonright;
-            //InitElements();
-            //templateDefault = buttonleft.Template;
-            //templateGreen = (ControlTemplate)TryFindResource("buttonTemplateGreen");
-            //templateRed = (ControlTemplate)TryFindResource("buttonTemplateRed");
+            pr = progressbar;
+            random = App.random;
+            arrButtons = new Button[2];
+            arrButtons[0] = buttonleft;
+            arrButtons[1] = buttonright;
+            InitElements();
+            templateDefault = buttonleft.Template;
+            templateGreen = (ControlTemplate)TryFindResource("buttonTemplateGreen");
+            templateRed = (ControlTemplate)TryFindResource("buttonTemplateRed");
 
 
             //colorDefault = new SolidColorBrush(Color.FromRgb(221, 221, 221));
@@ -158,27 +160,26 @@ namespace MyDictionary.Repetition
         {
             dispatcherTimer.Stop();
             isLock = false;
-            if (currentIndex >= (myWords.Count - 1))
-            {
-                //MessageBox.Show("Finish");
-                Summarizing();
-                return;
-            }
-            //progressbar.Value = 100;
+            progressbar.Value = 100;
             textblocktop.Visibility = Visibility.Hidden;
-            //elipsecount.Visibility = Visibility.Hidden;
-            //imageTop.Visibility = Visibility.Visible;
-            //imageTop.Source = MyTools.CreateBitmapImage(pathCross);
+         
             if (answer)
             {
-                //lineyes1.Visibility = Visibility.Visible;
-                //lineyes2.Visibility = Visibility.Visible;
+                StartAnimationV();
             }
             else
             {
-                //lineNo1.Visibility = Visibility.Visible;
-                //lineNo2.Visibility = Visibility.Visible;
+                StartAnimationX();
 
+            }
+            if (currentIndex >= (myWords.Count - 1))
+            {
+                DispatcherTimer timer = new DispatcherTimer();
+                timer.Tick += new EventHandler(Summarizing);
+                timer.Interval = new TimeSpan(0, 0, 0, 0, countMilisekDelayFinishAnimation);
+                timer.Start();
+                //Summarizing();
+                return;
             }
             dispatcherTimerNext.Start();
         }
@@ -210,14 +211,14 @@ namespace MyDictionary.Repetition
                 dispatcherTimer.Stop();
                 if (mw.WordId == currentMyWord.WordId)
                 {
-                    //but.Background = colorGreen;
-                    //but.Template = templateGreen;
+                    
+                    but.Template = templateGreen;
                     AnswerTrue(but);
                 }
                 else
                 {
-                    //but.Background = colorRed;
-                    //but.Template = templateRed;
+                   
+                    but.Template = templateRed;
                     AnswerFalse(but);
                 }
             }
@@ -232,14 +233,14 @@ namespace MyDictionary.Repetition
                 dispatcherTimer.Stop();
                 if (mw.WordId == currentMyWord.WordId)
                 {
-                    //but.Background = colorGreen
-                    //but.Template = templateGreen;
+                    
+                    but.Template = templateGreen;
                     AnswerTrue(but);
                 }
                 else
                 {
-                    //but.Background = colorRed;
-                    //but.Template = templateRed;
+                   
+                    but.Template = templateRed;
                     AnswerFalse(but);
                 }
             }
@@ -257,17 +258,12 @@ namespace MyDictionary.Repetition
             EndTime(false);
         }
 
-        //public int CountDown
-        //{
-        //    get { return countdown; }
-        //    set { countdown = value; }
-        //}
+      
         private void HiddenLines()
         {
-            //lineyes1.Visibility = Visibility.Hidden;
-            //lineyes2.Visibility = Visibility.Hidden;
-            //lineNo1.Visibility = Visibility.Hidden;
-            //lineNo2.Visibility = Visibility.Hidden;
+        
+            BackAnimationV();
+            BackAnimationX();
         }
         private void NextStep(object sender, EventArgs e)
         {
@@ -298,13 +294,16 @@ namespace MyDictionary.Repetition
         private void checkbox_Unchecked(object sender, RoutedEventArgs e)
         {
             isPlay = false;
-            BackAnimationX();
+            
 
 
 
         }
-        private void Summarizing()
+        private void Summarizing(object sender, EventArgs e)
         {
+            DispatcherTimer timer = sender as DispatcherTimer;
+            timer.Stop();
+            textblocktop.Visibility = Visibility.Visible;
             textblocktop.Text = myWords.Count.ToString();
             textblocktop.Foreground = new SolidColorBrush(Colors.Black);
             HiddenContent();
@@ -334,12 +333,15 @@ namespace MyDictionary.Repetition
 
         private void buttonBack_Click(object sender, RoutedEventArgs e)
         {
-
+            this.Close();
+            int count = App.dataVariable.CountWordRepetition;
+            List<MyWord> lists = BdTools.GetRandomListMyWord(count);
+            WindowsManager.CreateWindowRepetition(lists);
         }
 
         private void buttonEnd_Click(object sender, RoutedEventArgs e)
         {
-
+            this.Close();
         }
         private void FinishAnimation()
         {
@@ -384,20 +386,23 @@ namespace MyDictionary.Repetition
 
         private void buttontest_Click_1(object sender, RoutedEventArgs e)
         {
+            StartAnimationV();
+        }
+        private void StartAnimationX()
+        {
             pathX.Visibility = Visibility.Visible;
             PointAnimation myPointAnimation = new PointAnimation();
-            myPointAnimation.Duration = TimeSpan.FromMilliseconds(100);
-            //myPointAnimation.RepeatBehavior = RepeatBehavior.Forever;
+            myPointAnimation.Duration = TimeSpan.FromMilliseconds(countMilisekAnimationPath);
             myPointAnimation.From = lineRed.EndPoint;
             myPointAnimation.To = new Point(100, 70);
-            myPointAnimation.Completed += CreateAnimation;
+            myPointAnimation.Completed += CreateСontinuationAnimationX;
             lineRed.BeginAnimation(LineGeometry.EndPointProperty, myPointAnimation);
         }
-        private void CreateAnimation(object sender, EventArgs e)
+        private void CreateСontinuationAnimationX(object sender, EventArgs e)
         {
 
             PointAnimation myPointAnimation = new PointAnimation();
-            myPointAnimation.Duration = TimeSpan.FromMilliseconds(100);
+            myPointAnimation.Duration = TimeSpan.FromMilliseconds(countMilisekAnimationPath);
             myPointAnimation.From = lineRed2.EndPoint;
             myPointAnimation.To = new Point(70, 70);
             lineRed2.BeginAnimation(LineGeometry.EndPointProperty, myPointAnimation);
@@ -409,7 +414,42 @@ namespace MyDictionary.Repetition
             lineRed.EndPoint = new Point(70, 40);
             lineRed2.BeginAnimation(LineGeometry.EndPointProperty, null);
             lineRed2.EndPoint = new Point(100, 40);
+            pathX.Visibility = Visibility.Hidden;
 
+        }
+        private void StartAnimationV()
+        {
+            pathV.Visibility = Visibility.Visible;
+            PointAnimation myPointAnimation = new PointAnimation();
+            myPointAnimation.Duration = TimeSpan.FromMilliseconds(countMilisekAnimationPath);
+            myPointAnimation.From = lineWhite.EndPoint;
+            myPointAnimation.To = new Point(85, 70);
+            myPointAnimation.Completed += CreateСontinuationAnimationV;
+            lineWhite.BeginAnimation(LineGeometry.EndPointProperty, myPointAnimation);
+
+        }
+        private void CreateСontinuationAnimationV(object sender, EventArgs e)
+        {
+            PointAnimation myPointAnimation = new PointAnimation();
+            myPointAnimation.Duration = TimeSpan.FromMilliseconds(countMilisekAnimationPath);
+            myPointAnimation.From = lineWhite2.EndPoint;
+            myPointAnimation.To = new Point(100, 40);
+            lineWhite2.BeginAnimation(LineGeometry.EndPointProperty, myPointAnimation);
+        }
+        private void BackAnimationV()
+        {
+            lineWhite.BeginAnimation(LineGeometry.EndPointProperty, null);
+            lineWhite.EndPoint = new Point(70, 40);
+            lineWhite2.BeginAnimation(LineGeometry.EndPointProperty, null);
+            lineWhite2.EndPoint = new Point(85, 70);
+            pathV.Visibility = Visibility.Hidden;
+
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            dispatcherTimerNext.Stop();
+            dispatcherTimer.Stop();
         }
     }
 }
