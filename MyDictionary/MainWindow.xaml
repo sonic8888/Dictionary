@@ -63,5 +63,6 @@
         <Button x:Name="buttonBreyShtorm4" Grid.Row="6" Grid.Column="6" Content="BreyShtorm4" Click="buttonBreyShtorm4_Click" />
         <Button x:Name="buttonBreyShtormResult" Grid.Row="8" Grid.Column="6" Content="BreyShtormResult" Click="buttonBreyShtormResult_Click"  />
         <Button x:Name="buttonTest" Grid.Row="8" Grid.Column="4" Content="Repetition" Click="buttonTest_Click"  />
+        <Button x:Name="buttonSprint" Grid.Row="8" Grid.Column="2" Content="Sprint" Click="buttonSprint_Click"    />
     </Grid>
 </Window>

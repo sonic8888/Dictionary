@@ -200,5 +200,12 @@ namespace MyDictionary
                 }
             }
         }
+
+        private void buttonSprint_Click(object sender, RoutedEventArgs e)
+        {
+             
+            List<MyWord> lists = BdTools.GetRandomListMyWord(10);
+            WindowsManager.CreateWindowSprint(lists);
+        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using MyDictionary.EF;
 using MyDictionary.Repetition;
+using MyDictionary.Sprint;
 using MyDictionary.Trenings;
 using System;
 using System.Collections.Generic;
@@ -74,7 +75,14 @@ namespace MyDictionary.Tools
             wr.Show();
             return wr;
         }
-     
-      
-}
+        public static WindowSprint CreateWindowSprint(List<MyWord> list)
+        {
+            WindowSprint wr = new WindowSprint(list);
+            wr.Show();
+            return wr;
+        }
+
+
+
+    }
 }
