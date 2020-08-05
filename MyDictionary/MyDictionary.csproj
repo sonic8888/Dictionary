@@ -111,6 +111,9 @@
     <Compile Include="Repetition\WindowRepetition.xaml.cs">
       <DependentUpon>WindowRepetition.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Sprint\WindowSprint.xaml.cs">
+      <DependentUpon>WindowSprint.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Tools\BdTools.cs" />
     <Compile Include="Tools\MyTools.cs" />
     <Compile Include="Tools\WindowsManager.cs" />
@@ -158,6 +161,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Repetition\WindowRepetition.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Sprint\WindowSprint.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

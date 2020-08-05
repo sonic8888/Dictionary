@@ -157,9 +157,8 @@ namespace MyDictionary
 
         private void buttonTest_Click(object sender, RoutedEventArgs e)
         {
-            //ObservableCollection<MyWord> obs = BdTools.ReadWord(10);
-            //List<MyWord> lists = MyTools.GetRandomListMyWord(obs.ToList(), 150);
-            List<MyWord> lists = BdTools.GetRandomListMyWord(6);
+            int count = App.dataVariable.CountWordRepetition;
+            List<MyWord> lists = BdTools.GetRandomListMyWord(count);
             WindowsManager.CreateWindowRepetition(lists);
         }
 
