@@ -16,6 +16,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using XMLRead;
 
 namespace MyDictionary.Sprint
 {
@@ -35,6 +36,10 @@ namespace MyDictionary.Sprint
         bool isBoolRight = true;
         bool isBoolLeft = false;
         int countTimeWork = 23;
+        int countAnswerTrue = 0;
+        int myltiRings = 20;
+        int currentTotal = 0;
+        string pathFile = @"./FileStorage/totalRings.txt";
         DispatcherTimer dispatcherTimer;
         public WindowSprint(List<MyWord> list)
         {
@@ -173,6 +178,8 @@ namespace MyDictionary.Sprint
         /// </summary>
         private void StartAnimationV()
         {
+            countAnswerTrue++;
+            InitTotal();
             pathV.Visibility = Visibility.Visible;
             elipseBottom.Visibility = Visibility;
             PointAnimation myPointAnimation = new PointAnimation();
@@ -314,6 +321,36 @@ namespace MyDictionary.Sprint
         {
             buttonAnswerFalse.IsEnabled = false;
             buttonAnswerTrue.IsEnabled = false;
+            SaveResult();
+        }
+        private void InitTotal()
+        {
+            currentTotal = countAnswerTrue * myltiRings;
+            textblockCountRings.Text = currentTotal.ToString();
+        }
+        private void SaveResult()
+        {
+            if (File.Exists(pathFile))
+            {
+                string str = FIleTools.ReadPath(pathFile);
+
+                int result = 0;
+                int.TryParse(str, out result);
+                if (currentTotal > result)
+                {
+                    result = currentTotal;
+                    FIleTools.WritePath(pathFile, result.ToString(), false);
+                }
+                textBlockTop.Text = "Лучший результат: " + result + " очков";
+
+
+            }
+            else
+            {
+                FIleTools.WritePath(pathFile, currentTotal.ToString(), false);
+                textBlockTop.Text = "Лучший результат: " + currentTotal + " очков";
+
+            }
         }
     }
 }

@@ -26,7 +26,7 @@
                 
             </Canvas>-->
             <Ellipse x:Name="elipseTop" Width ="60" Height="60" Stroke="Green" Fill="Green" Grid.Row="0" Grid.Column="2" />
-            <TextBlock x:Name="textblockCountRings" Grid.Row="0" Grid.Column="0" Text="3450" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Microsoft JhengHei" FontSize="30" Foreground="#FF066808"/>
+            <TextBlock x:Name="textblockCountRings" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Microsoft JhengHei" FontSize="30" Foreground="#FF066808"/>
             <TextBlock x:Name="textblockTime" Grid.Row="0" Grid.Column="2" Text="20" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Microsoft JhengHei" FontSize="36" Foreground="#FFFFEFEF"/>
             <TextBlock x:Name="textblockWord" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Text="example" VerticalAlignment="Center" FontSize="38" HorizontalAlignment="Center" FontFamily="Georgia"/>
             <TextBlock x:Name="textblockTranslate" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" Text="пример" VerticalAlignment="Center" FontSize="24" HorizontalAlignment="Center" TextWrapping="Wrap" FontFamily="Georgia"/>
@@ -53,6 +53,8 @@
 
             <Button x:Name="buttonAnswerFalse" Content="Неверно" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" FontFamily="Georgia" FontSize="20" Margin="10" Background="#FFEE1212" Foreground="White" Click="buttonAnswerFalse_Click" />
             <Button x:Name="buttonAnswerTrue" Content="Верно" Grid.Row="4" Grid.Column="3" Grid.ColumnSpan="2" FontFamily="Georgia" FontSize="20" Margin="10" Background="Green" Foreground="White" Click="buttonAnswerTrue_Click" />
+            <TextBlock x:Name="textBlockTop" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" Margin="0,-120,0,0" Text="Правильный ответ: 20 очков"
+                       VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20"/>
         </Grid>
     </Grid>
 </Window>
