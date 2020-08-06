@@ -90,5 +90,30 @@ namespace MyDictionary.Tools
             bi.EndInit();
             return bi;
         }
+        /// <summary>
+        /// возвращает рандомное MyWord из коллекции но только не index
+        /// </summary>
+        /// <param name="sourse"></param>
+        /// <param name="index"></param>
+        /// <returns></returns>
+        public static MyWord GetRandomMyWord(List<MyWord> sourse, int index)
+        {
+            int indexRandom = 0;
+            while ((indexRandom = App.random.Next(sourse.Count)) == index) ;
+            return sourse[indexRandom];
+           
+        }
+        /// <summary>
+        /// возвращает рандомный перевод из MyWord
+        /// </summary>
+        /// <param name="mw"></param>
+        /// <returns></returns>
+        public static string GetTranslate(MyWord mw)
+        {
+            int count = mw.MyTranslates.Count;
+            List<MyTranslate> lt = mw.MyTranslates.ToList();
+            MyTranslate tr = lt[App.random.Next(count)];
+            return tr.Translate;
+        }
     }
 }

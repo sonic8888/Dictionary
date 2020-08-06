@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MyDictionary.Repetition"
         mc:Ignorable="d"
-        Title="WindowRepetition"  Height="600" Width="800" Closing="Window_Closing">
+        Title="WindowRepetition"  Height="600" Width="800" Closing="Window_Closing" Unloaded="Window_Unloaded">
     <Window.Resources>
         <ControlTemplate x:Key="buttonTemplateGreen"  TargetType="{x:Type Button}">
             <Border x:Name="borderButtonGreen" BorderBrush="#FF54C564" BorderThickness="2" Background="#FF54C564"   TextBlock.Foreground="Black" TextBlock.FontSize="30">

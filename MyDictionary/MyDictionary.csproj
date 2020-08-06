@@ -404,6 +404,14 @@
     <Resource Include="Picture\GalkaLow.png" />
     <Resource Include="Picture\krestikLow.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="SoundsApplication\soundNo.mp3">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SoundsApplication\soundYes.mp3">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

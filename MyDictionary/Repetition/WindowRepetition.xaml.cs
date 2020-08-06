@@ -58,8 +58,10 @@ namespace MyDictionary.Repetition
         ProgressBar pr;
         DispatcherTimer dispatcherTimer;
         DispatcherTimer dispatcherTimerNext;
+        MediaPlayer mediaPlayer;
         public WindowRepetition(List<MyWord> words)
         {
+            mediaPlayer = new MediaPlayer();
             myWords = words;
             currentMyWord = myWords[currentIndex];
             countMilisek = App.dataVariable.CountMilisek;
@@ -94,7 +96,7 @@ namespace MyDictionary.Repetition
                 MyWord mw = arrMw[random[i]];
                 arrButtons[i].DataContext = mw;
                 TextBlock textblock = (TextBlock)arrButtons[i].Content;
-                textblock.Text = GetTranslate(mw);
+                textblock.Text = MyTools.GetTranslate(mw);
             }
             textblocktop.Text = (myWords.Count - currentIndex).ToString();
             if (isPlay)
@@ -118,13 +120,7 @@ namespace MyDictionary.Repetition
             dispatcherTimerNext.Interval = new TimeSpan(0, 0, 0, 0, countMilisekDelay);
 
         }
-        private string GetTranslate(MyWord mw)
-        {
-            int count = mw.MyTranslates.Count;
-            List<MyTranslate> lt = mw.MyTranslates.ToList();
-            MyTranslate tr = lt[random.Next(count)];
-            return tr.Translate;
-        }
+     
 
         private void buttontest_Click(object sender, RoutedEventArgs e)
         {
@@ -162,7 +158,7 @@ namespace MyDictionary.Repetition
             isLock = false;
             progressbar.Value = 100;
             textblocktop.Visibility = Visibility.Hidden;
-         
+
             if (answer)
             {
                 StartAnimationV();
@@ -211,13 +207,13 @@ namespace MyDictionary.Repetition
                 dispatcherTimer.Stop();
                 if (mw.WordId == currentMyWord.WordId)
                 {
-                    
+
                     but.Template = templateGreen;
                     AnswerTrue(but);
                 }
                 else
                 {
-                   
+
                     but.Template = templateRed;
                     AnswerFalse(but);
                 }
@@ -233,13 +229,13 @@ namespace MyDictionary.Repetition
                 dispatcherTimer.Stop();
                 if (mw.WordId == currentMyWord.WordId)
                 {
-                    
+
                     but.Template = templateGreen;
                     AnswerTrue(but);
                 }
                 else
                 {
-                   
+
                     but.Template = templateRed;
                     AnswerFalse(but);
                 }
@@ -258,10 +254,10 @@ namespace MyDictionary.Repetition
             EndTime(false);
         }
 
-      
+
         private void HiddenLines()
         {
-        
+
             BackAnimationV();
             BackAnimationX();
         }
@@ -280,7 +276,7 @@ namespace MyDictionary.Repetition
         }
         private void PlaySound(FileInfo sound)
         {
-            MediaPlayer mediaPlayer = new MediaPlayer();
+            mediaPlayer.Stop();
             mediaPlayer.Open(new Uri(sound.FullName));
             mediaPlayer.Play();
         }
@@ -294,7 +290,7 @@ namespace MyDictionary.Repetition
         private void checkbox_Unchecked(object sender, RoutedEventArgs e)
         {
             isPlay = false;
-            
+
 
 
 
@@ -450,6 +446,11 @@ namespace MyDictionary.Repetition
         {
             dispatcherTimerNext.Stop();
             dispatcherTimer.Stop();
+        }
+
+        private void Window_Unloaded(object sender, RoutedEventArgs e)
+        {
+            mediaPlayer.Close();
         }
     }
 }

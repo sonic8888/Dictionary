@@ -18,6 +18,8 @@ namespace MyDictionary
         private int countSelectWord;//вспомогательная вывыбока для создания ресурса слов(Trenings)
         private int countMilisek;//время задержки таймера прогрессбара в WindowRepetition
         private int countMilisekDelay;//время задержки для смены слов в WindowRepetition
+        public FileInfo soundYes;//звуковой файл "Галочка" "Yes" правилиьный ответ
+        private FileInfo soundNo;//звуковой файл "Нет" не правильный ответ (ошибка)
         public DataVariable()
         {
             defoltValueList = new List<string>();
@@ -62,7 +64,8 @@ namespace MyDictionary
 
                 }
             }
-
+            soundYes = new FileInfo(@".\SoundsApplication\soundYes.mp3");
+            soundNo = new FileInfo(@".\SoundsApplication\soundNo.mp3");
             InitVariable();
         }
         private void WriteDefoltValue()
@@ -173,6 +176,21 @@ namespace MyDictionary
             get { return countMilisekDelay; }
             set { countMilisekDelay = value; }
         }
+     
+
+        public FileInfo SoundYes
+        {
+            get { return soundYes; }
+            set { soundYes = value; }
+        }
+
+        public FileInfo SoundNo
+        {
+            get { return soundNo; }
+            set { soundNo = value; }
+        }
+
+
 
 
 

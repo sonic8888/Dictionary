@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MyDictionary.Sprint"
         mc:Ignorable="d"
-        Title="WindowSprint" Height="600" Width="800">
+        Title="WindowSprint" Height="600" Width="800" Unloaded="Window_Unloaded">
     <Grid  Background="#FFA492F1">
         <Grid x:Name="innergrid" Background="#FFC4C6F9" Margin="60,50">
             <Grid.RowDefinitions>
@@ -30,7 +30,7 @@
             <TextBlock x:Name="textblockTime" Grid.Row="0" Grid.Column="2" Text="20" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Microsoft JhengHei" FontSize="36" Foreground="#FFFFEFEF"/>
             <TextBlock x:Name="textblockWord" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Text="example" VerticalAlignment="Center" FontSize="38" HorizontalAlignment="Center" FontFamily="Georgia"/>
             <TextBlock x:Name="textblockTranslate" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" Text="пример" VerticalAlignment="Center" FontSize="24" HorizontalAlignment="Center" TextWrapping="Wrap" FontFamily="Georgia"/>
-            <Ellipse x:Name="elipseBottom" Width ="60" Height="60" Stroke="Green" Fill="Green" Grid.Row="3" Grid.Column="2" />
+            <Ellipse x:Name="elipseBottom" Width ="60" Height="60" Stroke="Green" Fill="Green" Grid.Row="3" Grid.Column="2" Visibility="Hidden" />
             <Canvas x:Name="canvasBottom" Grid.Row="3" Grid.Column="2">
                 <Path x:Name="pathX"  Stroke="Red" StrokeThickness="6" StrokeEndLineCap="Round" StrokeStartLineCap="Round" Visibility="Hidden"  VerticalAlignment="Center" HorizontalAlignment="Center">
                     <Path.Data>
