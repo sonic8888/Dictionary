@@ -25,17 +25,18 @@ namespace MyDictionary.Sprint
     /// </summary>
     public partial class WindowSprint : Window
     {
-        int countMilisekAnimationPath = 100;
         List<MyWord> myList;
-        bool isAnswerTrue = true;
         MediaPlayer mediaPlayer;
         Random random;
         MyWord currentMyWord;
-        int currentIndex = 0;
+        bool isAnswerTrue = true;
         bool isCurrentBool = true;
         bool isBoolRight = true;
         bool isBoolLeft = false;
-        int countTimeWork = 23;
+        bool isFinish = true;
+        int currentIndex = 0;
+        int countMilisekAnimationPath = 100;
+        int countTimeWork = 0;
         int countAnswerTrue = 0;
         int myltiRings = 20;
         int currentTotal = 0;
@@ -44,6 +45,7 @@ namespace MyDictionary.Sprint
         public WindowSprint(List<MyWord> list)
         {
             mediaPlayer = new MediaPlayer();
+            countTimeWork = App.dataVariable.CountTimeWork;
             myList = list;
             random = App.random;
             InitializeComponent();
@@ -84,37 +86,51 @@ namespace MyDictionary.Sprint
         }
         private void buttonAnswerFalse_Click(object sender, RoutedEventArgs e)
         {
-            if (isCurrentBool == isBoolLeft)
+            if (isFinish)
             {
-                isAnswerTrue = true;
-                PlaySound(App.dataVariable.SoundYes);
-                StartAnimationV();
+                if (isCurrentBool == isBoolLeft)
+                {
+                    isAnswerTrue = true;
+                    PlaySound(App.dataVariable.SoundYes);
+                    StartAnimationV();
+                }
+                else
+                {
+                    isAnswerTrue = false;
+                    PlaySound(App.dataVariable.SoundNo);
+                    StartAnimationX();
+                }
             }
             else
             {
-                isAnswerTrue = false;
-                PlaySound(App.dataVariable.SoundNo);
-                StartAnimationX();
+                this.Close();
+                List<MyWord> lists = BdTools.GetRandomListMyWord(10);
+                WindowsManager.CreateWindowSprint(lists);
             }
 
         }
 
         private void buttonAnswerTrue_Click(object sender, RoutedEventArgs e)
         {
-            //FileInfo fi = App.dataVariable.SoundYes;
-            //PlaySound(fi);
-            //StartAnimationV();
-            if (isCurrentBool == isBoolRight)
+
+            if (isFinish)
             {
-                isAnswerTrue = true;
-                PlaySound(App.dataVariable.SoundYes);
-                StartAnimationV();
+                if (isCurrentBool == isBoolRight)
+                {
+                    isAnswerTrue = true;
+                    PlaySound(App.dataVariable.SoundYes);
+                    StartAnimationV();
+                }
+                else
+                {
+                    isAnswerTrue = false;
+                    PlaySound(App.dataVariable.SoundNo);
+                    StartAnimationX();
+                }
             }
             else
             {
-                isAnswerTrue = false;
-                PlaySound(App.dataVariable.SoundNo);
-                StartAnimationX();
+                this.Close();
             }
         }
         //=======================================================================================================//
@@ -298,8 +314,8 @@ namespace MyDictionary.Sprint
             }
             else
             {
-                MessageBox.Show("Finish");
-                //finish
+                dispatcherTimer.Stop();
+                Finish();
             }
         }
         private void TimeDeduction(object sender, EventArgs e)
@@ -319,8 +335,13 @@ namespace MyDictionary.Sprint
         }
         private void Finish()
         {
-            buttonAnswerFalse.IsEnabled = false;
-            buttonAnswerTrue.IsEnabled = false;
+            isFinish = false;
+            buttonAnswerFalse.Content = "Продолжить";
+            buttonAnswerTrue.Content = "Завершить";
+            textblockWord.Text = "Финиш";
+            textblockWord.FontSize = 42;
+            textblockWord.Foreground = new SolidColorBrush(Colors.Red);
+            textblockTranslate.Text = "";
             SaveResult();
         }
         private void InitTotal()

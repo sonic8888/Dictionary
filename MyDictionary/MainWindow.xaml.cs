@@ -48,6 +48,7 @@ namespace MyDictionary
             textboxCountRepetition.Text = App.dataVariable.CountWordRepetition.ToString();
             textboxCountMlSekRepetition.Text = App.dataVariable.CountMilisek.ToString();
             textboxCountMlSekDelayRepetition.Text = App.dataVariable.CountMilisekDelay.ToString();
+            textboxCountTimeWork.Text = App.dataVariable.CountTimeWork.ToString();
         }
 
         private void clickNewWord(object sender, RoutedEventArgs e)
@@ -206,6 +207,19 @@ namespace MyDictionary
              
             List<MyWord> lists = BdTools.GetRandomListMyWord(10);
             WindowsManager.CreateWindowSprint(lists);
+        }
+
+        private void textboxCountTimeWork_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                string str = textboxCountTimeWork.Text;
+                int value;
+                if (int.TryParse(str, out value))
+                {
+                    App.dataVariable.CountTimeWork = value;
+                }
+            }
         }
     }
 }

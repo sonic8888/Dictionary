@@ -108,7 +108,7 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <ToolBar Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="13">
+        <ToolBar Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="13" FontSize="24" FontFamily="Georgia">
             <Menu x:Name="menu" >Menu</Menu>
             <Separator Width="2"/>
             <Button x:Name="buttonReffresh" Width="50" Click="buttonReffresh_Click"  Foreground="{x:Null}">
@@ -122,6 +122,8 @@
                     <Image Source="Picture/backet.png"/>
                 </Button.Content>
             </Button>
+            <Separator Width="2"/>
+            <TextBlock x:Name="textblockTotalWords" Text="Всего слов: 56" VerticalAlignment="Center" Margin="220,0" FontFamily="Microsoft New Tai Lue"/>
         </ToolBar>
         <StackPanel Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="11" Orientation="Horizontal">
             <TextBox x:Name="textboxFindWord" Width="345" Margin="0,5" VerticalContentAlignment="Center" FontSize="22" Foreground="#FFCFCDCD" Text="найти слово" GotFocus="textboxFindWord_GotFocus" LostFocus="textboxFindWord_LostFocus" PreviewTextInput="textboxFindWord_PreviewTextInput" KeyUp="textboxFindWord_KeyUp"/>

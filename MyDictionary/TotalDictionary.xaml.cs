@@ -33,6 +33,7 @@ namespace MyDictionary
         Thread thread;
         string messageQuestion = "Вы хотите удалить выделеные слова?";
         string messageWarning = "Внимание!";
+        string text = "Всего слов: ";
         //string colorForegraund = "#FFCFCDCD";//серый цвет 
         string pathGrey = @"Picture/Cub_grey.png";
         string pathGreen = @"Picture/Cub_green.png";
@@ -45,7 +46,7 @@ namespace MyDictionary
             collection = col;
             listViewDictionary.ItemsSource = collection;
             collDelete = new List<int>();
-
+            textblockTotalWords.Text = text + collection.Count.ToString();
 
 
 

@@ -13,6 +13,7 @@ namespace MyDictionary
     public class DataVariable
     {
         private List<string> defoltValueList;
+        private int countTimeWork;//время работы упражнения Sprint
         private int countWordRepetition;// кол-во слов для упражнения повторения (Repetitio)
         private int countWordLearning;//кол-во слов для тренировки (Trenings)
         private int countSelectWord;//вспомогательная вывыбока для создания ресурса слов(Trenings)
@@ -28,6 +29,7 @@ namespace MyDictionary
             defoltValueList.Add("20");// defoltValue countWordRepetition
             defoltValueList.Add("10");// defoltValue countMilisek
             defoltValueList.Add("1000");// defoltValue countMilisekDelay
+            defoltValueList.Add("30");// defoltValue countTimeWork
             if (!File.Exists(FIleTools.NameFileDataVariable))
             {
                 WriteDefoltValue();
@@ -94,11 +96,12 @@ namespace MyDictionary
                     try
                     {
 
-                        countMilisekDelay = int.Parse(listValue[4]);//читаем countMilisekDelay
-                        countMilisek = int.Parse(listValue[3]);//читаем countMilisek
-                        countWordRepetition = int.Parse(listValue[2]);//читаем countWordRepetition
-                        countSelectWord = int.Parse(listValue[1]);//читаем countSelectWord
                         countWordLearning = int.Parse(listValue[0]);//читаем countWordLearning
+                        countSelectWord = int.Parse(listValue[1]);//читаем countSelectWord
+                        countWordRepetition = int.Parse(listValue[2]);//читаем countWordRepetition
+                        countMilisek = int.Parse(listValue[3]);//читаем countMilisek
+                        countMilisekDelay = int.Parse(listValue[4]);//читаем countMilisekDelay
+                        countTimeWork = int.Parse(listValue[5]);//читаем countTimeWork
 
                     }
                     catch (Exception ex)
@@ -189,6 +192,13 @@ namespace MyDictionary
             get { return soundNo; }
             set { soundNo = value; }
         }
+
+        public int CountTimeWork
+        {
+            get { return countTimeWork; }
+            set { countTimeWork = value; }
+        }
+
 
 
 
