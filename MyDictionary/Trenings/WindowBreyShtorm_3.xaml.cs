@@ -15,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 using XMLRead;
 
 namespace MyDictionary.Trenings
@@ -45,11 +46,15 @@ namespace MyDictionary.Trenings
         private string strFront;
         private string strDef;
         private int countAnswerTrue = 0;
+        private int trueAnswer = 0;
         Random random;
         MyWord curentMyWord;
         Brush backgroundButtonNextDefault;
         Brush backgroundButtonNextColor;
-        public WindowBreyShtorm_3(List<MyWord> words)
+        bool isTrening;
+        int countFalse;
+        int _countTrue = 0;
+        public WindowBreyShtorm_3(List<MyWord> words, bool isTrening)
         {
             myWords = words;
             InitializeComponent();
@@ -58,6 +63,8 @@ namespace MyDictionary.Trenings
             strDef = "Не знаю ):";
             backgroundButtonNextDefault = buttonNext.Background;
             backgroundButtonNextColor = Brushes.LightCyan;
+            this.isTrening = isTrening;
+            countFalse = myWords.Count();
             Init();
         }
         private void Init()
@@ -161,7 +168,7 @@ namespace MyDictionary.Trenings
         }
         private void LitterFalse(Button buttonSender)
         {
-
+            countAnswerTrue--;
 
         }
 
@@ -202,10 +209,30 @@ namespace MyDictionary.Trenings
             if (countAnswerTrue == wordTrue.Length)
             {
                 myWords[currentWord].TrueAnswer++;
+                trueAnswer++;
             }
+
+            if (++currentWord >= myWords.Count)
+            {
+                if (isTrening)
+                {
+                    VisibilityElements();
+                    textBlockWord.Text = "Всего: " + myWords.Count.ToString();
+                    FinishAnimation();
+                    buttonNext.Content = "Завершить";
+                    buttonNext.Click -= buttonNext_Click;
+                    buttonNext.Click += Close;
+                }
+                else
+                {
+                    WindowsManager.CreateWindowBreyShtorm_4(myWords);
+                    this.Close();
+
+                }
+                return;
+            };
             currentLitter = 0;
             RemoveButtons();
-            currentWord++;
             imageWord.Visibility = Visibility.Hidden;
             textblockexample.Text = "";
             countAnswerTrue = 0;
@@ -214,26 +241,71 @@ namespace MyDictionary.Trenings
 
         private void buttonNext_Click(object sender, RoutedEventArgs e)
         {
-            if (currentWord < myWords.Count - 1)
-            {
-                Finish();
 
-            }
-            else
-            {
-                //MessageBox.Show("Новое окно");
-                /// следующее окно
-                //WindowBreyShtorm_4 wb4 = new WindowBreyShtorm_4(myWords);
-                //wb4.Show();
-                WindowsManager.CreateWindowBreyShtorm_4(myWords);
-                this.Close();
-            }
+
+            Finish();
+
+
         }
         private void PlaySound(FileInfo sound)
         {
             MediaPlayer mediaPlayer = new MediaPlayer();
             mediaPlayer.Open(new Uri(sound.FullName));
             mediaPlayer.Play();
+        }
+        private void FinishAnimation()
+        {
+            DoubleAnimation danime = new DoubleAnimation();
+
+            danime.From = 1;
+            DispatcherTimer timer = CreateDispetcherTrue();
+            timer?.Start();
+            danime.To = trueAnswer * recRed.ActualWidth / myWords.Count;
+            danime.Duration = TimeSpan.FromMilliseconds(2000);
+            recGreen.BeginAnimation(Rectangle.WidthProperty, danime);
+            //dispatcherTimer.Start();
+        }
+        private void VisibilityElements()
+        {
+            wrapPanelTop.Visibility = Visibility.Hidden;
+            wrapPanelBottom.Visibility = Visibility.Hidden;
+            canvasAnime.Visibility = Visibility.Visible;
+            textblockLeft.Visibility = Visibility.Visible;
+            textblockLeft.Foreground = new SolidColorBrush(Colors.Green);
+            textblockRight.Foreground = new SolidColorBrush(Colors.Red);
+            textblockRight.Visibility = Visibility.Visible;
+        }
+        private DispatcherTimer CreateDispetcherTrue()
+        {
+            DispatcherTimer timer = new DispatcherTimer();
+            timer.Tick += new EventHandler(InitTextBlock);
+            int delay = 0;
+            if (trueAnswer != 0)
+            {
+                delay = 2000 / (myWords.Count + 1);
+            }
+            else
+            {
+                delay = 1;
+            }
+            timer.Interval = new TimeSpan(0, 0, 0, 0, delay);
+            return timer;
+
+        }
+        private void InitTextBlock(object sender, EventArgs e)
+        {
+            DispatcherTimer timer = sender as DispatcherTimer;
+            textblockLeft.Text = "Верно: " + _countTrue.ToString();
+            textblockRight.Text = "Не верно: " + countFalse.ToString();
+            countFalse--;
+            if (++_countTrue > trueAnswer)
+            {
+                timer.Stop();
+            }
+        }
+        private void Close(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

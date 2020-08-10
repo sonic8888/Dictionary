@@ -144,6 +144,9 @@
     <Compile Include="WindowWordEdit.xaml.cs">
       <DependentUpon>WindowWordEdit.xaml</DependentUpon>
     </Compile>
+    <Compile Include="WordConstructor\WindowWordConstructor.xaml.cs">
+      <DependentUpon>WindowWordConstructor.xaml</DependentUpon>
+    </Compile>
     <Page Include="ChoseWords.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -201,6 +204,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="WindowWordEdit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WordConstructor\WindowWordConstructor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

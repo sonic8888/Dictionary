@@ -32,7 +32,7 @@ namespace MyDictionary
         string str = "Не знаю ):";
         string esAnswer = "Правильный ответ!";
         string noAnswer = "Не верный ответ!";
-        string strFront ;
+        string strFront;
         Random random;
         int currentRandowValue;
         Brush backgroundButtonDefault;
@@ -208,13 +208,13 @@ namespace MyDictionary
         private void buttonsix_Click(object sender, RoutedEventArgs e)
         {
             Button bt = sender as Button;
-            if ((string)bt.Content==str)
+            if ((string)bt.Content == str)
             {
                 arrButtons[currentRandowValue].Background = backgroundGreen;
                 buttonsix.Foreground = buttonForegroundBlue;
                 buttonsix.Content = strFront;
                 buttonsix.FontSize = 24;
-        
+
                 return;
             }
             Next();
@@ -282,7 +282,7 @@ namespace MyDictionary
         {
             //WindowBreyShtorm_3 bs3 = new WindowBreyShtorm_3(trenings);
             //bs3.Show();
-            WindowsManager.CreateWindowBreyShtorm_3(trenings);
+            WindowsManager.CreateWindowBreyShtorm_3(trenings, false);
             this.Close();
         }
     }

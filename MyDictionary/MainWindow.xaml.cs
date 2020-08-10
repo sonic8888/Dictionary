@@ -63,7 +63,7 @@ namespace MyDictionary
         private void buttonDictionary_Click(object sender, RoutedEventArgs e)
         {
 
-         
+
             while (App.thread.IsAlive)
             {
                 Thread.Sleep(50);
@@ -93,7 +93,7 @@ namespace MyDictionary
         private void buttonBreyShtorm_Click(object sender, RoutedEventArgs e)
         {
 
-        
+
             WindowsManager.CreateWindowBreyShtorm();
         }
 
@@ -135,8 +135,8 @@ namespace MyDictionary
 
         private void buttonBreyShtorm3_Click(object sender, RoutedEventArgs e)
         {
-            ObservableCollection<MyWord> collec_5 = BdTools.ReadWord(7);
-            WindowsManager.CreateWindowBreyShtorm_3(collec_5.ToList());
+            ObservableCollection<MyWord> collec_5 = BdTools.ReadWord(5);
+            WindowsManager.CreateWindowBreyShtorm_3(collec_5.ToList(), true);
         }
 
         private void buttonBreyShtorm4_Click(object sender, RoutedEventArgs e)
@@ -204,7 +204,7 @@ namespace MyDictionary
 
         private void buttonSprint_Click(object sender, RoutedEventArgs e)
         {
-             
+
             List<MyWord> lists = BdTools.GetRandomListMyWord(10);
             WindowsManager.CreateWindowSprint(lists);
         }

@@ -70,6 +70,12 @@
             <TextBlock x:Name="textBlockWord" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="9" VerticalAlignment="Top" HorizontalAlignment="Center" Text="wertyufgertud" FontSize="24" />
             <WrapPanel Name="wrapPanelTop" Orientation="Horizontal" Grid.Row="2" Grid.Column="1" Grid.RowSpan="2" 
                       Grid.ColumnSpan="9" HorizontalAlignment="Center"/>
+            <Canvas x:Name="canvasAnime" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="7" Visibility="Hidden" >
+                <Rectangle x:Name="recRed"   Height="55" Fill="Red" Stroke="Black" Width="{Binding ActualWidth, ElementName=canvasAnime, Mode=OneWay}"  />
+                <Rectangle x:Name="recGreen"   Height="55"  Width="1" Fill="Green" Stroke="Black"  />
+            </Canvas>
+            <TextBlock x:Name="textblockLeft" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Text="4" VerticalAlignment="Center" FontSize="18" HorizontalAlignment="Center" Visibility="Hidden"/>
+            <TextBlock x:Name="textblockRight" Grid.Row="2" Grid.Column="9" Grid.ColumnSpan="2" Text="4" VerticalAlignment="Center" FontSize="18" HorizontalAlignment="Center" Visibility="Hidden"/>
             <WrapPanel Name="wrapPanelBottom" Orientation="Horizontal" Grid.Row="5"  Grid.Column="1" Grid.RowSpan="2"
                        Grid.ColumnSpan="9" HorizontalAlignment="Center"/>
             <Button Name="buttonNext" Grid.Row="9" Grid.Column="9" Grid.ColumnSpan="2"    FontSize="20" Margin="0,0,5,5" Background="#FFCDE7FF" Click="buttonNext_Click" />
