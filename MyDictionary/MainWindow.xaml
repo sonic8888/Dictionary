@@ -59,6 +59,11 @@
                         <TextBox x:Name="textboxCountTimeWork" Width="30" PreviewKeyDown="textboxCountTimeWork_PreviewKeyDown"    />
                     </MenuItem>
                     </MenuItem>
+                    <MenuItem Header="Упражнения">
+                        <MenuItem Header="Кол-во слов упражнений:">
+                            <TextBox x:Name="textboxCountWordTrenings" Width="30" PreviewKeyDown="textboxCountWordTrenings_PreviewKeyDown"     />
+                        </MenuItem>
+                    </MenuItem>
                 </MenuItem>
             </Menu>
         </ToolBar>
@@ -66,7 +71,7 @@
         <Button x:Name="buttonDictionary" Click="buttonDictionary_Click" Grid.Row="2" Grid.Column="2">TotalDictionary</Button>
         <Button x:Name="buttonBreyShtorm" Grid.Row="2" Grid.Column="4" Content="BreyShtorm" Click="buttonBreyShtorm_Click"/>
         <Button x:Name="buttonBreyShtorm2" Grid.Row="2" Grid.Column="6" Content="BreyShtorm2" Click="buttonBreyShtorm2_Click"/>
-        <Button x:Name="buttonBreyShtorm3" Grid.Row="4" Grid.Column="6" Content="BreyShtorm3" Click="buttonBreyShtorm3_Click"/>
+        <Button x:Name="buttonBreyShtorm3" Grid.Row="4" Grid.Column="6" Content="WordConstructor" Click="buttonBreyShtorm3_Click"/>
         <Button x:Name="buttonBreyShtorm4" Grid.Row="6" Grid.Column="6" Content="BreyShtorm4" Click="buttonBreyShtorm4_Click" />
         <Button x:Name="buttonBreyShtormResult" Grid.Row="8" Grid.Column="6" Content="BreyShtormResult" Click="buttonBreyShtormResult_Click"  />
         <Button x:Name="buttonTest" Grid.Row="8" Grid.Column="4" Content="Repetition" Click="buttonTest_Click"  />

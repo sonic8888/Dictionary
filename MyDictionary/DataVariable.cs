@@ -19,6 +19,7 @@ namespace MyDictionary
         private int countSelectWord;//вспомогательная вывыбока для создания ресурса слов(Trenings)
         private int countMilisek;//время задержки таймера прогрессбара в WindowRepetition
         private int countMilisekDelay;//время задержки для смены слов в WindowRepetition
+        private int countWordTrenings;//кол-во слов для тренировки(упражнений)
         public FileInfo soundYes;//звуковой файл "Галочка" "Yes" правилиьный ответ
         private FileInfo soundNo;//звуковой файл "Нет" не правильный ответ (ошибка)
         public DataVariable()
@@ -30,6 +31,7 @@ namespace MyDictionary
             defoltValueList.Add("10");// defoltValue countMilisek
             defoltValueList.Add("1000");// defoltValue countMilisekDelay
             defoltValueList.Add("30");// defoltValue countTimeWork
+            defoltValueList.Add("10");// defoltValue countWordTrenings
             if (!File.Exists(FIleTools.NameFileDataVariable))
             {
                 WriteDefoltValue();
@@ -102,6 +104,7 @@ namespace MyDictionary
                         countMilisek = int.Parse(listValue[3]);//читаем countMilisek
                         countMilisekDelay = int.Parse(listValue[4]);//читаем countMilisekDelay
                         countTimeWork = int.Parse(listValue[5]);//читаем countTimeWork
+                        countWordTrenings = int.Parse(listValue[6]);//читаем countTimeWork
 
                     }
                     catch (Exception ex)
@@ -139,6 +142,8 @@ namespace MyDictionary
                     sw.WriteLine(countWordRepetition);
                     sw.WriteLine(countMilisek);
                     sw.WriteLine(countMilisekDelay);
+                    sw.WriteLine(countTimeWork);
+                    sw.WriteLine(countWordTrenings);
                 }
             }
             catch (IOException ex)
@@ -173,31 +178,48 @@ namespace MyDictionary
             get { return countMilisek; }
             set { countMilisek = value; }
         }
-
+        /// <summary>
+        /// время задержки для смены слов в WindowRepetition
+        /// </summary>
         public int CountMilisekDelay
         {
             get { return countMilisekDelay; }
             set { countMilisekDelay = value; }
         }
      
-
+        /// <summary>
+        /// звук утверждения
+        /// </summary>
         public FileInfo SoundYes
         {
             get { return soundYes; }
             set { soundYes = value; }
         }
-
+        /// <summary>
+        /// звук отрицания
+        /// </summary>
         public FileInfo SoundNo
         {
             get { return soundNo; }
             set { soundNo = value; }
         }
-
+        /// <summary>
+        /// время работы упражнения Sprint
+        /// </summary>
         public int CountTimeWork
         {
             get { return countTimeWork; }
             set { countTimeWork = value; }
         }
+        /// <summary>
+        /// кол-во слов для тренировки
+        /// </summary>
+        public int CountWordTrenings
+        {
+            get { return countWordTrenings; }
+            set { countWordTrenings = value; }
+        }
+
 
 
 

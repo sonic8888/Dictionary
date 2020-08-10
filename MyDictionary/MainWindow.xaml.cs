@@ -49,6 +49,7 @@ namespace MyDictionary
             textboxCountMlSekRepetition.Text = App.dataVariable.CountMilisek.ToString();
             textboxCountMlSekDelayRepetition.Text = App.dataVariable.CountMilisekDelay.ToString();
             textboxCountTimeWork.Text = App.dataVariable.CountTimeWork.ToString();
+            textboxCountWordTrenings.Text = App.dataVariable.CountWordTrenings.ToString();
         }
 
         private void clickNewWord(object sender, RoutedEventArgs e)
@@ -115,8 +116,12 @@ namespace MyDictionary
             ObservableCollection<MyWord> collec_5 = BdTools.ReadWord(8);
             ObservableCollection<MyWord> collectionTotal
                 = BdTools.ReadWord();
-            IEnumerable<MyWord> enumerable = collectionTotal.Except(collec_5);
-            WindowsManager.GreateWindowBreyShtorm_2(collec_5.ToList(), enumerable.ToList());
+            if (collec_5 != null && collectionTotal != null)
+            {
+                IEnumerable<MyWord> enumerable = collectionTotal.Except(collec_5);
+                WindowsManager.GreateWindowBreyShtorm_2(collec_5.ToList(), enumerable.ToList());
+
+            }
 
         }
 
@@ -135,32 +140,48 @@ namespace MyDictionary
 
         private void buttonBreyShtorm3_Click(object sender, RoutedEventArgs e)
         {
-            ObservableCollection<MyWord> collec_5 = BdTools.ReadWord(5);
-            WindowsManager.CreateWindowBreyShtorm_3(collec_5.ToList(), true);
+            ObservableCollection<MyWord> collec_5 = BdTools.ReadWord(App.dataVariable.CountWordTrenings);
+            if (collec_5 != null)
+            {
+
+                WindowsManager.CreateWindowBreyShtorm_3(collec_5.ToList(), true);
+            }
         }
 
         private void buttonBreyShtorm4_Click(object sender, RoutedEventArgs e)
         {
             ObservableCollection<MyWord> collec_5 = BdTools.ReadWord(5);
-            WindowsManager.CreateWindowBreyShtorm_4(collec_5.ToList());
+            if (collec_5 != null)
+            {
+                WindowsManager.CreateWindowBreyShtorm_4(collec_5.ToList());
+
+            }
         }
 
         private void buttonBreyShtormResult_Click(object sender, RoutedEventArgs e)
         {
             ObservableCollection<MyWord> collec_5 = BdTools.ReadWord(5);
-            foreach (MyWord item in collec_5)
+            if (collec_5 != null)
             {
-                item.TrueAnswer = App.random.Next(4);
+                foreach (MyWord item in collec_5)
+                {
+                    item.TrueAnswer = App.random.Next(4);
+                }
+                WindowBreyShtormResult wbr = new WindowBreyShtormResult(collec_5.ToList());
+                wbr.Show();
+
             }
-            WindowBreyShtormResult wbr = new WindowBreyShtormResult(collec_5.ToList());
-            wbr.Show();
         }
 
         private void buttonTest_Click(object sender, RoutedEventArgs e)
         {
             int count = App.dataVariable.CountWordRepetition;
             List<MyWord> lists = BdTools.GetRandomListMyWord(count);
-            WindowsManager.CreateWindowRepetition(lists);
+            if (lists != null)
+            {
+                WindowsManager.CreateWindowRepetition(lists);
+
+            }
         }
 
         private void textboxCountRepetition_PreviewKeyDown(object sender, KeyEventArgs e)
@@ -206,7 +227,11 @@ namespace MyDictionary
         {
 
             List<MyWord> lists = BdTools.GetRandomListMyWord(10);
-            WindowsManager.CreateWindowSprint(lists);
+            if (lists != null)
+            {
+
+                WindowsManager.CreateWindowSprint(lists);
+            }
         }
 
         private void textboxCountTimeWork_PreviewKeyDown(object sender, KeyEventArgs e)
@@ -218,6 +243,19 @@ namespace MyDictionary
                 if (int.TryParse(str, out value))
                 {
                     App.dataVariable.CountTimeWork = value;
+                }
+            }
+        }
+
+        private void textboxCountWordTrenings_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                string str = textboxCountWordTrenings.Text;
+                int value;
+                if (int.TryParse(str, out value))
+                {
+                    App.dataVariable.CountWordTrenings = value;
                 }
             }
         }

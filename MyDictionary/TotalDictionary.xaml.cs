@@ -111,6 +111,8 @@ namespace MyDictionary
                 Thread.Sleep(50);
             }
             listViewDictionary.ItemsSource = App.collection;
+            collection = App.collection;
+            textblockTotalWords.Text = text + collection.Count.ToString();
         }
         private void ReadDictionary()
         {
