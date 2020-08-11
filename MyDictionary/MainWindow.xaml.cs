@@ -113,13 +113,14 @@ namespace MyDictionary
 
         private void buttonBreyShtorm2_Click(object sender, RoutedEventArgs e)
         {
-            ObservableCollection<MyWord> collec_5 = BdTools.ReadWord(8);
+            //ObservableCollection<MyWord> collec_5 = BdTools.ReadWord(App.dataVariable.CountWordTrenings);
+            ObservableCollection<MyWord> collec_5 = BdTools.ReadWord(3);
             ObservableCollection<MyWord> collectionTotal
                 = BdTools.ReadWord();
             if (collec_5 != null && collectionTotal != null)
             {
                 IEnumerable<MyWord> enumerable = collectionTotal.Except(collec_5);
-                WindowsManager.GreateWindowBreyShtorm_2(collec_5.ToList(), enumerable.ToList());
+                WindowsManager.GreateWindowBreyShtorm_2(collec_5.ToList(), enumerable.ToList(), true);
 
             }
 

@@ -45,9 +45,9 @@ namespace MyDictionary.Tools
             wbs.Show();
             return wbs;
         }
-        public static WindowBreyShtorm_2 GreateWindowBreyShtorm_2(List<MyWord> trenings, List<MyWord> resurse)
+        public static WindowBreyShtorm_2 GreateWindowBreyShtorm_2(List<MyWord> trenings, List<MyWord> resurse, bool istrenings)
         {
-            WindowBreyShtorm_2 wb2 = new WindowBreyShtorm_2(trenings, resurse);
+            WindowBreyShtorm_2 wb2 = new WindowBreyShtorm_2(trenings, resurse, istrenings);
             wb2.Show();
             return wb2;
         }

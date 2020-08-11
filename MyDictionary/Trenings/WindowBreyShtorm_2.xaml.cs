@@ -13,8 +13,10 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 using XMLRead;
 
 namespace MyDictionary
@@ -43,10 +45,16 @@ namespace MyDictionary
         Brush buttonForegroundDefault;
         bool isEnabledButton;
         double fontsize;
-        public WindowBreyShtorm_2(List<MyWord> trenings, List<MyWord> resurse)
+        int countAnswerTrue = 0;
+        bool isTrenings;
+        int _countTrue = 0;
+        int countFalse = 0;
+        public WindowBreyShtorm_2(List<MyWord> trenings, List<MyWord> resurse, bool istrenings)
         {
             this.trenings = trenings;
+            countFalse = trenings.Count;
             this.resurse = resurse;
+            isTrenings = istrenings;
             InitializeComponent();
             arrButtons = new List<Button>();
             arrButtons.Add(buttonOne);
@@ -66,6 +74,7 @@ namespace MyDictionary
             fontsize = buttonsix.FontSize;
             buttonForegroundDefault = buttonsix.Foreground;
             strFront = "Далее ➞";
+            textblockTotal.Text = "Всего: " + trenings.Count().ToString();
         }
 
         private void buttonSound_Click(object sender, RoutedEventArgs e)
@@ -253,6 +262,7 @@ namespace MyDictionary
             buttonsix.FontSize = 24;
             buttonsix.Foreground = buttonForegroundBlue;
             trenings[count].TrueAnswer++;
+            countAnswerTrue++;
         }
         private void MethodNo(Button bt)
         {
@@ -280,10 +290,75 @@ namespace MyDictionary
         }
         private void GreateWindowBreyShtorm3()
         {
-            //WindowBreyShtorm_3 bs3 = new WindowBreyShtorm_3(trenings);
-            //bs3.Show();
-            WindowsManager.CreateWindowBreyShtorm_3(trenings, false);
-            this.Close();
+           
+            if (isTrenings)
+            {
+                VisibilityElements();
+                FinishAnimation();
+            }
+            else
+            {
+                WindowsManager.CreateWindowBreyShtorm_3(trenings, false);
+                this.Close();
+
+            }
+
+        }
+        private void VisibilityElements()
+        {
+            buttonOne.Visibility = Visibility.Hidden;
+            buttontwo.Visibility = Visibility.Hidden;
+            buttonthree.Visibility = Visibility.Hidden;
+            buttonfour.Visibility = Visibility.Hidden;
+            buttonfive.Visibility = Visibility.Hidden;
+            buttonsix.Visibility = Visibility.Hidden;
+            buttonSound.Visibility = Visibility.Hidden;
+            textblockWord.Visibility = Visibility.Hidden;
+            border.Visibility = Visibility.Hidden;
+            canvasAnime.Visibility = Visibility.Visible;
+            textblockLeft.Visibility = Visibility.Visible;
+            textblockRight.Visibility = Visibility.Visible;
+            textblockTotal.Visibility = Visibility.Visible;
+        }
+        private void FinishAnimation()
+        {
+            DoubleAnimation danime = new DoubleAnimation();
+
+            danime.From = 1;
+            DispatcherTimer timer = CreateDispetcherTrue();
+            timer?.Start();
+            danime.To = countAnswerTrue * recRed.ActualWidth / trenings.Count;
+            danime.Duration = TimeSpan.FromMilliseconds(2000);
+            recGreen.BeginAnimation(Rectangle.WidthProperty, danime);
+            //dispatcherTimer.Start();
+        }
+        private DispatcherTimer CreateDispetcherTrue()
+        {
+            DispatcherTimer timer = new DispatcherTimer();
+            timer.Tick += new EventHandler(InitTextBlock);
+            int delay = 0;
+            if (countAnswerTrue != 0)
+            {
+                delay = 2000 / (trenings.Count + 1);
+            }
+            else
+            {
+                delay = 1;
+            }
+            timer.Interval = new TimeSpan(0, 0, 0, 0, delay);
+            return timer;
+
+        }
+        private void InitTextBlock(object sender, EventArgs e)
+        {
+            DispatcherTimer timer = sender as DispatcherTimer;
+            textblockLeft.Text = "Верно: " + _countTrue.ToString();
+            textblockRight.Text = "Не верно: " + countFalse.ToString();
+            countFalse--;
+            if (++_countTrue > countAnswerTrue)
+            {
+                timer.Stop();
+            }
         }
     }
 }
