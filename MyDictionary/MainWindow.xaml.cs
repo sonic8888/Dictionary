@@ -151,10 +151,10 @@ namespace MyDictionary
 
         private void buttonBreyShtorm4_Click(object sender, RoutedEventArgs e)
         {
-            ObservableCollection<MyWord> collec_5 = BdTools.ReadWord(5);
+            ObservableCollection<MyWord> collec_5 = BdTools.ReadWord(3);
             if (collec_5 != null)
             {
-                WindowsManager.CreateWindowBreyShtorm_4(collec_5.ToList());
+                WindowsManager.CreateWindowBreyShtorm_4(collec_5.ToList(), true);
 
             }
         }

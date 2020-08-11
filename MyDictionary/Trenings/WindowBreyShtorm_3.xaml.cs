@@ -225,7 +225,7 @@ namespace MyDictionary.Trenings
                 }
                 else
                 {
-                    WindowsManager.CreateWindowBreyShtorm_4(myWords);
+                    WindowsManager.CreateWindowBreyShtorm_4(myWords,false);
                     this.Close();
 
                 }

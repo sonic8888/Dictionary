@@ -16,6 +16,8 @@ using System.Windows.Shapes;
 using XMLRead;
 using MyDictionary.Tools;
 using System.Threading;
+using System.Windows.Media.Animation;
+using System.Windows.Threading;
 
 namespace MyDictionary.Trenings
 {
@@ -30,10 +32,15 @@ namespace MyDictionary.Trenings
         string contentNext = "Далее ➞";
         string contentControl = "Проверить";
         Thread thread;
-        public WindowBreyShtorm_4(List<MyWord> words)
+        bool isTrenings;
+        int countAnswerTrue;
+        int _countTrue = 0;
+        int countFalse;
+        public WindowBreyShtorm_4(List<MyWord> words, bool istrenings)
         {
             myWords = words;
-
+            countFalse = myWords.Count;
+            isTrenings = istrenings;
             InitializeComponent();
             textboxkword.Focus();
             Play();
@@ -55,11 +62,11 @@ namespace MyDictionary.Trenings
         {
             if (e.Key == Key.Enter)
             {
-                
-               
 
-                    ControlAnswer();
-             
+
+
+                ControlAnswer();
+
             }
         }
         private void AnswerYes()
@@ -67,6 +74,7 @@ namespace MyDictionary.Trenings
             VisibilityOn();
             InitTextBlock();
             myWords[currentword].TrueAnswer++;
+            countAnswerTrue++;
         }
         private void AnswerNo()
         {
@@ -159,8 +167,17 @@ namespace MyDictionary.Trenings
             }
             else
             {
-                //завершение и подведение итога
-                FinishAndChageState();
+                if (isTrenings)
+                {
+                    VisibilityElements();
+                    FinishAnimation();
+                }
+                else
+                {
+                    //завершение и подведение итога
+                    FinishAndChageState();
+
+                }
             }
         }
 
@@ -189,13 +206,76 @@ namespace MyDictionary.Trenings
                 BdTools.UpdateStateMyWord(item.WordId, (int)st);
             }
         }
-        public  Thread StartNewThread()
+        public Thread StartNewThread()
         {
             thread = new Thread(new ThreadStart(UpdateState));
             thread.Start();
             return thread;
         }
+        private void VisibilityElements()
+        {
+            textboxkword.Visibility = Visibility.Hidden;
+            textblockmessage.Visibility = Visibility.Hidden;
+            textblockerror.Visibility = Visibility.Hidden;
+            textblockword.Visibility = Visibility.Hidden;
+            textblocktranscription.Visibility = Visibility.Hidden;
+            textblocktranslation.Visibility = Visibility.Hidden;
+            textblockexample.Visibility = Visibility.Hidden;
+            buttonSound.Visibility = Visibility.Hidden;
+            canvasAnime.Visibility = Visibility.Visible;
+            textblockLeft.Visibility = Visibility.Visible;
+            textblockRight.Visibility = Visibility.Visible;
+            textblockTotal.Visibility = Visibility.Visible;
+            buttonNext.Click -= buttonNext_Click;
+            buttonNext.Click += Close;
+            buttonNext.Content = "Завершить";
+
+        }
+        private void FinishAnimation()
+        {
+            DoubleAnimation danime = new DoubleAnimation();
+
+            danime.From = 1;
+            DispatcherTimer timer = CreateDispetcherTrue();
+            timer?.Start();
+            danime.To = countAnswerTrue * recRed.ActualWidth / myWords.Count;
+            danime.Duration = TimeSpan.FromMilliseconds(2000);
+            recGreen.BeginAnimation(Rectangle.WidthProperty, danime);
+            //dispatcherTimer.Start();
+        }
+        private DispatcherTimer CreateDispetcherTrue()
+        {
+            DispatcherTimer timer = new DispatcherTimer();
+            timer.Tick += new EventHandler(InitTextBlock);
+            int delay = 0;
+            if (countAnswerTrue != 0)
+            {
+                delay = 2000 / (myWords.Count + 1);
+            }
+            else
+            {
+                delay = 1;
+            }
+            timer.Interval = new TimeSpan(0, 0, 0, 0, delay);
+            return timer;
+
+        }
+        private void InitTextBlock(object sender, EventArgs e)
+        {
+            DispatcherTimer timer = sender as DispatcherTimer;
+            textblockLeft.Text = "Верно: " + _countTrue.ToString();
+            textblockRight.Text = "Не верно: " + countFalse.ToString();
+            countFalse--;
+            if (++_countTrue > countAnswerTrue)
+            {
+                timer.Stop();
+            }
+        }
+        private void Close(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 
-    
+
 }

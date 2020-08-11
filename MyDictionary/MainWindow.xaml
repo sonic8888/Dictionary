@@ -72,7 +72,7 @@
         <Button x:Name="buttonBreyShtorm" Grid.Row="2" Grid.Column="4" Content="BreyShtorm" Click="buttonBreyShtorm_Click"/>
         <Button x:Name="buttonBreyShtorm2" Grid.Row="2" Grid.Column="6" Content="Слово-перевод" Click="buttonBreyShtorm2_Click"/>
         <Button x:Name="buttonBreyShtorm3" Grid.Row="4" Grid.Column="6" Content="WordConstructor" Click="buttonBreyShtorm3_Click"/>
-        <Button x:Name="buttonBreyShtorm4" Grid.Row="6" Grid.Column="6" Content="BreyShtorm4" Click="buttonBreyShtorm4_Click" />
+        <Button x:Name="buttonBreyShtorm4" Grid.Row="6" Grid.Column="6" Content="Аудирование" Click="buttonBreyShtorm4_Click" />
         <Button x:Name="buttonBreyShtormResult" Grid.Row="8" Grid.Column="6" Content="BreyShtormResult" Click="buttonBreyShtormResult_Click"  />
         <Button x:Name="buttonTest" Grid.Row="8" Grid.Column="4" Content="Repetition" Click="buttonTest_Click"  />
         <Button x:Name="buttonSprint" Grid.Row="8" Grid.Column="2" Content="Sprint" Click="buttonSprint_Click"    />

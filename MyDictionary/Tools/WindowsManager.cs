@@ -57,9 +57,9 @@ namespace MyDictionary.Tools
             wb3.Show();
             return wb3;
         }
-        public static WindowBreyShtorm_4 CreateWindowBreyShtorm_4(List<MyWord> words)
+        public static WindowBreyShtorm_4 CreateWindowBreyShtorm_4(List<MyWord> words, bool istrenings)
         {
-            WindowBreyShtorm_4 wb4 = new WindowBreyShtorm_4(words);
+            WindowBreyShtorm_4 wb4 = new WindowBreyShtorm_4(words, istrenings);
             wb4.Show();
             return wb4;
         }

@@ -33,6 +33,13 @@
             <Button x:Name="buttonSound" Grid.Row="0" Grid.Column="0"   Margin="0,0,0,10" Background="{x:Null}" Foreground="{x:Null}" BorderThickness="0" DataContext="{Binding SoundName}" Click="buttonSound_Click"  >
                 <Image Source="/MyDictionary;component/Picture/icons8-динамик-48.png" Width=" 50" Height="50"/>
             </Button>
+            <Canvas x:Name="canvasAnime" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="4" Visibility="Hidden" >
+                <Rectangle x:Name="recRed"   Height="55" Fill="Red" Stroke="Black" Width="{Binding ActualWidth, ElementName=canvasAnime, Mode=OneWay}"  />
+                <Rectangle x:Name="recGreen"   Height="55"  Width="1" Fill="Green" Stroke="Black"  />
+            </Canvas>
+            <TextBlock x:Name="textblockLeft" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Text="Верно: 4" VerticalAlignment="Center" FontSize="18" HorizontalAlignment="Center" Visibility="Hidden" Foreground="Green"/>
+            <TextBlock x:Name="textblockRight" Grid.Row="2" Grid.Column="6" Grid.ColumnSpan="2" Text="Не верно: 4" VerticalAlignment="Center" FontSize="18" HorizontalAlignment="Center" Visibility="Hidden" Foreground="Red"/>
+            <TextBlock x:Name="textblockTotal" Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="2"  Text="Всего: 20" FontSize="18" VerticalAlignment="Center"  Visibility="Hidden" HorizontalAlignment="Center"/>
             <TextBlock x:Name="textblockerror" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="6" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="24" Visibility="Collapsed" TextDecorations="Strikethrough" Foreground="Red" />
             <TextBlock x:Name="textblockword" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="6" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30" Visibility="Collapsed"/>
             <TextBlock x:Name="textblocktranscription" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="6" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" Visibility="Collapsed"/>
@@ -40,7 +47,7 @@
             <TextBlock x:Name="textblockexample" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="8" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="14" Visibility="Collapsed"/>
             <Border x:Name="border" BorderBrush="#FFD3CCF1" Background="#FFC6B1EC" Grid.Row="6" Grid.RowSpan="2" Grid.Column="0" Grid.ColumnSpan="8" BorderThickness="1">
             </Border>
-                <Button x:Name="buttonNext" Grid.Row="7" Grid.Column="6" Grid.ColumnSpan="2" Content="Проверить" FontSize="18" Background="#FF8F9EFF" Margin="5" Click="buttonNext_Click"/>
+            <Button x:Name="buttonNext" Grid.Row="7" Grid.Column="6" Grid.ColumnSpan="2" Content="Проверить" FontSize="18" Background="#FF8F9EFF" Margin="5" Click="buttonNext_Click"/>
         </Grid>
 
     </Grid>
