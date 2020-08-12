@@ -6,6 +6,9 @@
         xmlns:local="clr-namespace:MyDictionary"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+    <Window.Background>
+        <ImageBrush ImageSource="Picture/field-1728099_1280.jpg"/>
+    </Window.Background>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -66,8 +69,10 @@
                     </MenuItem>
                 </MenuItem>
             </Menu>
+            <Separator/>
+          
         </ToolBar>
-        <Button Click="clickNewWord" Grid.Row="2" Grid.Column="0">HewWord</Button>
+        <!--<Button Click="clickNewWord" Grid.Row="2" Grid.Column="0">HewWord</Button>
         <Button x:Name="buttonDictionary" Click="buttonDictionary_Click" Grid.Row="2" Grid.Column="2">TotalDictionary</Button>
         <Button x:Name="buttonBreyShtorm" Grid.Row="2" Grid.Column="4" Content="BreyShtorm" Click="buttonBreyShtorm_Click"/>
         <Button x:Name="buttonBreyShtorm2" Grid.Row="2" Grid.Column="6" Content="Слово-перевод" Click="buttonBreyShtorm2_Click"/>
@@ -75,6 +80,18 @@
         <Button x:Name="buttonBreyShtorm4" Grid.Row="6" Grid.Column="6" Content="Аудирование" Click="buttonBreyShtorm4_Click" />
         <Button x:Name="buttonBreyShtormResult" Grid.Row="8" Grid.Column="6" Content="BreyShtormResult" Click="buttonBreyShtormResult_Click"  />
         <Button x:Name="buttonTest" Grid.Row="8" Grid.Column="4" Content="Repetition" Click="buttonTest_Click"  />
-        <Button x:Name="buttonSprint" Grid.Row="8" Grid.Column="2" Content="Sprint" Click="buttonSprint_Click"    />
+        <Button x:Name="buttonSprint" Grid.Row="8" Grid.Column="2" Content="Sprint" Click="buttonSprint_Click"    />-->
+        <Button x:Name="buttonDictionary" Grid.Row="2" Grid.RowSpan="2" Grid.Column="1" Grid.ColumnSpan="2" Margin="20" Click="buttonDictionary_Click_1" BorderBrush="#FF1EA5B3">
+            <StackPanel Orientation="Horizontal">
+                <Image Source="Picture/dictionary_abc_837.png"/>
+                <TextBlock Text="Словарь" VerticalAlignment="Center" Margin="10" FontSize="20"/>
+            </StackPanel>
+        </Button>
+        <Button x:Name="buttonTrenings" Grid.Row="2" Grid.RowSpan="2" Grid.Column="3" Grid.ColumnSpan="2" Margin="20" Click="buttonBreyShtorm_Click" BorderBrush="#FF1EA5B3">
+            <StackPanel Orientation="Horizontal">
+                <Image Source="Picture/accerciser_103989.png"/>
+                <TextBlock Text="Тренировка" VerticalAlignment="Center" Margin="0" FontSize="20"/>
+            </StackPanel>
+        </Button>
     </Grid>
 </Window>

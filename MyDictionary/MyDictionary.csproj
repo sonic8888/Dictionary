@@ -412,6 +412,10 @@
     <Resource Include="Picture\krestikLow.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Picture\dictionary_abc_837.png" />
+    <Resource Include="Picture\field-1728099_1280.jpg" />
+    <Resource Include="Picture\plus.png" />
+    <Resource Include="Picture\accerciser_103989.png" />
     <Content Include="SoundsApplication\soundNo.mp3">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

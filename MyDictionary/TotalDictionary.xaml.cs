@@ -305,5 +305,12 @@ namespace MyDictionary
             }
 
         }
+
+        private void buttonAddWord_Click(object sender, RoutedEventArgs e)
+        {
+            ChoseWords chw = new ChoseWords();
+
+            chw.Show();
+        }
     }
 }

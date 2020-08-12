@@ -260,5 +260,14 @@ namespace MyDictionary
                 }
             }
         }
+
+        private void buttonDictionary_Click_1(object sender, RoutedEventArgs e)
+        {
+            while (App.thread.IsAlive)
+            {
+                Thread.Sleep(50);
+            }
+            WindowsManager.CreateTotalDictionary();
+        }
     }
 }

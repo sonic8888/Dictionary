@@ -123,6 +123,11 @@
                 </Button.Content>
             </Button>
             <Separator Width="2"/>
+            <Button x:Name="buttonAddWord" Width="50" Click="buttonAddWord_Click">
+                <Button.Content>
+                    <Image Source="Picture/plus.png"/>
+                </Button.Content>
+            </Button>
             <TextBlock x:Name="textblockTotalWords" Text="Всего слов: 56" VerticalAlignment="Center" Margin="220,0" FontFamily="Microsoft New Tai Lue"/>
         </ToolBar>
         <StackPanel Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="11" Orientation="Horizontal">

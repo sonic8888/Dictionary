@@ -44,6 +44,7 @@ namespace MyDictionary.Trenings
             InitializeComponent();
             textboxkword.Focus();
             Play();
+            textblockTotal.Text = "Всего: " + myWords.Count();
         }
 
         private void buttonSound_Click(object sender, RoutedEventArgs e)
