@@ -416,6 +416,13 @@
     <Resource Include="Picture\field-1728099_1280.jpg" />
     <Resource Include="Picture\plus.png" />
     <Resource Include="Picture\accerciser_103989.png" />
+    <Resource Include="Picture\upr.png" />
+    <Resource Include="Picture\word-translateLitle.jpg" />
+    <Resource Include="Picture\construct.png" />
+    <Resource Include="Picture\headphone-icon_34408.png" />
+    <Resource Include="Picture\repetition_12848.png" />
+    <Resource Include="Picture\hotpng.com %281%29.png" />
+    <Resource Include="Picture\restart_back_left_arrow_6022.png" />
     <Content Include="SoundsApplication\soundNo.mp3">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
