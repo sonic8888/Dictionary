@@ -20,6 +20,7 @@ namespace MyDictionary
         private int countMilisek;//время задержки таймера прогрессбара в WindowRepetition
         private int countMilisekDelay;//время задержки для смены слов в WindowRepetition
         private int countWordTrenings;//кол-во слов для тренировки(упражнений)
+        private int countWordSprint;//кол-во слов в упражнении Спринт
         public FileInfo soundYes;//звуковой файл "Галочка" "Yes" правилиьный ответ
         private FileInfo soundNo;//звуковой файл "Нет" не правильный ответ (ошибка)
         public DataVariable()
@@ -32,6 +33,7 @@ namespace MyDictionary
             defoltValueList.Add("1000");// defoltValue countMilisekDelay
             defoltValueList.Add("30");// defoltValue countTimeWork
             defoltValueList.Add("10");// defoltValue countWordTrenings
+            defoltValueList.Add("30");// defoltValue countWordSprint
             if (!File.Exists(FIleTools.NameFileDataVariable))
             {
                 WriteDefoltValue();
@@ -104,7 +106,8 @@ namespace MyDictionary
                         countMilisek = int.Parse(listValue[3]);//читаем countMilisek
                         countMilisekDelay = int.Parse(listValue[4]);//читаем countMilisekDelay
                         countTimeWork = int.Parse(listValue[5]);//читаем countTimeWork
-                        countWordTrenings = int.Parse(listValue[6]);//читаем countTimeWork
+                        countWordTrenings = int.Parse(listValue[6]);//читаем countWordTrenings
+                        countWordSprint = int.Parse(listValue[7]);//читаем countWordSprint
 
                     }
                     catch (Exception ex)
@@ -144,6 +147,7 @@ namespace MyDictionary
                     sw.WriteLine(countMilisekDelay);
                     sw.WriteLine(countTimeWork);
                     sw.WriteLine(countWordTrenings);
+                    sw.WriteLine(countWordSprint);
                 }
             }
             catch (IOException ex)
@@ -219,6 +223,15 @@ namespace MyDictionary
             get { return countWordTrenings; }
             set { countWordTrenings = value; }
         }
+        /// <summary>
+        /// кол-во слов в упражнении Спринт
+        /// </summary>
+        public int CountWordSprint
+        {
+            get { return countWordSprint; }
+            set { countWordSprint = value; }
+        }
+
 
 
 

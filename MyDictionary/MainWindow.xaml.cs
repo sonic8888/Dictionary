@@ -50,6 +50,7 @@ namespace MyDictionary
             textboxCountMlSekDelayRepetition.Text = App.dataVariable.CountMilisekDelay.ToString();
             textboxCountTimeWork.Text = App.dataVariable.CountTimeWork.ToString();
             textboxCountWordTrenings.Text = App.dataVariable.CountWordTrenings.ToString();
+            textboxCountWordSprint.Text = App.dataVariable.CountWordSprint.ToString();
         }
 
         private void clickNewWord(object sender, RoutedEventArgs e)
@@ -277,14 +278,14 @@ namespace MyDictionary
 
         private void buttonWordTranslate_Click(object sender, RoutedEventArgs e)
         {
-            ObservableCollection<MyWord> collec_5 = BdTools.ReadWord(App.dataVariable.CountWordTrenings);
+            List<MyWord> lists = BdTools.GetRandomListMyWord(App.dataVariable.CountWordTrenings);
             //ObservableCollection<MyWord> collec_5 = BdTools.ReadWord(3);
             ObservableCollection<MyWord> collectionTotal
                 = BdTools.ReadWord();
-            if (collec_5 != null && collectionTotal != null)
+            if (lists != null && collectionTotal != null)
             {
-                IEnumerable<MyWord> enumerable = collectionTotal.Except(collec_5);
-                WindowsManager.GreateWindowBreyShtorm_2(collec_5.ToList(), enumerable.ToList(), true);
+                IEnumerable<MyWord> enumerable = collectionTotal.Except(lists);
+                WindowsManager.GreateWindowBreyShtorm_2(lists, enumerable.ToList(), true);
 
             }
 
@@ -292,20 +293,20 @@ namespace MyDictionary
 
         private void buttonWordConstructor_Click(object sender, RoutedEventArgs e)
         {
-            ObservableCollection<MyWord> collec_5 = BdTools.ReadWord(App.dataVariable.CountWordTrenings);
-            if (collec_5 != null)
+            List<MyWord> lists = BdTools.GetRandomListMyWord(App.dataVariable.CountWordTrenings);
+            if (lists != null)
             {
 
-                WindowsManager.CreateWindowBreyShtorm_3(collec_5.ToList(), true);
+                WindowsManager.CreateWindowBreyShtorm_3(lists, true);
             }
         }
 
         private void buttonAudirovanie_Click(object sender, RoutedEventArgs e)
         {
-            ObservableCollection<MyWord> collec_5 = BdTools.ReadWord(3);
-            if (collec_5 != null)
+            List<MyWord> lists = BdTools.GetRandomListMyWord(App.dataVariable.CountWordTrenings);
+            if (lists != null)
             {
-                WindowsManager.CreateWindowBreyShtorm_4(collec_5.ToList(), true);
+                WindowsManager.CreateWindowBreyShtorm_4(lists, true);
 
             }
         }
@@ -323,7 +324,7 @@ namespace MyDictionary
 
         private void buttonSprint_Click_1(object sender, RoutedEventArgs e)
         {
-            List<MyWord> lists = BdTools.GetRandomListMyWord(10);
+            List<MyWord> lists = BdTools.GetRandomListMyWord(App.dataVariable.CountWordSprint);
             if (lists != null)
             {
 
@@ -347,6 +348,19 @@ namespace MyDictionary
         {
 
             VisibilityElements(Visibility.Visible, Visibility.Hidden);
+        }
+
+        private void textboxCountWordSprint_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                string str = textboxCountWordSprint.Text;
+                int value;
+                if (int.TryParse(str, out value))
+                {
+                    App.dataVariable.CountWordSprint = value;
+                }
+            }
         }
     }
 }

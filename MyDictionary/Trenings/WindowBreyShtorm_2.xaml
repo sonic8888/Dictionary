@@ -61,7 +61,7 @@
             </Canvas>
             <TextBlock x:Name="textblockLeft" Grid.Row="3" Grid.Column="0"  Text="Верно: 4" VerticalAlignment="Center" FontSize="18" HorizontalAlignment="Left" Margin="40,0" Visibility="Hidden" Foreground="Green"/>
             <TextBlock x:Name="textblockRight" Grid.Row="3" Grid.Column="1"  Text="Не верно: 4" VerticalAlignment="Center" FontSize="18" HorizontalAlignment="Right"  Margin="0,0,35,0" Visibility="Hidden" Foreground="Red"/>
-            <TextBlock x:Name="textblockTotal" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"  Text="Всего: 20" FontSize="18" VerticalAlignment="Center" Margin="300,0" Visibility="Hidden"/>
+            <TextBlock x:Name="textblockTotal" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"  Text="Всего: 20" FontSize="18" VerticalAlignment="Center" Margin="295,0" Visibility="Hidden"/>
             <Border x:Name="border" Grid.Row="7" Grid.RowSpan="2" Grid.Column="0" Grid.ColumnSpan="2" Background="#FFC2C4E8" BorderBrush="AliceBlue" BorderThickness="1">
                 <TextBlock x:Name="textBlockAnswer"    VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="24"/>
             </Border>

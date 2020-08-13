@@ -58,9 +58,12 @@
                         </MenuItem>
                     </MenuItem>
                     <MenuItem Header="Спринт">
-                    <MenuItem Header="Время работы в сек. упр. 'Спринт':">
-                        <TextBox x:Name="textboxCountTimeWork" Width="30" PreviewKeyDown="textboxCountTimeWork_PreviewKeyDown"    />
-                    </MenuItem>
+                        <MenuItem Header="Время работы в сек. упр. 'Спринт':">
+                            <TextBox x:Name="textboxCountTimeWork" Width="30" PreviewKeyDown="textboxCountTimeWork_PreviewKeyDown"    />
+                        </MenuItem>
+                        <MenuItem Header="Кол-во слов в упр.'Спринт':">
+                            <TextBox x:Name="textboxCountWordSprint" Width="30" PreviewKeyDown="textboxCountWordSprint_PreviewKeyDown"  />
+                        </MenuItem>
                     </MenuItem>
                     <MenuItem Header="Упражнения">
                         <MenuItem Header="Кол-во слов упражнений:">
@@ -73,7 +76,7 @@
             <Button x:Name="buttonBack" Click="buttonBack_Click" Visibility="Hidden">
                 <Image Source="Picture/restart_back_left_arrow_6022.png"/>
             </Button>
-          
+
         </ToolBar>
         <!--<Button Click="clickNewWord" Grid.Row="2" Grid.Column="0">HewWord</Button>
         <Button x:Name="buttonDictionary" Click="buttonDictionary_Click" Grid.Row="2" Grid.Column="2">TotalDictionary</Button>
