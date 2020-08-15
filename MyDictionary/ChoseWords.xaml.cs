@@ -443,8 +443,11 @@ namespace MyDictionary
             }
             else
             {
-                filcopy = FIleTools.CopyTo(fileInfo, FIleTools.NameDirectoryAudio);
+                //filcopy = FIleTools.CopyTo(fileInfo, FIleTools.NameDirectoryAudio);
+                filcopy = FIleTools.CopyTo(fileInfo, true);
+                filcopy.IsReadOnly = false;
                 _wordsSample.SoundName = filcopy.Name;
+            
 
             }
             return filcopy;

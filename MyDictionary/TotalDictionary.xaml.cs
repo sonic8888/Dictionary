@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -17,8 +18,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using XMLRead;
-
-
+using Path = System.IO.Path;
 
 namespace MyDictionary
 {
@@ -99,7 +99,17 @@ namespace MyDictionary
             int index = (int)but.DataContext;
 
             MyWord wordDel = BdTools.DeleteWord(index);
+            FileInfo fileInfo = FIleTools.SearchFile(wordDel.SoundName, FIleTools.NameDirectoryAudio);
             collection.Remove(wordDel);
+            try
+            {
+                File.Delete(fileInfo.FullName);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message + MethodBase.GetCurrentMethod().DeclaringType.FullName);
+                return;
+            }
 
         }
 
@@ -150,6 +160,23 @@ namespace MyDictionary
             BdTools.DeleteWord(wordId);
             MyWord myWord = collection.Where(n => n.WordId == wordId).First();
             collection.Remove(myWord);
+            FileInfo fileInfo = FIleTools.SearchFile(myWord.SoundName, FIleTools.NameDirectoryAudio);
+            if (fileInfo != null)
+            {
+                try
+                {
+                    File.Delete(fileInfo.FullName);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message + MethodBase.GetCurrentMethod().DeclaringType.FullName);
+                    return;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Файл отсутствует в папке SoundFiles");
+            }
 
         }
         /// <summary>
