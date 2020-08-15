@@ -94,7 +94,15 @@ namespace MyDictionary
 
         private void buttonBreyShtorm_Click(object sender, RoutedEventArgs e)
         {
-
+            while (App.thread.IsAlive)
+            {
+                Thread.Sleep(200);
+            }
+            if (App.collection.Count < App.dataVariable.CountWordSprint)
+            {
+                MessageBox.Show("Для нормальной работы приложения кол-во слов в словаре должно быть не менее: " + App.dataVariable.CountWordSprint);
+                return;
+            }
 
             WindowsManager.CreateWindowBreyShtorm();
         }
@@ -273,6 +281,15 @@ namespace MyDictionary
 
         private void buttonUpr_Click(object sender, RoutedEventArgs e)
         {
+            while (App.thread.IsAlive)
+            {
+                Thread.Sleep(200);
+            }
+            if (App.collection.Count < App.dataVariable.CountWordSprint)
+            {
+                MessageBox.Show("Для нормальной работы приложения кол-во слов в словаре должно быть не менее: " + App.dataVariable.CountWordSprint);
+                return;
+            }
             VisibilityElements(Visibility.Hidden, Visibility.Visible);
         }
 
