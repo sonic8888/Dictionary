@@ -52,6 +52,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>&amp;Applications&amp;Dictionary.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.3.0\lib\net45\EntityFramework.dll</HintPath>
@@ -424,6 +427,8 @@
     <Resource Include="Picture\repetition_12848.png" />
     <Resource Include="Picture\hotpng.com %281%29.png" />
     <Resource Include="Picture\restart_back_left_arrow_6022.png" />
+    <Resource Include="GOM Player.ico" />
+    <Resource Include="&amp;Applications&amp;Dictionary.ico" />
     <Content Include="SoundsApplication\soundNo.mp3">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
