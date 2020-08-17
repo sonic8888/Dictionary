@@ -152,6 +152,7 @@ namespace MyDictionary
                 foreach (int index in collDelete)
                 {
                     DeleteWord(index);
+                    textblockTotalWords.Text = text + collection.Count.ToString();
                 }
             }
         }
@@ -161,6 +162,7 @@ namespace MyDictionary
             MyWord myWord = collection.Where(n => n.WordId == wordId).First();
             collection.Remove(myWord);
             FileInfo fileInfo = FIleTools.SearchFile(myWord.SoundName, FIleTools.NameDirectoryAudio);
+            fileInfo.IsReadOnly = false;
             if (fileInfo != null)
             {
                 try
@@ -298,10 +300,11 @@ namespace MyDictionary
         {
             if (part == "все")
             {
-                listViewDictionary.ItemsSource = collection;
+
+                listViewDictionary.ItemsSource = new ObservableCollection<MyWord>(collection.OrderBy(n => n.Word));
                 return;
             }
-            IEnumerable<MyWord> en = collection.Where(n => n.PartOfSpeach.StartsWith(part));
+            IEnumerable<MyWord> en = collection.Where(n => n.PartOfSpeach.StartsWith(part)).OrderBy(n => n.Word);
             listViewDictionary.ItemsSource = new ObservableCollection<MyWord>(en);
 
         }
