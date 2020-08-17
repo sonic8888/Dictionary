@@ -115,6 +115,11 @@ namespace MyDictionary
 
         private void buttonReffresh_Click(object sender, RoutedEventArgs e)
         {
+            Reffresh();
+        }
+
+        private void Reffresh()
+        {
             Thread thread = App.StartNewThread();
             while (thread.IsAlive)
             {
@@ -154,12 +159,27 @@ namespace MyDictionary
                     DeleteWord(index);
                     textblockTotalWords.Text = text + collection.Count.ToString();
                 }
+                Reffresh();
+                collDelete.Clear();
             }
         }
         private void DeleteWord(int wordId)
         {
             BdTools.DeleteWord(wordId);
-            MyWord myWord = collection.Where(n => n.WordId == wordId).First();
+            //MyWord myWord = collection.Where(n => n.WordId == wordId).Single();
+            MyWord myWord=null;
+            foreach (MyWord item in collection)
+            {
+                if (item.WordId==wordId)
+                {
+                    myWord = item;
+                }
+            }
+            if (myWord==null)
+            {
+                MessageBox.Show("Слово не найдено!");
+                return;
+            }
             collection.Remove(myWord);
             FileInfo fileInfo = FIleTools.SearchFile(myWord.SoundName, FIleTools.NameDirectoryAudio);
             fileInfo.IsReadOnly = false;

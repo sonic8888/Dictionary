@@ -287,7 +287,7 @@ namespace MyDictionary
                 }
                 _wordsSample.Word = word.Trim();
                 _wordsSample.PartOfSpeach = textBoxPartOfSpeach.Text.Trim();
-                _wordsSample.Transcription = textBoxTranscription.Text.Trim();
+                _wordsSample.Transcription = textBoxTranscription.Text.Trim(new char[] { ' ', '[', ']' });
                 return true;
             }
             FileInfo file = FIleTools.SearchFile(_wordsSample.SoundName, FIleTools.NameDirectoryAudio);
@@ -305,7 +305,7 @@ namespace MyDictionary
             }
             _wordsSample.Word = word.Trim();
             _wordsSample.PartOfSpeach = textBoxPartOfSpeach.Text.Trim();
-            _wordsSample.Transcription = textBoxTranscription.Text.Trim();
+            _wordsSample.Transcription = textBoxTranscription.Text.Trim(new char[] { ' ', '[', ']' });
             _wordsSample.DateTimeInsert = DateTime.Now;
             _wordsSample.DateTimeLastCall = DateTime.Now;
             _wordsSample.State = newState;
@@ -447,7 +447,7 @@ namespace MyDictionary
                 filcopy = FIleTools.CopyTo(fileInfo, true);
                 filcopy.IsReadOnly = false;
                 _wordsSample.SoundName = filcopy.Name;
-            
+
 
             }
             return filcopy;
