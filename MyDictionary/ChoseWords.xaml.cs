@@ -15,6 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using XMLRead;
 using MyDictionary.Tools;
+using Path = System.IO.Path;
 
 namespace MyDictionary
 {
@@ -223,9 +224,11 @@ namespace MyDictionary
             dds.OpenFileDialog();
             string fileName = dds.FilePath;
             FileInfo filesound = new FileInfo(fileName);
-            FileInfo filecopy = FIleTools.CopyTo(filesound, FIleTools.NameDirectoryAudio);
+       
+            FileInfo filecopy = filesound.CopyTo(Path.Combine(FIleTools.NameDirectoryAudio, textBoxWord.Text.Trim().ToLower() + filesound.Extension));
             if (filecopy != null)
             {
+
                 _wordsSample.SoundName = filecopy.Name;
 
             }
@@ -444,6 +447,7 @@ namespace MyDictionary
             else
             {
                 //filcopy = FIleTools.CopyTo(fileInfo, FIleTools.NameDirectoryAudio);
+          
                 filcopy = FIleTools.CopyTo(fileInfo, true);
                 filcopy.IsReadOnly = false;
                 _wordsSample.SoundName = filcopy.Name;
