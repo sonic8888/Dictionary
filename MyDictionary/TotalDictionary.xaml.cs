@@ -244,7 +244,7 @@ namespace MyDictionary
 
         private void buttonStateGrey_Click(object sender, RoutedEventArgs e)
         {
-            IEnumerable<MyWord> en = collection.Where(n => n.State == 1);
+            IEnumerable<MyWord> en = collection.OrderByDescending(n => n.State == 1).Select(n=>n);
             listViewDictionary.ItemsSource = new ObservableCollection<MyWord>(en);
         }
         private BitmapImage InitBitMap()
@@ -324,20 +324,20 @@ namespace MyDictionary
                 listViewDictionary.ItemsSource = new ObservableCollection<MyWord>(collection.OrderBy(n => n.Word));
                 return;
             }
-            IEnumerable<MyWord> en = collection.Where(n => n.PartOfSpeach.StartsWith(part)).OrderBy(n => n.Word);
+            IEnumerable<MyWord> en = collection.OrderByDescending(n => n.PartOfSpeach.StartsWith(part));
             listViewDictionary.ItemsSource = new ObservableCollection<MyWord>(en);
 
         }
 
         private void buttonStateGreen_Click(object sender, RoutedEventArgs e)
         {
-            IEnumerable<MyWord> en = collection.Where(n => n.State == 2);
+            IEnumerable<MyWord> en = collection.OrderByDescending(n => n.State == 2).Select(n => n);
             listViewDictionary.ItemsSource = new ObservableCollection<MyWord>(en);
         }
 
         private void buttonStateGold_Click(object sender, RoutedEventArgs e)
         {
-            IEnumerable<MyWord> en = collection.Where(n => n.State == 3);
+            IEnumerable<MyWord> en = collection.OrderByDescending(n => n.State == 3).Select(n=>n);
             listViewDictionary.ItemsSource = new ObservableCollection<MyWord>(en);
         }
 
