@@ -430,6 +430,22 @@
     <Resource Include="GOM Player.ico" />
     <Resource Include="&amp;Applications&amp;Dictionary.ico" />
     <Resource Include="Picture\&amp;Applications&amp;Dictionary.ico" />
+    <Resource Include="Picture\alert.png" />
+    <Resource Include="Picture\Help and Support.png" />
+    <Resource Include="Picture\Error.png" />
+    <Resource Include="Picture\Harley-Davidson Classic Icon 34_256x256-32.png" />
+    <Resource Include="Picture\Applications_TextEdit.ico" />
+    <Resource Include="Picture\AllDay.ru_Live messenger3.ico" />
+    <Resource Include="Picture\AllDay.ru_messenger.ico" />
+    <Resource Include="Picture\&amp;Applications&amp;Dictionary.png" />
+    <Resource Include="Picture\Chubby_3D_Character-30.png" />
+    <Resource Include="Picture\Chubby_3D_Character-80.png" />
+    <Resource Include="Picture\orchide1.png" />
+    <Resource Include="Picture\orchide5.png" />
+    <Resource Include="Picture\orchide7.png" />
+    <Resource Include="Picture\orchide10.png" />
+    <Resource Include="Picture\Untitled-1.png" />
+    <Resource Include="Picture\GT2_recycle_empty_green.png" />
     <Content Include="SoundsApplication\soundNo.mp3">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

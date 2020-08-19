@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:MyDictionary"
         xmlns:convert="clr-namespace:MyDictionary.Converters"
         mc:Ignorable="d"
-        Title="WindowBreyShtorm" Height="600" Width="800">
+        Title="Тренировка" Height="600" Width="800" Icon="/MyDictionary;component/Picture/orchide1.png">
     <Window.Resources>
         <convert:TranscriptionConverter x:Key="TranscriptionConverter"></convert:TranscriptionConverter>
     </Window.Resources>

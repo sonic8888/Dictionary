@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MyDictionary"
         mc:Ignorable="d"
-        Title="WindowAddTranslation" Height="450" Width="600" WindowStartupLocation="CenterOwner"
-        ResizeMode="NoResize">
+        Title="Добавить перевод" Height="450" Width="600" WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize" Icon="Picture/AllDay.ru_Live messenger3.ico">
     <Grid Background="#FFB6B6B6" >
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>

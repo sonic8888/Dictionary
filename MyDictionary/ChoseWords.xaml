@@ -7,7 +7,7 @@
         xmlns:xmlread="clr-namespace:XMLRead;assembly=XMLRead"
         xmlns:convert="clr-namespace:MyDictionary.Converters"
         mc:Ignorable="d"
-        Title="ChoseWords" Height="650" Width="1000" MinHeight="600" MaxHeight="700" MinWidth="950" MaxWidth="1050">
+        Title="Добавить слово" Height="650" Width="1000" MinHeight="600" MaxHeight="700" MinWidth="950" MaxWidth="1050" Icon="Picture/AllDay.ru_messenger.ico">
     <Window.Resources>
         <convert:WidthConverterMultiplication x:Key="WidthconverterMultiplication70" Width="0.7"></convert:WidthConverterMultiplication>
         <convert:WidthConverterMultiplication x:Key="WidthconverterMultiplication30" Width="0.3"></convert:WidthConverterMultiplication>

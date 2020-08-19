@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MyDictionary.Trenings"
         mc:Ignorable="d"
-        Title="WindowBreyShtorm_3" Height="600" Width="800" Loaded="Window_Loaded">
+        Title="Конструктор слов" Height="600" Width="800" Loaded="Window_Loaded" Icon="/MyDictionary;component/Picture/construct.png">
     <Window.Resources>
         <ControlTemplate x:Key="templateButtonTop" TargetType="{x:Type Button}">
             <Border x:Name="borderButtonTop" BorderBrush="#FFB8BAE2" BorderThickness="2" Background="#FFB8BAE2" CornerRadius="5" TextBlock.Foreground="#FFB8BAE2" TextBlock.FontSize="20">

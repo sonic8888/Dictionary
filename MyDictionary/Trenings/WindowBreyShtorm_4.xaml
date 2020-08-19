@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MyDictionary.Trenings"
         mc:Ignorable="d"
-        Title="WindowBreyShtorm_4" Height="600" Width="800" PreviewKeyDown="Window_PreviewKeyDown" >
+        Title="Аудирование" Height="600" Width="800" PreviewKeyDown="Window_PreviewKeyDown" Icon="/MyDictionary;component/Picture/headphone-icon_34408.png">
     <Grid Background="#FFD3CCF1">
         <Grid x:Name="gridinner" Margin="60,50" Background="#FFDBDCF0">
             <Grid.RowDefinitions>

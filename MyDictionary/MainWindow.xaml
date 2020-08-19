@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MyDictionary"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" Icon="&amp;Applications&amp;Dictionary.ico">
+        Title="Dictionary" Height="450" Width="800" Icon="&amp;Applications&amp;Dictionary.ico">
     <Window.Background>
         <ImageBrush ImageSource="Picture/field-1728099_1280.jpg"/>
     </Window.Background>
@@ -36,7 +36,7 @@
             <Menu>
                 <MenuItem>
                     <MenuItem.Header>
-                        <Image Source="Picture/settingsMain.png" />
+                        <Image Source="Picture/Harley-Davidson Classic Icon 34_256x256-32.png" />
                     </MenuItem.Header>
                     <MenuItem Header="Тренировка">
                         <MenuItem Header="Кол-во слов 'Тренировки':">
@@ -87,25 +87,25 @@
         <Button x:Name="buttonBreyShtormResult" Grid.Row="8" Grid.Column="6" Content="BreyShtormResult" Click="buttonBreyShtormResult_Click"  />
         <Button x:Name="buttonTest" Grid.Row="8" Grid.Column="4" Content="Repetition" Click="buttonTest_Click"  />
         <Button x:Name="buttonSprint" Grid.Row="8" Grid.Column="2" Content="Sprint" Click="buttonSprint_Click"    />-->
-        <Button x:Name="buttonDictionary" Grid.Row="2" Grid.RowSpan="2" Grid.Column="1" Grid.ColumnSpan="2" Margin="20" Click="buttonDictionary_Click_1" BorderBrush="#FF1EA5B3" Visibility="Visible">
+        <Button x:Name="buttonDictionary" Grid.Row="2" Grid.RowSpan="2" Grid.Column="1" Grid.ColumnSpan="2" Margin="20" Click="buttonDictionary_Click_1" BorderBrush="#FF1EA5B3" Visibility="Visible" Background="#FFB7D5F6">
             <StackPanel Orientation="Horizontal">
-                <Image Source="Picture/dictionary_abc_837.png"/>
+                <Image Source="Picture/&amp;Applications&amp;Dictionary.png"/>
                 <TextBlock Text="Словарь" VerticalAlignment="Center" Margin="10" FontSize="20"/>
             </StackPanel>
         </Button>
-        <Button x:Name="buttonTrenings" Grid.Row="2" Grid.RowSpan="2" Grid.Column="3" Grid.ColumnSpan="2" Margin="20" Click="buttonBreyShtorm_Click" BorderBrush="#FF1EA5B3" Visibility="Visible">
+        <Button x:Name="buttonTrenings" Grid.Row="2" Grid.RowSpan="2" Grid.Column="3" Grid.ColumnSpan="2" Margin="20" Click="buttonBreyShtorm_Click" BorderBrush="#FF1EA5B3" Visibility="Visible" Background="#FFB7D5F6">
             <StackPanel Orientation="Horizontal">
-                <Image Source="Picture/accerciser_103989.png"/>
+                <Image Source="Picture/Chubby_3D_Character-30.png"/>
                 <TextBlock Text="Тренировка" VerticalAlignment="Center" Margin="0" FontSize="20"/>
             </StackPanel>
         </Button>
-        <Button x:Name="buttonUpr" Grid.Row="2" Grid.RowSpan="2" Grid.Column="5" Grid.ColumnSpan="2" Margin="20"  BorderBrush="#FF1EA5B3" Click="buttonUpr_Click" Visibility="Visible">
+        <Button x:Name="buttonUpr" Grid.Row="2" Grid.RowSpan="2" Grid.Column="5" Grid.ColumnSpan="2" Margin="20"  BorderBrush="#FF1EA5B3" Click="buttonUpr_Click" Visibility="Visible" Background="#FFB7D5F6">
             <StackPanel Orientation="Horizontal">
-                <Image Source="Picture/upr.png"/>
+                <Image Source="Picture/Chubby_3D_Character-80.png"/>
                 <TextBlock Text="Задания" VerticalAlignment="Center" Margin="10" FontSize="20"/>
             </StackPanel>
         </Button>
-        <Button x:Name="buttonWordTranslate" Grid.Row="2" Grid.RowSpan="2" Grid.Column="1" Grid.ColumnSpan="2" Margin="12"  BorderBrush="#FF1EA5B3" Visibility="Hidden" Click="buttonWordTranslate_Click">
+        <Button x:Name="buttonWordTranslate" Grid.Row="2" Grid.RowSpan="2" Grid.Column="1" Grid.ColumnSpan="2" Margin="12"  BorderBrush="#FF1EA5B3" Visibility="Hidden" Click="buttonWordTranslate_Click" Background="#FF8BEBE6" >
             <StackPanel Orientation="Horizontal">
                 <Image Source="Picture/word-translateLitle.jpg"/>
                 <TextBlock  VerticalAlignment="Center" Margin="10" FontSize="16" TextWrapping="Wrap" TextAlignment="Center">
@@ -115,7 +115,7 @@
                 </TextBlock>
             </StackPanel>
         </Button>
-        <Button x:Name="buttonWordConstructor" Grid.Row="2" Grid.RowSpan="2" Grid.Column="3" Grid.ColumnSpan="2" Margin="12"  BorderBrush="#FF1EA5B3" Visibility="Hidden" Click="buttonWordConstructor_Click" >
+        <Button x:Name="buttonWordConstructor" Grid.Row="2" Grid.RowSpan="2" Grid.Column="3" Grid.ColumnSpan="2" Margin="12"  BorderBrush="#FF1EA5B3" Visibility="Hidden" Click="buttonWordConstructor_Click" Background="#FF8BEBE6"  >
             <StackPanel Orientation="Horizontal">
                 <Image Source="Picture/construct.png"/>
                 <TextBlock  VerticalAlignment="Center" Margin="-5,0" FontSize="16" TextWrapping="Wrap" TextAlignment="Center">
@@ -125,7 +125,7 @@
                 </TextBlock>
             </StackPanel>
         </Button>
-        <Button x:Name="buttonAudirovanie" Grid.Row="2" Grid.RowSpan="2" Grid.Column="5" Grid.ColumnSpan="2" Margin="12"  BorderBrush="#FF1EA5B3" Visibility="Hidden" Click="buttonAudirovanie_Click"  >
+        <Button x:Name="buttonAudirovanie" Grid.Row="2" Grid.RowSpan="2" Grid.Column="5" Grid.ColumnSpan="2" Margin="12"  BorderBrush="#FF1EA5B3" Visibility="Hidden" Click="buttonAudirovanie_Click" Background="#FF8BEBE6"  >
             <StackPanel Orientation="Horizontal">
                 <Image Source="Picture/headphone-icon_34408.png"/>
                 <TextBlock  VerticalAlignment="Center" Margin="5,0" FontSize="16" TextWrapping="Wrap" TextAlignment="Center">
@@ -133,7 +133,7 @@
                 </TextBlock>
             </StackPanel>
         </Button>
-        <Button x:Name="buttonRepetition" Grid.Row="4" Grid.RowSpan="2" Grid.Column="2" Grid.ColumnSpan="2" Margin="12"  BorderBrush="#FF1EA5B3" Visibility="Hidden" Click="buttonRepetition_Click" >
+        <Button x:Name="buttonRepetition" Grid.Row="4" Grid.RowSpan="2" Grid.Column="2" Grid.ColumnSpan="2" Margin="12"  BorderBrush="#FF1EA5B3" Visibility="Hidden" Click="buttonRepetition_Click" Background="#FF8BEBE6" >
             <StackPanel Orientation="Horizontal">
                 <Image Source="Picture/repetition_12848.png"/>
                 <TextBlock  VerticalAlignment="Center" Margin="10,0" FontSize="16" TextWrapping="Wrap" TextAlignment="Center">
@@ -141,7 +141,7 @@
                 </TextBlock>
             </StackPanel>
         </Button>
-        <Button x:Name="buttonSprint" Grid.Row="4" Grid.RowSpan="2" Grid.Column="4" Grid.ColumnSpan="2" Margin="12"  BorderBrush="#FF1EA5B3" Visibility="Hidden" Click="buttonSprint_Click_1"  >
+        <Button x:Name="buttonSprint" Grid.Row="4" Grid.RowSpan="2" Grid.Column="4" Grid.ColumnSpan="2" Margin="12"  BorderBrush="#FF1EA5B3" Visibility="Hidden" Click="buttonSprint_Click_1" Background="#FF8BEBE6"  >
             <StackPanel Orientation="Horizontal">
                 <Image Source="Picture/hotpng.com (1).png"/>
                 <TextBlock  VerticalAlignment="Center" Margin="20,0" FontSize="16" TextWrapping="Wrap" TextAlignment="Center">

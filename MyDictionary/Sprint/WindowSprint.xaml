@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MyDictionary.Sprint"
         mc:Ignorable="d"
-        Title="WindowSprint" Height="600" Width="800" Unloaded="Window_Unloaded">
+        Title="Спринт" Height="600" Width="800" Unloaded="Window_Unloaded" Icon="/MyDictionary;component/Picture/hotpng.com (1).png">
     <Grid  Background="#FFA492F1">
         <Grid x:Name="innergrid" Background="#FFC4C6F9" Margin="60,50">
             <Grid.RowDefinitions>

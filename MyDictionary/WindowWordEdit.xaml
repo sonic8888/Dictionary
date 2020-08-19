@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:MyDictionary"
         xmlns:convert="clr-namespace:MyDictionary.Converters"
         mc:Ignorable="d"
-        Title="WindowWordEdit" Height="500" Width="500" Topmost="True">
+        Title="Редактор" Height="500" Width="500" Topmost="True" Icon="Picture/Applications_TextEdit.ico">
     <Window.Resources>
         <Style TargetType="TextBlock">
             <Setter Property="Margin" Value="0,5,0,0"/>
