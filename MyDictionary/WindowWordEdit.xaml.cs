@@ -84,7 +84,7 @@ namespace MyDictionary
             string word = textboxWord.Text.Trim();
             if (word == "")
             {
-                MessageBox.Show("Слово не указано");
+                MessageBox.Show("Слово не указано", "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
             string transcription = textboxTranscription.Text.Trim();
@@ -101,7 +101,7 @@ namespace MyDictionary
             IEnumerable<string> example = GetEnumerable(textboxExample.Text, splitExample);
             if (audio==null)
             {
-                MessageBoxResult messageBoxResult = MessageBox.Show(messageNotAudio, messageWarning, MessageBoxButton.YesNo);
+                MessageBoxResult messageBoxResult = MessageBox.Show(messageNotAudio, messageWarning, MessageBoxButton.YesNo,MessageBoxImage.Question);
                 if (messageBoxResult == MessageBoxResult.No)
                 {
                     return; 
@@ -143,7 +143,7 @@ namespace MyDictionary
             }
             catch (IOException ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message, "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
                 return null;
             }
             return file;

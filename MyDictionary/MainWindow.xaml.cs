@@ -100,7 +100,7 @@ namespace MyDictionary
             }
             if (App.collection.Count < App.dataVariable.CountWordSprint)
             {
-                MessageBox.Show("Для нормальной работы приложения кол-во слов в словаре должно быть не менее: " + App.dataVariable.CountWordSprint);
+                MessageBox.Show("Для нормальной работы приложения кол-во слов в словаре должно быть не менее: " + App.dataVariable.CountWordSprint,"Внимание!",MessageBoxButton.OK,MessageBoxImage.Warning);
                 return;
             }
 
@@ -287,7 +287,7 @@ namespace MyDictionary
             }
             if (App.collection.Count < App.dataVariable.CountWordSprint)
             {
-                MessageBox.Show("Для нормальной работы приложения кол-во слов в словаре должно быть не менее: " + App.dataVariable.CountWordSprint);
+                MessageBox.Show("Для нормальной работы приложения кол-во слов в словаре должно быть не менее: " + App.dataVariable.CountWordSprint, "Внимание!", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
             VisibilityElements(Visibility.Hidden, Visibility.Visible);

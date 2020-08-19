@@ -82,10 +82,10 @@
         <TextBox x:Name="textboxStatus" Grid.Row="4" Grid.Column="6" Grid.ColumnSpan="6" Text="{Binding State, Converter={StaticResource statestringconvert}}"/>
         <TextBlock Text="Аудио:" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="4"/>
         <TextBox x:Name="textboxAudio" Grid.Row="5" Grid.Column="6" Grid.ColumnSpan="6" Text="{Binding SoundName}" FontSize="14"/>
-        <TextBlock Text="Перевод:" Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="4"/>
+        <TextBlock Text="Перевод:" Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="4" FontSize="22"/>
         <TextBox x:Name="textboxTranslate" Grid.Row="6" Grid.RowSpan="2" Grid.Column="6" Grid.ColumnSpan="6" FontSize="14" AcceptsReturn="True"/>
         <TextBlock Text="Примеры:" Grid.Row="8" Grid.Column="1" Grid.ColumnSpan="4"/>
-        <TextBox x:Name="textboxExample" Grid.Row="9" Grid.RowSpan="2" Grid.Column="1" Grid.ColumnSpan="11"/>
+        <TextBox x:Name="textboxExample" Grid.Row="9" Grid.RowSpan="2" Grid.Column="1" Grid.ColumnSpan="11" TextWrapping="Wrap" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" AcceptsReturn="True" FontSize="14"/>
         <Button x:Name="buttonSave" Content="Сохранить" Grid.Row="12"  Grid.Column="1" Grid.ColumnSpan="3" IsDefault="True" Click="buttonSave_Click"/>
         <Button x:Name="buttonCansel" Content="Отмена" Grid.Row="12"  Grid.Column="9" Grid.ColumnSpan="3" IsCancel="True"/>
     </Grid>

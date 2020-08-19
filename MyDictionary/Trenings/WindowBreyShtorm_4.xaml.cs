@@ -140,7 +140,7 @@ namespace MyDictionary.Trenings
         {
             if (textboxkword.Text == "")
             {
-                MessageBox.Show(message);
+                MessageBox.Show(message, "Внимание!", MessageBoxButton.OK, MessageBoxImage.Exclamation);
                 return;
             }
             if (textboxkword.Text.ToUpper() == myWords[currentword].Word.ToUpper())

@@ -25,7 +25,7 @@ namespace MyDictionary.Tools
         {
             if (sourse.Count < count)
             {
-                MessageBox.Show(MethodBase.GetCurrentMethod().DeclaringType.FullName);
+                MessageBox.Show(MethodBase.GetCurrentMethod().DeclaringType.FullName, "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
                 return null;
             }
             List<int> listRandom = new List<int>();
@@ -45,7 +45,7 @@ namespace MyDictionary.Tools
         {
             if (sourse.Count < count)
             {
-                MessageBox.Show(MethodBase.GetCurrentMethod().DeclaringType.FullName);
+                MessageBox.Show(MethodBase.GetCurrentMethod().DeclaringType.FullName, "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
                 return null;
             }
             List<string> listRandom = new List<string>();
@@ -66,7 +66,7 @@ namespace MyDictionary.Tools
         {
             if (sourse.Count < count)
             {
-                MessageBox.Show(MethodBase.GetCurrentMethod().DeclaringType.FullName);
+                MessageBox.Show(MethodBase.GetCurrentMethod().DeclaringType.FullName, "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
                 return null;
             }
             List<MyWord> listRandom = new List<MyWord>();

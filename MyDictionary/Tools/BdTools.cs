@@ -28,7 +28,7 @@ namespace MyDictionary.Tools
                 }
                 catch (Exception e)
                 {
-                    MessageBox.Show(e.Message + MethodBase.GetCurrentMethod().DeclaringType.FullName);
+                    MessageBox.Show(e.Message + MethodBase.GetCurrentMethod().DeclaringType.FullName, "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
                     return 0;
                 }
 
@@ -48,7 +48,7 @@ namespace MyDictionary.Tools
                 }
                 catch (Exception e)
                 {
-                    MessageBox.Show(e.Message + " " + MethodBase.GetCurrentMethod().DeclaringType.FullName);
+                    MessageBox.Show(e.Message + " " + MethodBase.GetCurrentMethod().DeclaringType.FullName, "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
                     return 0;
                 }
 
@@ -67,7 +67,7 @@ namespace MyDictionary.Tools
                 }
                 catch (Exception e)
                 {
-                    MessageBox.Show(e.Message + " " + MethodBase.GetCurrentMethod().DeclaringType.FullName);
+                    MessageBox.Show(e.Message + " " + MethodBase.GetCurrentMethod().DeclaringType.FullName, "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
                     return 0;
                 }
 
@@ -110,7 +110,7 @@ namespace MyDictionary.Tools
                 }
                 catch (Exception e)
                 {
-                    MessageBox.Show(e.Message + " " + MethodBase.GetCurrentMethod().DeclaringType.FullName);
+                    MessageBox.Show(e.Message + " " + MethodBase.GetCurrentMethod().DeclaringType.FullName, "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
                     return null;
 
 
@@ -135,7 +135,7 @@ namespace MyDictionary.Tools
                 }
                 catch (Exception e)
                 {
-                    MessageBox.Show(e.Message + " " + MethodBase.GetCurrentMethod().DeclaringType.FullName);
+                    MessageBox.Show(e.Message + " " + MethodBase.GetCurrentMethod().DeclaringType.FullName, "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
                     return null;
                 }
                 return myWords;
@@ -158,7 +158,7 @@ namespace MyDictionary.Tools
                 }
                 catch (Exception e)
                 {
-                    MessageBox.Show(e.Message + " " + MethodBase.GetCurrentMethod().DeclaringType.FullName);
+                    MessageBox.Show(e.Message + " " + MethodBase.GetCurrentMethod().DeclaringType.FullName, "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
                     return null;
                 }
                 return myWords;
@@ -180,7 +180,7 @@ namespace MyDictionary.Tools
                 }
                 catch (Exception e)
                 {
-                    MessageBox.Show(e.Message + " " + MethodBase.GetCurrentMethod().DeclaringType.FullName);
+                    MessageBox.Show(e.Message + " " + MethodBase.GetCurrentMethod().DeclaringType.FullName, "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
                     return null;
                 }
             }
@@ -199,7 +199,7 @@ namespace MyDictionary.Tools
                 }
                 catch (Exception e)
                 {
-                    MessageBox.Show(e.Message + " " + MethodBase.GetCurrentMethod().DeclaringType.FullName);
+                    MessageBox.Show(e.Message + " " + MethodBase.GetCurrentMethod().DeclaringType.FullName, "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
                     return null;
                 }
             }
@@ -227,7 +227,7 @@ namespace MyDictionary.Tools
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message + " " + MethodBase.GetCurrentMethod().DeclaringType.FullName);
+                    MessageBox.Show(ex.Message + " " + MethodBase.GetCurrentMethod().DeclaringType.FullName, "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
                     return null;
                 }
             }
@@ -248,7 +248,7 @@ namespace MyDictionary.Tools
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message + " " + MethodBase.GetCurrentMethod().DeclaringType.FullName);
+                    MessageBox.Show(ex.Message + " " + MethodBase.GetCurrentMethod().DeclaringType.FullName, "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
                     return null;
                 }
                 return wordid;
@@ -280,7 +280,7 @@ namespace MyDictionary.Tools
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message + " " + MethodBase.GetCurrentMethod().DeclaringType.FullName);
+                    MessageBox.Show(ex.Message + " " + MethodBase.GetCurrentMethod().DeclaringType.FullName, "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
                     return null;
                 }
                 return myWords;
@@ -318,7 +318,7 @@ namespace MyDictionary.Tools
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message + " " + MethodBase.GetCurrentMethod().DeclaringType.FullName);
+                    MessageBox.Show(ex.Message + " " + MethodBase.GetCurrentMethod().DeclaringType.FullName, "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
                     return null;
                 }
                 return myWords;
@@ -345,7 +345,7 @@ namespace MyDictionary.Tools
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message + " " + MethodBase.GetCurrentMethod().DeclaringType.FullName);
+                    MessageBox.Show(ex.Message + " " + MethodBase.GetCurrentMethod().DeclaringType.FullName, "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
                     return null;
                 }
                 return translate;
@@ -357,7 +357,7 @@ namespace MyDictionary.Tools
             List<int> listId = GetWordId();
             if (listId.Count<=count)
             {
-                MessageBox.Show("Кол-во выбираемых слов превышает кол-во слов в БД " + MethodBase.GetCurrentMethod().DeclaringType.FullName);
+                MessageBox.Show("Кол-во выбираемых слов превышает кол-во слов в БД " + MethodBase.GetCurrentMethod().DeclaringType.FullName, "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
                 return null;
             }
             List<int> listRandomId = MyTools.GetRandomInt(listId, count);
@@ -378,7 +378,7 @@ namespace MyDictionary.Tools
                 catch (Exception ex)
                 {
 
-                    MessageBox.Show(ex.Message + " " + MethodBase.GetCurrentMethod().DeclaringType.FullName);
+                    MessageBox.Show(ex.Message + " " + MethodBase.GetCurrentMethod().DeclaringType.FullName, "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
                     return null;
                 }
 

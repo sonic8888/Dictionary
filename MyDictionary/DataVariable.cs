@@ -66,7 +66,7 @@ namespace MyDictionary
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message + " " + MethodBase.GetCurrentMethod().DeclaringType.FullName);
+                    MessageBox.Show(ex.Message + " " + MethodBase.GetCurrentMethod().DeclaringType.FullName, "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
 
                 }
             }
@@ -113,7 +113,7 @@ namespace MyDictionary
                     catch (Exception ex)
                     {
 
-                        MessageBox.Show(ex.Message + " " + MethodBase.GetCurrentMethod().DeclaringType.FullName);
+                        MessageBox.Show(ex.Message + " " + MethodBase.GetCurrentMethod().DeclaringType.FullName, "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
 
                 }
@@ -122,7 +122,7 @@ namespace MyDictionary
             catch (IOException ex)
             {
 
-                MessageBox.Show(ex.ToString() + " " + MethodBase.GetCurrentMethod().DeclaringType.FullName);
+                MessageBox.Show(ex.ToString() + " " + MethodBase.GetCurrentMethod().DeclaringType.FullName, "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
         /// <summary>
@@ -153,7 +153,7 @@ namespace MyDictionary
             catch (IOException ex)
             {
 
-                MessageBox.Show(ex.ToString() + " " + MethodBase.GetCurrentMethod().DeclaringType.FullName);
+                MessageBox.Show(ex.ToString() + " " + MethodBase.GetCurrentMethod().DeclaringType.FullName, "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
         /// <summary>

@@ -177,7 +177,7 @@ namespace MyDictionary
             }
             if (myWord==null)
             {
-                MessageBox.Show("Слово не найдено!");
+                MessageBox.Show("Слово не найдено!","Внимание!",MessageBoxButton.OK,MessageBoxImage.Error);
                 return;
             }
             collection.Remove(myWord);
@@ -191,13 +191,13 @@ namespace MyDictionary
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message + MethodBase.GetCurrentMethod().DeclaringType.FullName);
+                    MessageBox.Show(ex.Message + MethodBase.GetCurrentMethod().DeclaringType.FullName, "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
             }
             else
             {
-                MessageBox.Show("Файл отсутствует в папке SoundFiles");
+                MessageBox.Show("Файл отсутствует в папке SoundFiles", "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
         }
