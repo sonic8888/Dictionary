@@ -48,6 +48,7 @@
             <Border x:Name="border" BorderBrush="#FFD3CCF1" Background="#FFC6B1EC" Grid.Row="6" Grid.RowSpan="2" Grid.Column="0" Grid.ColumnSpan="8" BorderThickness="1">
             </Border>
             <Button x:Name="buttonNext" Grid.Row="7" Grid.Column="6" Grid.ColumnSpan="2" Content="Проверить" FontSize="18" Background="#FF8F9EFF" Margin="5" Click="buttonNext_Click"/>
+            <TextBlock x:Name="textblockCountword" Grid.Row="0" Grid.Column="6" Grid.ColumnSpan="2" Text="1/10" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#FF025D00" FontSize="18"/>
         </Grid>
 
     </Grid>

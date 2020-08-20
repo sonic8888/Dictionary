@@ -77,6 +77,7 @@ namespace MyDictionary.Trenings
             textBlockWord.Text = translate;
             buttonNext.Content = strDef;
             buttonNext.Background = backgroundButtonNextDefault;
+            textblockCountword.Text = (currentWord + 1).ToString() + "/" + myWords.Count;
         }
         private void AddButtons(string word)
         {

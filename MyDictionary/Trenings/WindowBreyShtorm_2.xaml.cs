@@ -97,6 +97,7 @@ namespace MyDictionary
             buttonsix.Content = str;
             FileInfo fi = FIleTools.SearchFile(trenings[count].SoundName, FIleTools.NameDirectoryAudio);
             PlaySound(fi);
+            textblockCountword.Text = (count + 1).ToString() + "/" + trenings.Count().ToString();
         }
         private void InitResurse()
         {
@@ -290,7 +291,7 @@ namespace MyDictionary
         }
         private void GreateWindowBreyShtorm3()
         {
-           
+
             if (isTrenings)
             {
                 VisibilityElements();

@@ -121,6 +121,7 @@ namespace MyDictionary.Trenings
         {
             FileInfo fi = FIleTools.SearchFile(myWords[currentword].SoundName, FIleTools.NameDirectoryAudio);
             PlaySound(fi);
+            textblockCountword.Text = (currentword + 1).ToString() + "/" + myWords.Count;
         }
 
         private void buttonNext_Click(object sender, RoutedEventArgs e)

@@ -38,6 +38,7 @@ namespace MyDictionary
         {
             this.DataContext = w;
             FileInfo fi = FIleTools.SearchFile(w.SoundName, FIleTools.NameDirectoryAudio);
+            textblockCountword.Text = (count + 1).ToString() + "/" + App.dataVariable.CountWordLearning;
             PlaySound(fi);
         }
 
