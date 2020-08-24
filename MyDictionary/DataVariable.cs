@@ -23,6 +23,7 @@ namespace MyDictionary
         private int countWordSprint;//кол-во слов в упражнении Спринт
         public FileInfo soundYes;//звуковой файл "Галочка" "Yes" правилиьный ответ
         private FileInfo soundNo;//звуковой файл "Нет" не правильный ответ (ошибка)
+        private int isUpdateState;//сбрасывает статус слов при не правильном ответе
         public DataVariable()
         {
             defoltValueList = new List<string>();
@@ -34,6 +35,7 @@ namespace MyDictionary
             defoltValueList.Add("30");// defoltValue countTimeWork
             defoltValueList.Add("10");// defoltValue countWordTrenings
             defoltValueList.Add("30");// defoltValue countWordSprint
+            defoltValueList.Add("0");// defoltValue isUpdateState
             if (!File.Exists(FIleTools.NameFileDataVariable))
             {
                 WriteDefoltValue();
@@ -108,6 +110,7 @@ namespace MyDictionary
                         countTimeWork = int.Parse(listValue[5]);//читаем countTimeWork
                         countWordTrenings = int.Parse(listValue[6]);//читаем countWordTrenings
                         countWordSprint = int.Parse(listValue[7]);//читаем countWordSprint
+                        isUpdateState = int.Parse(listValue[8]);//читаем countWordSprint
 
                     }
                     catch (Exception ex)
@@ -148,6 +151,7 @@ namespace MyDictionary
                     sw.WriteLine(countTimeWork);
                     sw.WriteLine(countWordTrenings);
                     sw.WriteLine(countWordSprint);
+                    sw.WriteLine(isUpdateState);
                 }
             }
             catch (IOException ex)
@@ -231,6 +235,13 @@ namespace MyDictionary
             get { return countWordSprint; }
             set { countWordSprint = value; }
         }
+
+        public int IsUpdateState
+        {
+            get { return isUpdateState; }
+            set { isUpdateState = value; }
+        }
+
 
 
 

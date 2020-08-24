@@ -51,6 +51,10 @@ namespace MyDictionary
             textboxCountTimeWork.Text = App.dataVariable.CountTimeWork.ToString();
             textboxCountWordTrenings.Text = App.dataVariable.CountWordTrenings.ToString();
             textboxCountWordSprint.Text = App.dataVariable.CountWordSprint.ToString();
+            if (App.dataVariable.IsUpdateState==1)
+            {
+                checkboxStatus.IsChecked = true;
+            }
         }
 
         private void clickNewWord(object sender, RoutedEventArgs e)
@@ -378,6 +382,16 @@ namespace MyDictionary
                     App.dataVariable.CountWordSprint = value;
                 }
             }
+        }
+
+        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            App.dataVariable.IsUpdateState = 1;
+        }
+
+        private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            App.dataVariable.IsUpdateState = 0;
         }
     }
 }

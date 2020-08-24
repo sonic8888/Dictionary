@@ -69,6 +69,9 @@
                         <MenuItem Header="Кол-во слов упражнений:">
                             <TextBox x:Name="textboxCountWordTrenings" Width="30" PreviewKeyDown="textboxCountWordTrenings_PreviewKeyDown"     />
                         </MenuItem>
+                        <MenuItem Header="Менять статус слова при не верном ответе:">
+                            <CheckBox x:Name="checkboxStatus"  IsChecked="False"   IsThreeState="False" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" />
+                        </MenuItem>
                     </MenuItem>
                 </MenuItem>
             </Menu>

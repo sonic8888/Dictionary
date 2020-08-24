@@ -33,7 +33,7 @@ namespace MyDictionary.Repetition
         //bool IsAnswer = true;
         //string pathCheck = @"/MyDictionary;component/Picture/GalkaLow.png";
         //string pathCross = @"/MyDictionary;component/Picture/krestikLow.png";
-
+     
         //private int countdown;
         int countMilisek;//скорость прогрессбара-время для ответа
         int countMilisekDelay;//время задержки смены слов
@@ -59,6 +59,7 @@ namespace MyDictionary.Repetition
         DispatcherTimer dispatcherTimer;
         DispatcherTimer dispatcherTimerNext;
         MediaPlayer mediaPlayer;
+        List<MyWord> upDateState;
         public WindowRepetition(List<MyWord> words)
         {
             mediaPlayer = new MediaPlayer();
@@ -79,6 +80,7 @@ namespace MyDictionary.Repetition
             templateDefault = buttonleft.Template;
             templateGreen = (ControlTemplate)TryFindResource("buttonTemplateGreen");
             templateRed = (ControlTemplate)TryFindResource("buttonTemplateRed");
+            upDateState = new List<MyWord>();
 
 
             //colorDefault = new SolidColorBrush(Color.FromRgb(221, 221, 221));
@@ -252,6 +254,7 @@ namespace MyDictionary.Repetition
             //SystemSounds.Beep.Play();
             but.Template = templateRed;
             EndTime(false);
+            upDateState.Add(currentMyWord);
         }
 
 
@@ -446,6 +449,15 @@ namespace MyDictionary.Repetition
         {
             dispatcherTimerNext.Stop();
             dispatcherTimer.Stop();
+            if (App.dataVariable.IsUpdateState==1)
+            {
+                foreach (MyWord item in upDateState)
+                {
+                    BdTools.UpdateStateMyWord(item, State.Learn);
+                }
+            }
+            upDateState.Clear();
+
         }
 
         private void Window_Unloaded(object sender, RoutedEventArgs e)
