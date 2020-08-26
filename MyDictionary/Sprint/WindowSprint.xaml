@@ -27,7 +27,7 @@
             </Canvas>-->
             <Ellipse x:Name="elipseTop" Width ="60" Height="60" Stroke="Green" Fill="Green" Grid.Row="0" Grid.Column="2" />
             <TextBlock x:Name="textblockCountRings" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Microsoft JhengHei" FontSize="30" Foreground="#FF066808"/>
-            <TextBlock x:Name="textblockTime" Grid.Row="0" Grid.Column="2" Text="20" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Microsoft JhengHei" FontSize="36" Foreground="#FFFFEFEF"/>
+            <TextBlock x:Name="textblockTime" Grid.Row="0" Grid.Column="2"  VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Microsoft JhengHei" FontSize="36" Foreground="#FFFFEFEF"/>
             <TextBlock x:Name="textblockWord" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Text="example" VerticalAlignment="Center" FontSize="38" HorizontalAlignment="Center" FontFamily="Georgia"/>
             <TextBlock x:Name="textblockTranslate" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" Text="пример" VerticalAlignment="Center" FontSize="24" HorizontalAlignment="Center" TextWrapping="Wrap" FontFamily="Georgia"/>
             <Ellipse x:Name="elipseBottom" Width ="60" Height="60" Stroke="Green" Fill="Green" Grid.Row="3" Grid.Column="2" Visibility="Hidden" />

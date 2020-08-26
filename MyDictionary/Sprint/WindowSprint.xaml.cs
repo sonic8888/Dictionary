@@ -343,6 +343,7 @@ namespace MyDictionary.Sprint
             textblockWord.Foreground = new SolidColorBrush(Colors.Red);
             textblockTranslate.Text = "";
             SaveResult();
+            dispatcherTimer.Stop();
         }
         private void InitTotal()
         {
