@@ -98,6 +98,17 @@ namespace MyDictionary.Tools
             response.Close();
             return response;
         }
+        private static DateTime GetDataBD()
+        {
+            FtpWebRequest request = (FtpWebRequest)WebRequest.Create(PatnServerBD);
+            request.UseBinary = true;
+            request.Method = WebRequestMethods.Ftp.GetDateTimestamp;
+            request.Credentials = new NetworkCredential(UserName, Password);
+            FtpWebResponse response = (FtpWebResponse)request.GetResponse();
+            DateTime dt = response.LastModified.ToUniversalTime();
+            response.Close();
+            return dt;
+        }
 
 
     }
