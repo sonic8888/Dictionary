@@ -33,6 +33,10 @@ namespace MyDictionary
             {
                 Directory.CreateDirectory(FIleTools.NameDirectoryAudio);
             }
+            if (!Directory.Exists(FIleTools.NameDirectoryTempFiles))
+            {
+                Directory.CreateDirectory(FIleTools.NameDirectoryTempFiles);
+            }
             dataVariable = new DataVariable();
             random = new Random();
             StartNewThread();

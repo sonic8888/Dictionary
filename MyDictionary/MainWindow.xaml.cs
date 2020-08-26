@@ -19,6 +19,8 @@ using System.Threading;
 using XMLRead;
 using MyDictionary.Trenings;
 using MyDictionary.Repetition;
+using System.IO;
+using System.Net;
 
 namespace MyDictionary
 {
@@ -51,7 +53,7 @@ namespace MyDictionary
             textboxCountTimeWork.Text = App.dataVariable.CountTimeWork.ToString();
             textboxCountWordTrenings.Text = App.dataVariable.CountWordTrenings.ToString();
             textboxCountWordSprint.Text = App.dataVariable.CountWordSprint.ToString();
-            if (App.dataVariable.IsUpdateState==1)
+            if (App.dataVariable.IsUpdateState == 1)
             {
                 checkboxStatus.IsChecked = true;
             }
@@ -104,7 +106,7 @@ namespace MyDictionary
             }
             if (App.collection.Count < App.dataVariable.CountWordSprint)
             {
-                MessageBox.Show("Для нормальной работы приложения кол-во слов в словаре должно быть не менее: " + App.dataVariable.CountWordSprint,"Внимание!",MessageBoxButton.OK,MessageBoxImage.Warning);
+                MessageBox.Show("Для нормальной работы приложения кол-во слов в словаре должно быть не менее: " + App.dataVariable.CountWordSprint, "Внимание!", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
 
@@ -392,6 +394,17 @@ namespace MyDictionary
         private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
         {
             App.dataVariable.IsUpdateState = 0;
+        }
+
+        private void buttonSinc_Click(object sender, RoutedEventArgs e)
+        {
+            FtpWebResponse response;
+            if ((response = FTPSinchronisation.DownloadDb()).StatusCode != FtpStatusCode.ClosingData)
+            {
+                MessageBox.Show(response.StatusDescription);
+            }
+            FileInfo infoDB = new FileInfo(FTPSinchronisation.PatnLocalTempBD);
+            MessageBox.Show(infoDB.LastWriteTime.ToString());
         }
     }
 }
