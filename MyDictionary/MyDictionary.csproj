@@ -88,7 +88,7 @@
     <Reference Include="PresentationFramework" />
     <Reference Include="XMLRead, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Library\XMLRead\bin\Debug\XMLRead.dll</HintPath>
+      <HintPath>..\..\MyLibrary\XMLRead\bin\Debug\XMLRead.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -119,6 +119,7 @@
       <DependentUpon>WindowSprint.xaml</DependentUpon>
     </Compile>
     <Compile Include="Tools\BdTools.cs" />
+    <Compile Include="Tools\FTPSinchronisation.cs" />
     <Compile Include="Tools\MyTools.cs" />
     <Compile Include="Tools\WindowsManager.cs" />
     <Compile Include="TotalDictionary.xaml.cs">
@@ -446,6 +447,7 @@
     <Resource Include="Picture\orchide10.png" />
     <Resource Include="Picture\Untitled-1.png" />
     <Resource Include="Picture\GT2_recycle_empty_green.png" />
+    <Resource Include="Picture\Sync.png" />
     <Content Include="SoundsApplication\soundNo.mp3">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

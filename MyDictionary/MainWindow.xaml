@@ -76,6 +76,9 @@
                 </MenuItem>
             </Menu>
             <Separator/>
+            <Button x:Name="buttonSinc" Click="buttonSinc_Click">
+                <Image Source="Picture/Sync.png"/>
+            </Button>
             <Button x:Name="buttonBack" Click="buttonBack_Click" Visibility="Hidden">
                 <Image Source="Picture/restart_back_left_arrow_6022.png"/>
             </Button>
