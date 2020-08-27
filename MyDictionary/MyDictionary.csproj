@@ -86,9 +86,8 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
-    <Reference Include="XMLRead, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Library\XMLRead\bin\Debug\XMLRead.dll</HintPath>
+    <Reference Include="XMLRead">
+      <HintPath>..\..\MyLibrary\XMLRead\bin\Debug\XMLRead.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -239,7 +238,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <None Include="mobiles.db">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -448,6 +447,10 @@
     <Resource Include="Picture\Untitled-1.png" />
     <Resource Include="Picture\GT2_recycle_empty_green.png" />
     <Resource Include="Picture\Sync.png" />
+    <Resource Include="Picture\icons8-cloud-sync-96.png" />
+    <Resource Include="Picture\icons8-download-from-the-cloud-144.png" />
+    <Resource Include="Picture\cloud.png" />
+    <Resource Include="Picture\icons8-upload-to-the-cloud-144.png" />
     <Content Include="SoundsApplication\soundNo.mp3">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
