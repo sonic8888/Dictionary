@@ -151,6 +151,19 @@
     <Compile Include="WordConstructor\WindowWordConstructor.xaml.cs">
       <DependentUpon>WindowWordConstructor.xaml</DependentUpon>
     </Compile>
+    <Compile Include="XMLRead\Card.cs" />
+    <Compile Include="XMLRead\DefaultDialogService.cs" />
+    <Compile Include="XMLRead\ExampleClass.cs" />
+    <Compile Include="XMLRead\FIleTools.cs" />
+    <Compile Include="XMLRead\Meaning.cs" />
+    <Compile Include="XMLRead\MyCardWord.cs" />
+    <Compile Include="XMLRead\MyCollection.cs" />
+    <Compile Include="XMLRead\MyCollectionTranslateClass.cs" />
+    <Compile Include="XMLRead\MyList.cs" />
+    <Compile Include="XMLRead\MyXmlReader.cs" />
+    <Compile Include="XMLRead\TranslateClass.cs" />
+    <Compile Include="XMLRead\WordForList.cs" />
+    <Compile Include="XMLRead\WordSample.cs" />
     <Page Include="ChoseWords.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

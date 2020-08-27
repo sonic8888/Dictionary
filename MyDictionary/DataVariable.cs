@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
-using XMLRead;
+using MyDictionary.XMLRead;
 using System.Windows;
 using System.Reflection;
 

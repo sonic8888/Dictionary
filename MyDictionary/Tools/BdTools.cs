@@ -8,7 +8,8 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using MyDictionary.EF;
-using XMLRead;
+
+using MyDictionary.XMLRead;
 
 namespace MyDictionary.Tools
 {

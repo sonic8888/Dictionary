@@ -10,7 +10,8 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
-using XMLRead;
+using MyDictionary.XMLRead;
+
 
 namespace MyDictionary
 {

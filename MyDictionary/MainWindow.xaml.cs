@@ -16,7 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Threading;
-using XMLRead;
+using MyDictionary.XMLRead;
 using MyDictionary.Trenings;
 using MyDictionary.Repetition;
 using System.IO;

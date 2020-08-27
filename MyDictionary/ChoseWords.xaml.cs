@@ -13,7 +13,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using XMLRead;
+using MyDictionary.XMLRead;
 using MyDictionary.Tools;
 using Path = System.IO.Path;
 
