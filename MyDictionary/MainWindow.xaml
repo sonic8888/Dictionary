@@ -76,12 +76,22 @@
                 </MenuItem>
             </Menu>
             <Separator/>
-            <Button x:Name="buttonSinc" Click="buttonSinc_Click">
-                <Image Source="Picture/Sync.png"/>
+            <Button x:Name="buttonSinc" Click="buttonSinc_Click" Margin="10,0" >
+                <Image Source="Picture/icons8-download-from-the-cloud-144.png"  />
             </Button>
-            <Button x:Name="buttonBack" Click="buttonBack_Click" Visibility="Hidden">
+            <Separator/>
+            <Button x:Name="buttonBack" Click="buttonBack_Click" Visibility="Collapsed">
                 <Image Source="Picture/restart_back_left_arrow_6022.png"/>
             </Button>
+
+            <Button x:Name="buttonToCloud"   HorizontalAlignment="Center" Margin="10,0">
+                <Image Source="Picture/icons8-upload-to-the-cloud-144.png"  />
+            </Button>
+            <Separator/>
+
+
+
+
 
         </ToolBar>
         <!--<Button Click="clickNewWord" Grid.Row="2" Grid.Column="0">HewWord</Button>

@@ -13,7 +13,7 @@ namespace MyDictionary.Tools
     {
         private const string PatnServerBD = @"ftp://andreysonic.asuscomm.com/sda1/Documents/BD/mobiles.db";
         public const string PatnLocalTempBD = @"./TempFiles/mobiles.db";
-        public const string PatnBD = @".mobiles.db";
+        public const string PatnLocalBD = @"./mobiles.db";
         private const string PatnDirectorySoundFiles = @"ftp://andreysonic.asuscomm.com/sda1/Documents/SoundFiles";
         private const string UserName = "andrey";
         private const string Password = "sonic";
@@ -98,7 +98,7 @@ namespace MyDictionary.Tools
             response.Close();
             return response;
         }
-        public static DateTime GetDataBD()
+        public static DateTime GetDataServerBD()
         {
             FtpWebRequest request = (FtpWebRequest)WebRequest.Create(PatnServerBD);
             request.UseBinary = true;
@@ -108,6 +108,11 @@ namespace MyDictionary.Tools
             DateTime dt = response.LastModified.ToUniversalTime();
             response.Close();
             return dt;
+        }
+        public static DateTime GetDataLocalBd()
+        {
+            FileInfo filebd = new FileInfo(PatnLocalBD);
+            return filebd.LastWriteTime;
         }
 
 
