@@ -398,13 +398,15 @@ namespace MyDictionary
 
         private void buttonSinc_Click(object sender, RoutedEventArgs e)
         {
-            FtpWebResponse response;
-            if ((response = FTPSinchronisation.DownloadDb()).StatusCode != FtpStatusCode.ClosingData)
-            {
-                MessageBox.Show(response.StatusDescription);
-            }
-            FileInfo infoDB = new FileInfo(FTPSinchronisation.PatnLocalTempBD);
-            MessageBox.Show(infoDB.LastWriteTime.ToString());
+            //FtpWebResponse response;
+            //if ((response = FTPSinchronisation.DownloadDb()).StatusCode != FtpStatusCode.ClosingData)
+            //{
+            //    MessageBox.Show(response.StatusDescription);
+            //}
+            //FileInfo infoDB = new FileInfo(FTPSinchronisation.PatnLocalTempBD);
+            //MessageBox.Show(infoDB.LastWriteTime.ToString());
+            DateTime dt = FTPSinchronisation.GetDataBD();
+            MessageBox.Show(dt.ToString());
         }
     }
 }

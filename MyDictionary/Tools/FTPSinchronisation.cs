@@ -98,7 +98,7 @@ namespace MyDictionary.Tools
             response.Close();
             return response;
         }
-        private static DateTime GetDataBD()
+        public static DateTime GetDataBD()
         {
             FtpWebRequest request = (FtpWebRequest)WebRequest.Create(PatnServerBD);
             request.UseBinary = true;
