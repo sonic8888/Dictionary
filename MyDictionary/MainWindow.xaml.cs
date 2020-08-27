@@ -399,13 +399,14 @@ namespace MyDictionary
         private void buttonSinc_Click(object sender, RoutedEventArgs e)
         {
 
-            DateTime dtServ = FTPSinchronisation.GetDataServerBD();
-            DateTime dtLoc = FTPSinchronisation.GetDataLocalBd();
-            if (dtServ < dtLoc)
-            {
-            MessageBox.Show("Sev: " + dtServ.ToString() + "   Loc " + dtLoc.ToString());
-          
-            }
+            //DateTime dtServ = FTPSinchronisation.GetDataServerBD();
+            //DateTime dtLoc = FTPSinchronisation.GetDataLocalBd();
+            //if (dtServ < dtLoc)
+            //{
+            //MessageBox.Show("Sev: " + dtServ.ToString() + "   Loc " + dtLoc.ToString());
+
+            //}
+            FTPSinchronisation.DownloadDb(progressBarDownload);
 
         }
     }

@@ -6,6 +6,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace MyDictionary.Tools
 {
@@ -20,8 +21,9 @@ namespace MyDictionary.Tools
         /// <summary>
         /// скачивает БД с FTP сервера
         /// </summary>
-        public static FtpWebResponse DownloadDb()
+        public static FtpWebResponse DownloadDb(ProgressBar progress)
         {
+            progress.Maximum = GetSizeServerDB();
             FtpWebRequest request = (FtpWebRequest)WebRequest.Create(PatnServerBD);
             request.UseBinary = true;
             request.Method = WebRequestMethods.Ftp.DownloadFile;
@@ -34,6 +36,7 @@ namespace MyDictionary.Tools
 
             while ((size = responseStream.Read(buffer, 0, buffer.Length)) > 0)
             {
+                progress.Value += size;
                 fs.Write(buffer, 0, size);
 
             }
@@ -113,6 +116,15 @@ namespace MyDictionary.Tools
         {
             FileInfo filebd = new FileInfo(PatnLocalBD);
             return filebd.LastWriteTime;
+        }
+        public static long GetSizeServerDB()
+        {
+            FtpWebRequest request = (FtpWebRequest)WebRequest.Create(PatnServerBD);
+            request.UseBinary = true;
+            request.Method = WebRequestMethods.Ftp.GetFileSize;
+            request.Credentials = new NetworkCredential(UserName, Password);
+            FtpWebResponse response = (FtpWebResponse)request.GetResponse();
+            return response.ContentLength;
         }
 
 
