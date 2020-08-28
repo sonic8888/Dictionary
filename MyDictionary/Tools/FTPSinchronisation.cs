@@ -1,4 +1,4 @@
-﻿ using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using MyDictionary.XMLRead;
+using System.ComponentModel;
 
 namespace MyDictionary.Tools
 {
@@ -22,27 +23,41 @@ namespace MyDictionary.Tools
         /// <summary>
         /// скачивает БД с FTP сервера
         /// </summary>
-        public static FtpWebResponse DownloadDb(ProgressBar progress)
+        public static FtpWebResponse DownloadDb(BackgroundWorker worker, int oneprocent)
         {
-            progress.Maximum = GetSizeServerDB();
+
+            int tempByte = 0;
             FtpWebRequest request = (FtpWebRequest)WebRequest.Create(PatnServerBD);
             request.UseBinary = true;
             request.Method = WebRequestMethods.Ftp.DownloadFile;
             request.Credentials = new NetworkCredential(UserName, Password);
             FtpWebResponse response = (FtpWebResponse)request.GetResponse();
-            Stream responseStream = response.GetResponseStream();
-            FileStream fs = new FileStream(PatnLocalTempBD, FileMode.Create);
-            byte[] buffer = new byte[64];
-            int size = 0;
-
-            while ((size = responseStream.Read(buffer, 0, buffer.Length)) > 0)
+            try
             {
-                progress.Value += size;
-                fs.Write(buffer, 0, size);
+                Stream responseStream = response.GetResponseStream();
+                FileStream fs = new FileStream(PatnLocalBD, FileMode.Create);
+                byte[] buffer = new byte[64];
+                int size = 0;
 
+                while ((size = responseStream.Read(buffer, 0, buffer.Length)) > 0)
+                {
+                    //tempByte += size;
+                    //if (tempByte >= oneprocent)
+                    //{
+                    //    worker.ReportProgress(tempByte);
+                    //    tempByte = 0;
+                    //}
+                    fs.Write(buffer, 0, size);
+
+                }
+                fs.Close();
+                response.Close();
             }
-            fs.Close();
-            response.Close();
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message);
+            }
             return response;
         }
         public static void WriteBD()

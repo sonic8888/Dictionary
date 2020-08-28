@@ -133,6 +133,7 @@ namespace MyDictionary.Tools
                         context.Entry(c).Collection(x => x.MyExamples).Load();
                         myWords.Add(c);
                     }
+                    
                 }
                 catch (Exception e)
                 {

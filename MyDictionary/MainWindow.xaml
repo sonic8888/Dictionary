@@ -3,9 +3,16 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:cm="clr-namespace:System.ComponentModel;assembly=System"
         xmlns:local="clr-namespace:MyDictionary"
         mc:Ignorable="d"
         Title="Dictionary" Height="450" Width="800" Icon="&amp;Applications&amp;Dictionary.ico">
+    <Window.Resources>
+        <cm:BackgroundWorker x:Key="backgroundWorker" 
+         WorkerReportsProgress="True" WorkerSupportsCancellation="True"
+         DoWork="backgroundWorker_DoWork" ProgressChanged="backgroundWorker_ProgressChanged" 
+         RunWorkerCompleted="backgroundWorker_RunWorkerCompleted"/>
+    </Window.Resources>
     <Window.Background>
         <ImageBrush ImageSource="Picture/field-1728099_1280.jpg"/>
     </Window.Background>
@@ -84,11 +91,11 @@
                 <Image Source="Picture/restart_back_left_arrow_6022.png"/>
             </Button>
 
-            <Button x:Name="buttonToCloud"   HorizontalAlignment="Center" Margin="10,0">
+            <Button x:Name="buttonToCloud"   HorizontalAlignment="Center" Margin="10,0" Click="buttonToCloud_Click">
                 <Image Source="Picture/icons8-upload-to-the-cloud-144.png"  />
             </Button>
             <Separator/>
-            <ProgressBar x:Name="progressBarDownload" Minimum="0"  Height="25" Width="200" Visibility="Visible" Background="{x:Null}" BorderBrush="{x:Null}"/>
+            <ProgressBar x:Name="progressBarDownload" Minimum="0"  Height="25" Width="200" Visibility="Visible" Background="{x:Null}" BorderBrush="{x:Null}" ValueChanged="progressBarDownload_ValueChanged"  />
 
 
 

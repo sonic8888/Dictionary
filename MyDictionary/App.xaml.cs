@@ -40,12 +40,13 @@ namespace MyDictionary
             }
             dataVariable = new DataVariable();
             random = new Random();
-            StartNewThread();
+            //StartNewThread();
         }
 
         private void Application_Exit(object sender, ExitEventArgs e)
         {
             dataVariable.WriteFile();
+            //dataVariable.CloseWindow();
         }
         private int myVar;
 

@@ -167,24 +167,24 @@ namespace MyDictionary
         {
             BdTools.DeleteWord(wordId);
             //MyWord myWord = collection.Where(n => n.WordId == wordId).Single();
-            MyWord myWord=null;
+            MyWord myWord = null;
             foreach (MyWord item in collection)
             {
-                if (item.WordId==wordId)
+                if (item.WordId == wordId)
                 {
                     myWord = item;
                 }
             }
-            if (myWord==null)
+            if (myWord == null)
             {
-                MessageBox.Show("Слово не найдено!","Внимание!",MessageBoxButton.OK,MessageBoxImage.Error);
+                MessageBox.Show("Слово не найдено!", "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
             collection.Remove(myWord);
             FileInfo fileInfo = FIleTools.SearchFile(myWord.SoundName, FIleTools.NameDirectoryAudio);
-            fileInfo.IsReadOnly = false;
             if (fileInfo != null)
             {
+                fileInfo.IsReadOnly = false;
                 try
                 {
                     File.Delete(fileInfo.FullName);
@@ -244,7 +244,7 @@ namespace MyDictionary
 
         private void buttonStateGrey_Click(object sender, RoutedEventArgs e)
         {
-            IEnumerable<MyWord> en = collection.OrderByDescending(n => n.State == 1).Select(n=>n);
+            IEnumerable<MyWord> en = collection.OrderByDescending(n => n.State == 1).Select(n => n);
             listViewDictionary.ItemsSource = new ObservableCollection<MyWord>(en);
         }
         private BitmapImage InitBitMap()
@@ -337,7 +337,7 @@ namespace MyDictionary
 
         private void buttonStateGold_Click(object sender, RoutedEventArgs e)
         {
-            IEnumerable<MyWord> en = collection.OrderByDescending(n => n.State == 3).Select(n=>n);
+            IEnumerable<MyWord> en = collection.OrderByDescending(n => n.State == 3).Select(n => n);
             listViewDictionary.ItemsSource = new ObservableCollection<MyWord>(en);
         }
 

@@ -7,6 +7,7 @@ using System.IO;
 using MyDictionary.XMLRead;
 using System.Windows;
 using System.Reflection;
+using MyDictionary.Tools;
 
 namespace MyDictionary
 {
@@ -194,7 +195,7 @@ namespace MyDictionary
             get { return countMilisekDelay; }
             set { countMilisekDelay = value; }
         }
-     
+
         /// <summary>
         /// звук утверждения
         /// </summary>
@@ -240,6 +241,23 @@ namespace MyDictionary
         {
             get { return isUpdateState; }
             set { isUpdateState = value; }
+        }
+        public   void CloseWindow()
+        {
+            FileInfo fileSourse = new FileInfo(FTPSinchronisation.PatnLocalTempBD);
+            FileInfo fileTarget = new FileInfo(FTPSinchronisation.PatnLocalBD);
+            try
+            {
+                fileTarget.Delete();
+                fileSourse.CopyTo(fileTarget.FullName);
+
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message);
+                return;
+            }
         }
 
 

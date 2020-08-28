@@ -119,6 +119,7 @@
     </Compile>
     <Compile Include="Tools\BdTools.cs" />
     <Compile Include="Tools\FTPSinchronisation.cs" />
+    <Compile Include="Tools\HelpWorker.cs" />
     <Compile Include="Tools\MyTools.cs" />
     <Compile Include="Tools\WindowsManager.cs" />
     <Compile Include="TotalDictionary.xaml.cs">

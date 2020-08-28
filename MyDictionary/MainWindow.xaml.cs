@@ -21,6 +21,7 @@ using MyDictionary.Trenings;
 using MyDictionary.Repetition;
 using System.IO;
 using System.Net;
+using System.ComponentModel;
 
 namespace MyDictionary
 {
@@ -37,14 +38,15 @@ namespace MyDictionary
         Thread thread;
 
 
-
+        private BackgroundWorker backgroundWorker;
 
         public MainWindow()
         {
             InitializeComponent();
+            backgroundWorker = ((BackgroundWorker)this.FindResource("backgroundWorker"));
             FIleTools.CreateDirectory(FIleTools.NameDirectoryAudio);
             FIleTools.CreateDirectory(FIleTools.NameDirectoryStorage);
-            StartNewThread();
+            //StartNewThread();
             textboxCountWord.Text = App.dataVariable.CountWordLearning.ToString();
             textboxCounSelekt.Text = App.dataVariable.CountSelectWord.ToString();
             textboxCountRepetition.Text = App.dataVariable.CountWordRepetition.ToString();
@@ -57,6 +59,21 @@ namespace MyDictionary
             {
                 checkboxStatus.IsChecked = true;
             }
+            ReadDictionary();
+        }
+        private void backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            HelpWorker hw = (HelpWorker)e.Argument;
+            FTPSinchronisation.DownloadDb(backgroundWorker, hw.Size);
+        }
+        private void backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            progressBarDownload.IsIndeterminate = false; ; ;
+            //MessageBox.Show("HHHHH");
+        }
+        private void backgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            progressBarDownload.Value += e.ProgressPercentage;
         }
 
         private void clickNewWord(object sender, RoutedEventArgs e)
@@ -278,11 +295,14 @@ namespace MyDictionary
 
         private void buttonDictionary_Click_1(object sender, RoutedEventArgs e)
         {
-            while (App.thread.IsAlive)
-            {
-                Thread.Sleep(50);
-            }
-            WindowsManager.CreateTotalDictionary();
+            //while (App.thread.IsAlive)
+            //{
+            //    Thread.Sleep(50);
+            //}
+            //WindowsManager.CreateTotalDictionary();
+            //ObservableCollection<MyWord> collection = BdTools.ReadWord();
+            TotalDictionary td = new TotalDictionary(collection);
+            td.Show();
         }
 
         private void buttonUpr_Click(object sender, RoutedEventArgs e)
@@ -398,16 +418,78 @@ namespace MyDictionary
 
         private void buttonSinc_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                DateTime dtServ = FTPSinchronisation.GetDataServerBD();
+                DateTime dtLoc = FTPSinchronisation.GetDataLocalBd();
+                if (dtServ < dtLoc)
+                {
+                    string message = $"Сервер БД: {dtServ},\nЛокал БД: {dtLoc}\n" +
+                        $"БД сервера старее локальной БД.\n" +
+                        $"Продолжить скачивание?";
+                    MessageBoxResult messageBoxResult = MessageBox.Show(message, "Внимание!", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                    if (messageBoxResult == MessageBoxResult.No)
+                    {
+                        return;
+                    }
 
-            //DateTime dtServ = FTPSinchronisation.GetDataServerBD();
-            //DateTime dtLoc = FTPSinchronisation.GetDataLocalBd();
-            //if (dtServ < dtLoc)
-            //{
-            //MessageBox.Show("Sev: " + dtServ.ToString() + "   Loc " + dtLoc.ToString());
+                }
 
-            //}
-            FTPSinchronisation.DownloadDb(progressBarDownload);
+                double size = FTPSinchronisation.GetSizeServerDB();
+                progressBarDownload.Maximum = size;
+                int oneProcent = (int)size / 100;
+                progressBarDownload.IsIndeterminate = true;
+                HelpWorker hw = new HelpWorker(oneProcent, progressBarDownload);
+                backgroundWorker.RunWorkerAsync(hw);
 
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message, "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+        }
+
+        private void progressBarDownload_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+
+        }
+
+        private void buttonToCloud_Click(object sender, RoutedEventArgs e)
+        {
+            FileInfo fileSourse = new FileInfo(FTPSinchronisation.PatnLocalTempBD);
+            FileInfo fileTarget = new FileInfo(FTPSinchronisation.PatnLocalBD);
+            try
+            {
+                fileTarget.Delete();
+                fileSourse.CopyTo(fileTarget.FullName);
+
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message);
+                return;
+            }
+        }
+        private void CloseWindow()
+        {
+            FileInfo fileSourse = new FileInfo(FTPSinchronisation.PatnLocalTempBD);
+            FileInfo fileTarget = new FileInfo(FTPSinchronisation.PatnLocalBD);
+            try
+            {
+                fileTarget.Delete();
+                fileSourse.CopyTo(fileTarget.FullName);
+
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message);
+                return;
+            }
         }
     }
 }
