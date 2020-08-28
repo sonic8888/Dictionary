@@ -142,6 +142,21 @@ namespace MyDictionary.Tools
             FtpWebResponse response = (FtpWebResponse)request.GetResponse();
             return response.ContentLength;
         }
+        public static void GetListDirectory()
+        {
+            FtpWebRequest request = (FtpWebRequest)WebRequest.Create(PatnDirectorySoundFiles);
+            request.UseBinary = true;
+            request.Method = WebRequestMethods.Ftp.ListDirectory;
+            request.Credentials = new NetworkCredential(UserName, Password);
+            FtpWebResponse response = (FtpWebResponse)request.GetResponse();
+            Stream responseStream = response.GetResponseStream();
+            StreamReader reader = new StreamReader(responseStream);
+            string str = reader.ReadToEnd();
+            string[] vs = str.Split(new char[] { '\r'});
+            MessageBox.Show(reader.ReadToEnd());
+
+
+        }
 
 
     }

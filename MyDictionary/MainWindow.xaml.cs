@@ -435,11 +435,11 @@ namespace MyDictionary
 
                 }
 
-                double size = FTPSinchronisation.GetSizeServerDB();
-                progressBarDownload.Maximum = size;
-                int oneProcent = (int)size / 100;
+                //double size = FTPSinchronisation.GetSizeServerDB();
+                //progressBarDownload.Maximum = size;
+                //int oneProcent = (int)size / 100;
                 progressBarDownload.IsIndeterminate = true;
-                HelpWorker hw = new HelpWorker(oneProcent, progressBarDownload);
+                HelpWorker hw = new HelpWorker(0, progressBarDownload);
                 backgroundWorker.RunWorkerAsync(hw);
 
             }
@@ -490,6 +490,11 @@ namespace MyDictionary
                 MessageBox.Show(ex.Message);
                 return;
             }
+        }
+
+        private void buttonFromCloudAudio_Click(object sender, RoutedEventArgs e)
+        {
+            FTPSinchronisation.GetListDirectory();
         }
     }
 }

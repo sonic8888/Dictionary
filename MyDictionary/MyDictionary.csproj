@@ -465,6 +465,7 @@
     <Resource Include="Picture\icons8-download-from-the-cloud-144.png" />
     <Resource Include="Picture\cloud.png" />
     <Resource Include="Picture\icons8-upload-to-the-cloud-144.png" />
+    <Resource Include="Picture\icons8-sound-cloud-96.png" />
     <Content Include="SoundsApplication\soundNo.mp3">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

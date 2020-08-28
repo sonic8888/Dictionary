@@ -90,7 +90,10 @@
             <Button x:Name="buttonBack" Click="buttonBack_Click" Visibility="Collapsed">
                 <Image Source="Picture/restart_back_left_arrow_6022.png"/>
             </Button>
-
+            <Button x:Name="buttonFromCloudAudio"   HorizontalAlignment="Center" Margin="10,0" Click="buttonFromCloudAudio_Click"  >
+                <Image Source="Picture/440.png"  />
+            </Button>
+            <Separator/>
             <Button x:Name="buttonToCloud"   HorizontalAlignment="Center" Margin="10,0" Click="buttonToCloud_Click">
                 <Image Source="Picture/icons8-upload-to-the-cloud-144.png"  />
             </Button>
