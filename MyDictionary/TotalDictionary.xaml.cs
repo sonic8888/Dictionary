@@ -72,9 +72,20 @@ namespace MyDictionary
                     MessageBox.Show(ex.Message);
                     return;
                 };
-                MediaPlayer mediaPlayer = new MediaPlayer();
-                mediaPlayer.Open(new Uri(sound.FullName));
-                mediaPlayer.Play();
+
+                try
+                {
+                    MediaPlayer mediaPlayer = new MediaPlayer();
+                    mediaPlayer.Open(new Uri(sound.FullName));
+                    mediaPlayer.Play();
+                }
+                catch (Exception ex)
+                {
+
+
+                    MessageBox.Show(ex.Message, "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
             }
 
         }

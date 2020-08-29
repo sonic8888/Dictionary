@@ -22,6 +22,8 @@ using MyDictionary.Repetition;
 using System.IO;
 using System.Net;
 using System.ComponentModel;
+using System.Reflection;
+using System.Windows.Media.Animation;
 
 namespace MyDictionary
 {
@@ -68,8 +70,10 @@ namespace MyDictionary
         }
         private void backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            progressBarDownload.IsIndeterminate = false; ; ;
-            //MessageBox.Show("HHHHH");
+            progressBarDownload.IsIndeterminate = false;
+            textblockMessage.Text = "БД загружена!";
+            TextAnimation();
+
         }
         private void backgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
@@ -85,16 +89,6 @@ namespace MyDictionary
 
         }
 
-        //private void buttonDictionary_Click(object sender, RoutedEventArgs e)
-        //{
-
-
-        //    while (App.thread.IsAlive)
-        //    {
-        //        Thread.Sleep(50);
-        //    }
-        //    WindowsManager.CreateTotalDictionary();
-        //}
         private void ReadDictionary()
         {
 
@@ -117,15 +111,15 @@ namespace MyDictionary
 
         private void buttonBreyShtorm_Click(object sender, RoutedEventArgs e)
         {
-            while (App.thread.IsAlive)
-            {
-                Thread.Sleep(200);
-            }
-            if (App.collection.Count < App.dataVariable.CountWordSprint)
-            {
-                MessageBox.Show("Для нормальной работы приложения кол-во слов в словаре должно быть не менее: " + App.dataVariable.CountWordSprint, "Внимание!", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
-            }
+            //while (App.thread.IsAlive)
+            //{
+            //    Thread.Sleep(200);
+            //}
+            //if (App.collection.Count < App.dataVariable.CountWordSprint)
+            //{
+            //    MessageBox.Show("Для нормальной работы приложения кол-во слов в словаре должно быть не менее: " + App.dataVariable.CountWordSprint, "Внимание!", MessageBoxButton.OK, MessageBoxImage.Warning);
+            //    return;
+            //}
 
             WindowsManager.CreateWindowBreyShtorm();
         }
@@ -143,20 +137,7 @@ namespace MyDictionary
             }
         }
 
-        //private void buttonBreyShtorm2_Click(object sender, RoutedEventArgs e)
-        //{
-        //    ObservableCollection<MyWord> collec_5 = BdTools.ReadWord(App.dataVariable.CountWordTrenings);
-        //    //ObservableCollection<MyWord> collec_5 = BdTools.ReadWord(3);
-        //    ObservableCollection<MyWord> collectionTotal
-        //        = BdTools.ReadWord();
-        //    if (collec_5 != null && collectionTotal != null)
-        //    {
-        //        IEnumerable<MyWord> enumerable = collectionTotal.Except(collec_5);
-        //        WindowsManager.GreateWindowBreyShtorm_2(collec_5.ToList(), enumerable.ToList(), true);
 
-        //    }
-
-        //}
 
         private void textboxCounSelekt_PreviewKeyDown(object sender, KeyEventArgs e)
         {
@@ -171,51 +152,7 @@ namespace MyDictionary
             }
         }
 
-        //private void buttonBreyShtorm3_Click(object sender, RoutedEventArgs e)
-        //{
-        //    ObservableCollection<MyWord> collec_5 = BdTools.ReadWord(App.dataVariable.CountWordTrenings);
-        //    if (collec_5 != null)
-        //    {
 
-        //        WindowsManager.CreateWindowBreyShtorm_3(collec_5.ToList(), true);
-        //    }
-        //}
-
-        //private void buttonBreyShtorm4_Click(object sender, RoutedEventArgs e)
-        //{
-        //    ObservableCollection<MyWord> collec_5 = BdTools.ReadWord(3);
-        //    if (collec_5 != null)
-        //    {
-        //        WindowsManager.CreateWindowBreyShtorm_4(collec_5.ToList(), true);
-
-        //    }
-        //}
-
-        //private void buttonBreyShtormResult_Click(object sender, RoutedEventArgs e)
-        //{
-        //    ObservableCollection<MyWord> collec_5 = BdTools.ReadWord(5);
-        //    if (collec_5 != null)
-        //    {
-        //        foreach (MyWord item in collec_5)
-        //        {
-        //            item.TrueAnswer = App.random.Next(4);
-        //        }
-        //        WindowBreyShtormResult wbr = new WindowBreyShtormResult(collec_5.ToList());
-        //        wbr.Show();
-
-        //    }
-        //}
-
-        //private void buttonTest_Click(object sender, RoutedEventArgs e)
-        //{
-        //    int count = App.dataVariable.CountWordRepetition;
-        //    List<MyWord> lists = BdTools.GetRandomListMyWord(count);
-        //    if (lists != null)
-        //    {
-        //        WindowsManager.CreateWindowRepetition(lists);
-
-        //    }
-        //}
 
         private void textboxCountRepetition_PreviewKeyDown(object sender, KeyEventArgs e)
         {
@@ -307,16 +244,16 @@ namespace MyDictionary
 
         private void buttonUpr_Click(object sender, RoutedEventArgs e)
         {
-            while (App.thread.IsAlive)
-            {
-                Thread.Sleep(200);
-            }
-            if (App.collection.Count < App.dataVariable.CountWordSprint)
-            {
-                MessageBox.Show("Для нормальной работы приложения кол-во слов в словаре должно быть не менее: " + App.dataVariable.CountWordSprint, "Внимание!", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
-            }
-            VisibilityElements(Visibility.Hidden, Visibility.Visible);
+            //while (App.thread.IsAlive)
+            //{
+            //    Thread.Sleep(200);
+            //}
+            //if (App.collection.Count < App.dataVariable.CountWordSprint)
+            //{
+            //    MessageBox.Show("Для нормальной работы приложения кол-во слов в словаре должно быть не менее: " + App.dataVariable.CountWordSprint, "Внимание!", MessageBoxButton.OK, MessageBoxImage.Warning);
+            //    return;
+            //}
+            VisibilityElements(Visibility.Hidden, Visibility.Visible,Visibility.Collapsed);
         }
 
         private void buttonWordTranslate_Click(object sender, RoutedEventArgs e)
@@ -348,8 +285,18 @@ namespace MyDictionary
         {
             List<MyWord> lists = BdTools.GetRandomListMyWord(App.dataVariable.CountWordTrenings);
             if (lists != null)
+
             {
-                WindowsManager.CreateWindowBreyShtorm_4(lists, true);
+                try
+                {
+                    WindowsManager.CreateWindowBreyShtorm_4(lists, true);
+                }
+                catch (Exception ex)
+                {
+
+                    MessageBox.Show(ex.Message, "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
 
             }
         }
@@ -374,7 +321,7 @@ namespace MyDictionary
                 WindowsManager.CreateWindowSprint(lists);
             }
         }
-        private void VisibilityElements(Visibility visibilitiOne, Visibility visibilitiTwo)
+        private void VisibilityElements(Visibility visibilitiOne, Visibility visibilitiTwo,Visibility visibilitiThree)
         {
             buttonDictionary.Visibility = visibilitiOne;
             buttonTrenings.Visibility = visibilitiOne;
@@ -385,12 +332,15 @@ namespace MyDictionary
             buttonAudirovanie.Visibility = visibilitiTwo;
             buttonRepetition.Visibility = visibilitiTwo;
             buttonSprint.Visibility = visibilitiTwo;
+            buttonSinc.Visibility = visibilitiThree;
+            buttonFromCloudAudio.Visibility = visibilitiThree;
+            buttonToCloud.Visibility = visibilitiThree;
         }
 
         private void buttonBack_Click(object sender, RoutedEventArgs e)
         {
 
-            VisibilityElements(Visibility.Visible, Visibility.Hidden);
+            VisibilityElements(Visibility.Visible, Visibility.Collapsed,Visibility.Visible);
         }
 
         private void textboxCountWordSprint_PreviewKeyDown(object sender, KeyEventArgs e)
@@ -494,7 +444,30 @@ namespace MyDictionary
 
         private void buttonFromCloudAudio_Click(object sender, RoutedEventArgs e)
         {
-            FTPSinchronisation.GetListDirectory();
+            try
+            {
+                FTPSinchronisation.LoaderAudio();
+            
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message + MethodBase.GetCurrentMethod().DeclaringType.FullName, "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+        }
+        private void TextAnimation()
+        {
+            SolidColorBrush gbrash =(SolidColorBrush) textblockMessage.Foreground;
+            
+            SolidColorBrush myBrush = new SolidColorBrush();
+            ColorAnimation colAnim = new ColorAnimation();
+            colAnim.Duration = TimeSpan.FromMilliseconds(2000);
+            colAnim.From = gbrash.Color;
+            colAnim.To = Color.FromArgb(0, 0, 0, 0);
+
+            myBrush.BeginAnimation(SolidColorBrush.ColorProperty, colAnim);
+            textblockMessage.Foreground = myBrush;
+
         }
     }
 }

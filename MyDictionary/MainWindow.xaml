@@ -98,22 +98,20 @@
                 <Image Source="Picture/icons8-upload-to-the-cloud-144.png"  />
             </Button>
             <Separator/>
-            <ProgressBar x:Name="progressBarDownload" Minimum="0"  Height="25" Width="200" Visibility="Visible" Background="{x:Null}" BorderBrush="{x:Null}" ValueChanged="progressBarDownload_ValueChanged"  />
+            <Grid>
+                <ProgressBar x:Name="progressBarDownload" Minimum="0"  Height="25" Width="200" Visibility="Visible" Background="{x:Null}" BorderBrush="{x:Null}" ValueChanged="progressBarDownload_ValueChanged" FontSize="18"/>
+                <TextBlock x:Name="textblockMessage"   VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" Foreground="Green" />
+
+            </Grid>
+
+
 
 
 
 
 
         </ToolBar>
-        <!--<Button Click="clickNewWord" Grid.Row="2" Grid.Column="0">HewWord</Button>
-        <Button x:Name="buttonDictionary" Click="buttonDictionary_Click" Grid.Row="2" Grid.Column="2">TotalDictionary</Button>
-        <Button x:Name="buttonBreyShtorm" Grid.Row="2" Grid.Column="4" Content="BreyShtorm" Click="buttonBreyShtorm_Click"/>
-        <Button x:Name="buttonBreyShtorm2" Grid.Row="2" Grid.Column="6" Content="Слово-перевод" Click="buttonBreyShtorm2_Click"/>
-        <Button x:Name="buttonBreyShtorm3" Grid.Row="4" Grid.Column="6" Content="WordConstructor" Click="buttonBreyShtorm3_Click"/>
-        <Button x:Name="buttonBreyShtorm4" Grid.Row="6" Grid.Column="6" Content="Аудирование" Click="buttonBreyShtorm4_Click" />
-        <Button x:Name="buttonBreyShtormResult" Grid.Row="8" Grid.Column="6" Content="BreyShtormResult" Click="buttonBreyShtormResult_Click"  />
-        <Button x:Name="buttonTest" Grid.Row="8" Grid.Column="4" Content="Repetition" Click="buttonTest_Click"  />
-        <Button x:Name="buttonSprint" Grid.Row="8" Grid.Column="2" Content="Sprint" Click="buttonSprint_Click"    />-->
+
         <Button x:Name="buttonDictionary" Grid.Row="2" Grid.RowSpan="2" Grid.Column="1" Grid.ColumnSpan="2" Margin="20" Click="buttonDictionary_Click_1" BorderBrush="#FF1EA5B3" Visibility="Visible" Background="#FFB7D5F6">
             <StackPanel Orientation="Horizontal">
                 <Image Source="Picture/&amp;Applications&amp;Dictionary.png"/>
@@ -176,5 +174,6 @@
                 </TextBlock>
             </StackPanel>
         </Button>
+
     </Grid>
 </Window>

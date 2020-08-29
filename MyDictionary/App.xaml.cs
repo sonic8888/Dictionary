@@ -41,6 +41,7 @@ namespace MyDictionary
             dataVariable = new DataVariable();
             random = new Random();
             //StartNewThread();
+            //ReadDictionary();
         }
 
         private void Application_Exit(object sender, ExitEventArgs e)

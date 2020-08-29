@@ -17,7 +17,10 @@ namespace MyDictionary.Tools
         private const string PatnServerBD = @"ftp://andreysonic.asuscomm.com/sda1/Documents/BD/mobiles.db";
         public const string PatnLocalTempBD = @"./TempFiles/mobiles.db";
         public const string PatnLocalBD = @"./mobiles.db";
-        private const string PatnDirectorySoundFiles = @"ftp://andreysonic.asuscomm.com/sda1/Documents/SoundFiles";
+        private const string PatnDirectorySoundFilesServer = @"ftp://andreysonic.asuscomm.com/sda1/Documents/SoundFiles";
+        private const string PathDirectorySoundFilesLocal = @"./SoundFiles/";
+        private const string UrlServer = @"ftp://andreysonic.asuscomm.com";
+        private const string PathServer = "/sda1/Documents/SoundFiles/";
         private const string UserName = "andrey";
         private const string Password = "sonic";
         /// <summary>
@@ -26,7 +29,7 @@ namespace MyDictionary.Tools
         public static FtpWebResponse DownloadDb(BackgroundWorker worker, int oneprocent)
         {
 
-            int tempByte = 0;
+         
             FtpWebRequest request = (FtpWebRequest)WebRequest.Create(PatnServerBD);
             request.UseBinary = true;
             request.Method = WebRequestMethods.Ftp.DownloadFile;
@@ -41,12 +44,7 @@ namespace MyDictionary.Tools
 
                 while ((size = responseStream.Read(buffer, 0, buffer.Length)) > 0)
                 {
-                    //tempByte += size;
-                    //if (tempByte >= oneprocent)
-                    //{
-                    //    worker.ReportProgress(tempByte);
-                    //    tempByte = 0;
-                    //}
+                   
                     fs.Write(buffer, 0, size);
 
                 }
@@ -96,27 +94,11 @@ namespace MyDictionary.Tools
             response.Close();
             return response;
         }
-        public static FtpWebResponse DownloadFile(string pathSours, string pathTarget)
-        {
-            FtpWebRequest request = (FtpWebRequest)WebRequest.Create(pathSours);
-            request.UseBinary = true;
-            request.Method = WebRequestMethods.Ftp.DownloadFile;
-            request.Credentials = new NetworkCredential(UserName, Password);
-            FtpWebResponse response = (FtpWebResponse)request.GetResponse();
-            Stream responseStream = response.GetResponseStream();
-            FileStream fs = new FileStream(pathTarget, FileMode.Create);
-            byte[] buffer = new byte[64];
-            int size = 0;
 
-            while ((size = responseStream.Read(buffer, 0, buffer.Length)) > 0)
-            {
-                fs.Write(buffer, 0, size);
-
-            }
-            fs.Close();
-            response.Close();
-            return response;
-        }
+        /// <summary>
+        /// возвращает дату создания БД на сервере
+        /// </summary>
+        /// <returns>DateTime</returns>
         public static DateTime GetDataServerBD()
         {
             FtpWebRequest request = (FtpWebRequest)WebRequest.Create(PatnServerBD);
@@ -128,34 +110,165 @@ namespace MyDictionary.Tools
             response.Close();
             return dt;
         }
+        /// <summary>
+        /// возвращает дату последнего изменения файла БД на локальном ПК
+        /// </summary>
+        /// <returns>DateTime</returns>
         public static DateTime GetDataLocalBd()
         {
             FileInfo filebd = new FileInfo(PatnLocalBD);
             return filebd.LastWriteTime;
         }
+        /// <summary>
+        /// Получить размер файла БД на серевере
+        /// </summary>
+        /// <returns></returns>
         public static long GetSizeServerDB()
         {
-            FtpWebRequest request = (FtpWebRequest)WebRequest.Create(PatnServerBD);
-            request.UseBinary = true;
-            request.Method = WebRequestMethods.Ftp.GetFileSize;
-            request.Credentials = new NetworkCredential(UserName, Password);
-            FtpWebResponse response = (FtpWebResponse)request.GetResponse();
-            return response.ContentLength;
+            try
+            {
+                FtpWebRequest request = (FtpWebRequest)WebRequest.Create(PatnServerBD);
+                request.UseBinary = true;
+                request.Method = WebRequestMethods.Ftp.GetFileSize;
+                request.Credentials = new NetworkCredential(UserName, Password);
+                FtpWebResponse response = (FtpWebResponse)request.GetResponse();
+                return response.ContentLength;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
-        public static void GetListDirectory()
+
+        /// <summary>
+        /// получает список файлов из папки SoundFiles на сервере
+        /// isFullName true - полное имя файла
+        /// </summary>
+        /// <param name="isFullName">true - полное имя файла</param>
+        /// <returns>IEnumerable<string></returns>
+        public static IEnumerable<string> GetListDirectoryServer(bool isFullName)
         {
-            FtpWebRequest request = (FtpWebRequest)WebRequest.Create(PatnDirectorySoundFiles);
-            request.UseBinary = true;
-            request.Method = WebRequestMethods.Ftp.ListDirectory;
-            request.Credentials = new NetworkCredential(UserName, Password);
-            FtpWebResponse response = (FtpWebResponse)request.GetResponse();
-            Stream responseStream = response.GetResponseStream();
-            StreamReader reader = new StreamReader(responseStream);
-            string str = reader.ReadToEnd();
-            string[] vs = str.Split(new char[] { '\r'});
-            MessageBox.Show(reader.ReadToEnd());
+            try
+            {
+                FtpWebRequest request = (FtpWebRequest)WebRequest.Create(PatnDirectorySoundFilesServer);
+                request.UseBinary = true;
+                request.Method = WebRequestMethods.Ftp.ListDirectory;
+                request.Credentials = new NetworkCredential(UserName, Password);
+                FtpWebResponse response = (FtpWebResponse)request.GetResponse();
+                Stream responseStream = response.GetResponseStream();
+                StreamReader reader = new StreamReader(responseStream);
+                string str = reader.ReadToEnd();
+                string[] stringSeparators = null;
+                if (isFullName)
+                {
+                    stringSeparators = new string[] { "\r\n" };
+                }
+                else
+                {
+                    stringSeparators = new string[] { "\r\n", "/sda1/Documents/SoundFiles/" };
 
+                }
+                return str.Split(stringSeparators, StringSplitOptions.None).Where(n => n.Length > 0);
+            }
+            catch (Exception)
+            {
 
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// получает список файлов из локальной папки SoundFiles
+        /// isAddPath true - обавляет к имени файла path
+        /// "path" путь к файлу ("/sda1/Documents/SoundFiles/") для удобства сравнения и последующей записи
+        /// </summary>
+        /// <param name="isAddPath">true - обавляет к имени файла path</param>
+        /// <param name="path">путь к файлу ("/sda1/Documents/SoundFiles/") для удобства сравнения и последующей записи</param>
+        /// <returns>IEnumerable<string></returns>
+        public static IEnumerable<string> GetListDirectoryLocal(bool isAddPath, string path = null)
+        {
+            try
+            {
+                DirectoryInfo di = new DirectoryInfo(PathDirectorySoundFilesLocal);
+                FileInfo[] fileInfos = di.GetFiles();
+                if (isAddPath)
+                {
+                    return fileInfos.Select(n => n.Name).Select(n => n.Insert(0, path));
+                }
+                else
+                {
+                    return fileInfos.Select(n => n.Name);
+
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        /// <summary>
+        /// Загружает аудиофайл с FTPSever в локальную папку SoundFiles
+        /// url-адресс файла на FTPSever (ftp://andreysonic.asuscomm.com/sda1/Documents/SoundFiles/apple.waw) 
+        /// </summary>
+        /// <param name="url">адресс файла на FTPSever</param>
+        public static void DownLoadAudio(string url)
+        {
+            try
+            {
+                FtpWebRequest request = (FtpWebRequest)WebRequest.Create(url);
+                request.UseBinary = true;
+                request.Method = WebRequestMethods.Ftp.DownloadFile;
+                request.Credentials = new NetworkCredential(UserName, Password);
+                FtpWebResponse response = (FtpWebResponse)request.GetResponse();
+                Stream responseStream = response.GetResponseStream();
+                string pathAudio = PathDirectorySoundFilesLocal + "/" + url.Remove(0, UrlServer.Length + PathServer.Length);
+                FileInfo file = new FileInfo(pathAudio);
+                FileStream fs = new FileStream(file.FullName, FileMode.Create);
+                byte[] buffer = new byte[64];
+                int size = 0;
+
+                while ((size = responseStream.Read(buffer, 0, buffer.Length)) > 0)
+                {
+                    fs.Write(buffer, 0, size);
+
+                }
+                fs.Close();
+                response.Close();
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+        /// <summary>
+        /// загрузчик аудиофайлов с сервера на локальный ПК
+        /// </summary>
+        public static void LoaderAudio()
+        {
+            try
+            {
+                IEnumerable<string> soundsSever = GetListDirectoryServer(true);
+                IEnumerable<string> sounsLocal = GetListDirectoryLocal(true, PathServer);
+                IEnumerable<string> soundsExcept = soundsSever.Except(sounsLocal).Select(n => n.Insert(0, UrlServer));
+                if (soundsExcept.Count() > 0)
+                {
+                    foreach (string item in soundsExcept)
+                    {
+                        DownLoadAudio(item);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Нет новых аудиофайлов!");
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
 
