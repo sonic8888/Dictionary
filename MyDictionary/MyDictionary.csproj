@@ -466,6 +466,13 @@
     <Resource Include="Picture\cloud.png" />
     <Resource Include="Picture\icons8-upload-to-the-cloud-144.png" />
     <Resource Include="Picture\icons8-sound-cloud-96.png" />
+    <Resource Include="Picture\music_audio_7173.png" />
+    <Resource Include="Picture\Update Database.ico" />
+    <Resource Include="Picture\db_comit.png" />
+    <Resource Include="Picture\db_update.png" />
+    <Resource Include="Picture\iTunes Music.ico" />
+    <Resource Include="Picture\iconfinder_db_update_3213.png" />
+    <Resource Include="Picture\olympics_sport_basket_basketball_ball_2290.png" />
     <Content Include="SoundsApplication\soundNo.mp3">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

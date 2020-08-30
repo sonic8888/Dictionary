@@ -9,6 +9,7 @@ using System.Windows;
 using System.Windows.Controls;
 using MyDictionary.XMLRead;
 using System.ComponentModel;
+using System.Reflection;
 
 namespace MyDictionary.Tools
 {
@@ -29,7 +30,7 @@ namespace MyDictionary.Tools
         public static FtpWebResponse DownloadDb(BackgroundWorker worker, int oneprocent)
         {
 
-         
+
             FtpWebRequest request = (FtpWebRequest)WebRequest.Create(PatnServerBD);
             request.UseBinary = true;
             request.Method = WebRequestMethods.Ftp.DownloadFile;
@@ -44,7 +45,7 @@ namespace MyDictionary.Tools
 
                 while ((size = responseStream.Read(buffer, 0, buffer.Length)) > 0)
                 {
-                   
+
                     fs.Write(buffer, 0, size);
 
                 }
@@ -54,45 +55,62 @@ namespace MyDictionary.Tools
             catch (Exception ex)
             {
 
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message + MethodBase.GetCurrentMethod().DeclaringType.FullName, "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             return response;
         }
         public static void WriteBD()
         {
-            FtpWebRequest request = (FtpWebRequest)WebRequest.Create(PatnServerBD);
-            request.UseBinary = true;
-            request.Method = WebRequestMethods.Ftp.UploadFile;
-            request.Credentials = new NetworkCredential(UserName, Password);
-            FileStream fs = new FileStream(PatnLocalTempBD, FileMode.Open);
-            byte[] fileContents = new byte[fs.Length];
-            fs.Read(fileContents, 0, fileContents.Length);
-            fs.Close();
-            request.ContentLength = fileContents.Length;
-            Stream requestStream = request.GetRequestStream();
-            requestStream.Write(fileContents, 0, fileContents.Length);
-            requestStream.Close();
-            FtpWebResponse response = (FtpWebResponse)request.GetResponse();
-            MessageBox.Show("Загрузка файлов завершена. Статус:" + response.StatusDescription);
-            response.Close();
+            try
+            {
+                FtpWebRequest request = (FtpWebRequest)WebRequest.Create(PatnServerBD);
+                request.UseBinary = true;
+                request.Method = WebRequestMethods.Ftp.UploadFile;
+                request.Credentials = new NetworkCredential(UserName, Password);
+                FileStream fs = new FileStream(PatnLocalBD, FileMode.Open);
+                byte[] fileContents = new byte[fs.Length];
+                fs.Read(fileContents, 0, fileContents.Length);
+                fs.Close();
+                request.ContentLength = fileContents.Length;
+                Stream requestStream = request.GetRequestStream();
+                requestStream.Write(fileContents, 0, fileContents.Length);
+                requestStream.Close();
+                FtpWebResponse response = (FtpWebResponse)request.GetResponse();
+                response.Close();
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message + MethodBase.GetCurrentMethod().DeclaringType.FullName, "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
+                return  ;
+            }
         }
         public static FtpWebResponse WriteFile(string target, string sours)
         {
-            FtpWebRequest request = (FtpWebRequest)WebRequest.Create(target);
-            request.UseBinary = true;
-            request.Method = WebRequestMethods.Ftp.UploadFile;
-            request.Credentials = new NetworkCredential(UserName, Password);
-            FileStream fs = new FileStream(sours, FileMode.Open);
-            byte[] fileContents = new byte[fs.Length];
-            fs.Read(fileContents, 0, fileContents.Length);
-            fs.Close();
-            request.ContentLength = fileContents.Length;
-            Stream requestStream = request.GetRequestStream();
-            requestStream.Write(fileContents, 0, fileContents.Length);
-            requestStream.Close();
-            FtpWebResponse response = (FtpWebResponse)request.GetResponse();
-            response.Close();
-            return response;
+            try
+            {
+                FtpWebRequest request = (FtpWebRequest)WebRequest.Create(target);
+                request.UseBinary = true;
+                request.Method = WebRequestMethods.Ftp.UploadFile;
+                request.Credentials = new NetworkCredential(UserName, Password);
+                FileStream fs = new FileStream(sours, FileMode.Open);
+                byte[] fileContents = new byte[fs.Length];
+                fs.Read(fileContents, 0, fileContents.Length);
+                fs.Close();
+                request.ContentLength = fileContents.Length;
+                Stream requestStream = request.GetRequestStream();
+                requestStream.Write(fileContents, 0, fileContents.Length);
+                requestStream.Close();
+                FtpWebResponse response = (FtpWebResponse)request.GetResponse();
+                response.Close();
+                return response;
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message + MethodBase.GetCurrentMethod().DeclaringType.FullName, "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
+                return null;
+            }
         }
 
         /// <summary>
@@ -101,14 +119,22 @@ namespace MyDictionary.Tools
         /// <returns>DateTime</returns>
         public static DateTime GetDataServerBD()
         {
-            FtpWebRequest request = (FtpWebRequest)WebRequest.Create(PatnServerBD);
-            request.UseBinary = true;
-            request.Method = WebRequestMethods.Ftp.GetDateTimestamp;
-            request.Credentials = new NetworkCredential(UserName, Password);
-            FtpWebResponse response = (FtpWebResponse)request.GetResponse();
-            DateTime dt = response.LastModified.ToUniversalTime();
-            response.Close();
-            return dt;
+            try
+            {
+                FtpWebRequest request = (FtpWebRequest)WebRequest.Create(PatnServerBD);
+                request.UseBinary = true;
+                request.Method = WebRequestMethods.Ftp.GetDateTimestamp;
+                request.Credentials = new NetworkCredential(UserName, Password);
+                FtpWebResponse response = (FtpWebResponse)request.GetResponse();
+                DateTime dt = response.LastModified.ToUniversalTime();
+                response.Close();
+                return dt;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message + MethodBase.GetCurrentMethod().DeclaringType.FullName, "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
+                return DateTime.MinValue;
+            }
         }
         /// <summary>
         /// возвращает дату последнего изменения файла БД на локальном ПК
@@ -116,8 +142,16 @@ namespace MyDictionary.Tools
         /// <returns>DateTime</returns>
         public static DateTime GetDataLocalBd()
         {
-            FileInfo filebd = new FileInfo(PatnLocalBD);
-            return filebd.LastWriteTime;
+            try
+            {
+                FileInfo filebd = new FileInfo(PatnLocalBD);
+                return filebd.LastWriteTime;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message + MethodBase.GetCurrentMethod().DeclaringType.FullName, "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
+                return DateTime.MinValue;
+            }
         }
         /// <summary>
         /// Получить размер файла БД на серевере
@@ -134,10 +168,11 @@ namespace MyDictionary.Tools
                 FtpWebResponse response = (FtpWebResponse)request.GetResponse();
                 return response.ContentLength;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                throw;
+                MessageBox.Show(ex.Message + MethodBase.GetCurrentMethod().DeclaringType.FullName, "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
+                return -1;
             }
         }
 
@@ -171,10 +206,11 @@ namespace MyDictionary.Tools
                 }
                 return str.Split(stringSeparators, StringSplitOptions.None).Where(n => n.Length > 0);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                throw;
+                MessageBox.Show(ex.Message + MethodBase.GetCurrentMethod().DeclaringType.FullName, "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
+                return null;
             }
         }
 
@@ -202,10 +238,11 @@ namespace MyDictionary.Tools
 
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                throw;
+                MessageBox.Show(ex.Message + MethodBase.GetCurrentMethod().DeclaringType.FullName, "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
+                return null;
             }
         }
         /// <summary>
@@ -239,7 +276,8 @@ namespace MyDictionary.Tools
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message + MethodBase.GetCurrentMethod().DeclaringType.FullName, "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
             }
         }
         /// <summary>
@@ -254,9 +292,12 @@ namespace MyDictionary.Tools
                 IEnumerable<string> soundsExcept = soundsSever.Except(sounsLocal).Select(n => n.Insert(0, UrlServer));
                 if (soundsExcept.Count() > 0)
                 {
+
                     foreach (string item in soundsExcept)
                     {
+
                         DownLoadAudio(item);
+
                     }
                 }
                 else
@@ -264,10 +305,11 @@ namespace MyDictionary.Tools
                     MessageBox.Show("Нет новых аудиофайлов!");
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                throw;
+                MessageBox.Show(ex.Message + MethodBase.GetCurrentMethod().DeclaringType.FullName, "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
             }
         }
 

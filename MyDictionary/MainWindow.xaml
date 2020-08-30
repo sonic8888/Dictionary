@@ -12,6 +12,14 @@
          WorkerReportsProgress="True" WorkerSupportsCancellation="True"
          DoWork="backgroundWorker_DoWork" ProgressChanged="backgroundWorker_ProgressChanged" 
          RunWorkerCompleted="backgroundWorker_RunWorkerCompleted"/>
+        <cm:BackgroundWorker x:Key="backgroundWorkerLoadAudio" WorkerReportsProgress="True"
+                             WorkerSupportsCancellation="True" DoWork="BackgroundWorker_DoWork_1"
+                             ProgressChanged="BackgroundWorker_ProgressChanged_1" 
+                             RunWorkerCompleted="BackgroundWorker_RunWorkerCompleted_1"/>
+        <cm:BackgroundWorker x:Key="backgroundWorkerWriteDB"  
+                             WorkerSupportsCancellation="True" DoWork="BackgroundWorker_DoWork_2"
+                             RunWorkerCompleted="BackgroundWorker_RunWorkerCompleted_2"/>
+
     </Window.Resources>
     <Window.Background>
         <ImageBrush ImageSource="Picture/field-1728099_1280.jpg"/>
@@ -80,11 +88,19 @@
                             <CheckBox x:Name="checkboxStatus"  IsChecked="False"   IsThreeState="False" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" />
                         </MenuItem>
                     </MenuItem>
+                    <MenuItem Click="MenuItem_Click">
+                        <MenuItem.Header>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="Picture/music_audio_7173.png" Width="24" Margin="-35,0,0,0"/>
+                                <TextBlock Text="Аудиофайлы" VerticalAlignment="Bottom"/>
+                            </StackPanel>
+                        </MenuItem.Header>
+                    </MenuItem>
                 </MenuItem>
             </Menu>
             <Separator/>
             <Button x:Name="buttonSinc" Click="buttonSinc_Click" Margin="10,0" >
-                <Image Source="Picture/icons8-download-from-the-cloud-144.png"  />
+                <Image Source="Picture/iconfinder_db_update_3213.png"  />
             </Button>
             <Separator/>
             <Button x:Name="buttonBack" Click="buttonBack_Click" Visibility="Collapsed">
@@ -94,15 +110,21 @@
                 <Image Source="Picture/440.png"  />
             </Button>
             <Separator/>
-            <Button x:Name="buttonToCloud"   HorizontalAlignment="Center" Margin="10,0" Click="buttonToCloud_Click">
-                <Image Source="Picture/icons8-upload-to-the-cloud-144.png"  />
-            </Button>
-            <Separator/>
+         
+          
             <Grid>
-                <ProgressBar x:Name="progressBarDownload" Minimum="0"  Height="25" Width="200" Visibility="Visible" Background="{x:Null}" BorderBrush="{x:Null}" ValueChanged="progressBarDownload_ValueChanged" FontSize="18"/>
+                <ProgressBar x:Name="progressBarDownload" Minimum="0"  Height="25" Width="480" Visibility="Visible" Background="{x:Null}" BorderBrush="{x:Null}" ValueChanged="progressBarDownload_ValueChanged" FontSize="18"/>
                 <TextBlock x:Name="textblockMessage"   VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" Foreground="Green" />
 
             </Grid>
+            <Separator/>
+            <Button x:Name="buttonToCloud"   HorizontalAlignment="Center" Margin="10,0" Click="buttonToCloud_Click">
+                <Image Source="Picture/Update Database.ico"  />
+            </Button>
+            <Separator/>
+            <Button x:Name="buttonToAudioCloud"   HorizontalAlignment="Center"    >
+                <Image Source="Picture/iTunes Music.ico"  />
+            </Button>
 
 
 
@@ -120,13 +142,13 @@
         </Button>
         <Button x:Name="buttonTrenings" Grid.Row="2" Grid.RowSpan="2" Grid.Column="3" Grid.ColumnSpan="2" Margin="20" Click="buttonBreyShtorm_Click" BorderBrush="#FF1EA5B3" Visibility="Visible" Background="#FFB7D5F6">
             <StackPanel Orientation="Horizontal">
-                <Image Source="Picture/Chubby_3D_Character-30.png"/>
+                <Image Source="Picture/accerciser_103989.png"/>
                 <TextBlock Text="Тренировка" VerticalAlignment="Center" Margin="0" FontSize="20"/>
             </StackPanel>
         </Button>
         <Button x:Name="buttonUpr" Grid.Row="2" Grid.RowSpan="2" Grid.Column="5" Grid.ColumnSpan="2" Margin="20"  BorderBrush="#FF1EA5B3" Click="buttonUpr_Click" Visibility="Visible" Background="#FFB7D5F6">
             <StackPanel Orientation="Horizontal">
-                <Image Source="Picture/Chubby_3D_Character-80.png"/>
+                <Image Source="Picture/olympics_sport_basket_basketball_ball_2290.png"/>
                 <TextBlock Text="Задания" VerticalAlignment="Center" Margin="10" FontSize="20"/>
             </StackPanel>
         </Button>

@@ -24,6 +24,7 @@ using System.Net;
 using System.ComponentModel;
 using System.Reflection;
 using System.Windows.Media.Animation;
+using Microsoft.Win32;
 
 namespace MyDictionary
 {
@@ -41,11 +42,15 @@ namespace MyDictionary
 
 
         private BackgroundWorker backgroundWorker;
+        private BackgroundWorker backgroundWorkerLoadAudio;
+        private BackgroundWorker backgroundWorkerWriteDB;
 
         public MainWindow()
         {
             InitializeComponent();
             backgroundWorker = ((BackgroundWorker)this.FindResource("backgroundWorker"));
+            backgroundWorkerLoadAudio = ((BackgroundWorker)this.FindResource("backgroundWorkerLoadAudio"));
+            backgroundWorkerWriteDB = ((BackgroundWorker)this.FindResource("backgroundWorkerWriteDB"));
             FIleTools.CreateDirectory(FIleTools.NameDirectoryAudio);
             FIleTools.CreateDirectory(FIleTools.NameDirectoryStorage);
             //StartNewThread();
@@ -61,7 +66,7 @@ namespace MyDictionary
             {
                 checkboxStatus.IsChecked = true;
             }
-            ReadDictionary();
+
         }
         private void backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
@@ -238,6 +243,7 @@ namespace MyDictionary
             //}
             //WindowsManager.CreateTotalDictionary();
             //ObservableCollection<MyWord> collection = BdTools.ReadWord();
+            ReadDictionary();
             TotalDictionary td = new TotalDictionary(collection);
             td.Show();
         }
@@ -253,7 +259,7 @@ namespace MyDictionary
             //    MessageBox.Show("Для нормальной работы приложения кол-во слов в словаре должно быть не менее: " + App.dataVariable.CountWordSprint, "Внимание!", MessageBoxButton.OK, MessageBoxImage.Warning);
             //    return;
             //}
-            VisibilityElements(Visibility.Hidden, Visibility.Visible,Visibility.Collapsed);
+            VisibilityElements(Visibility.Hidden, Visibility.Visible, Visibility.Collapsed);
         }
 
         private void buttonWordTranslate_Click(object sender, RoutedEventArgs e)
@@ -321,7 +327,7 @@ namespace MyDictionary
                 WindowsManager.CreateWindowSprint(lists);
             }
         }
-        private void VisibilityElements(Visibility visibilitiOne, Visibility visibilitiTwo,Visibility visibilitiThree)
+        private void VisibilityElements(Visibility visibilitiOne, Visibility visibilitiTwo, Visibility visibilitiThree)
         {
             buttonDictionary.Visibility = visibilitiOne;
             buttonTrenings.Visibility = visibilitiOne;
@@ -340,7 +346,7 @@ namespace MyDictionary
         private void buttonBack_Click(object sender, RoutedEventArgs e)
         {
 
-            VisibilityElements(Visibility.Visible, Visibility.Collapsed,Visibility.Visible);
+            VisibilityElements(Visibility.Visible, Visibility.Collapsed, Visibility.Visible);
         }
 
         private void textboxCountWordSprint_PreviewKeyDown(object sender, KeyEventArgs e)
@@ -409,45 +415,35 @@ namespace MyDictionary
 
         private void buttonToCloud_Click(object sender, RoutedEventArgs e)
         {
-            FileInfo fileSourse = new FileInfo(FTPSinchronisation.PatnLocalTempBD);
-            FileInfo fileTarget = new FileInfo(FTPSinchronisation.PatnLocalBD);
             try
             {
-                fileTarget.Delete();
-                fileSourse.CopyTo(fileTarget.FullName);
-
+                DateTime dataServ = FTPSinchronisation.GetDataServerBD();
+                DateTime dataLocal = FTPSinchronisation.GetDataLocalBd();
+                if (dataLocal < dataServ)
+                {
+                    MessageBox.Show("Локальная БД старее чем на сервере!");
+                    return;
+                }
+                progressBarDownload.IsIndeterminate = true;
+                backgroundWorkerWriteDB.RunWorkerAsync();
             }
             catch (Exception ex)
             {
 
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message + MethodBase.GetCurrentMethod().DeclaringType.FullName, "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-        }
-        private void CloseWindow()
-        {
-            FileInfo fileSourse = new FileInfo(FTPSinchronisation.PatnLocalTempBD);
-            FileInfo fileTarget = new FileInfo(FTPSinchronisation.PatnLocalBD);
-            try
-            {
-                fileTarget.Delete();
-                fileSourse.CopyTo(fileTarget.FullName);
 
-            }
-            catch (Exception ex)
-            {
-
-                MessageBox.Show(ex.Message);
-                return;
-            }
         }
+  
 
         private void buttonFromCloudAudio_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                FTPSinchronisation.LoaderAudio();
-            
+                progressBarDownload.IsIndeterminate = true;
+                backgroundWorkerLoadAudio.RunWorkerAsync();
+
             }
             catch (Exception ex)
             {
@@ -457,8 +453,8 @@ namespace MyDictionary
         }
         private void TextAnimation()
         {
-            SolidColorBrush gbrash =(SolidColorBrush) textblockMessage.Foreground;
-            
+            SolidColorBrush gbrash = (SolidColorBrush)textblockMessage.Foreground;
+
             SolidColorBrush myBrush = new SolidColorBrush();
             ColorAnimation colAnim = new ColorAnimation();
             colAnim.Duration = TimeSpan.FromMilliseconds(2000);
@@ -468,6 +464,55 @@ namespace MyDictionary
             myBrush.BeginAnimation(SolidColorBrush.ColorProperty, colAnim);
             textblockMessage.Foreground = myBrush;
 
+        }
+
+        private void BackgroundWorker_DoWork_1(object sender, DoWorkEventArgs e)
+        {
+            FTPSinchronisation.LoaderAudio();
+        }
+
+        private void BackgroundWorker_ProgressChanged_1(object sender, ProgressChangedEventArgs e)
+        {
+            progressBarDownload.Value = e.ProgressPercentage;
+        }
+
+        private void BackgroundWorker_RunWorkerCompleted_1(object sender, RunWorkerCompletedEventArgs e)
+        {
+            progressBarDownload.IsIndeterminate = false;
+            textblockMessage.Text = "Аудиофайлы загружены!";
+            TextAnimation();
+        }
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            //openFileDialog.CustomPlaces.Add(new FileDialogCustomPlace(FIleTools.NameDirectoryAudio));
+            //openFileDialog.Filter = "Wav files (*.wav)|*.wav|MP3 files (*.mp3)|*.mp3";
+            //openFileDialog.FileName = FIleTools.NameDirectoryAudio;
+            openFileDialog.ShowDialog();
+
+        }
+
+        private void BackgroundWorker_DoWork_2(object sender, DoWorkEventArgs e)
+        {
+
+            try
+            {
+                FTPSinchronisation.WriteBD();
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message + MethodBase.GetCurrentMethod().DeclaringType.FullName, "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+        }
+
+        private void BackgroundWorker_RunWorkerCompleted_2(object sender, RunWorkerCompletedEventArgs e)
+        {
+            progressBarDownload.IsIndeterminate = false;
+            textblockMessage.Text = "БД отправлена на сервер!";
+            TextAnimation();
         }
     }
 }
