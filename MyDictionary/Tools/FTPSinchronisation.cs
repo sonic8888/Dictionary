@@ -59,6 +59,9 @@ namespace MyDictionary.Tools
             }
             return response;
         }
+        /// <summary>
+        /// звписывает БД с локального ПК на сервер
+        /// </summary>
         public static void WriteBD()
         {
             try
@@ -82,7 +85,7 @@ namespace MyDictionary.Tools
             {
 
                 MessageBox.Show(ex.Message + MethodBase.GetCurrentMethod().DeclaringType.FullName, "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
-                return  ;
+                return;
             }
         }
         public static FtpWebResponse WriteFile(string target, string sours)
@@ -219,7 +222,7 @@ namespace MyDictionary.Tools
         /// isAddPath true - обавляет к имени файла path
         /// "path" путь к файлу ("/sda1/Documents/SoundFiles/") для удобства сравнения и последующей записи
         /// </summary>
-        /// <param name="isAddPath">true - обавляет к имени файла path</param>
+        /// <param name="isAddPath">true - добавляет к имени файла path</param>
         /// <param name="path">путь к файлу ("/sda1/Documents/SoundFiles/") для удобства сравнения и последующей записи</param>
         /// <returns>IEnumerable<string></returns>
         public static IEnumerable<string> GetListDirectoryLocal(bool isAddPath, string path = null)
@@ -311,6 +314,39 @@ namespace MyDictionary.Tools
                 MessageBox.Show(ex.Message + MethodBase.GetCurrentMethod().DeclaringType.FullName, "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
+        }
+        public static void LoaderAudioToServer()
+        {
+            try
+            {
+                IEnumerable<string> soundsSever = GetListDirectoryServer(true);
+                IEnumerable<string> sounsLocal = GetListDirectoryLocal(true, PathServer);
+                IEnumerable<string> soundsExcept = sounsLocal.Except(soundsSever).Select(n => n.Insert(0, UrlServer));
+                if (soundsExcept.Count() > 0)
+                {
+
+                    foreach (string item in soundsExcept)
+                    {
+                        string s = item.Remove(0, PatnDirectorySoundFilesServer.Length + 1);
+                        s = s.Insert(0, PathDirectorySoundFilesLocal);
+
+                        WriteFile(item, s);
+
+                    }
+
+                }
+                else
+                {
+                    MessageBox.Show("Нет новых аудиофайлов!");
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message + MethodBase.GetCurrentMethod().DeclaringType.FullName, "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
         }
 
 

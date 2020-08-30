@@ -19,6 +19,9 @@
         <cm:BackgroundWorker x:Key="backgroundWorkerWriteDB"  
                              WorkerSupportsCancellation="True" DoWork="BackgroundWorker_DoWork_2"
                              RunWorkerCompleted="BackgroundWorker_RunWorkerCompleted_2"/>
+        <cm:BackgroundWorker x:Key="backgroundWorkerWriteSeverAudio" WorkerSupportsCancellation="True"
+                             DoWork="BackgroundWorker_DoWork_3" RunWorkerCompleted="BackgroundWorker_RunWorkerCompleted_3"/>
+
 
     </Window.Resources>
     <Window.Background>
@@ -122,7 +125,7 @@
                 <Image Source="Picture/Update Database.ico"  />
             </Button>
             <Separator/>
-            <Button x:Name="buttonToAudioCloud"   HorizontalAlignment="Center"    >
+            <Button x:Name="buttonToAudioCloud"   HorizontalAlignment="Center" Click="buttonToAudioCloud_Click"    >
                 <Image Source="Picture/iTunes Music.ico"  />
             </Button>
 

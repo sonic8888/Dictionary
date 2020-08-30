@@ -44,6 +44,8 @@ namespace MyDictionary
         private BackgroundWorker backgroundWorker;
         private BackgroundWorker backgroundWorkerLoadAudio;
         private BackgroundWorker backgroundWorkerWriteDB;
+        private BackgroundWorker backgroundWorkerWriteSeverAudio;
+        SolidColorBrush gbrash;
 
         public MainWindow()
         {
@@ -51,6 +53,7 @@ namespace MyDictionary
             backgroundWorker = ((BackgroundWorker)this.FindResource("backgroundWorker"));
             backgroundWorkerLoadAudio = ((BackgroundWorker)this.FindResource("backgroundWorkerLoadAudio"));
             backgroundWorkerWriteDB = ((BackgroundWorker)this.FindResource("backgroundWorkerWriteDB"));
+            backgroundWorkerWriteSeverAudio = ((BackgroundWorker)this.FindResource("backgroundWorkerWriteSeverAudio"));
             FIleTools.CreateDirectory(FIleTools.NameDirectoryAudio);
             FIleTools.CreateDirectory(FIleTools.NameDirectoryStorage);
             //StartNewThread();
@@ -62,6 +65,7 @@ namespace MyDictionary
             textboxCountTimeWork.Text = App.dataVariable.CountTimeWork.ToString();
             textboxCountWordTrenings.Text = App.dataVariable.CountWordTrenings.ToString();
             textboxCountWordSprint.Text = App.dataVariable.CountWordSprint.ToString();
+            gbrash = (SolidColorBrush)textblockMessage.Foreground;
             if (App.dataVariable.IsUpdateState == 1)
             {
                 checkboxStatus.IsChecked = true;
@@ -435,7 +439,7 @@ namespace MyDictionary
             }
 
         }
-  
+
 
         private void buttonFromCloudAudio_Click(object sender, RoutedEventArgs e)
         {
@@ -453,13 +457,14 @@ namespace MyDictionary
         }
         private void TextAnimation()
         {
-            SolidColorBrush gbrash = (SolidColorBrush)textblockMessage.Foreground;
+            //SolidColorBrush gbrash = (SolidColorBrush)textblockMessage.Foreground;
 
             SolidColorBrush myBrush = new SolidColorBrush();
             ColorAnimation colAnim = new ColorAnimation();
             colAnim.Duration = TimeSpan.FromMilliseconds(2000);
             colAnim.From = gbrash.Color;
             colAnim.To = Color.FromArgb(0, 0, 0, 0);
+            colAnim.Completed += BackColor;
 
             myBrush.BeginAnimation(SolidColorBrush.ColorProperty, colAnim);
             textblockMessage.Foreground = myBrush;
@@ -513,6 +518,49 @@ namespace MyDictionary
             progressBarDownload.IsIndeterminate = false;
             textblockMessage.Text = "БД отправлена на сервер!";
             TextAnimation();
+        }
+
+        private void buttonToAudioCloud_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                progressBarDownload.IsIndeterminate = true;
+                backgroundWorkerWriteSeverAudio.RunWorkerAsync();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message + MethodBase.GetCurrentMethod().DeclaringType.FullName, "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+        }
+
+        private void BackgroundWorker_DoWork_3(object sender, DoWorkEventArgs e)
+        {
+            try
+            {
+                FTPSinchronisation.LoaderAudioToServer();
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message + MethodBase.GetCurrentMethod().DeclaringType.FullName, "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+        }
+
+        private void BackgroundWorker_RunWorkerCompleted_3(object sender, RunWorkerCompletedEventArgs e)
+        {
+            progressBarDownload.IsIndeterminate = false;
+            textblockMessage.Text = "Аудиофайлы отправлены на сервер!";
+            TextAnimation();
+        }
+        private void BackColor(object sender, EventArgs e)
+        {
+            textblockMessage.Text = "";
+            textblockMessage.Foreground = gbrash;
+
         }
     }
 }
