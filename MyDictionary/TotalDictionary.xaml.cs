@@ -373,5 +373,17 @@ namespace MyDictionary
 
             chw.Show();
         }
+
+        private void MenuItemControlAudio_Click(object sender, RoutedEventArgs e)
+        {
+            //IEnumerable<string> enumerable = FTPSinchronisation.GetListDirectoryLocal(false);
+            IEnumerable<string> enumerable = BdTools.GetAudio();
+            string str = "";
+            foreach (string item in enumerable)
+            {
+                str += item + "\n";
+            }
+            MessageBox.Show(str);
+        }
     }
 }

@@ -109,7 +109,21 @@
             </ListView.View>
         </ListView>
         <ToolBar Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="13" FontSize="24" FontFamily="Georgia">
-            <!--<Menu x:Name="menu" >Menu</Menu>-->
+            <Menu x:Name="menu"  >
+                <MenuItem Width="60">
+                    <MenuItem.Icon>
+                        <Image Source="Picture/terminal_process_256.png"/>
+                    </MenuItem.Icon>
+                    <MenuItem Click="MenuItemControlAudio_Click" x:Name="MenuItemControlAudio">
+                        <MenuItem.Header>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="Picture/&amp;Applications&amp;Sherlock 1.png" Height="30" Margin ="-20,0,10,0"/>
+                                <TextBlock Text="Проверить соответсвие аудиофайлов" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="14"/>
+                            </StackPanel>
+                        </MenuItem.Header>
+                    </MenuItem>
+                </MenuItem>
+            </Menu>
             <Separator Width="2"/>
             <Button x:Name="buttonReffresh" Width="50" Click="buttonReffresh_Click"  Foreground="{x:Null}">
                 <Button.Content>

@@ -343,7 +343,7 @@ namespace MyDictionary.Tools
                             translate.Add(mt.Translate);
                         }
                     }
-                  
+
                 }
                 catch (Exception ex)
                 {
@@ -357,7 +357,7 @@ namespace MyDictionary.Tools
         public static List<MyWord> GetRandomListMyWord(int count)
         {
             List<int> listId = GetWordId();
-            if (listId.Count<=count)
+            if (listId.Count <= count)
             {
                 MessageBox.Show("Кол-во выбираемых слов превышает кол-во слов в БД " + MethodBase.GetCurrentMethod().DeclaringType.FullName, "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
                 return null;
@@ -386,6 +386,29 @@ namespace MyDictionary.Tools
 
             }
             return listRandom;
+        }
+        public static IEnumerable<string> GetAudio()
+        {
+            List<string> list = new List<string>();
+            using (var context = new ApplicationContext())
+            {
+
+                try
+                {
+                    foreach (MyWord item in context.MyWords)
+                    {
+                        list.Add(item.SoundName);
+                    }
+                }
+                catch (Exception ex)
+                {
+
+                    MessageBox.Show(ex.Message + " " + MethodBase.GetCurrentMethod().DeclaringType.FullName, "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return null;
+                }
+
+            }
+            return list.Select(n => n);
         }
 
 
