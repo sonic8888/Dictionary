@@ -281,6 +281,8 @@ namespace MyDictionary.Trenings
             wrapPanelTop.Visibility = Visibility.Hidden;
             wrapPanelBottom.Visibility = Visibility.Hidden;
             canvasAnime.Visibility = Visibility.Visible;
+            textblockexample.Visibility = Visibility.Hidden;
+            imageWord.Visibility = Visibility.Hidden;
             textblockLeft.Visibility = Visibility.Visible;
             textblockLeft.Foreground = new SolidColorBrush(Colors.Green);
             textblockRight.Foreground = new SolidColorBrush(Colors.Red);

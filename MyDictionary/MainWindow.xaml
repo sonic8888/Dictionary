@@ -101,18 +101,18 @@
                     </MenuItem>
                 </MenuItem>
             </Menu>
-            <Separator/>
+            <Separator x:Name="separator_1"/>
             <Button x:Name="buttonSinc" Click="buttonSinc_Click" Margin="10,0" >
                 <Image Source="Picture/iconfinder_db_update_3213.png"  />
             </Button>
-            <Separator/>
+            <Separator x:Name="separator_2"/>
             <Button x:Name="buttonBack" Click="buttonBack_Click" Visibility="Collapsed">
                 <Image Source="Picture/restart_back_left_arrow_6022.png"/>
             </Button>
             <Button x:Name="buttonFromCloudAudio"   HorizontalAlignment="Center" Margin="10,0" Click="buttonFromCloudAudio_Click"  >
                 <Image Source="Picture/440.png"  />
             </Button>
-            <Separator/>
+            <Separator x:Name="separator_3"/>
          
           
             <Grid>
@@ -120,11 +120,11 @@
                 <TextBlock x:Name="textblockMessage"   VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" Foreground="Green" />
 
             </Grid>
-            <Separator/>
+            <Separator x:Name="separator_4"/>
             <Button x:Name="buttonToCloud"   HorizontalAlignment="Center" Margin="10,0" Click="buttonToCloud_Click">
                 <Image Source="Picture/Update Database.ico"  />
             </Button>
-            <Separator/>
+            <Separator x:Name="separator_5"/>
             <Button x:Name="buttonToAudioCloud"   HorizontalAlignment="Center" Click="buttonToAudioCloud_Click"    >
                 <Image Source="Picture/iTunes Music.ico"  />
             </Button>

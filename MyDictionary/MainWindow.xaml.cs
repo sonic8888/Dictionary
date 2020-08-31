@@ -334,8 +334,15 @@ namespace MyDictionary
         private void VisibilityElements(Visibility visibilitiOne, Visibility visibilitiTwo, Visibility visibilitiThree)
         {
             buttonDictionary.Visibility = visibilitiOne;
+            buttonToAudioCloud.Visibility = visibilitiOne;
+            buttonToCloud.Visibility = visibilitiOne;
             buttonTrenings.Visibility = visibilitiOne;
             buttonUpr.Visibility = visibilitiOne;
+            separator_1.Visibility = visibilitiOne;
+            separator_2.Visibility = visibilitiOne;
+            separator_3.Visibility = visibilitiOne;
+            separator_4.Visibility = visibilitiOne;
+            separator_5.Visibility = visibilitiOne;
             buttonBack.Visibility = visibilitiTwo;
             buttonWordTranslate.Visibility = visibilitiTwo;
             buttonWordConstructor.Visibility = visibilitiTwo;
