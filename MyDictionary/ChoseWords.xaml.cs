@@ -16,6 +16,7 @@ using System.Windows.Shapes;
 using MyDictionary.XMLRead;
 using MyDictionary.Tools;
 using Path = System.IO.Path;
+using System.Reflection;
 
 namespace MyDictionary
 {
@@ -259,9 +260,18 @@ namespace MyDictionary
 
         private void PlaySound(FileInfo sound)
         {
-            MediaPlayer mediaPlayer = new MediaPlayer();
-            mediaPlayer.Open(new Uri(sound.FullName));
-            mediaPlayer.Play();
+            try
+            {
+                MediaPlayer mediaPlayer = new MediaPlayer();
+                mediaPlayer.Open(new Uri(sound.FullName));
+                mediaPlayer.Play();
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message + MethodBase.GetCurrentMethod().DeclaringType.FullName, "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
         }
 
 

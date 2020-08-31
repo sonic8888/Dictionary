@@ -18,6 +18,7 @@ using MyDictionary.Tools;
 using System.Threading;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
+using System.Reflection;
 
 namespace MyDictionary.Trenings
 {
@@ -54,9 +55,18 @@ namespace MyDictionary.Trenings
         }
         private void PlaySound(FileInfo sound)
         {
-            MediaPlayer mediaPlayer = new MediaPlayer();
-            mediaPlayer.Open(new Uri(sound.FullName));
-            mediaPlayer.Play();
+            try
+            {
+                MediaPlayer mediaPlayer = new MediaPlayer();
+                mediaPlayer.Open(new Uri(sound.FullName));
+                mediaPlayer.Play();
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message + MethodBase.GetCurrentMethod().DeclaringType.FullName, "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
         }
 
         private void textboxkword_PreviewKeyDown(object sender, KeyEventArgs e)

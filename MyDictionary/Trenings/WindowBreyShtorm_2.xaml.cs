@@ -19,6 +19,7 @@ using System.Windows.Shapes;
 using System.Windows.Threading;
 
 using MyDictionary.XMLRead;
+using System.Reflection;
 
 namespace MyDictionary
 {
@@ -85,9 +86,18 @@ namespace MyDictionary
         }
         private void PlaySound(FileInfo sound)
         {
-            MediaPlayer mediaPlayer = new MediaPlayer();
-            mediaPlayer.Open(new Uri(sound.FullName));
-            mediaPlayer.Play();
+            try
+            {
+                MediaPlayer mediaPlayer = new MediaPlayer();
+                mediaPlayer.Open(new Uri(sound.FullName));
+                mediaPlayer.Play();
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message + MethodBase.GetCurrentMethod().DeclaringType.FullName, "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
         }
         private void InitValue()
         {

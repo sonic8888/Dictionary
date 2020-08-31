@@ -20,6 +20,7 @@ using System.Windows.Shapes;
 using System.Windows.Threading;
 
 using MyDictionary.XMLRead;
+using System.Reflection;
 
 namespace MyDictionary.Repetition
 {
@@ -34,7 +35,7 @@ namespace MyDictionary.Repetition
         //bool IsAnswer = true;
         //string pathCheck = @"/MyDictionary;component/Picture/GalkaLow.png";
         //string pathCross = @"/MyDictionary;component/Picture/krestikLow.png";
-     
+
         //private int countdown;
         int countMilisek;//скорость прогрессбара-время для ответа
         int countMilisekDelay;//время задержки смены слов
@@ -105,7 +106,13 @@ namespace MyDictionary.Repetition
             if (isPlay)
             {
                 FileInfo fi = FIleTools.SearchFile(currentMyWord.SoundName, FIleTools.NameDirectoryAudio);
-                PlaySound(fi);
+           
+               
+                    PlaySound(fi);
+
+             
+               
+
             }
         }
 
@@ -123,7 +130,7 @@ namespace MyDictionary.Repetition
             dispatcherTimerNext.Interval = new TimeSpan(0, 0, 0, 0, countMilisekDelay);
 
         }
-     
+
 
         private void buttontest_Click(object sender, RoutedEventArgs e)
         {
@@ -280,9 +287,19 @@ namespace MyDictionary.Repetition
         }
         private void PlaySound(FileInfo sound)
         {
-            mediaPlayer.Stop();
-            mediaPlayer.Open(new Uri(sound.FullName));
-            mediaPlayer.Play();
+
+            try
+            {
+                mediaPlayer.Stop();
+                mediaPlayer.Open(new Uri(sound.FullName));
+                mediaPlayer.Play();
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message + MethodBase.GetCurrentMethod().DeclaringType.FullName, "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
         }
 
         private void checkbox_Checked(object sender, RoutedEventArgs e)
@@ -450,7 +467,7 @@ namespace MyDictionary.Repetition
         {
             dispatcherTimerNext.Stop();
             dispatcherTimer.Stop();
-            if (App.dataVariable.IsUpdateState==1)
+            if (App.dataVariable.IsUpdateState == 1)
             {
                 foreach (MyWord item in upDateState)
                 {

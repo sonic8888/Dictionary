@@ -18,6 +18,7 @@ using System.Windows.Shapes;
 using System.Windows.Threading;
 
 using MyDictionary.XMLRead;
+using System.Reflection;
 
 namespace MyDictionary.Sprint
 {
@@ -296,9 +297,18 @@ namespace MyDictionary.Sprint
 
         private void PlaySound(FileInfo sound)
         {
-            mediaPlayer.Stop();
-            mediaPlayer.Open(new Uri(sound.FullName));
-            mediaPlayer.Play();
+            try
+            {
+                mediaPlayer.Stop();
+                mediaPlayer.Open(new Uri(sound.FullName));
+                mediaPlayer.Play();
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message + MethodBase.GetCurrentMethod().DeclaringType.FullName, "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
         }
 
         private void Window_Unloaded(object sender, RoutedEventArgs e)
