@@ -376,14 +376,59 @@ namespace MyDictionary
 
         private void MenuItemControlAudio_Click(object sender, RoutedEventArgs e)
         {
-            //IEnumerable<string> enumerable = FTPSinchronisation.GetListDirectoryLocal(false);
-            IEnumerable<string> enumerable = BdTools.GetAudio();
-            string str = "";
-            foreach (string item in enumerable)
+            IEnumerable<string> soundFilesDirect = FTPSinchronisation.GetListDirectoryLocal(false);
+            IEnumerable<string> soundFilesDB = BdTools.GetAudio();
+            IEnumerable<string> intersect = soundFilesDB.Intersect(soundFilesDirect);
+            IEnumerable<string> except = soundFilesDB.Except(intersect);
+            if (except.Count() > 0)
             {
-                str += item + "\n";
+                string message = "";
+                foreach (string item in except)
+                {
+                    message += item + "\n";
+                }
+                MessageBox.Show("В приложении нет аудиофайлов: " + message, "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            MessageBox.Show(str);
+            else
+            {
+                MessageBox.Show("В приложении  аудиофайлы соответствуют БД", "Информация", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+        }
+
+        private void MenuItemтExcessAudio_Click(object sender, RoutedEventArgs e)
+        {
+            IEnumerable<string> soundFilesDirect = FTPSinchronisation.GetListDirectoryLocal(false);
+            IEnumerable<string> soundFilesDB = BdTools.GetAudio();
+            IEnumerable<string> except = soundFilesDirect.Except(soundFilesDB);
+            if (except.Count() > 0)
+            {
+                string message = "";
+                foreach (string item in except)
+                {
+                    message += item + "\n";
+                }
+                MessageBox.Show("В приложении есть аудиофайлу которых нет в БД: " + message, "Информация!", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            else
+            {
+                MessageBox.Show("В приложении  аудиофайлы соответствуют БД", "Информация", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+
+
+        }
+
+        private void MenuItemтDeletAudio_Click(object sender, RoutedEventArgs e)
+        {
+            IEnumerable<string> soundFilesDirect = FTPSinchronisation.GetListDirectoryLocal(false);
+            IEnumerable<string> soundFilesDB = BdTools.GetAudio();
+            IEnumerable<string> except = soundFilesDirect.Except(soundFilesDB);
+            string message = "";
+            foreach (string item in except)
+            {
+                FileInfo info = FIleTools.DeletFile(FIleTools.NameDirectoryAudio, item);
+                message += info.Name+"\n";
+            }
+            MessageBox.Show("Удалены лишнии файлы из папки:'SoundFiles':\n" + message, "Информация", MessageBoxButton.OK, MessageBoxImage.Information);
         }
     }
 }

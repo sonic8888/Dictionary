@@ -122,6 +122,22 @@
                             </StackPanel>
                         </MenuItem.Header>
                     </MenuItem>
+                    <MenuItem   x:Name="MenuItemтExcessAudio" Click="MenuItemтExcessAudio_Click">
+                        <MenuItem.Header>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="Picture/virus_256.png" Height="30" Margin ="-20,0,10,0"/>
+                                <TextBlock Text="Найти лишнии аудиофайлы" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="14"/>
+                            </StackPanel>
+                        </MenuItem.Header>
+                    </MenuItem>
+                    <MenuItem   x:Name="MenuItemтDeletAudio" Click="MenuItemтDeletAudio_Click"  >
+                        <MenuItem.Header>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="Picture/Errorshield.png" Height="30" Margin ="-20,0,10,0"/>
+                                <TextBlock Text="Удалить лишнии аудиофайлы" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="14"/>
+                            </StackPanel>
+                        </MenuItem.Header>
+                    </MenuItem>
                 </MenuItem>
             </Menu>
             <Separator Width="2"/>

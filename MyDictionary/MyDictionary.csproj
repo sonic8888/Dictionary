@@ -474,6 +474,8 @@
     <Resource Include="Picture\iconfinder_db_update_3213.png" />
     <Resource Include="Picture\olympics_sport_basket_basketball_ball_2290.png" />
     <Resource Include="Picture\&amp;Applications&amp;Sherlock 1.png" />
+    <Resource Include="Picture\virus_256.png" />
+    <Resource Include="Picture\Errorshield.png" />
     <Content Include="SoundsApplication\soundNo.mp3">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

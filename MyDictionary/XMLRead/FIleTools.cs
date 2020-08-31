@@ -227,5 +227,21 @@ namespace MyDictionary.XMLRead
             FileInfo fi = new FileInfo(file);
             return fi.Extension;
         }
+        public static FileInfo DeletFile(string pathDirectory,string fileName)
+        {
+            FileInfo file;
+            try
+            {
+                 file = new FileInfo(Path.Combine(pathDirectory, fileName));
+                file.Delete();
+                return file;
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message, "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
+                return null;
+            }
+        }
     }
 }
