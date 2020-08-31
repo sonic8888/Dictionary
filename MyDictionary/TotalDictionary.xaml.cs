@@ -422,13 +422,21 @@ namespace MyDictionary
             IEnumerable<string> soundFilesDirect = FTPSinchronisation.GetListDirectoryLocal(false);
             IEnumerable<string> soundFilesDB = BdTools.GetAudio();
             IEnumerable<string> except = soundFilesDirect.Except(soundFilesDB);
-            string message = "";
-            foreach (string item in except)
+
+            if (except.Count() > 0)
             {
-                FileInfo info = FIleTools.DeletFile(FIleTools.NameDirectoryAudio, item);
-                message += info.Name+"\n";
+                string message = "";
+                foreach (string item in except)
+                {
+                    FileInfo info = FIleTools.DeletFile(FIleTools.NameDirectoryAudio, item);
+                    message += info.Name + "\n";
+                }
+                MessageBox.Show("Удалены лишнии файлы из папки:'SoundFiles':\n" + message, "Информация", MessageBoxButton.OK, MessageBoxImage.Information);
             }
-            MessageBox.Show("Удалены лишнии файлы из папки:'SoundFiles':\n" + message, "Информация", MessageBoxButton.OK, MessageBoxImage.Information);
+            else
+            {
+                MessageBox.Show("В приложении нет аудиофайлов для удаления", "Информация", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
         }
     }
 }
