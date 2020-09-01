@@ -387,7 +387,7 @@ namespace MyDictionary
                 {
                     message += item + "\n";
                 }
-                MessageBox.Show("В приложении нет аудиофайлов: " + message, "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("В приложении нет аудиофайлов:\n" + message, "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             else
             {
@@ -407,7 +407,7 @@ namespace MyDictionary
                 {
                     message += item + "\n";
                 }
-                MessageBox.Show("В приложении есть аудиофайлу которых нет в БД: " + message, "Информация!", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("В приложении есть аудиофайлу которых нет в БД:\n" + message, "Информация!", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             else
             {
