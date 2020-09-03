@@ -89,7 +89,7 @@ namespace MyDictionary
         {
             if (++count < words.Count)
             {
-                BdTools.UpdateStateMyWord(words[count], State.Know);
+                BdTools.UpdateStateMyWord(words[count-1], State.Know);
 
                 InitDbContext(words[count]);
 
