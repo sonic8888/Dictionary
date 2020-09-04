@@ -569,5 +569,11 @@ namespace MyDictionary
             textblockMessage.Foreground = gbrash;
 
         }
+
+        //private void buttonTesst_Click(object sender, RoutedEventArgs e)
+        //{
+        //    ObservableCollection<MyWord> col = BdTools.ReadWord(5);
+        //    WindowsManager.CreateWindowBreyShtorm_3(col.ToList(), false);
+        //}
     }
 }

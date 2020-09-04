@@ -227,7 +227,7 @@ namespace MyDictionary.Trenings
                 }
                 else
                 {
-                    WindowsManager.CreateWindowBreyShtorm_4(myWords,false);
+                    WindowsManager.CreateWindowBreyShtorm_4(myWords, false);
                     this.Close();
 
                 }
@@ -319,6 +319,46 @@ namespace MyDictionary.Trenings
         private void Close(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private void Window_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                Finish();
+                return;
+            }
+            int k = (int)e.Key;
+            if (k < 44 || k > 69)
+            {
+                return;
+            }
+            string key = e.Key.ToString().ToLower();
+            Button buttontarget = listButtonsTop[currentLitter];
+            char contentTarget = (char)buttontarget.Content;
+
+            Button buttonSender = null;
+            if (key == contentTarget.ToString().ToLower())
+            {
+                foreach (Button bt in listButtonsBottom)
+                {
+                    char liter = (char)bt.Content;
+                    if (liter == contentTarget)
+                    {
+                        buttonSender = bt;
+                        break;
+                    }
+                }
+                LitterTrue(buttontarget, buttonSender);
+                listButtonsBottom.Remove(buttonSender);
+            }
+            else
+            {
+
+                LitterFalse(buttonSender);
+                System.Media.SystemSounds.Beep.Play();
+            }
+
         }
     }
 }
