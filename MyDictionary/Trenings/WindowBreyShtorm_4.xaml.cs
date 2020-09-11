@@ -104,6 +104,10 @@ namespace MyDictionary.Trenings
                 textblockexample.Text = MyTools.ExampleSpace(myWords[currentword].MyExamples.First().Example);
 
             }
+            else
+            {
+                textblockexample.Text = "";
+            }
         }
         private void VisibilityOn()
         {
