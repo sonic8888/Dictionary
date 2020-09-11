@@ -317,6 +317,10 @@ namespace MyDictionary.Sprint
         }
         private void NextStep(object sender, EventArgs e)
         {
+            if (!isFinish)
+            {
+                return;
+            }
 
             if (++currentIndex < myList.Count - 1)
             {
@@ -331,6 +335,10 @@ namespace MyDictionary.Sprint
         }
         private void TimeDeduction(object sender, EventArgs e)
         {
+            if (!isFinish)
+            {
+                return;
+            }
             if (countTimeWork >= 0)
             {
                 textblockTime.Text = countTimeWork.ToString();
@@ -347,6 +355,7 @@ namespace MyDictionary.Sprint
         private void Finish()
         {
             isFinish = false;
+            dispatcherTimer.Stop();
             buttonAnswerFalse.Content = "Продолжить";
             buttonAnswerTrue.Content = "Завершить";
             textblockWord.Text = "Финиш";
@@ -354,7 +363,6 @@ namespace MyDictionary.Sprint
             textblockWord.Foreground = new SolidColorBrush(Colors.Red);
             textblockTranslate.Text = "";
             SaveResult();
-            dispatcherTimer.Stop();
         }
         private void InitTotal()
         {
