@@ -51,7 +51,7 @@
                 <RowDefinition Height="60"/>
                 <RowDefinition Height="60"/>
                 <RowDefinition/>
-                <RowDefinition/>
+                <RowDefinition Height="1.3*"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
@@ -79,7 +79,7 @@
             <WrapPanel Name="wrapPanelBottom" Orientation="Horizontal" Grid.Row="5"  Grid.Column="1" Grid.RowSpan="2"
                        Grid.ColumnSpan="9" HorizontalAlignment="Center"/>
             <Button Name="buttonNext" Grid.Row="9" Grid.Column="9" Grid.ColumnSpan="2"    FontSize="20" Margin="0,0,5,5" Background="#FFCDE7FF" Click="buttonNext_Click" />
-            <TextBlock x:Name="textblockexample" Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="11" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"/>
+            <TextBlock x:Name="textblockexample" Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="11" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" TextWrapping="Wrap"/>
             <Image x:Name="imageWord" Source="/MyDictionary;component/Picture/english2.jpg" Grid.Row="5" Grid.Column="4" Grid.RowSpan="3" Grid.ColumnSpan="3" Visibility="Hidden"/>
             <TextBlock x:Name="textblockCountword" Grid.Row="0" Grid.Column="9" Grid.ColumnSpan="2" Text="1/10" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#FF025D00" FontSize="18"/>
         </Grid>
