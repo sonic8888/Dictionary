@@ -250,6 +250,7 @@ namespace MyDictionary
             ReadDictionary();
             TotalDictionary td = new TotalDictionary(collection);
             td.Show();
+            this.WindowState = WindowState.Minimized;
         }
 
         private void buttonUpr_Click(object sender, RoutedEventArgs e)

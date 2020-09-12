@@ -372,6 +372,7 @@ namespace MyDictionary
             ChoseWords chw = new ChoseWords();
 
             chw.Show();
+            this.WindowState = WindowState.Minimized;
         }
 
         private void MenuItemControlAudio_Click(object sender, RoutedEventArgs e)
@@ -436,6 +437,17 @@ namespace MyDictionary
             else
             {
                 MessageBox.Show("В приложении нет аудиофайлов для удаления", "Информация", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            foreach (Window window in App.Current.Windows)
+            {
+                if (window.Title== "Dictionary")
+                {
+                    window.WindowState = WindowState.Normal;
+                }
             }
         }
     }

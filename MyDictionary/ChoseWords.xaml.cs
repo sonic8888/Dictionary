@@ -225,7 +225,7 @@ namespace MyDictionary
             dds.OpenFileDialog();
             string fileName = dds.FilePath;
             FileInfo filesound = new FileInfo(fileName);
-       
+
             FileInfo filecopy = filesound.CopyTo(Path.Combine(FIleTools.NameDirectoryAudio, textBoxWord.Text.Trim().ToLower() + filesound.Extension));
             if (filecopy != null)
             {
@@ -457,7 +457,7 @@ namespace MyDictionary
             else
             {
                 //filcopy = FIleTools.CopyTo(fileInfo, FIleTools.NameDirectoryAudio);
-          
+
                 filcopy = FIleTools.CopyTo(fileInfo, true);
                 filcopy.IsReadOnly = false;
                 _wordsSample.SoundName = filcopy.Name;
@@ -490,6 +490,67 @@ namespace MyDictionary
             inerGrid.DataContext = wordSample;
             _wordsSample = inerGrid.DataContext as WordSample;
             ChengeIconButtonSave(pathRedTick, ColorIconButtonsave.Red);
+        }
+
+        private void buttonSearchAudio_Click(object sender, RoutedEventArgs e)
+
+        {
+            try
+            {
+                string directAudio = FIleTools.ReadPath(FIleTools.NameFilePathes);
+                if (directAudio == null)
+                {
+                    MessageBox.Show("Не указан путь к папке с аудиофайлами!", "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                string wordAudio = textBoxWord.Text;
+                if (wordAudio == "" || wordAudio == null)
+                {
+                    MessageBox.Show("Укажите слово!");
+                    return;
+                }
+                wordAudio = wordAudio.ToLower() + ".wav";
+                FileInfo audio = FIleTools.SearchFile(wordAudio, directAudio);
+                if (audio == null)
+                {
+                    MessageBox.Show("Аудиофайл не найден!\nУкажите файл в ручную. ");
+                    return;
+                }
+                else
+                {
+                    FileInfo filcopy = FIleTools.CopyTo(audio, true);
+                   filcopy.IsReadOnly = false;
+                    _wordsSample.SoundName = filcopy.Name;
+                    MessageBox.Show("Аудиофайл успешно скопирован!");
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message, "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+        }
+
+        private void textBoxWord_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (colorIcon == ColorIconButtonsave.Green)
+            {
+                ChengeIconButtonSave(pathRedTick, ColorIconButtonsave.Red);
+            }
+        }
+
+        private void window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            foreach (Window window in App.Current.Windows)
+            {
+                if (window.Title == "Словарь")
+                {
+                    window.WindowState = WindowState.Normal;
+                }
+            }
         }
     }
 
