@@ -225,8 +225,14 @@ namespace MyDictionary
             dds.OpenFileDialog();
             string fileName = dds.FilePath;
             FileInfo filesound = new FileInfo(fileName);
+            FileInfo filecopy = null;
+            if ((filecopy = IsExist(filesound)) != null)
+            {
+                _wordsSample.SoundName = filecopy.Name;
+                return;
+            }
 
-            FileInfo filecopy = filesound.CopyTo(Path.Combine(FIleTools.NameDirectoryAudio, textBoxWord.Text.Trim().ToLower() + filesound.Extension));
+            filecopy = filesound.CopyTo(Path.Combine(FIleTools.NameDirectoryAudio, textBoxWord.Text.Trim().ToLower() + filesound.Extension));
             if (filecopy != null)
             {
 
@@ -237,6 +243,11 @@ namespace MyDictionary
             {
                 System.Media.SystemSounds.Beep.Play();
             }
+        }
+        private FileInfo IsExist(FileInfo file)
+        {
+            string nameFile = textBoxWord.Text.Trim().ToLower() + file.Extension;
+            return FIleTools.SearchFile(nameFile, FIleTools.NameDirectoryAudio);
         }
 
         private void ClickButtonPlayAudio(object sender, RoutedEventArgs e)
@@ -519,7 +530,7 @@ namespace MyDictionary
                 else
                 {
                     FileInfo filcopy = FIleTools.CopyTo(audio, true);
-                   filcopy.IsReadOnly = false;
+                    filcopy.IsReadOnly = false;
                     _wordsSample.SoundName = filcopy.Name;
                     MessageBox.Show("Аудиофайл успешно скопирован!");
                 }
