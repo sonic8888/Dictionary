@@ -80,7 +80,7 @@ namespace MyDictionary
         private void backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             progressBarDownload.IsIndeterminate = false;
-            textblockMessage.Text = "БД загружена!";
+            textblockMessage.Text = "БД скопирована!";
             TextAnimation();
 
         }
@@ -576,7 +576,14 @@ namespace MyDictionary
             {
                 if (File.Exists(FTPSinchronisation.PatnLocalTempBD))
                 {
-                    MessageBox.Show("YYYY");
+                    FileInfo copy = new FileInfo(FTPSinchronisation.PatnLocalTempBD);
+                    copy.CopyTo(FTPSinchronisation.PatnLocalBD, true);
+                    textblockMessage.Text = "БД обновлена!";
+                    TextAnimation();
+                }
+                else
+                {
+                    MessageBox.Show("Файла Базы Данных не обнаружено!\nСкачайте его.");
                 }
             }
             catch (Exception ex)
