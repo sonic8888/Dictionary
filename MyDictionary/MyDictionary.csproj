@@ -476,6 +476,7 @@
     <Resource Include="Picture\&amp;Applications&amp;Sherlock 1.png" />
     <Resource Include="Picture\virus_256.png" />
     <Resource Include="Picture\Errorshield.png" />
+    <Resource Include="Picture\databaseprocess_basededatos_12922.png" />
     <Content Include="SoundsApplication\soundNo.mp3">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

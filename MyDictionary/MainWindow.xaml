@@ -105,6 +105,10 @@
             <Button x:Name="buttonSinc" Click="buttonSinc_Click" Margin="10,0" >
                 <Image Source="Picture/iconfinder_db_update_3213.png"  />
             </Button>
+            <Separator  />
+            <Button x:Name="buttonDBCopy"  Margin="10,0" Click="buttonDBCopy_Click" >
+                <Image Source="Picture/databaseprocess_basededatos_12922.png"  />
+            </Button>
             <Separator x:Name="separator_2"/>
             <Button x:Name="buttonBack" Click="buttonBack_Click" Visibility="Collapsed">
                 <Image Source="Picture/restart_back_left_arrow_6022.png"/>
@@ -116,7 +120,7 @@
          
           
             <Grid>
-                <ProgressBar x:Name="progressBarDownload" Minimum="0"  Height="25" Width="480" Visibility="Visible" Background="{x:Null}" BorderBrush="{x:Null}" ValueChanged="progressBarDownload_ValueChanged" FontSize="18"/>
+                <ProgressBar x:Name="progressBarDownload" Minimum="0"  Height="25" Width="400" Visibility="Visible" Background="{x:Null}" BorderBrush="{x:Null}" ValueChanged="progressBarDownload_ValueChanged" FontSize="18"/>
                 <TextBlock x:Name="textblockMessage"   VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" Foreground="Green" />
 
             </Grid>

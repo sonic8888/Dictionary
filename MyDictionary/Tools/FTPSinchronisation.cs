@@ -39,7 +39,7 @@ namespace MyDictionary.Tools
             try
             {
                 Stream responseStream = response.GetResponseStream();
-                FileStream fs = new FileStream(PatnLocalBD, FileMode.Create);
+                FileStream fs = new FileStream(PatnLocalTempBD, FileMode.Create);
                 byte[] buffer = new byte[64];
                 int size = 0;
 

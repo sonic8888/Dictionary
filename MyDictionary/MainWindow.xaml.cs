@@ -93,7 +93,6 @@ namespace MyDictionary
         {
 
             ChoseWords chw = new ChoseWords();
-
             chw.Show();
 
         }
@@ -569,6 +568,22 @@ namespace MyDictionary
             textblockMessage.Text = "";
             textblockMessage.Foreground = gbrash;
 
+        }
+
+        private void buttonDBCopy_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (File.Exists(FTPSinchronisation.PatnLocalTempBD))
+                {
+                    MessageBox.Show("YYYY");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message + MethodBase.GetCurrentMethod().DeclaringType.FullName, "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
         }
 
         //private void buttonTesst_Click(object sender, RoutedEventArgs e)
