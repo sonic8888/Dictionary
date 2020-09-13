@@ -293,6 +293,8 @@ namespace MyDictionary.Tools
                 IEnumerable<string> soundsSever = GetListDirectoryServer(true);
                 IEnumerable<string> sounsLocal = GetListDirectoryLocal(true, PathServer);
                 IEnumerable<string> soundsExcept = soundsSever.Except(sounsLocal).Select(n => n.Insert(0, UrlServer));
+                //IEnumerable<string> sounsLocal = BdTools.GetAudio();
+                //IEnumerable<string> soundsExcept = soundsSever.Intersect(sounsLocal);
                 if (soundsExcept.Count() > 0)
                 {
 

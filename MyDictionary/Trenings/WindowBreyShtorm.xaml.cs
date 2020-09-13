@@ -69,7 +69,7 @@ namespace MyDictionary
         private void buttonNotKnow_Click(object sender, RoutedEventArgs e)
         {
             wordsTrenings.Add(words[count]);
-            if (++count < words.Count && count < App.dataVariable.CountWordLearning)
+            if (++count < words.Count && wordsTrenings.Count < App.dataVariable.CountWordLearning)
             {
                 InitDbContext(words[count]);
 

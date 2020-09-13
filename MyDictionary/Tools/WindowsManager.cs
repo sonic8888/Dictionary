@@ -29,11 +29,8 @@ namespace MyDictionary.Tools
         {
             ObservableCollection<MyWord> collLearn = BdTools.SelecWhereState(State.Learn);
             ObservableCollection<MyWord> collNew = BdTools.SelecWhereState(State.New);
-            foreach (MyWord m in collNew)
-            {
-                collLearn.Add(m);
-            }
-
+            IEnumerable<MyWord> enumerable = collLearn.Concat(collNew);
+            collLearn = new ObservableCollection<MyWord>(enumerable);
             WindowBreyShtorm wbs = new WindowBreyShtorm(collLearn);
             wbs.Show();
             return wbs;
