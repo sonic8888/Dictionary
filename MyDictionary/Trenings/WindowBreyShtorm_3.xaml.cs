@@ -70,15 +70,24 @@ namespace MyDictionary.Trenings
         }
         private void Init()
         {
-            curentMyWord = myWords[currentWord];
-            wordTrue = curentMyWord.Word.ToUpper();
-            translate = curentMyWord.MyTranslates.First().Translate;
-            string str = Mix(wordTrue);
-            AddButtons(str);
-            textBlockWord.Text = translate;
-            buttonNext.Content = strDef;
-            buttonNext.Background = backgroundButtonNextDefault;
-            textblockCountword.Text = (currentWord + 1).ToString() + "/" + myWords.Count;
+            try
+            {
+                curentMyWord = myWords[currentWord];
+                wordTrue = curentMyWord.Word.ToUpper();
+                translate = curentMyWord.MyTranslates.First().Translate;
+                string str = Mix(wordTrue);
+                AddButtons(str);
+                textBlockWord.Text = translate;
+                buttonNext.Content = strDef;
+                buttonNext.Background = backgroundButtonNextDefault;
+                textblockCountword.Text = (currentWord + 1).ToString() + "/" + myWords.Count;
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message + MethodBase.GetCurrentMethod().DeclaringType.FullName, "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
         }
         private void AddButtons(string word)
         {
