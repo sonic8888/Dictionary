@@ -197,17 +197,26 @@ namespace MyDictionary.Trenings
         private string Mix(string word)
         {
             string mix;
-            do
+            if (word.Count() > 2)
             {
-                mix = null;
-                List<char> lists = word.ToList();
-                for (int i = lists.Count - 1; i >= 0; i--)
+                do
                 {
-                    char ch = lists[random.Next(i)];
-                    mix += ch;
-                    lists.Remove(ch);
-                }
-            } while (mix == word);
+                    mix = null;
+                    List<char> lists = word.ToList();
+                    for (int i = lists.Count - 1; i >= 0; i--)
+                    {
+                        char ch = lists[random.Next(i)];
+                        mix += ch;
+                        lists.Remove(ch);
+                    }
+                } while (mix == word);
+            }
+            else
+            {
+                char[] vs = word.ToArray();
+                char[] revers = vs.Reverse().ToArray();
+                return new String(revers);
+            }
             return mix;
         }
         private void PaintGreen(Button bt)
