@@ -50,8 +50,13 @@ namespace MyDictionary.Trenings
 
         private void buttonSound_Click(object sender, RoutedEventArgs e)
         {
+            SoundSearchAndPlay();
+        }
+        private void SoundSearchAndPlay()
+        {
             FileInfo fi = FIleTools.SearchFile(myWords[currentword].SoundName, FIleTools.NameDirectoryAudio);
             PlaySound(fi);
+            textboxkword.Focus();
         }
         private void PlaySound(FileInfo sound)
         {
@@ -77,7 +82,11 @@ namespace MyDictionary.Trenings
 
 
                 ControlAnswer();
-
+                return;
+            }
+            if (e.KeyboardDevice.Modifiers==ModifierKeys.Control)
+            {
+                SoundSearchAndPlay();
             }
         }
         private void AnswerYes()
@@ -291,6 +300,8 @@ namespace MyDictionary.Trenings
         {
             this.Close();
         }
+
+
     }
 
 

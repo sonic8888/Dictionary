@@ -30,7 +30,7 @@
             </Grid.ColumnDefinitions>
             <TextBox x:Name="textboxkword" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="6" HorizontalContentAlignment="Center" FontSize="24" VerticalContentAlignment="Center" PreviewKeyDown="textboxkword_PreviewKeyDown"  />
             <TextBlock x:Name="textblockmessage" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="6" Text="Введите прослушаное слово:" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="16"/>
-            <Button x:Name="buttonSound" Grid.Row="0" Grid.Column="0"   Margin="0,0,0,10" Background="{x:Null}" Foreground="{x:Null}" BorderThickness="0" DataContext="{Binding SoundName}" Click="buttonSound_Click"  >
+            <Button x:Name="buttonSound" Grid.Row="0" Grid.Column="0"   Margin="0,0,0,10" Background="{x:Null}" Foreground="{x:Null}" BorderThickness="0" DataContext="{Binding SoundName}" Click="buttonSound_Click" ToolTip="Ctrl" >
                 <Image Source="/MyDictionary;component/Picture/icons8-динамик-48.png" Width=" 50" Height="50"/>
             </Button>
             <Canvas x:Name="canvasAnime" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="4" Visibility="Hidden" >
