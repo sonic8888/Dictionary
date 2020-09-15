@@ -30,15 +30,16 @@ namespace MyDictionary.Tools
         /// </summary>
         public static FtpWebResponse DownloadDb(BackgroundWorker worker, int oneprocent)
         {
-
-
-            FtpWebRequest request = (FtpWebRequest)WebRequest.Create(PatnServerBD);
-            request.UseBinary = true;
-            request.Method = WebRequestMethods.Ftp.DownloadFile;
-            request.Credentials = new NetworkCredential(UserName, Password);
-            FtpWebResponse response = (FtpWebResponse)request.GetResponse();
+            FtpWebRequest request = null;
+            FtpWebResponse response = null;
             try
             {
+                request = (FtpWebRequest)WebRequest.Create(PatnServerBD);
+                request.UseBinary = true;
+                request.Method = WebRequestMethods.Ftp.DownloadFile;
+                request.Credentials = new NetworkCredential(UserName, Password);
+                response = (FtpWebResponse)request.GetResponse();
+
                 Stream responseStream = response.GetResponseStream();
                 FileStream fs = new FileStream(PatnLocalTempBD, FileMode.Create);
                 byte[] buffer = new byte[64];

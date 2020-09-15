@@ -74,14 +74,19 @@ namespace MyDictionary
         }
         private void backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
+            //progressBarDownload.IsIndeterminate = true;
             HelpWorker hw = (HelpWorker)e.Argument;
             FTPSinchronisation.DownloadDb(backgroundWorker, hw.Size);
         }
         private void backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             progressBarDownload.IsIndeterminate = false;
-            textblockMessage.Text = "БД скопирована!";
-            TextAnimation();
+            if (File.Exists(FTPSinchronisation.PatnLocalTempBD))
+            {
+                textblockMessage.Text = "БД скопирована!";
+                TextAnimation();
+
+            }
 
         }
         private void backgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -387,20 +392,21 @@ namespace MyDictionary
         {
             try
             {
-                DateTime dtServ = FTPSinchronisation.GetDataServerBD();
-                DateTime dtLoc = FTPSinchronisation.GetDataLocalBd();
-                if (dtServ < dtLoc)
-                {
-                    string message = $"Сервер БД: {dtServ},\nЛокал БД: {dtLoc}\n" +
-                        $"БД сервера старее локальной БД.\n" +
-                        $"Продолжить скачивание?";
-                    MessageBoxResult messageBoxResult = MessageBox.Show(message, "Внимание!", MessageBoxButton.YesNo, MessageBoxImage.Question);
-                    if (messageBoxResult == MessageBoxResult.No)
-                    {
-                        return;
-                    }
+                //progressBarDownload.IsIndeterminate = true;
+                //DateTime dtServ = FTPSinchronisation.GetDataServerBD();
+                //DateTime dtLoc = FTPSinchronisation.GetDataLocalBd();
+                //if (dtServ < dtLoc)
+                //{
+                //    string message = $"Сервер БД: {dtServ},\nЛокал БД: {dtLoc}\n" +
+                //        $"БД сервера старее локальной БД.\n" +
+                //        $"Продолжить скачивание?";
+                //    MessageBoxResult messageBoxResult = MessageBox.Show(message, "Внимание!", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                //    if (messageBoxResult == MessageBoxResult.No)
+                //    {
+                //        return;
+                //    }
 
-                }
+                //}
 
                 //double size = FTPSinchronisation.GetSizeServerDB();
                 //progressBarDownload.Maximum = size;
@@ -428,14 +434,14 @@ namespace MyDictionary
         {
             try
             {
+                progressBarDownload.IsIndeterminate = true;
                 DateTime dataServ = FTPSinchronisation.GetDataServerBD();
                 DateTime dataLocal = FTPSinchronisation.GetDataLocalBd();
-                if (dataLocal < dataServ)
+                if (dataServ != DateTime.MinValue && dataLocal < dataServ)
                 {
                     MessageBox.Show("Локальная БД старее чем на сервере!");
                     return;
                 }
-                progressBarDownload.IsIndeterminate = true;
                 backgroundWorkerWriteDB.RunWorkerAsync();
             }
             catch (Exception ex)
@@ -580,6 +586,8 @@ namespace MyDictionary
                     copy.CopyTo(FTPSinchronisation.PatnLocalBD, true);
                     textblockMessage.Text = "БД обновлена!";
                     TextAnimation();
+                    copy.Delete();
+
                 }
                 else
                 {
@@ -598,7 +606,7 @@ namespace MyDictionary
             try
             {
                 FileInfo fileDB = new FileInfo(FTPSinchronisation.PatnLocalBD);
-                fileDB.CopyTo(FTPSinchronisation.PatnLocalTempBDCopy,true);
+                fileDB.CopyTo(FTPSinchronisation.PatnLocalTempBDCopy, true);
                 textblockMessage.Text = "БД скопирована для отправки на сервер!";
                 TextAnimation();
             }
