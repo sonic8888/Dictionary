@@ -46,6 +46,9 @@ namespace MyDictionary
         private BackgroundWorker backgroundWorkerWriteDB;
         private BackgroundWorker backgroundWorkerWriteSeverAudio;
         SolidColorBrush gbrash;
+        private bool IsErorConetctionFTP = true;
+        private bool IsErorConetctionFTPAudio = true;
+        private bool IsErorConetctionFTPAudioServer = true;
 
         public MainWindow()
         {
@@ -434,15 +437,26 @@ namespace MyDictionary
         {
             try
             {
+                //progressBarDownload.IsIndeterminate = true;
+                //DateTime dataServ = FTPSinchronisation.GetDataServerBD();
+                //DateTime dataLocal = FTPSinchronisation.GetDataLocalBd();
+                //if (dataServ != DateTime.MinValue && dataLocal < dataServ)
+                //{
+                //    MessageBox.Show("Локальная БД старее чем на сервере!");
+                //    return;
+                //}
+                IsErorConetctionFTP = true;
                 progressBarDownload.IsIndeterminate = true;
-                DateTime dataServ = FTPSinchronisation.GetDataServerBD();
-                DateTime dataLocal = FTPSinchronisation.GetDataLocalBd();
-                if (dataServ != DateTime.MinValue && dataLocal < dataServ)
+                if (File.Exists(FTPSinchronisation.PatnLocalTempBDCopy))
                 {
-                    MessageBox.Show("Локальная БД старее чем на сервере!");
-                    return;
+                    backgroundWorkerWriteDB.RunWorkerAsync();
+
                 }
-                backgroundWorkerWriteDB.RunWorkerAsync();
+                else
+                {
+                    progressBarDownload.IsIndeterminate = false;
+                    MessageBox.Show("Файл БД не найден!\nСкопируйте БД для отправки на сервер");
+                }
             }
             catch (Exception ex)
             {
@@ -456,6 +470,7 @@ namespace MyDictionary
 
         private void buttonFromCloudAudio_Click(object sender, RoutedEventArgs e)
         {
+            IsErorConetctionFTPAudio = true;
             try
             {
                 progressBarDownload.IsIndeterminate = true;
@@ -486,7 +501,17 @@ namespace MyDictionary
 
         private void BackgroundWorker_DoWork_1(object sender, DoWorkEventArgs e)
         {
-            FTPSinchronisation.LoaderAudio();
+            try
+            {
+
+                FTPSinchronisation.LoaderAudio();
+            }
+            catch (Exception ex)
+            {
+                IsErorConetctionFTPAudio = false;
+                //MessageBox.Show(ex.Message + MethodBase.GetCurrentMethod().DeclaringType.FullName, "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
+                throw;
+            }
         }
 
         private void BackgroundWorker_ProgressChanged_1(object sender, ProgressChangedEventArgs e)
@@ -497,8 +522,12 @@ namespace MyDictionary
         private void BackgroundWorker_RunWorkerCompleted_1(object sender, RunWorkerCompletedEventArgs e)
         {
             progressBarDownload.IsIndeterminate = false;
-            textblockMessage.Text = "Аудиофайлы загружены!";
-            TextAnimation();
+
+            if (IsErorConetctionFTPAudio)
+            {
+                textblockMessage.Text = "Аудиофайлы загружены!";
+                TextAnimation();
+            }
         }
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
@@ -516,10 +545,12 @@ namespace MyDictionary
 
             try
             {
+
                 FTPSinchronisation.WriteBD(FTPSinchronisation.PatnLocalTempBDCopy);
             }
             catch (Exception ex)
             {
+                IsErorConetctionFTP = false;
 
                 MessageBox.Show(ex.Message + MethodBase.GetCurrentMethod().DeclaringType.FullName, "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
@@ -529,12 +560,16 @@ namespace MyDictionary
         private void BackgroundWorker_RunWorkerCompleted_2(object sender, RunWorkerCompletedEventArgs e)
         {
             progressBarDownload.IsIndeterminate = false;
-            textblockMessage.Text = "БД отправлена на сервер!";
-            TextAnimation();
+            if (IsErorConetctionFTP)
+            {
+                textblockMessage.Text = "БД отправлена на сервер!";
+                TextAnimation();
+            }
         }
 
         private void buttonToAudioCloud_Click(object sender, RoutedEventArgs e)
         {
+            IsErorConetctionFTPAudioServer = true;
             try
             {
                 progressBarDownload.IsIndeterminate = true;
@@ -556,9 +591,9 @@ namespace MyDictionary
             }
             catch (Exception ex)
             {
-
-                MessageBox.Show(ex.Message + MethodBase.GetCurrentMethod().DeclaringType.FullName, "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
+                IsErorConetctionFTPAudioServer = false;
+                //MessageBox.Show(ex.Message + MethodBase.GetCurrentMethod().DeclaringType.FullName, "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
+                throw;
             }
 
         }
@@ -566,8 +601,11 @@ namespace MyDictionary
         private void BackgroundWorker_RunWorkerCompleted_3(object sender, RunWorkerCompletedEventArgs e)
         {
             progressBarDownload.IsIndeterminate = false;
-            textblockMessage.Text = "Аудиофайлы отправлены на сервер!";
-            TextAnimation();
+            if (IsErorConetctionFTPAudioServer)
+            {
+                textblockMessage.Text = "Аудиофайлы отправлены на сервер!";
+                TextAnimation(); 
+            }
         }
         private void BackColor(object sender, EventArgs e)
         {

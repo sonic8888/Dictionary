@@ -112,8 +112,8 @@ namespace MyDictionary.Tools
             catch (Exception ex)
             {
 
-                MessageBox.Show(ex.Message + MethodBase.GetCurrentMethod().DeclaringType.FullName, "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
+                //MessageBox.Show(ex.Message + MethodBase.GetCurrentMethod().DeclaringType.FullName, "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
+               throw;
             }
         }
         public static FtpWebResponse WriteFile(string target, string sours)
@@ -341,8 +341,8 @@ namespace MyDictionary.Tools
             catch (Exception ex)
             {
 
-                MessageBox.Show(ex.Message + MethodBase.GetCurrentMethod().DeclaringType.FullName, "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
+
+                throw;
             }
         }
         public static void LoaderAudioToServer()
@@ -373,8 +373,8 @@ namespace MyDictionary.Tools
             catch (Exception ex)
             {
 
-                MessageBox.Show(ex.Message + MethodBase.GetCurrentMethod().DeclaringType.FullName, "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
+                //MessageBox.Show(ex.Message + MethodBase.GetCurrentMethod().DeclaringType.FullName, "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
+                throw;
             }
 
         }
