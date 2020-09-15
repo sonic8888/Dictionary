@@ -17,6 +17,7 @@ namespace MyDictionary.Tools
     {
         private const string PatnServerBD = @"ftp://andreysonic.asuscomm.com/sda1/Documents/BD/mobiles.db";
         public const string PatnLocalTempBD = @"./TempFiles/mobiles.db";
+        public const string PatnLocalTempBDCopy = @"./TempFiles/mobilesCopy.db";
         public const string PatnLocalBD = @"./mobiles.db";
         private const string PatnDirectorySoundFilesServer = @"ftp://andreysonic.asuscomm.com/sda1/Documents/SoundFiles";
         private const string PathDirectorySoundFilesLocal = @"./SoundFiles/";
@@ -71,6 +72,32 @@ namespace MyDictionary.Tools
                 request.Method = WebRequestMethods.Ftp.UploadFile;
                 request.Credentials = new NetworkCredential(UserName, Password);
                 FileStream fs = new FileStream(PatnLocalBD, FileMode.Open);
+                byte[] fileContents = new byte[fs.Length];
+                fs.Read(fileContents, 0, fileContents.Length);
+                fs.Close();
+                request.ContentLength = fileContents.Length;
+                Stream requestStream = request.GetRequestStream();
+                requestStream.Write(fileContents, 0, fileContents.Length);
+                requestStream.Close();
+                FtpWebResponse response = (FtpWebResponse)request.GetResponse();
+                response.Close();
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message + MethodBase.GetCurrentMethod().DeclaringType.FullName, "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+        }
+        public static void WriteBD(string path)
+        {
+            try
+            {
+                FtpWebRequest request = (FtpWebRequest)WebRequest.Create(PatnServerBD);
+                request.UseBinary = true;
+                request.Method = WebRequestMethods.Ftp.UploadFile;
+                request.Credentials = new NetworkCredential(UserName, Password);
+                FileStream fs = new FileStream(path, FileMode.Open);
                 byte[] fileContents = new byte[fs.Length];
                 fs.Read(fileContents, 0, fileContents.Length);
                 fs.Close();

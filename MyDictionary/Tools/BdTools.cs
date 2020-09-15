@@ -18,6 +18,7 @@ namespace MyDictionary.Tools
 
         public static int AddNewWord(string word, DateTime insert, DateTime lastCall, string soundname = "", string partofspeach = "", string transcription = "", int state = 1)
         {
+
             using (var context = new ApplicationContext())
             {
                 try
@@ -25,6 +26,7 @@ namespace MyDictionary.Tools
                     var words = new MyWord() { Word = word, SoundName = soundname, PartOfSpeach = partofspeach, Transcription = transcription, State = state, DataTimeInsert = insert, DataTimeLastCall = lastCall };
                     context.MyWords.Add(words);
                     context.SaveChanges();
+                    context.Dispose();
                     return words.WordId;
                 }
                 catch (Exception e)
@@ -399,6 +401,7 @@ namespace MyDictionary.Tools
                     {
                         list.Add(item.SoundName);
                     }
+                    //context.Dispose();
                 }
                 catch (Exception ex)
                 {

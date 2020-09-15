@@ -510,7 +510,7 @@ namespace MyDictionary
 
             try
             {
-                FTPSinchronisation.WriteBD();
+                FTPSinchronisation.WriteBD(FTPSinchronisation.PatnLocalTempBDCopy);
             }
             catch (Exception ex)
             {
@@ -588,6 +588,23 @@ namespace MyDictionary
             }
             catch (Exception ex)
             {
+                MessageBox.Show(ex.Message + MethodBase.GetCurrentMethod().DeclaringType.FullName, "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+        }
+
+        private void buttonDBCopy2_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                FileInfo fileDB = new FileInfo(FTPSinchronisation.PatnLocalBD);
+                fileDB.CopyTo(FTPSinchronisation.PatnLocalTempBDCopy,true);
+                textblockMessage.Text = "БД скопирована для отправки на сервер!";
+                TextAnimation();
+            }
+            catch (Exception ex)
+            {
+
                 MessageBox.Show(ex.Message + MethodBase.GetCurrentMethod().DeclaringType.FullName, "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }

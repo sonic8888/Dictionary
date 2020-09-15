@@ -120,11 +120,15 @@
          
           
             <Grid>
-                <ProgressBar x:Name="progressBarDownload" Minimum="0"  Height="25" Width="400" Visibility="Visible" Background="{x:Null}" BorderBrush="{x:Null}" ValueChanged="progressBarDownload_ValueChanged" FontSize="18"/>
+                <ProgressBar x:Name="progressBarDownload" Minimum="0"  Height="25" Width="360" Visibility="Visible" Background="{x:Null}" BorderBrush="{x:Null}" ValueChanged="progressBarDownload_ValueChanged" FontSize="18"/>
                 <TextBlock x:Name="textblockMessage"   VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" Foreground="Green" />
 
             </Grid>
             <Separator x:Name="separator_4"/>
+            <Button x:Name="buttonDBCopy2"  Margin="10,0" Click="buttonDBCopy2_Click"   >
+                <Image Source="Picture/databaseprocess_basededatos_12922.png"  />
+            </Button>
+            <Separator/>
             <Button x:Name="buttonToCloud"   HorizontalAlignment="Center" Margin="10,0" Click="buttonToCloud_Click">
                 <Image Source="Picture/Update Database.ico"  />
             </Button>
