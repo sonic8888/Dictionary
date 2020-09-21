@@ -31,7 +31,8 @@ namespace MyDictionary
         WordSample wordSample;
         private string messageNotAudio = "Аудиофайл не указан.\nПродожить без него?";
         private string messageWarning = "Внимание!";
-        public WindowWordEdit(MyWord word)
+        Button wordButton;
+        public WindowWordEdit(MyWord word, Button downButton)
         {
             MyWord = word;
             InitializeComponent();
@@ -39,16 +40,17 @@ namespace MyDictionary
             initElements();
             splitTranslate = new char[] { '\n', '.', ',', '!', ' ', ';', ':', '\r', '\t', '\v', '?', '/' };
             splitExample = new char[] { '\n', '\r', '\t', '\v' };
-
+            wordButton = downButton;
         }
 
         private void buttonSave_Click(object sender, RoutedEventArgs e)
         {
             BdTools.DeleteWord(MyWord.WordId);
             initNewWord();
-            if (wordSample!=null)
+            if (wordSample != null)
             {
-                BdTools.AddNewWords(wordSample);
+                int id = BdTools.AddNewWords(wordSample);
+                wordButton.DataContext = id;
             }
             this.DialogResult = true;
 
@@ -100,12 +102,12 @@ namespace MyDictionary
             DateTime lastCall = DateTime.Now;
             IEnumerable<string> translate = GetEnumerable(textboxTranslate.Text, splitTranslate);
             IEnumerable<string> example = GetEnumerable(textboxExample.Text, splitExample);
-            if (audio==null)
+            if (audio == null)
             {
-                MessageBoxResult messageBoxResult = MessageBox.Show(messageNotAudio, messageWarning, MessageBoxButton.YesNo,MessageBoxImage.Question);
+                MessageBoxResult messageBoxResult = MessageBox.Show(messageNotAudio, messageWarning, MessageBoxButton.YesNo, MessageBoxImage.Question);
                 if (messageBoxResult == MessageBoxResult.No)
                 {
-                    return; 
+                    return;
                 }
             }
             wordSample = new WordSample(word, partOfSpeach, transcription, audio, new ObservableCollection<string>(translate), new ObservableCollection<string>(example), insert, lastCall, result);
@@ -125,7 +127,7 @@ namespace MyDictionary
 
             FIleTools.CopyTo(fileInfo, FIleTools.NameDirectoryAudio);
             textboxAudio.Text = fileInfo.Name.ToLower();
-       
+
         }
 
         private void PlaySound(FileInfo sound)
@@ -158,8 +160,8 @@ namespace MyDictionary
             }
             return file;
         }
- 
-  
+
+
 
         private void ClickButtonPlayAudio(object sender, RoutedEventArgs e)
         {

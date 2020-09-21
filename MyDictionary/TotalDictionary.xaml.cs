@@ -359,7 +359,7 @@ namespace MyDictionary
             Button bt = sender as Button;
             int wordid = (int)bt.DataContext;
             MyWord mw = BdTools.FindMyWord(wordid);
-            WindowWordEdit wwe = new WindowWordEdit(mw);
+            WindowWordEdit wwe = new WindowWordEdit(mw,bt);
             if (wwe.ShowDialog() == true)
             {
 
