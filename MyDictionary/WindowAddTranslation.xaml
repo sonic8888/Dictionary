@@ -29,7 +29,7 @@
         <TextBlock Grid.Row="6" Text="Примеры:" HorizontalAlignment="Left"
         FontSize="24" Margin="10,0"/>
         <TextBox x:Name="textBoxExample" Grid.Row="7" Grid.RowSpan="3"   Margin="10,0" Background="#FFC7C7C7"
-          AcceptsReturn="True"   FontSize="20" />
+          AcceptsReturn="True"   FontSize="20"  TextWrapping="Wrap"/>
         <Button x:Name="buttonSave" Grid.Row="11" Content="Сохранить" Width="110" Margin="10,-20,0,15" HorizontalAlignment="Left"
                FontSize="20" IsDefault="True" Click="ClickButtonSave" />
         <Button x:Name="buttonCansel" Grid.Row="11" Content="Отмена" Width="110" Margin="0,-20,10,15" HorizontalAlignment="Right"

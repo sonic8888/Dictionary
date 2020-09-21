@@ -143,7 +143,7 @@
 
                     <TextBlock Text="Примеры:" Grid.Row="8" FontSize="24" Width="{Binding ActualWidth, ElementName=textBlockWord, Mode=OneWay}"
                                    VerticalAlignment="Bottom" Foreground="{Binding Foreground, ElementName=textBlockWord}" HorizontalAlignment="Left" />
-                    <ListBox Grid.Row="9" x:Name="listBoxExample" Background="{Binding Background, ElementName=textBoxWord}" ItemsSource="{Binding Path=Example}" FontSize="{Binding FontSize, ElementName=listBoxETranslate}"/>
+                    <ListBox Grid.Row="9" x:Name="listBoxExample" Background="{Binding Background, ElementName=textBoxWord}" ItemsSource="{Binding Path=Example}" FontSize="{Binding FontSize, ElementName=listBoxETranslate}" />
                     <Button x:Name="buttonAddWord" Grid.Row="11"   HorizontalAlignment="Right"  Width="120" Click="ClickButtonAddWord" FontSize="10" >
                         <Button.Content>
                             <TextBlock Text="Добавить перевод" TextWrapping="Wrap" TextAlignment="Left" FontSize="12"/>
