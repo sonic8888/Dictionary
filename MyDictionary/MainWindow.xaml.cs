@@ -271,7 +271,7 @@ namespace MyDictionary
             //    MessageBox.Show("Для нормальной работы приложения кол-во слов в словаре должно быть не менее: " + App.dataVariable.CountWordSprint, "Внимание!", MessageBoxButton.OK, MessageBoxImage.Warning);
             //    return;
             //}
-            VisibilityElements(Visibility.Hidden, Visibility.Visible, Visibility.Collapsed);
+            VisibilityElements(Visibility.Collapsed, Visibility.Visible, Visibility.Collapsed);
         }
 
         private void buttonWordTranslate_Click(object sender, RoutedEventArgs e)
@@ -351,6 +351,10 @@ namespace MyDictionary
             separator_3.Visibility = visibilitiOne;
             separator_4.Visibility = visibilitiOne;
             separator_5.Visibility = visibilitiOne;
+            buttonDBCopy.Visibility = visibilitiOne;
+            buttonDBCopy2.Visibility = visibilitiOne;
+            separatorDbcopy.Visibility = visibilitiOne;
+            separatorSinc.Visibility = visibilitiOne;
             buttonBack.Visibility = visibilitiTwo;
             buttonWordTranslate.Visibility = visibilitiTwo;
             buttonWordConstructor.Visibility = visibilitiTwo;

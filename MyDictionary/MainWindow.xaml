@@ -105,7 +105,7 @@
             <Button x:Name="buttonSinc" Click="buttonSinc_Click" Margin="10,0" ToolTip="С сервера загружает БД во временную папку" >
                 <Image Source="Picture/iconfinder_db_update_3213.png"  />
             </Button>
-            <Separator  />
+            <Separator Name="separatorSinc"  />
             <Button x:Name="buttonDBCopy"  Margin="10,0" Click="buttonDBCopy_Click" ToolTip="Копирует БД из временой папки в рабочую директорию" >
                 <Image Source="Picture/databaseprocess_basededatos_12922.png"  />
             </Button>
@@ -128,7 +128,7 @@
             <Button x:Name="buttonDBCopy2"  Margin="10,0" Click="buttonDBCopy2_Click" ToolTip="Создает копию БД для последующей отправки на сервер"   >
                 <Image Source="Picture/databaseprocess_basededatos_12922.png"  />
             </Button>
-            <Separator/>
+            <Separator Name="separatorDbcopy"/>
             <Button x:Name="buttonToCloud"   HorizontalAlignment="Center" Margin="10,0" Click="buttonToCloud_Click" ToolTip="отправляет копию БД на сервер">
                 <Image Source="Picture/Update Database.ico"  />
             </Button>
