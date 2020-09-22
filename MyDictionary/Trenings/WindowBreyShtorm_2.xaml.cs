@@ -262,8 +262,9 @@ namespace MyDictionary
             if (trenings[count].MyExamples.Count > 0)
             {
                 MyExample ex = trenings[count].MyExamples.First();
-
-                textblockExample.Text = ex.Example;
+                string examplle = ex.Example;
+                string tire = "" + '\u2014';
+                textblockExample.Text = examplle?.Replace("--", tire);
                 textblockContext.Text = "Контекст:";
 
             }
