@@ -477,8 +477,10 @@ namespace MyDictionary
             IsErorConetctionFTPAudio = true;
             try
             {
-                progressBarDownload.IsIndeterminate = true;
-                backgroundWorkerLoadAudio.RunWorkerAsync();
+                //progressBarDownload.IsIndeterminate = true;
+                IEnumerable<string> listSound = FTPSinchronisation.GetListSound();
+                progressBarDownload.Maximum = listSound.Count();
+                backgroundWorkerLoadAudio.RunWorkerAsync(listSound);
 
             }
             catch (Exception ex)
@@ -507,13 +509,21 @@ namespace MyDictionary
         {
             try
             {
+                IEnumerable<string> listSound = (IEnumerable<string>)e.Argument;
+                BackgroundWorker worker = sender as BackgroundWorker;
+                int valueProgresBar = 0;
+                foreach (string item in listSound)
+                {
+                    valueProgresBar += FTPSinchronisation.DownLoadAudio(item);
+                    worker.ReportProgress(valueProgresBar);
+                }
 
-                FTPSinchronisation.LoaderAudio();
+                //FTPSinchronisation.LoaderAudio();
             }
             catch (Exception ex)
             {
                 IsErorConetctionFTPAudio = false;
-                //MessageBox.Show(ex.Message + MethodBase.GetCurrentMethod().DeclaringType.FullName, "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(ex.Message + MethodBase.GetCurrentMethod().DeclaringType.FullName, "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
                 throw;
             }
         }
@@ -521,12 +531,18 @@ namespace MyDictionary
         private void BackgroundWorker_ProgressChanged_1(object sender, ProgressChangedEventArgs e)
         {
             progressBarDownload.Value = e.ProgressPercentage;
+            double max =  progressBarDownload.Maximum;
+            double oneProcent = 100 / max;
+            double procent = (double)e.ProgressPercentage * oneProcent;
+            textblockMessage.Text = ((int)procent).ToString() + "%";
         }
 
         private void BackgroundWorker_RunWorkerCompleted_1(object sender, RunWorkerCompletedEventArgs e)
         {
-            progressBarDownload.IsIndeterminate = false;
-
+            //progressBarDownload.IsIndeterminate = false;
+            progressBarDownload.Value = 0;
+            //progressBarDownload.Maximum = 0;
+            textblockMessage.Text = "";
             if (IsErorConetctionFTPAudio)
             {
                 textblockMessage.Text = "Аудиофайлы загружены!";
@@ -608,7 +624,7 @@ namespace MyDictionary
             if (IsErorConetctionFTPAudioServer)
             {
                 textblockMessage.Text = "Аудиофайлы отправлены на сервер!";
-                TextAnimation(); 
+                TextAnimation();
             }
         }
         private void BackColor(object sender, EventArgs e)

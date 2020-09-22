@@ -113,7 +113,7 @@ namespace MyDictionary.Tools
             {
 
                 //MessageBox.Show(ex.Message + MethodBase.GetCurrentMethod().DeclaringType.FullName, "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
-               throw;
+                throw;
             }
         }
         public static FtpWebResponse WriteFile(string target, string sours)
@@ -281,7 +281,7 @@ namespace MyDictionary.Tools
         /// url-адресс файла на FTPSever (ftp://andreysonic.asuscomm.com/sda1/Documents/SoundFiles/apple.waw) 
         /// </summary>
         /// <param name="url">адресс файла на FTPSever</param>
-        public static void DownLoadAudio(string url)
+        public static int DownLoadAudio(string url)
         {
             try
             {
@@ -304,11 +304,12 @@ namespace MyDictionary.Tools
                 }
                 fs.Close();
                 response.Close();
+                return 1;
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message + MethodBase.GetCurrentMethod().DeclaringType.FullName, "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
+                return 0;
             }
         }
         /// <summary>
@@ -344,6 +345,23 @@ namespace MyDictionary.Tools
 
                 throw;
             }
+        }
+        public static IEnumerable<string> GetListSound()
+        {
+            IEnumerable<string> soundsExcept = null;
+            try
+            {
+                IEnumerable<string> soundsSever = GetListDirectoryServer(true);
+                IEnumerable<string> sounsLocal = GetListDirectoryLocal(true, PathServer);
+                soundsExcept = soundsSever.Except(sounsLocal).Select(n => n.Insert(0, UrlServer));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message + MethodBase.GetCurrentMethod().DeclaringType.FullName, "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
+                return null;
+
+            }
+            return soundsExcept;
         }
         public static void LoaderAudioToServer()
         {
