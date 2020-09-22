@@ -120,7 +120,7 @@
          
           
             <Grid>
-                <ProgressBar x:Name="progressBarDownload" Minimum="0"  Height="25" Width="360" Visibility="Visible" Background="{x:Null}" BorderBrush="{x:Null}" ValueChanged="progressBarDownload_ValueChanged" FontSize="18"/>
+                <ProgressBar x:Name="progressBarDownload" Minimum="0"  Height="25" Width="360" Visibility="Visible" Background="{x:Null}" BorderBrush="{x:Null}" ValueChanged="progressBarDownload_ValueChanged" FontSize="18" />
                 <TextBlock x:Name="textblockMessage"   VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" Foreground="Green" />
 
             </Grid>

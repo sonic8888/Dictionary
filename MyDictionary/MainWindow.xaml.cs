@@ -479,7 +479,12 @@ namespace MyDictionary
             {
                 //progressBarDownload.IsIndeterminate = true;
                 IEnumerable<string> listSound = FTPSinchronisation.GetListSound();
-                progressBarDownload.Maximum = listSound.Count();
+                int max = listSound.Count();
+                if (max > 0)
+                {
+                    progressBarDownload.Maximum = max;
+
+                }
                 backgroundWorkerLoadAudio.RunWorkerAsync(listSound);
 
             }
@@ -531,7 +536,7 @@ namespace MyDictionary
         private void BackgroundWorker_ProgressChanged_1(object sender, ProgressChangedEventArgs e)
         {
             progressBarDownload.Value = e.ProgressPercentage;
-            double max =  progressBarDownload.Maximum;
+            double max = progressBarDownload.Maximum;
             double oneProcent = 100 / max;
             double procent = (double)e.ProgressPercentage * oneProcent;
             textblockMessage.Text = ((int)procent).ToString() + "%";
