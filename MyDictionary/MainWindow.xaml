@@ -19,8 +19,8 @@
         <cm:BackgroundWorker x:Key="backgroundWorkerWriteDB"  
                              WorkerSupportsCancellation="True" DoWork="BackgroundWorker_DoWork_2"
                              RunWorkerCompleted="BackgroundWorker_RunWorkerCompleted_2"/>
-        <cm:BackgroundWorker x:Key="backgroundWorkerWriteSeverAudio" WorkerSupportsCancellation="True"
-                             DoWork="BackgroundWorker_DoWork_3" RunWorkerCompleted="BackgroundWorker_RunWorkerCompleted_3"/>
+        <cm:BackgroundWorker x:Key="backgroundWorkerWriteSeverAudio" WorkerSupportsCancellation="True"  WorkerReportsProgress="True"
+                             DoWork="BackgroundWorker_DoWork_3" RunWorkerCompleted="BackgroundWorker_RunWorkerCompleted_3" ProgressChanged="BackgroundWorker_ProgressChanged_3"/>
 
 
     </Window.Resources>

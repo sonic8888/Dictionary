@@ -478,7 +478,7 @@ namespace MyDictionary
             try
             {
                 //progressBarDownload.IsIndeterminate = true;
-                IEnumerable<string> listSound = FTPSinchronisation.GetListSound();
+                IEnumerable<string> listSound = FTPSinchronisation.GetListSound(true);
                 int max = listSound.Count();
                 if (max > 0)
                 {
@@ -597,8 +597,15 @@ namespace MyDictionary
             IsErorConetctionFTPAudioServer = true;
             try
             {
-                progressBarDownload.IsIndeterminate = true;
-                backgroundWorkerWriteSeverAudio.RunWorkerAsync();
+                IEnumerable<string> listSound = FTPSinchronisation.GetListSound(false);
+                int max = listSound.Count();
+                if (max > 0)
+                {
+                    progressBarDownload.Maximum = max;
+
+                }
+                backgroundWorkerWriteSeverAudio.RunWorkerAsync(listSound);
+
 
             }
             catch (Exception ex)
@@ -612,7 +619,16 @@ namespace MyDictionary
         {
             try
             {
-                FTPSinchronisation.LoaderAudioToServer();
+                IEnumerable<string> listSound = (IEnumerable<string>)e.Argument;
+                BackgroundWorker worker = sender as BackgroundWorker;
+                int valueProgresBar = 0;
+                foreach (string item in listSound)
+                {
+                    string s = item.Remove(0, FTPSinchronisation.PatnDirectorySoundFilesServer.Length + 1);
+                    s = s.Insert(0, FTPSinchronisation.PathDirectorySoundFilesLocal);
+                    valueProgresBar += FTPSinchronisation.WriteFile(item, s);
+                    worker.ReportProgress(valueProgresBar);
+                }
             }
             catch (Exception ex)
             {
@@ -625,7 +641,8 @@ namespace MyDictionary
 
         private void BackgroundWorker_RunWorkerCompleted_3(object sender, RunWorkerCompletedEventArgs e)
         {
-            progressBarDownload.IsIndeterminate = false;
+            progressBarDownload.Value = 0;
+            textblockMessage.Text = "";
             if (IsErorConetctionFTPAudioServer)
             {
                 textblockMessage.Text = "Аудиофайлы отправлены на сервер!";
@@ -679,6 +696,15 @@ namespace MyDictionary
                 MessageBox.Show(ex.Message + MethodBase.GetCurrentMethod().DeclaringType.FullName, "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
+        }
+
+        private void BackgroundWorker_ProgressChanged_3(object sender, ProgressChangedEventArgs e)
+        {
+            progressBarDownload.Value = e.ProgressPercentage;
+            double max = progressBarDownload.Maximum;
+            double oneProcent = 100 / max;
+            double procent = (double)e.ProgressPercentage * oneProcent;
+            textblockMessage.Text = ((int)procent).ToString() + "%";
         }
 
         //private void buttonTesst_Click(object sender, RoutedEventArgs e)

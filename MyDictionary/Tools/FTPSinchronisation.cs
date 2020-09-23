@@ -19,8 +19,8 @@ namespace MyDictionary.Tools
         public const string PatnLocalTempBD = @"./TempFiles/mobiles.db";
         public const string PatnLocalTempBDCopy = @"./TempFiles/mobilesCopy.db";
         public const string PatnLocalBD = @"./mobiles.db";
-        private const string PatnDirectorySoundFilesServer = @"ftp://andreysonic.asuscomm.com/sda1/Documents/SoundFiles";
-        private const string PathDirectorySoundFilesLocal = @"./SoundFiles/";
+        public const string PatnDirectorySoundFilesServer = @"ftp://andreysonic.asuscomm.com/sda1/Documents/SoundFiles";
+        public const string PathDirectorySoundFilesLocal = @"./SoundFiles/";
         private const string UrlServer = @"ftp://andreysonic.asuscomm.com";
         private const string PathServer = "/sda1/Documents/SoundFiles/";
         private const string UserName = "andrey";
@@ -116,7 +116,7 @@ namespace MyDictionary.Tools
                 throw;
             }
         }
-        public static FtpWebResponse WriteFile(string target, string sours)
+        public static int WriteFile(string target, string sours)
         {
             try
             {
@@ -134,13 +134,13 @@ namespace MyDictionary.Tools
                 requestStream.Close();
                 FtpWebResponse response = (FtpWebResponse)request.GetResponse();
                 response.Close();
-                return response;
+                return 1;
             }
             catch (Exception ex)
             {
 
                 MessageBox.Show(ex.Message + MethodBase.GetCurrentMethod().DeclaringType.FullName, "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
-                return null;
+                return 0;
             }
         }
 
@@ -346,14 +346,21 @@ namespace MyDictionary.Tools
                 throw;
             }
         }
-        public static IEnumerable<string> GetListSound()
+        public static IEnumerable<string> GetListSound(bool isWay)
         {
             IEnumerable<string> soundsExcept = null;
             try
             {
                 IEnumerable<string> soundsSever = GetListDirectoryServer(true);
                 IEnumerable<string> sounsLocal = GetListDirectoryLocal(true, PathServer);
-                soundsExcept = soundsSever.Except(sounsLocal).Select(n => n.Insert(0, UrlServer));
+                if (isWay)
+                {
+                    soundsExcept = soundsSever.Except(sounsLocal).Select(n => n.Insert(0, UrlServer));
+                }
+                else
+                {
+                    soundsExcept = sounsLocal.Except(soundsSever).Select(n => n.Insert(0, UrlServer));
+                }
             }
             catch (Exception ex)
             {

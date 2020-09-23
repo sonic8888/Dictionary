@@ -248,7 +248,7 @@ namespace MyDictionary
             }
             else
             {
-                MessageBox.Show("Укажите слово!");
+                MessageBox.Show("Укажите слово!","Внимание!",MessageBoxButton.OK,MessageBoxImage.Error);
             }
         }
         private FileInfo IsExist(FileInfo file)
