@@ -231,17 +231,24 @@ namespace MyDictionary
                 _wordsSample.SoundName = filecopy.Name;
                 return;
             }
-
-            filecopy = filesound.CopyTo(Path.Combine(FIleTools.NameDirectoryAudio, textBoxWord.Text.Trim().ToLower() + filesound.Extension));
-            if (filecopy != null)
+            string wordName = textBoxWord.Text.Trim().ToLower();
+            if (wordName!="")
             {
+                filecopy = filesound.CopyTo(Path.Combine(FIleTools.NameDirectoryAudio, wordName + filesound.Extension));
+                if (filecopy != null)
+                {
 
-                _wordsSample.SoundName = filecopy.Name;
+                    _wordsSample.SoundName = filecopy.Name;
 
+                }
+                else
+                {
+                    System.Media.SystemSounds.Beep.Play();
+                }
             }
             else
             {
-                System.Media.SystemSounds.Beep.Play();
+                MessageBox.Show("Укажите слово!");
             }
         }
         private FileInfo IsExist(FileInfo file)
