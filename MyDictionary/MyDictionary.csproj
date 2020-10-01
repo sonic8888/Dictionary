@@ -98,6 +98,9 @@
     <Compile Include="ChoseWords.xaml.cs">
       <DependentUpon>ChoseWords.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ChoseWords2.xaml.cs">
+      <DependentUpon>ChoseWords2.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Converters\AnswerConverter.cs" />
     <Compile Include="Converters\DataConverter.cs" />
     <Compile Include="Converters\StateConverter.cs" />
@@ -166,6 +169,10 @@
     <Compile Include="XMLRead\WordForList.cs" />
     <Compile Include="XMLRead\WordSample.cs" />
     <Page Include="ChoseWords.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ChoseWords2.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -477,6 +484,7 @@
     <Resource Include="Picture\virus_256.png" />
     <Resource Include="Picture\Errorshield.png" />
     <Resource Include="Picture\databaseprocess_basededatos_12922.png" />
+    <Resource Include="Picture\button_add_insert_green.png" />
     <Content Include="SoundsApplication\soundNo.mp3">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

@@ -450,5 +450,11 @@ namespace MyDictionary
                 }
             }
         }
+
+        private void buttonAddWord2_Click(object sender, RoutedEventArgs e)
+        {
+            ChoseWords2 w2 = new ChoseWords2();
+            w2.Show();
+        }
     }
 }

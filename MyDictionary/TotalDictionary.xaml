@@ -158,7 +158,12 @@
                     <Image Source="Picture/plus.png"/>
                 </Button.Content>
             </Button>
-            <TextBlock x:Name="textblockTotalWords" Text="Всего слов: 56" VerticalAlignment="Center" Margin="220,0" FontFamily="Microsoft New Tai Lue"/>
+            <Button x:Name="buttonAddWord2" Width="50" Click="buttonAddWord2_Click" >
+                <Button.Content>
+                    <Image Source="Picture/button_add_insert_green.png"/>
+                </Button.Content>
+            </Button>
+            <TextBlock x:Name="textblockTotalWords" Text="Всего слов: 56" VerticalAlignment="Center" Margin="140,0" FontFamily="Microsoft New Tai Lue"/>
         </ToolBar>
         <StackPanel Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="11" Orientation="Horizontal">
             <TextBox x:Name="textboxFindWord" Width="345" Margin="0,5" VerticalContentAlignment="Center" FontSize="22" Foreground="#FFCFCDCD" Text="найти слово" GotFocus="textboxFindWord_GotFocus" LostFocus="textboxFindWord_LostFocus" PreviewTextInput="textboxFindWord_PreviewTextInput" KeyUp="textboxFindWord_KeyUp"/>
