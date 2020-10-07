@@ -258,6 +258,9 @@
     <Resource Include="Fonts\phontm.ttf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <None Include="Dictionary\dict.xdxf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="mobiles.db">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

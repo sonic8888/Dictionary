@@ -7,58 +7,96 @@
         xmlns:convert="clr-namespace:MyDictionary.Converters"
         mc:Ignorable="d"
         Title="Добавить слово" Height="650" Width="1000" MinHeight="600" MaxHeight="700" MinWidth="950" MaxWidth="1050" Icon="Picture/AllDay.ru_messenger.ico" >
-    <Window.Resources>
-        <convert:WidthConverterMultiplication x:Key="WidthconverterMultiplication70" Width="0.7"></convert:WidthConverterMultiplication>
-        <convert:WidthConverterMultiplication x:Key="WidthconverterMultiplication30" Width="0.3"></convert:WidthConverterMultiplication>
-        <convert:WidthConverterMultiplication x:Key="WidthconverterMultiplication40" Width="0.4"></convert:WidthConverterMultiplication>
-        <convert:WidthConverterMultiplication x:Key="WidthconverterMultiplication60" Width="0.6"></convert:WidthConverterMultiplication>
-        <convert:WidthConverterSummation x:Key="WidthconverterSummation" Width="55"></convert:WidthConverterSummation>
-        <convert:WidthConverterSummation x:Key="WidthconverterSummation300" Width="350"></convert:WidthConverterSummation>
-    </Window.Resources>
-    <Grid x:Name="GridMain">
+
+    <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
+        <Grid x:Name="gridLeft"  Grid.Column="0" Background="#FFD7F9D9" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="8*"/>
+
+            </Grid.RowDefinitions>
+            <Border x:Name="borderLeft" Grid.Row="0" Background="#FF0F7E0A"  >
+                <Grid Background="{Binding ElementName=gridLeft, Mode=OneWay}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="4*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="12*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBox x:Name="textboxFindWord" Grid.Row="1" Grid.Column="1" VerticalContentAlignment="Center" FontSize="24"  TextChanged="textboxFindWord_TextChanged" PreviewKeyDown="textboxFindWord_PreviewKeyDown" Background="#FFF9F9F9" />
+                    <ComboBox Name="combobox"  Grid.Row="1" Grid.Column="1" Height="1" VerticalAlignment="Bottom" SelectionChanged="combobox_SelectionChanged" DisplayMemberPath="Word" Background="#FFA0F1EA" FontSize="20" >
+
+                    </ComboBox>
+                </Grid>
+            </Border>
+            <!--<TextBlock x:Name="textblockTotal" Grid.Row="1">
+                
+            </TextBlock>-->
+            <FlowDocumentScrollViewer Name="flowscrolview" Grid.Row="1"  >
+                <FlowDocument Name="flowdocument">
+                    <Paragraph Name="paragraf" FontSize="16"  >
+                        <!--<Run Name="run"/>-->
+                    </Paragraph>
+                </FlowDocument>
+            </FlowDocumentScrollViewer>
+        </Grid>
         <GridSplitter Grid.Column="1" ShowsPreview="False" Width="3"
         HorizontalAlignment="Center" VerticalAlignment="Stretch" />
-        <Grid x:Name="gridListElement" Background="AliceBlue" Margin="5" Grid.Column="0" >
+        <Grid x:Name="gridRight" Grid.Column="2" Background="#FFADE0AD">
             <Grid.RowDefinitions>
-                <RowDefinition MinHeight="60" MaxHeight="60" />
-                <RowDefinition Height="9*" />
+                <RowDefinition Height="*"/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition Height="0.5*"/>
+                <RowDefinition/>
+                <RowDefinition Height="0.5*"/>
+                <RowDefinition Height="0.5*"/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition Height="*"/>
+
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Border x:Name="borderTop" Background="#FF406F44" Grid.Column="0" Grid.Row="0" VerticalAlignment="Top"   >
-                <StackPanel Orientation="Horizontal">
-                    <Image Source="Picture/icons8-поиск-64.png" Stretch="Fill" Width="32" Height="32" Margin="5,0"/>
-                    <TextBox x:Name="findWord" Margin="5,10,15,10" FontSize="28" VerticalContentAlignment="Center"
-                             Width="{Binding ActualWidth, ElementName=borderTop, Mode=OneWay, 
-                        Converter={StaticResource WidthconverterSummation}}" BorderBrush="White"  
-                             Focusable="True" TextAlignment="Left" PreviewTextInput="PreviewTextInputt" KeyUp="KeyUpTextBoxFind"  />
-                </StackPanel>
-            </Border>
-            <ListView x:Name="wordListView" Grid.Row="1"  
-                IsSynchronizedWithCurrentItem="True" FontSize="16" Margin="0,5,0,0" Background="#FFCFFDD0" MouseDoubleClick="wordListView_MouseDoubleClick" BorderBrush="#FF879082" SelectionChanged="wordListView_SelectionChanged"    >
-                <ListView.View>
-                    <GridView>
-                        <GridViewColumn Header="Слово" Width="{Binding ActualWidth,
-                            ElementName=wordListView, Mode=OneWay, Converter={StaticResource WidthconverterMultiplication30}}" >
-                            <GridViewColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock x:Name="textboxword" Text="{Binding Word}" FontSize="18" Background="{x:Null}" Foreground="#FF6679F0"  />
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
-                        </GridViewColumn>
-                        <GridViewColumn DisplayMemberBinding="{Binding TranslateLine}" Width="{Binding ActualWidth, ElementName=wordListView, Mode=OneWay, 
-                            Converter={StaticResource WidthconverterMultiplication70}}">Перевод</GridViewColumn>
-                        <!--<GridViewColumn DisplayMemberBinding="{Binding PartOfSpeach}">Часть речи</GridViewColumn>-->
-                    </GridView>
-                </ListView.View>
-            </ListView>
-
+            <ToolBar Grid.Row="0" VerticalAlignment="Top" Grid.Column="0" Grid.ColumnSpan="12" Background="#FF0F7E0A" >
+                <Button x:Name="buttonfile" Click="buttonfile_Click">
+                    <Image Source="Picture/icons8-проводник-windows-48.png"  />
+                </Button>
+            </ToolBar>
+            <TextBlock Text="Слово:" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="4" VerticalAlignment="Bottom" FontSize="24" Foreground="#FF032B0F" FontFamily="Georgia"/>
+            <TextBox x:Name="textboxWord"  Grid.Row="1" Grid.Column="5" Height="40" Grid.ColumnSpan="6" VerticalAlignment="Bottom" FontSize="24"/>
+            <TextBlock Text="Транскрипция:" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="4" VerticalAlignment="Bottom" FontSize="24" Foreground="#FF032B0F" FontFamily="Georgia"/>
+            <TextBox x:Name="textboxTranscrition" Grid.Row="2" Grid.Column="5" Height="40" Grid.ColumnSpan="6" VerticalAlignment="Bottom" FontSize="24"/>
+            <TextBlock Text="Аудио:" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" VerticalAlignment="Bottom" FontSize="24" Foreground="#FF032B0F" FontFamily="Georgia"/>
+            <Button x:Name="buttonFindAudio" Content="Поиск" Grid.Row="3" Grid.Column="3" Grid.ColumnSpan="2" VerticalAlignment="Bottom" FontSize="16" Margin="5,5,5,0" Background="#FF68FF68" Click="buttonFindAudio_Click"/>
+            <TextBox x:Name="textboxAudio" Grid.Row="3" Height="40" Grid.Column="5" Grid.ColumnSpan="6" VerticalAlignment="Bottom" FontSize="18" HorizontalScrollBarVisibility="Auto"/>
+            <TextBlock Text="Перевод:" Grid.Row="4" Grid.Column="4" Grid.ColumnSpan="4" VerticalAlignment="Bottom" FontSize="24" HorizontalAlignment="Center" Foreground="#FF032B0F" FontFamily="Georgia"/>
+            <TextBox x:Name="textboxTranslation" Grid.Row="5" Grid.RowSpan="2" Grid.Column="1" Grid.ColumnSpan="10" TextWrapping="Wrap" FontSize="20" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" AcceptsReturn="True"/>
+            <TextBlock Text="Примеры:" Grid.Row="7" Grid.Column="4" Grid.ColumnSpan="4"  VerticalAlignment="Bottom" FontSize="24" HorizontalAlignment="Center" Foreground="#FF032B0F" FontFamily="Georgia"/>
+            <TextBox x:Name="textboxExample" Grid.Row="8" Grid.RowSpan="2" Grid.Column="1" Grid.ColumnSpan="10" TextWrapping="Wrap" FontSize="16" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" AcceptsReturn="True"/>
+            <Button x:Name="buttonSave" Grid.Row="10" Grid.Column="1" Grid.ColumnSpan="3" Content="Сохранить" Margin="0,15" Background="#FFE2F709" FontSize="16" Click="buttonSave_Click"/>
         </Grid>
     </Grid>
 </Window>
