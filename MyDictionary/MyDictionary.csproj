@@ -488,6 +488,9 @@
     <Resource Include="Picture\Errorshield.png" />
     <Resource Include="Picture\databaseprocess_basededatos_12922.png" />
     <Resource Include="Picture\button_add_insert_green.png" />
+    <Resource Include="Picture\halftone13.png" />
+    <Resource Include="Picture\halftone14.png" />
+    <Resource Include="Picture\halftone2.png" />
     <Content Include="SoundsApplication\soundNo.mp3">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
