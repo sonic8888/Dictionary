@@ -91,7 +91,7 @@
             <TextBox x:Name="textboxTranscrition" Grid.Row="2" Grid.Column="5" Height="40" Grid.ColumnSpan="6" VerticalAlignment="Bottom" FontSize="24"/>
             <TextBlock Text="Аудио:" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" VerticalAlignment="Bottom" FontSize="24" Foreground="#FF032B0F" FontFamily="Georgia"/>
             <Button x:Name="buttonFindAudio" Content="Поиск" Grid.Row="3" Grid.Column="3" Grid.ColumnSpan="2" VerticalAlignment="Bottom" FontSize="16" Margin="5,5,5,0" Background="#FF68FF68" Click="buttonFindAudio_Click"/>
-            <TextBox x:Name="textboxAudio" Grid.Row="3" Height="40" Grid.Column="5" Grid.ColumnSpan="6" VerticalAlignment="Bottom" FontSize="18" HorizontalScrollBarVisibility="Auto"/>
+            <TextBox x:Name="textboxAudio" VerticalContentAlignment="Center" Grid.Row="3" Height="40" Grid.Column="5" Grid.ColumnSpan="6" VerticalAlignment="Bottom" FontSize="18" HorizontalScrollBarVisibility="Auto"/>
             <TextBlock Text="Перевод:" Grid.Row="4" Grid.Column="4" Grid.ColumnSpan="4" VerticalAlignment="Bottom" FontSize="24" HorizontalAlignment="Center" Foreground="#FF032B0F" FontFamily="Georgia"/>
             <TextBox x:Name="textboxTranslation" Grid.Row="5" Grid.RowSpan="2" Grid.Column="1" Grid.ColumnSpan="10" TextWrapping="Wrap" FontSize="20" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" AcceptsReturn="True"/>
             <TextBlock Text="Примеры:" Grid.Row="7" Grid.Column="4" Grid.ColumnSpan="4"  VerticalAlignment="Bottom" FontSize="24" HorizontalAlignment="Center" Foreground="#FF032B0F" FontFamily="Georgia"/>

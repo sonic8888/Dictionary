@@ -39,6 +39,7 @@ namespace MyDictionary
         string pathGreen = @"Picture/Cub_green.png";
         string pathGold = @"Picture/Cub_Gold.png";
         private bool IsOrder = true;
+        MediaPlayer mediaPlayer;
         public TotalDictionary(ObservableCollection<MyWord> col)
         {
             InitializeComponent();
@@ -75,9 +76,12 @@ namespace MyDictionary
 
                 try
                 {
-                    MediaPlayer mediaPlayer = new MediaPlayer();
+                  
+                    mediaPlayer = new MediaPlayer();
                     mediaPlayer.Open(new Uri(sound.FullName));
                     mediaPlayer.Play();
+                    
+                    //mediaPlayer.Close();
                 }
                 catch (Exception ex)
                 {
@@ -456,5 +460,6 @@ namespace MyDictionary
             ChoseWords2 w2 = new ChoseWords2();
             w2.Show();
         }
+    
     }
 }

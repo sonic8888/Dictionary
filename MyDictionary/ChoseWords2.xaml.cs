@@ -273,7 +273,8 @@ namespace MyDictionary
 
             if (!File.Exists(FIleTools.NameDirectoryAudio + "/" + audioFile.Name))
             {
-                FIleTools.CopyTo(audioFile, true);
+                FileInfo copy = FIleTools.CopyTo(audioFile, true);
+                copy.IsReadOnly = false;
             }
 
             WordSample _wordsSample = new WordSample();
@@ -283,6 +284,8 @@ namespace MyDictionary
             _wordsSample.DateTimeLastCall = DateTime.Now;
             _wordsSample.State = (int)State.New;
             _wordsSample.SoundName = audioFile.Name;
+            _wordsSample.Transcription = transcription;
+            _wordsSample.Example = new ObservableCollection<string>(examples);
             int st = 0;
             try
             {
