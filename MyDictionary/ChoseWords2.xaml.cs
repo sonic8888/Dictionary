@@ -1,6 +1,8 @@
-﻿using MyDictionary.XMLRead;
+﻿using MyDictionary.Tools;
+using MyDictionary.XMLRead;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -35,7 +37,7 @@ namespace MyDictionary
     public partial class ChoseWords2 : Window
     {
         string path = @".\Dictionary\dict.xdxf";
-        FileInfo audioFile;
+        FileInfo audioFile = null;
         public ChoseWords2()
         {
             InitializeComponent();
@@ -255,6 +257,56 @@ namespace MyDictionary
 
         private void buttonSave_Click(object sender, RoutedEventArgs e)
         {
+            string translate = textboxTranslation.Text;
+            IEnumerable<string> translates = translate.Split(new char[] { ',', '.', '\n', '\r', ';' }).Select(n => n.Trim()).Where(n => Regex.IsMatch(n, "\\S"));
+            string example = textboxExample.Text;
+            IEnumerable<string> examples = example.Split(new char[] { ';' }).Select(n => n.Trim());
+
+            string word = textboxWord.Text.ToLower().Trim();
+            string audio = textboxAudio.Text.ToLower().Trim();
+            string transcription = textboxTranscrition.Text.ToLower().Trim();
+            if (word == "" || audio == "" || translate == "" || audioFile == null)
+            {
+                MessageBox.Show("Заполните все поля!");
+                return;
+            }
+
+            if (!File.Exists(FIleTools.NameDirectoryAudio + "/" + audioFile.Name))
+            {
+                FIleTools.CopyTo(audioFile, true);
+            }
+
+            WordSample _wordsSample = new WordSample();
+            _wordsSample.Word = word;
+            _wordsSample.Translate = new ObservableCollection<string>(translates);
+            _wordsSample.DateTimeInsert = DateTime.Now;
+            _wordsSample.DateTimeLastCall = DateTime.Now;
+            _wordsSample.State = (int)State.New;
+            _wordsSample.SoundName = audioFile.Name;
+            int st = 0;
+            try
+            {
+                st = BdTools.AddNewWords(_wordsSample);
+
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message, "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            Clear();
+        }
+
+        private void Clear()
+        {
+            audioFile = null;
+            textboxWord.Text = "";
+            textboxTranscrition.Text = "";
+            textboxAudio.Text = "";
+            textboxTranslation.Text = "";
+            textboxExample.Text = "";
 
         }
     }

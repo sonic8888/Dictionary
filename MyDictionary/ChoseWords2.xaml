@@ -97,6 +97,7 @@
             <TextBlock Text="Примеры:" Grid.Row="7" Grid.Column="4" Grid.ColumnSpan="4"  VerticalAlignment="Bottom" FontSize="24" HorizontalAlignment="Center" Foreground="#FF032B0F" FontFamily="Georgia"/>
             <TextBox x:Name="textboxExample" Grid.Row="8" Grid.RowSpan="2" Grid.Column="1" Grid.ColumnSpan="10" TextWrapping="Wrap" FontSize="16" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" AcceptsReturn="True"/>
             <Button x:Name="buttonSave" Grid.Row="10" Grid.Column="1" Grid.ColumnSpan="3" Content="Сохранить" Margin="0,15" Background="#FFE2F709" FontSize="16" Click="buttonSave_Click"/>
+            <TextBlock Grid.Row="10" Grid.Column="5" Grid.ColumnSpan="6" Text="*Примеры - добавлять раделитель ';'" VerticalAlignment="Center"/>
         </Grid>
     </Grid>
 </Window>
