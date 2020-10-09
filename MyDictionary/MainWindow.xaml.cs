@@ -49,6 +49,7 @@ namespace MyDictionary
         private bool IsErorConetctionFTP = true;
         private bool IsErorConetctionFTPAudio = true;
         private bool IsErorConetctionFTPAudioServer = true;
+        IEnumerable<string> listSounds = null;
 
         public MainWindow()
         {
@@ -597,14 +598,18 @@ namespace MyDictionary
             IsErorConetctionFTPAudioServer = true;
             try
             {
-                IEnumerable<string> listSound = FTPSinchronisation.GetListSound(false);
-                int max = listSound.Count();
+                listSounds = FTPSinchronisation.GetListSound(false);
+                //MessageBox.Show(listSound.GetType().ToString());
+                //return;
+
+                int max = listSounds.Count();
                 if (max > 0)
                 {
                     progressBarDownload.Maximum = max;
 
                 }
-                backgroundWorkerWriteSeverAudio.RunWorkerAsync(listSound);
+                CopyAudio(listSounds);
+                backgroundWorkerWriteSeverAudio.RunWorkerAsync(listSounds);
 
 
             }
@@ -619,13 +624,15 @@ namespace MyDictionary
         {
             try
             {
+
+
                 IEnumerable<string> listSound = (IEnumerable<string>)e.Argument;
                 BackgroundWorker worker = sender as BackgroundWorker;
                 int valueProgresBar = 0;
                 foreach (string item in listSound)
                 {
                     string s = item.Remove(0, FTPSinchronisation.PatnDirectorySoundFilesServer.Length + 1);
-                    s = s.Insert(0, FTPSinchronisation.PathDirectorySoundFilesLocal);
+                    s = s.Insert(0, FTPSinchronisation.PathDirectoryTempAudio);
                     valueProgresBar += FTPSinchronisation.WriteFile(item, s);
                     worker.ReportProgress(valueProgresBar);
                 }
@@ -648,6 +655,7 @@ namespace MyDictionary
                 textblockMessage.Text = "Аудиофайлы отправлены на сервер!";
                 TextAnimation();
             }
+            ClearDirectory(FTPSinchronisation.PathDirectoryTempAudio);
         }
         private void BackColor(object sender, EventArgs e)
         {
@@ -712,5 +720,48 @@ namespace MyDictionary
         //    ObservableCollection<MyWord> col = BdTools.ReadWord(5);
         //    WindowsManager.CreateWindowBreyShtorm_3(col.ToList(), false);
         //}
+        private void CopyAudio(IEnumerable<string> listSound)
+        {
+            if (!Directory.Exists(FTPSinchronisation.PathDirectoryTempAudio))
+            {
+                Directory.CreateDirectory(FTPSinchronisation.PathDirectoryTempAudio);
+            }
+
+            try
+            {
+                foreach (string item in listSound)
+                {
+                    string s = item.Remove(0, FTPSinchronisation.PatnDirectorySoundFilesServer.Length + 1);
+                    s = s.Insert(0, FTPSinchronisation.PathDirectorySoundFilesLocal);
+                    FileInfo fsours = new FileInfo(s);
+                    FileInfo fcopy = fsours.CopyTo(FTPSinchronisation.PathDirectoryTempAudio + fsours.Name, true);
+                    fcopy.IsReadOnly = false;
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message + MethodBase.GetCurrentMethod().DeclaringType.FullName, "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+        }
+        private void ClearDirectory(string pathDirectory)
+        {
+            try
+            {
+                string[] vs = Directory.GetFiles(pathDirectory);
+                foreach (string item in vs)
+                {
+                    File.Delete(item);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message + MethodBase.GetCurrentMethod().DeclaringType.FullName, "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+        }
     }
+
 }

@@ -21,6 +21,7 @@ namespace MyDictionary.Tools
         public const string PatnLocalBD = @"./mobiles.db";
         public const string PatnDirectorySoundFilesServer = @"ftp://andreysonic.asuscomm.com/sda1/Documents/SoundFiles";
         public const string PathDirectorySoundFilesLocal = @"./SoundFiles/";
+        public const string PathDirectoryTempAudio = @"./TempAudio/";
         private const string UrlServer = @"ftp://andreysonic.asuscomm.com";
         private const string PathServer = "/sda1/Documents/SoundFiles/";
         private const string UserName = "andrey";
