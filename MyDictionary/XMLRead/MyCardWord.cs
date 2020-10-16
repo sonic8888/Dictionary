@@ -17,8 +17,8 @@ namespace MyDictionary.XMLRead
     {
         Card card;
         string word;
-        string translates;
-        string examples;
+        //string translates;
+        //string examples;
         string transcription;
         List<TranslateClass> translateList;
         List<ExampleClass> exampleList;

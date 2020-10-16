@@ -110,7 +110,7 @@ namespace MyDictionary.Tools
                 FtpWebResponse response = (FtpWebResponse)request.GetResponse();
                 response.Close();
             }
-            catch (Exception ex)
+            catch (Exception )
             {
 
                 //MessageBox.Show(ex.Message + MethodBase.GetCurrentMethod().DeclaringType.FullName, "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -340,7 +340,7 @@ namespace MyDictionary.Tools
                     MessageBox.Show("Нет новых аудиофайлов!");
                 }
             }
-            catch (Exception ex)
+            catch (Exception )
             {
 
 
@@ -396,7 +396,7 @@ namespace MyDictionary.Tools
                     MessageBox.Show("Нет новых аудиофайлов!");
                 }
             }
-            catch (Exception ex)
+            catch (Exception )
             {
 
                 //MessageBox.Show(ex.Message + MethodBase.GetCurrentMethod().DeclaringType.FullName, "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);

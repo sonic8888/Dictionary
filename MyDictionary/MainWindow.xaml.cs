@@ -637,7 +637,7 @@ namespace MyDictionary
                     worker.ReportProgress(valueProgresBar);
                 }
             }
-            catch (Exception ex)
+            catch (Exception )
             {
                 IsErorConetctionFTPAudioServer = false;
                 //MessageBox.Show(ex.Message + MethodBase.GetCurrentMethod().DeclaringType.FullName, "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
