@@ -76,11 +76,11 @@ namespace MyDictionary
 
                 try
                 {
-                  
+
                     mediaPlayer = new MediaPlayer();
                     mediaPlayer.Open(new Uri(sound.FullName));
                     mediaPlayer.Play();
-                    
+
                     //mediaPlayer.Close();
                 }
                 catch (Exception ex)
@@ -342,6 +342,7 @@ namespace MyDictionary
             IEnumerable<MyWord> en = collection.OrderByDescending(n => n.PartOfSpeach.StartsWith(part));
             listViewDictionary.ItemsSource = new ObservableCollection<MyWord>(en);
 
+
         }
 
         private void buttonStateGreen_Click(object sender, RoutedEventArgs e)
@@ -363,7 +364,7 @@ namespace MyDictionary
             Button bt = sender as Button;
             int wordid = (int)bt.DataContext;
             MyWord mw = BdTools.FindMyWord(wordid);
-            WindowWordEdit wwe = new WindowWordEdit(mw,bt);
+            WindowWordEdit wwe = new WindowWordEdit(mw, bt);
             if (wwe.ShowDialog() == true)
             {
 
@@ -448,7 +449,7 @@ namespace MyDictionary
         {
             foreach (Window window in App.Current.Windows)
             {
-                if (window.Title== "Dictionary")
+                if (window.Title == "Dictionary")
                 {
                     window.WindowState = WindowState.Normal;
                 }
@@ -460,6 +461,6 @@ namespace MyDictionary
             ChoseWords2 w2 = new ChoseWords2();
             w2.Show();
         }
-    
+
     }
 }
