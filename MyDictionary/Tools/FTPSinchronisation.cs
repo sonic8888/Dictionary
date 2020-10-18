@@ -21,6 +21,7 @@ namespace MyDictionary.Tools
         public const string PatnLocalBD = @"./mobiles.db";
         public const string PatnDirectorySoundFilesServer = @"ftp://andreysonic.asuscomm.com/sda1/Documents/SoundFiles";
         public const string PathDirectorySoundFilesLocal = @"./SoundFiles/";
+        public const string PathDirectoryTempAudio = @"./TempAudio/";
         private const string UrlServer = @"ftp://andreysonic.asuscomm.com";
         private const string PathServer = "/sda1/Documents/SoundFiles/";
         private const string UserName = "andrey";
@@ -109,7 +110,7 @@ namespace MyDictionary.Tools
                 FtpWebResponse response = (FtpWebResponse)request.GetResponse();
                 response.Close();
             }
-            catch (Exception ex)
+            catch (Exception )
             {
 
                 //MessageBox.Show(ex.Message + MethodBase.GetCurrentMethod().DeclaringType.FullName, "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -339,7 +340,7 @@ namespace MyDictionary.Tools
                     MessageBox.Show("Нет новых аудиофайлов!");
                 }
             }
-            catch (Exception ex)
+            catch (Exception )
             {
 
 
@@ -395,7 +396,7 @@ namespace MyDictionary.Tools
                     MessageBox.Show("Нет новых аудиофайлов!");
                 }
             }
-            catch (Exception ex)
+            catch (Exception )
             {
 
                 //MessageBox.Show(ex.Message + MethodBase.GetCurrentMethod().DeclaringType.FullName, "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
