@@ -287,6 +287,7 @@ namespace MyDictionary
             _wordsSample.Transcription = transcription;
             _wordsSample.Example = new ObservableCollection<string>(examples);
             _wordsSample.PartOfSpeach = "";
+
             int st = 0;
             try
             {
