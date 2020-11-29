@@ -42,6 +42,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -121,6 +122,7 @@
       <DependentUpon>WindowSprint.xaml</DependentUpon>
     </Compile>
     <Compile Include="Tools\BdTools.cs" />
+    <Compile Include="Tools\FileLogger.cs" />
     <Compile Include="Tools\FTPSinchronisation.cs" />
     <Compile Include="Tools\HelpWorker.cs" />
     <Compile Include="Tools\MyTools.cs" />

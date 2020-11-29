@@ -208,6 +208,10 @@
             </StackPanel>
         </Button>
         <!--<Button x:Name="buttonTesst" Grid.Row="5" Grid.Column="4" Content="Test" Click="buttonTesst_Click"/>-->
+        <StackPanel x:Name="panelChoseStorege" Orientation="Vertical" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" >
+            <RadioButton GroupName="storage" Name="radioButtonAsuscom" Content="Asuscom"  Margin="10,5,0,0" FontSize="15" Checked="radioButtonAsuscom_Checked"/>
+            <RadioButton GroupName="storage" Name="radioButtonYandexDisc" Content="YandexDisc" Margin="10,1,0,0" FontSize="15" Checked="radioButtonYandexDisc_Checked"/>
+        </StackPanel>
 
     </Grid>
 </Window>

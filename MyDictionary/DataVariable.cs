@@ -25,6 +25,7 @@ namespace MyDictionary
         public FileInfo soundYes;//звуковой файл "Галочка" "Yes" правилиьный ответ
         private FileInfo soundNo;//звуковой файл "Нет" не правильный ответ (ошибка)
         private int isUpdateState;//сбрасывает статус слов при не правильном ответе
+        private bool ischoseStorage;//выбор варианта загрузки (asuscom - yandexdisc)
         public DataVariable()
         {
             defoltValueList = new List<string>();
@@ -37,41 +38,42 @@ namespace MyDictionary
             defoltValueList.Add("10");// defoltValue countWordTrenings
             defoltValueList.Add("30");// defoltValue countWordSprint
             defoltValueList.Add("0");// defoltValue isUpdateState
+            defoltValueList.Add("true");// defoltValue ischoseStorage
             if (!File.Exists(FIleTools.NameFileDataVariable))
             {
                 WriteDefoltValue();
             }
             else
             {
-                try
-                {
-                    List<string> listValue;
-                    using (StreamReader sr = File.OpenText(FIleTools.NameFileDataVariable))
-                    {
-                        string input = null;
-                        listValue = new List<string>();
-                        while ((input = sr.ReadLine()) != null)
-                        {
-                            int v = 0;
-                            if (int.TryParse(input, out v))
-                            {
-                                listValue.Add(input);
+                //try
+                //{
+                //    List<string> listValue;
+                //    using (StreamReader sr = File.OpenText(FIleTools.NameFileDataVariable))
+                //    {
+                //        string input = null;
+                //        listValue = new List<string>();
+                //        while ((input = sr.ReadLine()) != null)
+                //        {
+                //            int v = 0;
+                //            if (int.TryParse(input, out v))
+                //            {
+                //                listValue.Add(input);
 
-                            }
-                        }
+                //            }
+                //        }
 
 
-                    }
-                    if (listValue.Count != defoltValueList.Count)
-                    {
-                        WriteDefoltValue();
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message + " " + MethodBase.GetCurrentMethod().DeclaringType.FullName, "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
+                //    }
+                //    if (listValue.Count != defoltValueList.Count)
+                //    {
+                //        WriteDefoltValue();
+                //    }
+                //}
+                //catch (Exception ex)
+                //{
+                //    MessageBox.Show(ex.Message + " " + MethodBase.GetCurrentMethod().DeclaringType.FullName, "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
 
-                }
+                //}
             }
             soundYes = new FileInfo(@".\SoundsApplication\soundYes.mp3");
             soundNo = new FileInfo(@".\SoundsApplication\soundNo.mp3");
@@ -112,6 +114,7 @@ namespace MyDictionary
                         countWordTrenings = int.Parse(listValue[6]);//читаем countWordTrenings
                         countWordSprint = int.Parse(listValue[7]);//читаем countWordSprint
                         isUpdateState = int.Parse(listValue[8]);//читаем countWordSprint
+                        ischoseStorage = Boolean.Parse(listValue[9]);//читаем ischoseStorage
 
                     }
                     catch (Exception ex)
@@ -153,6 +156,7 @@ namespace MyDictionary
                     sw.WriteLine(countWordTrenings);
                     sw.WriteLine(countWordSprint);
                     sw.WriteLine(isUpdateState);
+                    sw.WriteLine(ischoseStorage);
                 }
             }
             catch (IOException ex)
@@ -242,6 +246,17 @@ namespace MyDictionary
             get { return isUpdateState; }
             set { isUpdateState = value; }
         }
+
+   
+        /// <summary>
+        /// выбор хранилища asuscom - yandexdisc
+        /// </summary>
+        public bool IsChoseStorage
+        {
+            get { return ischoseStorage; }
+            set { ischoseStorage = value; }
+        }
+
         public   void CloseWindow()
         {
             FileInfo fileSourse = new FileInfo(FTPSinchronisation.PatnLocalTempBD);

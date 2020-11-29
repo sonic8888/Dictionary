@@ -49,6 +49,7 @@ namespace MyDictionary
         private bool IsErorConetctionFTP = true;
         private bool IsErorConetctionFTPAudio = true;
         private bool IsErorConetctionFTPAudioServer = true;
+        private bool IsChoesStorage ;
         IEnumerable<string> listSounds = null;
 
         public MainWindow()
@@ -70,10 +71,22 @@ namespace MyDictionary
             textboxCountWordTrenings.Text = App.dataVariable.CountWordTrenings.ToString();
             textboxCountWordSprint.Text = App.dataVariable.CountWordSprint.ToString();
             gbrash = (SolidColorBrush)textblockMessage.Foreground;
+            IsChoesStorage = MyDictionary.App.dataVariable.IsChoseStorage;
             if (App.dataVariable.IsUpdateState == 1)
             {
                 checkboxStatus.IsChecked = true;
             }
+            if (IsChoesStorage)
+            {
+                radioButtonAsuscom.IsChecked = true;
+                HidenElements(0);
+            }
+            else
+            {
+                radioButtonYandexDisc.IsChecked = true;
+                HidenElements(1);
+            }
+
 
         }
         private void backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
@@ -761,6 +774,43 @@ namespace MyDictionary
                 MessageBox.Show(ex.Message + MethodBase.GetCurrentMethod().DeclaringType.FullName, "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
+        }
+
+        private void radioButtonAsuscom_Checked(object sender, RoutedEventArgs e)
+        {
+            
+            if (!IsChoesStorage)
+            {
+                IsChoesStorage = true;
+                MyDictionary.App.dataVariable.IsChoseStorage = IsChoesStorage;
+                HidenElements(0);
+            }
+        }
+
+        private void radioButtonYandexDisc_Checked(object sender, RoutedEventArgs e)
+        {
+            if (IsChoesStorage)
+            {
+                IsChoesStorage = false;
+                MyDictionary.App.dataVariable.IsChoseStorage = IsChoesStorage;
+                HidenElements(1);
+            }
+        }
+        private void HidenElements(int visible)
+        {
+            buttonSinc.Visibility = (Visibility)visible;
+            buttonDBCopy.Visibility = (Visibility)visible;
+            buttonFromCloudAudio.Visibility = (Visibility)visible;
+            buttonDBCopy2.Visibility = (Visibility)visible;
+            buttonToCloud.Visibility = (Visibility)visible;
+            buttonToAudioCloud.Visibility = (Visibility)visible;
+            separatorSinc.Visibility = (Visibility)visible;
+            separator_2.Visibility = (Visibility)visible;
+            separator_3.Visibility = (Visibility)visible;
+            separator_4.Visibility = (Visibility)visible;
+            separator_5.Visibility = (Visibility)visible;
+            separatorDbcopy.Visibility = (Visibility)visible;
+           
         }
     }
 
