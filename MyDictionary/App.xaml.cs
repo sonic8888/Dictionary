@@ -24,6 +24,9 @@ namespace MyDictionary
         public static Random random;
         public static ObservableCollection<MyWord> collection;
         public static Thread thread;
+        public static string User;
+        public static string PathDbYandexDisc;
+        public static string PathDirectoryAudioYandexDisc;
         private void Application_Startup(object sender, StartupEventArgs e)
         {
             if (!Directory.Exists(FIleTools.NameDirectoryStorage))
@@ -40,14 +43,20 @@ namespace MyDictionary
             }
             dataVariable = new DataVariable();
             random = new Random();
-            //StartNewThread();
-            //ReadDictionary();
+            User = System.Environment.GetEnvironmentVariable("HOMEPATH");
+            PathDbYandexDisc = @"C:\" + User + "\\YandexDisk\\Dictionary\\Db\\mobiles.db";
+            PathDirectoryAudioYandexDisc = @"C:\" + User + "\\YandexDisk\\Dictionary\\FilesSound\\";
+
         }
 
         private void Application_Exit(object sender, ExitEventArgs e)
         {
             dataVariable.WriteFile();
-            //dataVariable.CloseWindow();
+            if (!MyDictionary.App.dataVariable.IsChoseStorage)
+            {
+                FTPSinchronisation.copyDbAndSoundFilesInYandexDisc();
+
+            }
         }
         private int myVar;
 

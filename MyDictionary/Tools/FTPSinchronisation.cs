@@ -404,6 +404,86 @@ namespace MyDictionary.Tools
             }
 
         }
+        public static void CopyAudioFilesFromYandexDisc(string pathAudioYandexDisk)
+        {
+            try
+            {
+                IEnumerable<string> enLoc = GetListDirectoryLocal(false);
+                IEnumerable<string> enYandex = GetListAudioFiles(pathAudioYandexDisk);
+                IEnumerable<string> soundsExcept = enYandex.Except(enLoc).Select(n => n.Insert(0, pathAudioYandexDisk));
+                foreach (string item in soundsExcept)
+                {
+                    FileInfo copy = new FileInfo(item);
+                    copy.CopyTo(FTPSinchronisation.PathDirectorySoundFilesLocal+ copy.Name, true);
+                }
+                 
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message + MethodBase.GetCurrentMethod().DeclaringType.FullName, "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
+                //FileLogger.WriteLine(ex.Message);
+            }
+           
+
+        }
+        private static IEnumerable<string> GetListAudioFiles(string pathDirectory )
+        {
+            try
+            {
+                DirectoryInfo di = new DirectoryInfo(pathDirectory);
+                FileInfo[] fileInfos = di.GetFiles();
+                return fileInfos.Select(n => n.Name);
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message + MethodBase.GetCurrentMethod().DeclaringType.FullName, "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
+                return null;
+            }
+        }
+        private static void CopyAudioFilesInYandexDisc(string pathAudioYandexDisk) 
+        {
+            try
+            {
+                IEnumerable<string> enLoc = GetListDirectoryLocal(false);
+                IEnumerable<string> enYandex = GetListAudioFiles(pathAudioYandexDisk);
+                DirectoryInfo directSounds = new DirectoryInfo(FTPSinchronisation.PathDirectorySoundFilesLocal);
+                IEnumerable<string> enCopy = enLoc.Except(enYandex).Select(n => n.Insert(0, directSounds.FullName));
+                foreach (string item in enCopy)
+                {
+                    FileInfo copy = new FileInfo(item);
+                    copy.CopyTo(pathAudioYandexDisk + copy.Name, true);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                FileLogger.WriteLine(ex.Message);
+            }
+
+        }
+        private static void CopyDbInYandexDisc()
+        {
+            try
+            {
+                FileInfo copy = new FileInfo(FTPSinchronisation.PatnLocalBD);
+                copy.CopyTo(App.PathDbYandexDisc, true);
+            }
+            catch (Exception ex)
+            {
+
+                FileLogger.WriteLine(ex.Message);
+            }
+        }
+        /// <summary>
+        /// сохраняем БД и Аудиофайлы на Яндекс Диск(при закрытии приложения)
+        /// </summary>
+        public static void copyDbAndSoundFilesInYandexDisc()
+        {
+            CopyDbInYandexDisc();
+            CopyAudioFilesInYandexDisc(App.PathDirectoryAudioYandexDisc);
+        }
 
 
     }

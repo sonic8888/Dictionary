@@ -25,6 +25,7 @@ using System.ComponentModel;
 using System.Reflection;
 using System.Windows.Media.Animation;
 using Microsoft.Win32;
+using Path = System.IO.Path;
 
 namespace MyDictionary
 {
@@ -45,20 +46,28 @@ namespace MyDictionary
         private BackgroundWorker backgroundWorkerLoadAudio;
         private BackgroundWorker backgroundWorkerWriteDB;
         private BackgroundWorker backgroundWorkerWriteSeverAudio;
+        private BackgroundWorker bwCopyDbFrowYandexDisc;
         SolidColorBrush gbrash;
         private bool IsErorConetctionFTP = true;
         private bool IsErorConetctionFTPAudio = true;
         private bool IsErorConetctionFTPAudioServer = true;
-        private bool IsChoesStorage ;
+        private bool IsChoesStorage;// true - asuscom, false - yandexdisc 
+        //string user;
+        //string pathDbYandexDisc;
+        //string pathDirectoryAudioYandexDisc;
         IEnumerable<string> listSounds = null;
 
         public MainWindow()
         {
             InitializeComponent();
+            //user = System.Environment.GetEnvironmentVariable("HOMEPATH");
+            //pathDbYandexDisc = @"C:\" + user + "\\YandexDisk\\Dictionary\\Db\\mobiles.db";
+            //pathDirectoryAudioYandexDisc = @"C:\" + user + "\\YandexDisk\\Dictionary\\FilesSound\\" 
             backgroundWorker = ((BackgroundWorker)this.FindResource("backgroundWorker"));
             backgroundWorkerLoadAudio = ((BackgroundWorker)this.FindResource("backgroundWorkerLoadAudio"));
             backgroundWorkerWriteDB = ((BackgroundWorker)this.FindResource("backgroundWorkerWriteDB"));
             backgroundWorkerWriteSeverAudio = ((BackgroundWorker)this.FindResource("backgroundWorkerWriteSeverAudio"));
+            bwCopyDbFrowYandexDisc = ((BackgroundWorker)this.FindResource("bwCopyDbFrowYandexDisc"));
             FIleTools.CreateDirectory(FIleTools.NameDirectoryAudio);
             FIleTools.CreateDirectory(FIleTools.NameDirectoryStorage);
             //StartNewThread();
@@ -411,40 +420,47 @@ namespace MyDictionary
 
         private void buttonSinc_Click(object sender, RoutedEventArgs e)
         {
+            if (IsChoesStorage)
+            {
+                try
+                {
+
+                    progressBarDownload.IsIndeterminate = true;
+                    HelpWorker hw = new HelpWorker(0, progressBarDownload);
+                    backgroundWorker.RunWorkerAsync(hw);
+
+                }
+                catch (Exception ex)
+                {
+
+                    MessageBox.Show(ex.Message, "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+            }
+            else
+            {
+                bwCopyDbFrowYandexDisc.RunWorkerAsync();
+                //CopyDbFromYandexDisc(App.PathDbYandexDisc);
+                //     CopyDbFromYandexDisc(App.PathDbYandexDisc);
+                //FTPSinchronisation.CopyAudioFilesFromYandexDisc(App.PathDirectoryAudioYandexDisc);
+            }
+
+        }
+        private void CopyDbFromYandexDisc(string pathDb)
+        {
             try
             {
-                //progressBarDownload.IsIndeterminate = true;
-                //DateTime dtServ = FTPSinchronisation.GetDataServerBD();
-                //DateTime dtLoc = FTPSinchronisation.GetDataLocalBd();
-                //if (dtServ < dtLoc)
-                //{
-                //    string message = $"Сервер БД: {dtServ},\nЛокал БД: {dtLoc}\n" +
-                //        $"БД сервера старее локальной БД.\n" +
-                //        $"Продолжить скачивание?";
-                //    MessageBoxResult messageBoxResult = MessageBox.Show(message, "Внимание!", MessageBoxButton.YesNo, MessageBoxImage.Question);
-                //    if (messageBoxResult == MessageBoxResult.No)
-                //    {
-                //        return;
-                //    }
 
-                //}
-
-                //double size = FTPSinchronisation.GetSizeServerDB();
-                //progressBarDownload.Maximum = size;
-                //int oneProcent = (int)size / 100;
-                progressBarDownload.IsIndeterminate = true;
-                HelpWorker hw = new HelpWorker(0, progressBarDownload);
-                backgroundWorker.RunWorkerAsync(hw);
-
+                FileInfo copy = new FileInfo(pathDb);
+                copy.CopyTo(FTPSinchronisation.PatnLocalBD, true);
             }
             catch (Exception ex)
             {
 
-                MessageBox.Show(ex.Message, "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
+                MessageBox.Show(ex.Message + MethodBase.GetCurrentMethod().DeclaringType.FullName, "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-
         }
+
 
         private void progressBarDownload_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
@@ -650,7 +666,7 @@ namespace MyDictionary
                     worker.ReportProgress(valueProgresBar);
                 }
             }
-            catch (Exception )
+            catch (Exception)
             {
                 IsErorConetctionFTPAudioServer = false;
                 //MessageBox.Show(ex.Message + MethodBase.GetCurrentMethod().DeclaringType.FullName, "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -778,7 +794,7 @@ namespace MyDictionary
 
         private void radioButtonAsuscom_Checked(object sender, RoutedEventArgs e)
         {
-            
+
             if (!IsChoesStorage)
             {
                 IsChoesStorage = true;
@@ -798,7 +814,7 @@ namespace MyDictionary
         }
         private void HidenElements(int visible)
         {
-            buttonSinc.Visibility = (Visibility)visible;
+            //buttonSinc.Visibility = (Visibility)visible;
             buttonDBCopy.Visibility = (Visibility)visible;
             buttonFromCloudAudio.Visibility = (Visibility)visible;
             buttonDBCopy2.Visibility = (Visibility)visible;
@@ -810,7 +826,19 @@ namespace MyDictionary
             separator_4.Visibility = (Visibility)visible;
             separator_5.Visibility = (Visibility)visible;
             separatorDbcopy.Visibility = (Visibility)visible;
-           
+
+        }
+
+        private void bw_DoWorcCopyDbFromYandexDisc(object sender, DoWorkEventArgs e)
+        {
+            CopyDbFromYandexDisc(App.PathDbYandexDisc);
+            FTPSinchronisation.CopyAudioFilesFromYandexDisc(App.PathDirectoryAudioYandexDisc);
+        }
+
+        private void bw_RunWorcerCompletedCopyDbFromYandexDisc(object sender, RunWorkerCompletedEventArgs e)
+        {
+            textblockMessage.Text = "БД скопирована!";
+            TextAnimation();
         }
     }
 
