@@ -26,6 +26,7 @@ namespace MyDictionary
         private FileInfo soundNo;//звуковой файл "Нет" не правильный ответ (ошибка)
         private int isUpdateState;//сбрасывает статус слов при не правильном ответе
         private bool ischoseStorage;//выбор варианта загрузки (asuscom - yandexdisc)
+        private DateTime timeSave;//время последнего сохранения
         public DataVariable()
         {
             defoltValueList = new List<string>();
@@ -39,6 +40,7 @@ namespace MyDictionary
             defoltValueList.Add("30");// defoltValue countWordSprint
             defoltValueList.Add("0");// defoltValue isUpdateState
             defoltValueList.Add("true");// defoltValue ischoseStorage
+            defoltValueList.Add("30.11.2020 19:48:40");// defoltValue ischoseStorage
             if (!File.Exists(FIleTools.NameFileDataVariable))
             {
                 WriteDefoltValue();
@@ -115,6 +117,7 @@ namespace MyDictionary
                         countWordSprint = int.Parse(listValue[7]);//читаем countWordSprint
                         isUpdateState = int.Parse(listValue[8]);//читаем countWordSprint
                         ischoseStorage = Boolean.Parse(listValue[9]);//читаем ischoseStorage
+                        timeSave = DateTime.Parse(listValue[10]);//читаем timesave
 
                     }
                     catch (Exception ex)
@@ -157,6 +160,7 @@ namespace MyDictionary
                     sw.WriteLine(countWordSprint);
                     sw.WriteLine(isUpdateState);
                     sw.WriteLine(ischoseStorage);
+                    sw.WriteLine(timeSave);
                 }
             }
             catch (IOException ex)
@@ -256,6 +260,8 @@ namespace MyDictionary
             get { return ischoseStorage; }
             set { ischoseStorage = value; }
         }
+
+        public DateTime TimeSave { get => timeSave; set => timeSave = value; }
 
         public   void CloseWindow()
         {

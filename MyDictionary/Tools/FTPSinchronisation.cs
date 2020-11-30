@@ -463,12 +463,12 @@ namespace MyDictionary.Tools
             }
 
         }
-        private static void CopyDbInYandexDisc()
+        private static void CopyDbInYandexDisc(string pathcopy)
         {
             try
             {
                 FileInfo copy = new FileInfo(FTPSinchronisation.PatnLocalBD);
-                copy.CopyTo(App.PathDbYandexDisc, true);
+                copy.CopyTo(pathcopy, true);
             }
             catch (Exception ex)
             {
@@ -479,10 +479,10 @@ namespace MyDictionary.Tools
         /// <summary>
         /// сохраняем БД и Аудиофайлы на Яндекс Диск(при закрытии приложения)
         /// </summary>
-        public static void copyDbAndSoundFilesInYandexDisc()
+        public static void copyDbAndSoundFilesInYandexDisc(string pathccopyDb, string pathcopyAudio)
         {
-            CopyDbInYandexDisc();
-            CopyAudioFilesInYandexDisc(App.PathDirectoryAudioYandexDisc);
+            CopyDbInYandexDisc(pathccopyDb);
+            CopyAudioFilesInYandexDisc(pathcopyAudio);
         }
 
 

@@ -26,7 +26,12 @@ namespace MyDictionary
         public static Thread thread;
         public static string User;
         public static string PathDbYandexDisc;
+        public static string PathDbReservCopy;
+        public static string PathAudioReservCopy;
         public static string PathDirectoryAudioYandexDisc;
+        private static DateTime currentData = DateTime.Now;
+        public static int countDayPeriodSave = 7;
+        private static TimeSpan periodSave = new TimeSpan(countDayPeriodSave, 0, 0, 0);
         private void Application_Startup(object sender, StartupEventArgs e)
         {
             if (!Directory.Exists(FIleTools.NameDirectoryStorage))
@@ -46,17 +51,20 @@ namespace MyDictionary
             User = System.Environment.GetEnvironmentVariable("HOMEPATH");
             PathDbYandexDisc = @"C:\" + User + "\\YandexDisk\\Dictionary\\Db\\mobiles.db";
             PathDirectoryAudioYandexDisc = @"C:\" + User + "\\YandexDisk\\Dictionary\\FilesSound\\";
+            PathDbReservCopy = @"C:\" + User + "\\YandexDisk\\ReservCopyDictionary\\Db\\";
+            PathAudioReservCopy = @"C:\" + User + "\\YandexDisk\\ReservCopyDictionary\\Filesound\\";
 
         }
 
         private void Application_Exit(object sender, ExitEventArgs e)
         {
-            dataVariable.WriteFile();
             if (!MyDictionary.App.dataVariable.IsChoseStorage)
             {
-                FTPSinchronisation.copyDbAndSoundFilesInYandexDisc();
+                FTPSinchronisation.copyDbAndSoundFilesInYandexDisc(PathDbYandexDisc, PathDirectoryAudioYandexDisc);
+                ReservCopydb();
 
             }
+            dataVariable.WriteFile();
         }
         private int myVar;
 
@@ -83,6 +91,15 @@ namespace MyDictionary
             {
 
                 return;
+            }
+        }
+        private void ReservCopydb()
+        {
+            if ((currentData - dataVariable.TimeSave) >= periodSave)
+            {
+                string path = PathDbReservCopy + "mobiles_" + currentData.Year + "_" + currentData.Month + "_" + currentData.Day + "_" + currentData.Hour + ".db";
+                FTPSinchronisation.copyDbAndSoundFilesInYandexDisc(path, PathAudioReservCopy);
+                dataVariable.TimeSave = currentData;
             }
         }
 
