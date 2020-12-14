@@ -392,7 +392,15 @@ namespace MyDictionary
         private void buttonBack_Click(object sender, RoutedEventArgs e)
         {
 
-            VisibilityElements(Visibility.Visible, Visibility.Collapsed, Visibility.Visible);
+            if (IsChoesStorage)
+            {
+                VisibilityElements(Visibility.Visible, Visibility.Collapsed, Visibility.Visible);
+            }
+            else
+            {
+                VisibilityElements(Visibility.Visible, Visibility.Collapsed, Visibility.Visible);
+                HidenElements(1);
+            }
         }
 
         private void textboxCountWordSprint_PreviewKeyDown(object sender, KeyEventArgs e)
