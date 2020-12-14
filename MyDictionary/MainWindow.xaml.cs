@@ -440,9 +440,7 @@ namespace MyDictionary
             else
             {
                 bwCopyDbFrowYandexDisc.RunWorkerAsync();
-                //CopyDbFromYandexDisc(App.PathDbYandexDisc);
-                //     CopyDbFromYandexDisc(App.PathDbYandexDisc);
-                //FTPSinchronisation.CopyAudioFilesFromYandexDisc(App.PathDirectoryAudioYandexDisc);
+            
             }
 
         }
