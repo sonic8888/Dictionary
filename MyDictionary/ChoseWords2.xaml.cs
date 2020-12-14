@@ -251,8 +251,34 @@ namespace MyDictionary
             DefaultDialogService dds = new DefaultDialogService();
             dds.OpenFileDialog();
             string fileName = dds.FilePath;
-            audioFile = new FileInfo(fileName);
-            textboxAudio.Text = audioFile.Name;
+            
+            audioFile = RenameFileAudio(fileName);
+            textboxAudio.Text = audioFile?.Name;
+        }
+        private FileInfo RenameFileAudio(string fileSourse)
+        {
+            string word = textboxWord.Text.Trim();
+            FileInfo newName = null;
+            if (word == "")
+            {
+                MessageBox.Show("Укажите слово!");
+                return newName;
+            }
+            string patern = word + ".(mp3|wav)";
+            Match match = Regex.Match(fileSourse, patern);
+            FileInfo fileInfo = new FileInfo(fileSourse);
+            try
+            {
+                newName = fileInfo.CopyTo(@fileInfo.DirectoryName +"/"+ match.Value, true);
+                fileInfo.Delete();
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message, "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
+                return newName;
+            }
+            return newName;
         }
 
         private void buttonSave_Click(object sender, RoutedEventArgs e)
@@ -312,6 +338,19 @@ namespace MyDictionary
             textboxAudio.Text = "";
             textboxTranslation.Text = "";
             textboxExample.Text = "";
+
+        }
+
+        private void Image_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            string word = textboxWord.Text.Trim();
+            if (word == "")
+            {
+                MessageBox.Show("Укажите слово!");
+                return;
+            }
+            string link = "https://ru.forvo.com/word/" + word + "/#en";
+            System.Diagnostics.Process.Start(link);
 
         }
     }

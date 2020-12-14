@@ -84,6 +84,7 @@
                 <Button x:Name="buttonfile" Click="buttonfile_Click">
                     <Image Source="Picture/icons8-проводник-windows-48.png"  />
                 </Button>
+                <Image Source="Picture/Forvo.png" Width="120" Margin="10,0" MouseLeftButtonDown="Image_MouseLeftButtonDown"/>
             </ToolBar>
             <TextBlock Text="Слово:" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="4" VerticalAlignment="Bottom" FontSize="24" Foreground="#FF032B0F" FontFamily="Georgia"/>
             <TextBox x:Name="textboxWord"  Grid.Row="1" Grid.Column="5" Height="40" Grid.ColumnSpan="6" VerticalAlignment="Bottom" FontSize="24"/>
