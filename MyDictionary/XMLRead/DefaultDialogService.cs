@@ -24,7 +24,7 @@ namespace MyDictionary.XMLRead
         public bool OpenFileDialog()
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter= "Wav files (*.wav)|*.wav|MP3 files (*.mp3)|*.mp3";
+            openFileDialog.Filter = "All Files|*.*|Mp3 Files|*.mp3|Wav Files|*.wav";
             if (openFileDialog.ShowDialog() == true)
             {
                 FilePath = openFileDialog.FileName;

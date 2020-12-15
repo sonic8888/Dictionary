@@ -493,6 +493,7 @@
     <Resource Include="Picture\halftone13.png" />
     <Resource Include="Picture\halftone14.png" />
     <Resource Include="Picture\halftone2.png" />
+    <Resource Include="Picture\Forvo.png" />
     <Content Include="SoundsApplication\soundNo.mp3">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
