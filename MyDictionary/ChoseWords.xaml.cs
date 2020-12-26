@@ -378,7 +378,7 @@ namespace MyDictionary
                 IEnumerable<string> exampl = null;
                 if (Regex.IsMatch(partOfSpeach, @"фраз(ы|а)?", RegexOptions.IgnoreCase))
                 {
-                    transl = new List<string>() { translate }.Select(n => n);
+                    transl = translate.Split(new char[] { ',', ';' }).Where(n => n.Length > 1).Select(n => n.Trim());
                     exampl = GetEnumerable(example, splitExample);
                 }
                 else
