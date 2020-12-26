@@ -60,8 +60,10 @@ namespace MyDictionary
         {
             if (!MyDictionary.App.dataVariable.IsChoseStorage)
             {
+#if !DEBUG
                 FTPSinchronisation.copyDbAndSoundFilesInYandexDisc(PathDbYandexDisc, PathDirectoryAudioYandexDisc);
                 ReservCopydb();
+#endif
 
             }
             dataVariable.WriteFile();

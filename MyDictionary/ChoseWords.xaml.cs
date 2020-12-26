@@ -17,6 +17,7 @@ using MyDictionary.XMLRead;
 using MyDictionary.Tools;
 using Path = System.IO.Path;
 using System.Reflection;
+using System.Text.RegularExpressions;
 
 namespace MyDictionary
 {
@@ -232,7 +233,7 @@ namespace MyDictionary
                 return;
             }
             string wordName = textBoxWord.Text.Trim().ToLower();
-            if (wordName!="")
+            if (wordName != "")
             {
                 filecopy = filesound.CopyTo(Path.Combine(FIleTools.NameDirectoryAudio, wordName + filesound.Extension));
                 if (filecopy != null)
@@ -248,7 +249,7 @@ namespace MyDictionary
             }
             else
             {
-                MessageBox.Show("Укажите слово!","Внимание!",MessageBoxButton.OK,MessageBoxImage.Error);
+                MessageBox.Show("Укажите слово!", "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
         private FileInfo IsExist(FileInfo file)
@@ -373,8 +374,19 @@ namespace MyDictionary
                 string word = textBoxWord.Text;
                 string trancription = textBoxTranscription.Text;
                 string partOfSpeach = textBoxPartOfSpeach.Text;
-                IEnumerable<string> transl = GetEnumerable(translate, splitTranslate);
-                IEnumerable<string> exampl = GetEnumerable(example, splitExample);
+                IEnumerable<string> transl = null;
+                IEnumerable<string> exampl = null;
+                if (Regex.IsMatch(partOfSpeach, @"фраз(ы|а)?", RegexOptions.IgnoreCase))
+                {
+                    transl = new List<string>() { translate }.Select(n => n);
+                    exampl = GetEnumerable(example, splitExample);
+                }
+                else
+                {
+
+                    transl = GetEnumerable(translate, splitTranslate);
+                    exampl = GetEnumerable(example, splitExample);
+                }
 
                 if (transl != null)
                 {
