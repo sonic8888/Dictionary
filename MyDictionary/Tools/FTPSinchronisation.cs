@@ -22,6 +22,7 @@ namespace MyDictionary.Tools
         public const string PatnDirectorySoundFilesServer = @"ftp://andreysonic.asuscomm.com/sda1/Documents/SoundFiles";
         public const string PathDirectorySoundFilesLocal = @"./SoundFiles/";
         public const string PathDirectoryTempAudio = @"./TempAudio/";
+        public const string PathDataVariable = @"./FileStorage/datavariable.txt";
         private const string UrlServer = @"ftp://andreysonic.asuscomm.com";
         private const string PathServer = "/sda1/Documents/SoundFiles/";
         private const string UserName = "andrey";
@@ -110,7 +111,7 @@ namespace MyDictionary.Tools
                 FtpWebResponse response = (FtpWebResponse)request.GetResponse();
                 response.Close();
             }
-            catch (Exception )
+            catch (Exception)
             {
 
                 //MessageBox.Show(ex.Message + MethodBase.GetCurrentMethod().DeclaringType.FullName, "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -340,7 +341,7 @@ namespace MyDictionary.Tools
                     MessageBox.Show("Нет новых аудиофайлов!");
                 }
             }
-            catch (Exception )
+            catch (Exception)
             {
 
 
@@ -396,7 +397,7 @@ namespace MyDictionary.Tools
                     MessageBox.Show("Нет новых аудиофайлов!");
                 }
             }
-            catch (Exception )
+            catch (Exception)
             {
 
                 //MessageBox.Show(ex.Message + MethodBase.GetCurrentMethod().DeclaringType.FullName, "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -414,9 +415,9 @@ namespace MyDictionary.Tools
                 foreach (string item in soundsExcept)
                 {
                     FileInfo copy = new FileInfo(item);
-                    copy.CopyTo(FTPSinchronisation.PathDirectorySoundFilesLocal+ copy.Name, true);
+                    copy.CopyTo(FTPSinchronisation.PathDirectorySoundFilesLocal + copy.Name, true);
                 }
-                 
+
             }
             catch (Exception ex)
             {
@@ -424,10 +425,10 @@ namespace MyDictionary.Tools
                 MessageBox.Show(ex.Message + MethodBase.GetCurrentMethod().DeclaringType.FullName, "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
                 //FileLogger.WriteLine(ex.Message);
             }
-           
+
 
         }
-        private static IEnumerable<string> GetListAudioFiles(string pathDirectory )
+        private static IEnumerable<string> GetListAudioFiles(string pathDirectory)
         {
             try
             {
@@ -442,7 +443,7 @@ namespace MyDictionary.Tools
                 return null;
             }
         }
-        private static void CopyAudioFilesInYandexDisc(string pathAudioYandexDisk) 
+        private static void CopyAudioFilesInYandexDisc(string pathAudioYandexDisk)
         {
             try
             {
@@ -483,6 +484,21 @@ namespace MyDictionary.Tools
         {
             CopyDbInYandexDisc(pathccopyDb);
             CopyAudioFilesInYandexDisc(pathcopyAudio);
+        }
+        public static void CopyFile(string sourse, string distination)
+        {
+            if (File.Exists(sourse))
+            {
+                try
+                {
+                    File.Copy(sourse, distination, true);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message + MethodBase.GetCurrentMethod().DeclaringType.FullName, "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
+
+                }
+            }
         }
 
 

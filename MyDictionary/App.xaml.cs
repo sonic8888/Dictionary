@@ -26,6 +26,7 @@ namespace MyDictionary
         public static Thread thread;
         public static string User;
         public static string PathDbYandexDisc;
+        public static string PathDbYandexDiscDataVariable;
         public static string PathDbReservCopy;
         public static string PathAudioReservCopy;
         public static string PathDirectoryAudioYandexDisc;
@@ -50,6 +51,7 @@ namespace MyDictionary
             random = new Random();
             User = System.Environment.GetEnvironmentVariable("HOMEPATH");
             PathDbYandexDisc = @"C:\" + User + "\\YandexDisk\\Dictionary\\Db\\mobiles.db";
+            PathDbYandexDiscDataVariable = @"C:\" + User + "\\YandexDisk\\Dictionary\\FileStorage\\datavariable.txt";
             PathDirectoryAudioYandexDisc = @"C:\" + User + "\\YandexDisk\\Dictionary\\FilesSound\\";
             PathDbReservCopy = @"C:\" + User + "\\YandexDisk\\ReservCopyDictionary\\Db\\";
             PathAudioReservCopy = @"C:\" + User + "\\YandexDisk\\ReservCopyDictionary\\Filesound\\";
@@ -67,6 +69,7 @@ namespace MyDictionary
 
             }
             dataVariable.WriteFile();
+            FTPSinchronisation.CopyFile(FTPSinchronisation.PathDataVariable, PathDbYandexDiscDataVariable);
         }
         private int myVar;
 

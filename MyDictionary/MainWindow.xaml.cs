@@ -841,6 +841,7 @@ namespace MyDictionary
         {
             CopyDbFromYandexDisc(App.PathDbYandexDisc);
             FTPSinchronisation.CopyAudioFilesFromYandexDisc(App.PathDirectoryAudioYandexDisc);
+            FTPSinchronisation.CopyFile(App.PathDbYandexDiscDataVariable, FTPSinchronisation.PathDataVariable);
         }
 
         private void bw_RunWorcerCompletedCopyDbFromYandexDisc(object sender, RunWorkerCompletedEventArgs e)
