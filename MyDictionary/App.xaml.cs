@@ -47,7 +47,6 @@ namespace MyDictionary
             {
                 Directory.CreateDirectory(FIleTools.NameDirectoryTempFiles);
             }
-            dataVariable = new DataVariable();
             random = new Random();
             User = System.Environment.GetEnvironmentVariable("HOMEPATH");
             PathDbYandexDisc = @"C:\" + User + "\\YandexDisk\\Dictionary\\Db\\mobiles.db";
@@ -56,6 +55,8 @@ namespace MyDictionary
             PathDbReservCopy = @"C:\" + User + "\\YandexDisk\\ReservCopyDictionary\\Db\\";
             PathAudioReservCopy = @"C:\" + User + "\\YandexDisk\\ReservCopyDictionary\\Filesound\\";
 
+            FTPSinchronisation.CopyFile(App.PathDbYandexDiscDataVariable, FTPSinchronisation.PathDataVariable);
+            dataVariable = new DataVariable();
         }
 
         private void Application_Exit(object sender, ExitEventArgs e)
