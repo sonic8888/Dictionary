@@ -207,10 +207,18 @@ namespace MyDictionary
         /// <param name="e"></param>
         private void ClickMenuItemOpen(object sender, RoutedEventArgs e)
         {
-            DefaultDialogService dds = new DefaultDialogService();
-            dds.OpenFileDialog();
-            string pathDirectory = dds.GetDirectory(dds.FilePath);
-            FIleTools.WritePath(FIleTools.NameFilePathes, pathDirectory, false);
+            try
+            {
+                DefaultDialogService dds = new DefaultDialogService();
+                dds.OpenFileDialog();
+                string pathDirectory = dds.GetDirectory(dds.FilePath);
+                FIleTools.WritePath(FIleTools.NameFilePathes, pathDirectory, false);
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message + MethodBase.GetCurrentMethod().DeclaringType.FullName, "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
         /// <summary>
         /// обработчик вкладки меню "Добавить"
@@ -222,34 +230,42 @@ namespace MyDictionary
         /// <param name="e"></param>
         private void ClickMenuItemAdd(object sender, RoutedEventArgs e)
         {
-            DefaultDialogService dds = new DefaultDialogService();
-            dds.OpenFileDialog();
-            string fileName = dds.FilePath;
-            FileInfo filesound = new FileInfo(fileName);
-            FileInfo filecopy = null;
-            if ((filecopy = IsExist(filesound)) != null)
+            try
             {
-                _wordsSample.SoundName = filecopy.Name;
-                return;
-            }
-            string wordName = textBoxWord.Text.Trim().ToLower();
-            if (wordName != "")
-            {
-                filecopy = filesound.CopyTo(Path.Combine(FIleTools.NameDirectoryAudio, wordName + filesound.Extension));
-                if (filecopy != null)
+                DefaultDialogService dds = new DefaultDialogService();
+                dds.OpenFileDialog();
+                string fileName = dds.FilePath;
+                FileInfo filesound = new FileInfo(fileName);
+                FileInfo filecopy = null;
+                if ((filecopy = IsExist(filesound)) != null)
                 {
-
                     _wordsSample.SoundName = filecopy.Name;
+                    return;
+                }
+                string wordName = textBoxWord.Text.Trim().ToLower();
+                if (wordName != "")
+                {
+                    filecopy = filesound.CopyTo(Path.Combine(FIleTools.NameDirectoryAudio, wordName + filesound.Extension));
+                    if (filecopy != null)
+                    {
 
+                        _wordsSample.SoundName = filecopy.Name;
+
+                    }
+                    else
+                    {
+                        System.Media.SystemSounds.Beep.Play();
+                    }
                 }
                 else
                 {
-                    System.Media.SystemSounds.Beep.Play();
+                    MessageBox.Show("Укажите слово!", "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Укажите слово!", "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
+
+                MessageBox.Show(ex.Message + MethodBase.GetCurrentMethod().DeclaringType.FullName, "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
         private FileInfo IsExist(FileInfo file)

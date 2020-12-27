@@ -68,20 +68,28 @@ namespace MyDictionary.XMLRead
         /// <param name="append">флаг добавления или перезаписи</param>
         public static void WritePath(string path, string str, bool append)
         {
-            StreamWriter writer = null;
-            if (!File.Exists(path))
+            try
             {
-                using (writer = File.CreateText(path))
+                StreamWriter writer = null;
+                if (!File.Exists(path))
                 {
-                    writer.WriteLine(str);
+                    using (writer = File.CreateText(path))
+                    {
+                        writer.WriteLine(str);
+                    }
+                }
+                else
+                {
+                    using (writer = new StreamWriter(path, append))
+                    {
+                        writer.WriteLine(str);
+                    }
                 }
             }
-            else
+            catch (Exception ex)
             {
-                using (writer = new StreamWriter(path, append))
-                {
-                    writer.WriteLine(str);
-                }
+
+                MessageBox.Show(ex.Message + MethodBase.GetCurrentMethod().DeclaringType.FullName);
             }
         }
         /// <summary>

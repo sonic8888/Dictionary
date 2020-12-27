@@ -17,6 +17,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using MyDictionary.XMLRead;
 using System.Reflection;
+using System.Text.RegularExpressions;
 
 namespace MyDictionary
 {
@@ -92,6 +93,7 @@ namespace MyDictionary
             }
             string transcription = textboxTranscription.Text.Trim();
             string partOfSpeach = textboxPartOfSpeach.Text.Trim();
+            string translateword = textboxTranslate.Text;
             int result = 0;
             if (!int.TryParse(textboxStatus.Text.Trim(), out result))
             {
@@ -100,7 +102,18 @@ namespace MyDictionary
             string audio = textboxAudio.Text.Trim();
             DateTime insert = MyWord.DataTimeInsert;
             DateTime lastCall = DateTime.Now;
-            IEnumerable<string> translate = GetEnumerable(textboxTranslate.Text, splitTranslate);
+            IEnumerable<string> translate = null;
+            if (Regex.IsMatch(partOfSpeach, @"фраз(ы|а)?", RegexOptions.IgnoreCase))
+            {
+                translate = translateword.Split(new char[] { ',', ';' }).Where(n => n.Length > 1).Select(n => n.Trim());
+                 
+            }
+            else
+            {
+
+                translate = GetEnumerable(translateword, splitTranslate);;
+            }
+            
             IEnumerable<string> example = GetEnumerable(textboxExample.Text, splitExample);
             if (audio == null)
             {
